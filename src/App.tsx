@@ -11,6 +11,14 @@ import CaseStudies from "./pages/CaseStudies";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+// Service landing pages
+import WebDevelopment from "./pages/services/WebDevelopment";
+import MobileApps from "./pages/services/MobileApps";
+import UIUXDesign from "./pages/services/UIUXDesign";
+import SEO from "./pages/services/SEO";
+import DigitalMarketing from "./pages/services/DigitalMarketing";
+import TechnicalSupport from "./pages/services/TechnicalSupport";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -22,7 +30,12 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/services/:slug" element={<Services />} />
+          <Route path="/services/web-development" element={<WebDevelopment />} />
+          <Route path="/services/mobile-apps" element={<MobileApps />} />
+          <Route path="/services/ui-ux-design" element={<UIUXDesign />} />
+          <Route path="/services/seo" element={<SEO />} />
+          <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
+          <Route path="/services/technical-support" element={<TechnicalSupport />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
           <Route path="/case-studies" element={<CaseStudies />} />
