@@ -15,107 +15,107 @@ const caseStudies = [
   {
     id: "body-aesthetics",
     title: "Body Aesthetics",
-    subtitle: "Premium Laser Center for Face & Body Treatments",
-    category: "Healthcare & Beauty",
+    subtitle: "Премиум лазерен център за терапии за лице и тяло",
+    category: "Здраве & Красота",
     url: "https://bodyaesthetics.bg/",
     isPublic: true,
     image: bodyaestheticsImg,
-    overview: "Body Aesthetics is a leading medical cosmetic laser center in Bulgaria, offering high-class non-invasive aesthetic procedures. Since 2018, they've built trust with thousands of clients through expert care and cutting-edge technology.",
-    challenge: "The clinic needed a modern, trustworthy website that would showcase their premium services, establish credibility in the competitive beauty industry, and enable seamless online booking. Their previous site failed to convey the sophistication and professionalism of their services.",
+    overview: "Body Aesthetics е водещ медицински козметичен лазерен център в България, предлагащ най-високия клас неинвазивни естетични процедури. От 2018 г. насам изграждат доверие с хиляди клиенти чрез експертни грижи и най-съвременни технологии.",
+    challenge: "Клиниката имаше нужда от модерен, вдъхващ доверие уебсайт, който да представи премиум услугите им, да изгради авторитет в конкурентната индустрия за красота и да позволи безпроблемно онлайн резервиране. Предишният им сайт не успяваше да предаде изискаността и професионализма на услугите им.",
     solution: [
-      "Designed an elegant, luxurious website reflecting the premium nature of their services",
-      "Implemented online booking system integrated with their schedule",
-      "Created comprehensive service pages with detailed treatment information",
-      "Built an e-commerce store for gift vouchers and products",
-      "Optimized for SEO to capture local search traffic"
+      "Създадохме елегантен, луксозен уебсайт, отразяващ премиум характера на услугите",
+      "Внедрихме система за онлайн резервации, интегрирана с техния график",
+      "Изградихме подробни страници за услуги с детайлна информация за процедурите",
+      "Разработихме онлайн магазин за ваучери за подарък и продукти",
+      "Оптимизирахме за SEO, за да привлечем локален трафик от търсачките"
     ],
     results: [
-      { metric: "+185%", label: "Online Bookings" },
-      { metric: "4.9★", label: "Google Rating" },
-      { metric: "+120%", label: "Organic Traffic" }
+      { metric: "+185%", label: "Онлайн резервации" },
+      { metric: "4.9★", label: "Google рейтинг" },
+      { metric: "+120%", label: "Органичен трафик" }
     ],
-    technologies: ["WordPress", "WooCommerce", "Custom Booking", "SEO"],
+    technologies: ["WordPress", "WooCommerce", "Booking система", "SEO"],
     gradient: "from-amber-500/20 to-yellow-500/20",
     accentColor: "text-amber-500"
   },
   {
     id: "booom-bg",
     title: "Booom.bg",
-    subtitle: "E-commerce Platform with Fast Delivery",
-    category: "E-commerce & Retail",
+    subtitle: "E-commerce платформа с бърза доставка",
+    category: "Електронна търговия",
     url: "https://booom.bg/",
     isPublic: true,
     image: booomImg,
-    overview: "Booom.bg is a dynamic Bulgarian e-commerce platform offering a diverse range of products with a focus on exceptional customer service, including payment on delivery and a 14-day return policy.",
-    challenge: "The client needed a reliable, high-performance online store that could handle growing product inventory, provide excellent user experience, and build customer trust through transparent policies and fast delivery times.",
+    overview: "Booom.bg е динамична българска e-commerce платформа, предлагаща разнообразие от продукти с фокус върху отлично клиентско обслужване, включително плащане при доставка и 14-дневно право на връщане.",
+    challenge: "Клиентът имаше нужда от надеждна, високопроизводителна онлайн платформа, която да обработва нарастващ продуктов инвентар, да осигурява отлично потребителско изживяване и да изгражда доверие чрез прозрачни политики и бързи доставки.",
     solution: [
-      "Built a fully-featured WooCommerce store with intuitive navigation",
-      "Implemented product search and filtering for easy browsing",
-      "Created trust-building elements highlighting delivery and return policies",
-      "Optimized checkout flow for maximum conversion",
-      "Integrated courier service tracking and notifications"
+      "Изградихме пълнофункционален WooCommerce магазин с интуитивна навигация",
+      "Внедрихме търсене и филтриране на продукти за лесно разглеждане",
+      "Създадохме елементи за изграждане на доверие, подчертаващи доставка и връщане",
+      "Оптимизирахме процеса на поръчка за максимална конверсия",
+      "Интегрирахме проследяване на куриерски услуги и известия"
     ],
     results: [
-      { metric: "+210%", label: "Sales Growth" },
-      { metric: "3 days", label: "Avg. Delivery" },
-      { metric: "98%", label: "Satisfaction" }
+      { metric: "+210%", label: "Ръст в продажбите" },
+      { metric: "3 дни", label: "Средна доставка" },
+      { metric: "98%", label: "Удовлетвореност" }
     ],
-    technologies: ["WordPress", "WooCommerce", "Payment Gateway", "Courier API"],
+    technologies: ["WordPress", "WooCommerce", "Платежен портал", "Куриерски API"],
     gradient: "from-blue-500/20 to-indigo-500/20",
     accentColor: "text-blue-500"
   },
   {
     id: "athleticiq",
     title: "Athletic IQ",
-    subtitle: "Youth Sports Training App",
-    category: "Sports Tech & Mobile Apps",
+    subtitle: "Приложение за спортни тренировки за младежи",
+    category: "Спортни технологии",
     url: "https://athleticiqapp.com/",
     isPublic: true,
     image: athleticiqImg,
-    overview: "Athletic IQ is an innovative fitness app designed to transform how young athletes train. With 4,500+ active youth athletes and 30+ game-based training programs, it makes fitness feel like a game rather than a grind.",
-    challenge: "Athletic IQ needed a compelling landing page that would resonate with both parents and young athletes, clearly communicate the app's unique gamified approach to fitness, and drive app downloads in the competitive UK youth sports market.",
+    overview: "Athletic IQ е иновативно фитнес приложение, създадено да трансформира начина, по който младите атлети тренират. С над 4 500 активни млади спортисти и 30+ игрови програми за тренировки, то превръща фитнеса в игра, а не в изтощение.",
+    challenge: "Athletic IQ имаше нужда от завладяващ landing page, който да резонира както с родителите, така и с младите атлети, ясно да комуникира уникалния геймифициран подход към фитнеса и да увеличи изтеглянията на приложението на конкурентния британски пазар за младежки спорт.",
     solution: [
-      "Designed a dynamic, energetic website with bold visuals and animations",
-      "Created compelling messaging targeting the UK youth market (8.5M potential users)",
-      "Implemented App Store and Google Play integration for seamless downloads",
-      "Built coach login portal and sign-up flows",
-      "Optimized for mobile-first experience"
+      "Създадохме динамичен, енергичен уебсайт с впечатляващи визии и анимации",
+      "Разработихме завладяващо послание, насочено към британския младежки пазар",
+      "Внедрихме интеграция с App Store и Google Play за лесно изтегляне",
+      "Изградихме портал за треньори и регистрационни форми",
+      "Оптимизирахме за mobile-first изживяване"
     ],
     results: [
-      { metric: "4.5K+", label: "Active Athletes" },
-      { metric: "35 min", label: "Avg. Session" },
-      { metric: "+280%", label: "Downloads" }
+      { metric: "4.5K+", label: "Активни атлети" },
+      { metric: "35 мин", label: "Средна сесия" },
+      { metric: "+280%", label: "Изтегляния" }
     ],
-    technologies: ["WordPress", "Custom Design", "App Integration", "Analytics"],
+    technologies: ["WordPress", "Custom Design", "App интеграция", "Analytics"],
     gradient: "from-green-500/20 to-emerald-500/20",
     accentColor: "text-green-500"
   },
   {
     id: "super-credit",
     title: "SuperCredit",
-    subtitle: "Internal Credit Management System",
-    category: "Finance & FinTech",
+    subtitle: "Вътрешна система за управление на кредити",
+    category: "Финанси & FinTech",
     url: null,
     isPublic: false,
     image: supercreditImg,
-    overview: "SuperCredit is a leading Bulgarian credit brokerage company helping clients find the best mortgage, consumer, and investment loan offers. With 2,600+ served clients and 900M+ BGN in processed loans, they're a trusted name in financial services.",
-    challenge: "SuperCredit required an internal system to streamline their loan processing workflows, manage client data securely, track application status, and improve communication between team members. The existing manual processes were slowing down operations.",
+    overview: "SuperCredit е водеща българска кредитна брокерска компания, помагаща на клиентите да намерят най-добрите оферти за ипотечни, потребителски и инвестиционни кредити. С над 2 600 обслужени клиенти и 900+ млн. лв. обработени кредити, те са надеждно име във финансовите услуги.",
+    challenge: "SuperCredit се нуждаеше от вътрешна система за оптимизиране на работните процеси по обработка на заеми, сигурно управление на клиентски данни, проследяване на статуса на заявленията и подобряване на комуникацията между членовете на екипа. Съществуващите ръчни процеси забавяха операциите.",
     solution: [
-      "Developed a secure, employee-only internal management platform",
-      "Created comprehensive client database with advanced search and filtering",
-      "Built loan application tracking with status updates and notifications",
-      "Implemented role-based access control for data security",
-      "Integrated reporting dashboard for performance analytics"
+      "Разработихме сигурна вътрешна платформа за управление, достъпна само за служители",
+      "Създадохме база данни с клиенти с разширено търсене и филтриране",
+      "Изградихме проследяване на кредитни заявления с актуализации на статус и известия",
+      "Внедрихме контрол на достъпа базиран на роли за сигурност на данните",
+      "Интегрирахме табло за отчети и анализ на представянето"
     ],
     results: [
-      { metric: "+65%", label: "Processing Speed" },
-      { metric: "2600+", label: "Clients Managed" },
-      { metric: "100%", label: "Data Security" }
+      { metric: "+65%", label: "Скорост на обработка" },
+      { metric: "2600+", label: "Управлявани клиенти" },
+      { metric: "100%", label: "Сигурност на данните" }
     ],
     technologies: ["React", "TypeScript", "Supabase", "Role-Based Access"],
     gradient: "from-orange-500/20 to-amber-500/20",
     accentColor: "text-orange-500",
-    internalNote: "This is an internal system accessible only to SuperCredit employees."
+    internalNote: "Това е вътрешна система, достъпна само за служители на SuperCredit."
   }
 ];
 
@@ -136,13 +136,13 @@ const CaseStudies = () => {
             className="text-center mb-16"
           >
             <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              Our Portfolio
+              Нашето портфолио
             </span>
             <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
-              Real Projects, <span className="text-gradient">Real Results</span>
+              Реални проекти, <span className="text-gradient">реални резултати</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Explore how we've helped businesses across different industries achieve digital success through innovative solutions and strategic thinking.
+              Разгледайте как помогнахме на бизнеси от различни индустрии да постигнат дигитален успех чрез иновативни решения и стратегическо мислене.
             </p>
           </motion.div>
         </div>
@@ -177,7 +177,7 @@ const CaseStudies = () => {
                         {!study.isPublic && (
                           <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-muted text-muted-foreground text-xs">
                             <Lock className="w-3 h-3" />
-                            Internal System
+                            Вътрешна система
                           </span>
                         )}
                       </div>
@@ -194,7 +194,7 @@ const CaseStudies = () => {
                       <div className="relative rounded-xl overflow-hidden border border-border shadow-2xl">
                         <img
                           src={study.image}
-                          alt={`${study.title} website screenshot`}
+                          alt={`${study.title} уебсайт`}
                           className="w-full h-auto"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent pointer-events-none" />
@@ -209,7 +209,7 @@ const CaseStudies = () => {
                         <div>
                           <h3 className="flex items-center gap-2 font-display font-semibold text-lg mb-3">
                             <Target className={`w-5 h-5 ${study.accentColor}`} />
-                            Overview
+                            Преглед
                           </h3>
                           <p className="text-muted-foreground leading-relaxed">
                             {study.overview}
@@ -220,7 +220,7 @@ const CaseStudies = () => {
                         <div>
                           <h3 className="flex items-center gap-2 font-display font-semibold text-lg mb-3">
                             <Lightbulb className={`w-5 h-5 ${study.accentColor}`} />
-                            The Challenge
+                            Предизвикателството
                           </h3>
                           <p className="text-muted-foreground leading-relaxed">
                             {study.challenge}
@@ -231,7 +231,7 @@ const CaseStudies = () => {
                         <div>
                           <h3 className="flex items-center gap-2 font-display font-semibold text-lg mb-3">
                             <CheckCircle className={`w-5 h-5 ${study.accentColor}`} />
-                            Our Solution
+                            Нашето решение
                           </h3>
                           <ul className="space-y-2">
                             {study.solution.map((item, i) => (
@@ -250,7 +250,7 @@ const CaseStudies = () => {
                         <div>
                           <h3 className="flex items-center gap-2 font-display font-semibold text-lg mb-4">
                             <BarChart3 className={`w-5 h-5 ${study.accentColor}`} />
-                            Key Results
+                            Ключови резултати
                           </h3>
                           <div className="grid grid-cols-3 gap-4">
                             {study.results.map((result, i) => (
@@ -269,7 +269,7 @@ const CaseStudies = () => {
                         {/* Technologies */}
                         <div>
                           <h3 className="font-display font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-3">
-                            Technologies Used
+                            Използвани технологии
                           </h3>
                           <div className="flex flex-wrap gap-2">
                             {study.technologies.map((tech) => (
@@ -298,14 +298,14 @@ const CaseStudies = () => {
                           {study.isPublic && study.url ? (
                             <Button variant="hero" size="lg" asChild className="w-full sm:w-auto">
                               <a href={study.url} target="_blank" rel="noopener noreferrer">
-                                Visit Live Project
+                                Посетете проекта
                                 <ExternalLink size={18} />
                               </a>
                             </Button>
                           ) : (
                             <Button variant="heroOutline" size="lg" asChild className="w-full sm:w-auto">
                               <Link to="/contact">
-                                Discuss Your Project
+                                Обсъдете вашия проект
                                 <ArrowRight size={18} />
                               </Link>
                             </Button>
@@ -331,19 +331,19 @@ const CaseStudies = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Our Track Record of <span className="text-gradient">Excellence</span>
+              Нашата история на <span className="text-gradient">успеха</span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Numbers that reflect our commitment to delivering exceptional results for every client.
+              Числа, които отразяват нашия ангажимент да доставяме изключителни резултати за всеки клиент.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { icon: Users, value: "30+", label: "Happy Clients" },
-              { icon: ExternalLink, value: "50+", label: "Projects Delivered" },
-              { icon: TrendingUp, value: "+150%", label: "Average Growth" },
-              { icon: Clock, value: "< 2s", label: "Load Time" }
+              { icon: Users, value: "30+", label: "Доволни клиенти" },
+              { icon: ExternalLink, value: "50+", label: "Завършени проекта" },
+              { icon: TrendingUp, value: "+150%", label: "Среден растеж" },
+              { icon: Clock, value: "< 2сек", label: "Време за зареждане" }
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -376,21 +376,21 @@ const CaseStudies = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-              Ready to Become Our Next Success Story?
+              Готови ли сте да станете следващата ни история на успеха?
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Let's discuss how we can help your business achieve similar results. Get in touch for a free consultation.
+              Нека обсъдим как можем да помогнем на вашия бизнес да постигне подобни резултати. Свържете се с нас за безплатна консултация.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button variant="hero" size="xl" asChild>
                 <Link to="/contact">
-                  Start Your Project
+                  Започнете проект
                   <ArrowRight size={18} />
                 </Link>
               </Button>
               <Button variant="heroOutline" size="xl" asChild>
                 <Link to="/services">
-                  Explore Our Services
+                  Разгледайте услугите ни
                   <ArrowUpRight size={18} />
                 </Link>
               </Button>
