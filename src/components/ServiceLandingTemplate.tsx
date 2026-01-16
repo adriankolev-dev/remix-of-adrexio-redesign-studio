@@ -211,13 +211,13 @@ const ServiceLandingTemplate = ({
               </p>
             </motion.div>
 
-            {introImage && (
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="relative"
-              >
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              {introImage ? (
                 <div className="aspect-video rounded-2xl overflow-hidden border-gradient">
                   <img
                     src={introImage}
@@ -225,8 +225,39 @@ const ServiceLandingTemplate = ({
                     className="w-full h-full object-cover"
                   />
                 </div>
-              </motion.div>
-            )}
+              ) : (
+                <div className="relative">
+                  {/* Abstract decorative visual */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-3xl blur-3xl" />
+                  
+                  {/* Floating stat cards */}
+                  <div className="relative grid grid-cols-2 gap-4">
+                    {stats.slice(0, 4).map((stat, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20, rotate: index % 2 === 0 ? -3 : 3 }}
+                        whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -3 : 3 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + index * 0.1 }}
+                        whileHover={{ scale: 1.05, rotate: 0 }}
+                        className={`p-6 rounded-2xl backdrop-blur-sm border border-primary/20 bg-card/80 ${
+                          index === 0 ? 'col-span-2' : ''
+                        }`}
+                      >
+                        <div className="text-2xl md:text-3xl font-display font-bold text-gradient mb-1">
+                          {stat.value}
+                        </div>
+                        <div className="text-sm text-muted-foreground">{stat.label}</div>
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  {/* Decorative elements */}
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
+                  <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
+                </div>
+              )}
+            </motion.div>
           </div>
         </div>
       </section>
