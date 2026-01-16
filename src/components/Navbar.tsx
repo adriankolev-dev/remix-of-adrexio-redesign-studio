@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.svg";
 
 const navLinks = [
   { name: "Начало", href: "/" },
@@ -35,10 +36,8 @@ const Navbar = () => {
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-display font-bold text-gradient">
-            adrexio
-          </span>
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="adrexio" className="h-8 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
