@@ -20,6 +20,7 @@ const services = [
     title: "Уеб разработка",
     subtitle: "Web Development",
     description: "Модерни сайтове за вашия бизнес и неговият растеж. Създаваме бързи, отзивчиви и SEO-оптимизирани уебсайтове.",
+    href: "/services/web-development",
     features: [
       "Корпоративни уебсайтове",
       "Лендинг страници",
@@ -32,6 +33,7 @@ const services = [
     title: "Мобилни приложения",
     subtitle: "Mobile Apps",
     description: "Иновативни приложения за iOS и Android, които предоставят отлично потребителско изживяване.",
+    href: "/services/mobile-apps",
     features: [
       "Native iOS приложения",
       "Native Android приложения",
@@ -44,6 +46,7 @@ const services = [
     title: "UI/UX Дизайн",
     subtitle: "& Стратегия",
     description: "Интуитивен дизайн за отлично потребителско изживяване, базиран на задълбочен анализ и изследване.",
+    href: "/services/ui-ux-design",
     features: [
       "Потребителско проучване",
       "Wireframing и прототипиране",
@@ -56,6 +59,7 @@ const services = [
     title: "SEO оптимизация",
     subtitle: "Search Engine Optimization",
     description: "Подобряване на видимостта в търсачките за повече органичен трафик и по-добри позиции.",
+    href: "/services/seo",
     features: [
       "Технически SEO одит",
       "On-page оптимизация",
@@ -68,6 +72,7 @@ const services = [
     title: "Дигитален маркетинг",
     subtitle: "Digital Marketing",
     description: "Стратегии за растеж и увеличаване на онлайн присъствието ви чрез ефективни маркетинг кампании.",
+    href: "/services/digital-marketing",
     features: [
       "Google Ads кампании",
       "Facebook/Instagram реклами",
@@ -80,6 +85,7 @@ const services = [
     title: "Техническа поддръжка",
     subtitle: "Support & Maintenance",
     description: "Постоянна техническа поддръжка и актуализации за безпроблемна работа на вашия сайт.",
+    href: "/services/technical-support",
     features: [
       "24/7 мониторинг",
       "Редовни актуализации",
@@ -153,7 +159,7 @@ const Services = () => {
                 </ul>
 
                 <Button variant="outline" size="lg" asChild className="w-full group-hover:border-primary/50">
-                  <Link to="/contact">
+                  <Link to={service.href}>
                     Научете повече
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
