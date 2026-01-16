@@ -3,7 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { useTheme } from "next-themes";
 import logo from "@/assets/logo.svg";
+import logoDark from "@/assets/logo-dark.svg";
 
 const navLinks = [
   { name: "Начало", href: "/" },
@@ -16,7 +19,13 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const location = useLocation();
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +34,9 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Use dark logo for light theme, white logo for dark theme
+  const currentLogo = mounted && resolvedTheme === "light" ? logoDark : logo;
 
   return (
     <motion.header
@@ -37,7 +49,7 @@ const Navbar = () => {
       <nav className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="adrexio" className="h-8 w-auto" />
+          <img src={currentLogo} alt="adrexio" className="h-8 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -63,20 +75,24 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* CTA Button */}
-        <div className="hidden md:block">
+        {/* Theme Toggle & CTA Button */}
+        <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
           <Button variant="hero" size="lg" asChild>
             <Link to="/contact">Свържи се с нас</Link>
           </Button>
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden text-foreground p-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="text-foreground p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Menu */}
