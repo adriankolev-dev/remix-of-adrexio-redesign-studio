@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Star, Download, Smartphone } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { mobileApps } from "@/data/mobileApps";
 
 const MobileAppsSection = () => {
@@ -26,16 +27,13 @@ const MobileAppsSection = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {mobileApps.map((app, index) => (
-            <motion.a
+            <motion.article
               key={app.id}
-              href={app.appStoreUrl}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative block"
+              className="group relative"
             >
               <div className="relative overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5">
                 {/* App Screenshot */}
@@ -76,8 +74,8 @@ const MobileAppsSection = () => {
                     {app.description}
                   </p>
 
-                  {/* Contribution Badge */}
-                  <div className="flex items-center justify-between">
+                  {/* Contribution Badge & Downloads */}
+                  <div className="flex items-center justify-between mb-4">
                     <span className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full">
                       {app.contribution}
                     </span>
@@ -88,14 +86,26 @@ const MobileAppsSection = () => {
                       </div>
                     )}
                   </div>
-                </div>
 
-                {/* External Link Indicator */}
-                <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:bg-primary group-hover:text-primary-foreground">
-                  <ExternalLink className="h-5 w-5" />
+                  {/* App Store Button */}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full group/btn"
+                    asChild
+                  >
+                    <a
+                      href={app.appStoreUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2 transition-transform group-hover/btn:translate-x-0.5" />
+                      Вижте в App Store
+                    </a>
+                  </Button>
                 </div>
               </div>
-            </motion.a>
+            </motion.article>
           ))}
         </div>
       </div>
