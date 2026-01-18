@@ -12,6 +12,7 @@ import tajmahalImg from "@/assets/case-studies/tajmahal.png";
 import amadentImg from "@/assets/case-studies/amadent.png";
 import boasImg from "@/assets/case-studies/boas.png";
 import bulbiochemImg from "@/assets/case-studies/bulbiochem.png";
+import fmlbdImg from "@/assets/case-studies/fml-bd.png";
 
 export interface CaseStudyResult {
   metric: string;
@@ -50,10 +51,39 @@ export const categories = [
   "Индустрия",
   "Организации",
   "Технологии",
+  "Логистика",
 ];
 
 export const caseStudies: CaseStudy[] = [
-  // FEATURED PROJECTS
+  // FML-BD (NEW)
+  {
+    id: "fml-bd",
+    title: "Freight Management Ltd.",
+    subtitle: "Глобална логистика с локална експертиза",
+    category: "Логистика",
+    url: "https://fml-bd.com/",
+    isPublic: true,
+    isFeatured: false,
+    image: fmlbdImg,
+    overview: "Freight Management Ltd. (FML) е глобална логистична компания, осигуряваща прецизност и надеждност във всяко звено на веригата за доставки. От спешни пратки до мащабни глобални карго проекти - те се справят с всичко.",
+    challenge: "Компанията се нуждаеше от модерен, професионален уебсайт, който да представи пълния спектър от логистични услуги - въздушен, морски, сухопътен транспорт и складиране - и да улесни връзката с потенциални клиенти 24/7.",
+    solution: [
+      "Изградихме корпоративен уебсайт с модерен, професионален дизайн",
+      "Създадохме детайлни страници за всяка логистична услуга",
+      "Разработихме секция 'Insights & Knowledge Hub' за експертно съдържание",
+      "Внедрихме формуляри за бързо запитване и получаване на оферти",
+      "Интегрирахме WhatsApp и директни контакти за 24/7 поддръжка"
+    ],
+    results: [
+      { metric: "24/7", label: "Обслужване" },
+      { metric: "Global", label: "Покритие" },
+      { metric: "+120%", label: "Запитвания" }
+    ],
+    technologies: ["WordPress", "Custom Theme", "SEO", "WhatsApp Integration"],
+    gradient: "from-blue-600/20 to-indigo-600/20",
+    accentColor: "text-blue-500"
+  },
+  // PROJECTS
   {
     id: "global-street-art",
     title: "Global Street Art",
@@ -61,7 +91,7 @@ export const caseStudies: CaseStudy[] = [
     category: "Изкуство & Култура",
     url: "https://www.globalstreetart.com/",
     isPublic: true,
-    isFeatured: true,
+    isFeatured: false,
     image: globalstreetartImg,
     overview: "Global Street Art е водещата европейска компания за ръчно рисувана реклама с глобален обхват. Те са създали над 3,000 публични арт творби, включително London Mural Festival, работейки с брандове като Gucci, Nike, Burberry, Spotify, Netflix и Marc Jacobs.",
     challenge: "Компанията се нуждаеше от модерна, визуално впечатляваща платформа, която да представи портфолиото им от мащабни мурали, да привлече премиум клиенти и да улесни процеса на заявка за проекти на глобално ниво.",
@@ -88,7 +118,7 @@ export const caseStudies: CaseStudy[] = [
     category: "Гейминг & Развлечения",
     url: "https://webxotic.com/",
     isPublic: true,
-    isFeatured: true,
+    isFeatured: false,
     image: webxoticImg,
     overview: "Webxotic LLC е студио за разработка на мобилни игри, специализирано в Unity, 3D анимация и AI визуализации. Създават стратегически игри с дълбоки икономически системи и конкурентна прогресия.",
     challenge: "Студиото имаше нужда от впечатляваща презентационна страница, която да демонстрира визуалните им способности, да привлече талантливи разработчици и да насочи потребителите към техните мобилни приложения.",
@@ -115,7 +145,7 @@ export const caseStudies: CaseStudy[] = [
     category: "Гейминг & Развлечения",
     url: "https://bitcoinempires.io/",
     isPublic: true,
-    isFeatured: true,
+    isFeatured: false,
     image: bitcoinempiresImg,
     overview: "Bitcoin Empires е икономическа стратегическа игра, където икономиката се задвижва от неограничена вътрешноигрова фиат валута и фиксирано предлагане от само 21 милиона монети. Този уникален икономически модел запознава играчите с потенциала на ограничените активи.",
     challenge: "Играта се нуждаеше от уебсайт, който да обясни сложната игрова механика по достъпен начин, да изгради общност около крипто-гейминг концепцията и да улесни изтеглянето на мобилното приложение.",

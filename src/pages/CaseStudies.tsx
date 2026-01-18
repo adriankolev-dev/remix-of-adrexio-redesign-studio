@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import CaseStudyFilters from "@/components/case-studies/CaseStudyFilters";
-import FeaturedCaseStudies from "@/components/case-studies/FeaturedCaseStudies";
+import MobileAppsSection from "@/components/case-studies/MobileAppsSection";
 import { caseStudies, getCaseStudiesByCategory } from "@/data/caseStudies";
 
 const CaseStudies = () => {
@@ -31,8 +31,7 @@ const CaseStudies = () => {
     return result;
   }, [activeCategory, searchQuery]);
 
-  // Hide featured section when filtering
-  const showFeatured = activeCategory === "Всички" && !searchQuery.trim();
+  const isFiltering = activeCategory !== "Всички" || searchQuery.trim();
 
   return (
     <main className="min-h-screen bg-background">
@@ -70,19 +69,10 @@ const CaseStudies = () => {
         </div>
       </section>
 
-      {/* Featured Section */}
-      {showFeatured && (
-        <section className="pb-8">
-          <div className="container mx-auto px-6">
-            <FeaturedCaseStudies />
-          </div>
-        </section>
-      )}
-
       {/* All Projects Grid */}
       <section className="pb-24">
         <div className="container mx-auto px-6">
-          {!showFeatured && (
+          {isFiltering && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -97,7 +87,7 @@ const CaseStudies = () => {
             </motion.div>
           )}
 
-          {showFeatured && (
+          {!isFiltering && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -141,6 +131,9 @@ const CaseStudies = () => {
           )}
         </div>
       </section>
+
+      {/* Mobile Apps Section */}
+      {!isFiltering && <MobileAppsSection />}
 
       {/* Stats Summary */}
       <section className="py-24 bg-gradient-to-b from-card to-background">
