@@ -70,7 +70,7 @@ const MobileAppsSection = () => {
                   </p>
 
                   {/* Description */}
-                  <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                  <p className="text-sm text-muted-foreground mb-4">
                     {app.description}
                   </p>
 
