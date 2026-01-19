@@ -24,13 +24,19 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="font-display font-semibold text-foreground">Бързи връзки</h4>
             <ul className="space-y-3">
-              {["Услуги", "Цени", "За нас", "Case Studies", "Контакти"].map((link) => (
-                <li key={link}>
+              {[
+                { label: "Услуги", path: "/services" },
+                { label: "Цени", path: "/pricing" },
+                { label: "За нас", path: "/about" },
+                { label: "Case Studies", path: "/case-studies" },
+                { label: "Контакти", path: "/contact" }
+              ].map((link) => (
+                <li key={link.path}>
                   <Link
-                    to={`/${link.toLowerCase().replace(" ", "-")}`}
+                    to={link.path}
                     className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-1 group"
                   >
-                    {link}
+                    {link.label}
                     <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
                 </li>
@@ -43,15 +49,21 @@ const Footer = () => {
             <h4 className="font-display font-semibold text-foreground">Услуги</h4>
             <ul className="space-y-3">
               {[
-                "Уеб разработка",
-                "Мобилни приложения",
-                "UI/UX Дизайн",
-                "SEO оптимизация",
-                "Дигитален маркетинг",
-                "Техническа поддръжка"
+                { label: "Уеб разработка", path: "/services/web-development" },
+                { label: "Мобилни приложения", path: "/services/mobile-apps" },
+                { label: "UI/UX Дизайн", path: "/services/ui-ux-design" },
+                { label: "SEO оптимизация", path: "/services/seo" },
+                { label: "Дигитален маркетинг", path: "/services/digital-marketing" },
+                { label: "Техническа поддръжка", path: "/services/technical-support" }
               ].map((service) => (
-                <li key={service}>
-                  <span className="text-muted-foreground text-sm">{service}</span>
+                <li key={service.path}>
+                  <Link
+                    to={service.path}
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-1 group"
+                  >
+                    {service.label}
+                    <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -61,13 +73,23 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="font-display font-semibold text-foreground">Контакти</h4>
             <ul className="space-y-3">
-              <li className="flex items-center gap-3 text-muted-foreground text-sm">
-                <Mail size={16} className="text-primary" />
-                hello@adrexio.com
+              <li>
+                <a
+                  href="mailto:hello@adrexio.com"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors text-sm group"
+                >
+                  <Mail size={16} className="text-primary" />
+                  hello@adrexio.com
+                </a>
               </li>
-              <li className="flex items-center gap-3 text-muted-foreground text-sm">
-                <Phone size={16} className="text-primary" />
-                +359 888 888 888
+              <li>
+                <a
+                  href="tel:+359888888888"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors text-sm group"
+                >
+                  <Phone size={16} className="text-primary" />
+                  +359 888 888 888
+                </a>
               </li>
               <li className="flex items-start gap-3 text-muted-foreground text-sm">
                 <MapPin size={16} className="text-primary mt-0.5" />

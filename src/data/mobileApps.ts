@@ -1,7 +1,6 @@
 // Mobile Applications Data
 import oneBetterImg from "@/assets/apps/1better.png";
 import trapflixImg from "@/assets/apps/trapflix.png";
-import smuleImg from "@/assets/apps/smule.png";
 import thisisdopeImg from "@/assets/apps/thisisdope.png";
 import xciteImg from "@/assets/apps/xcite.png";
 
@@ -45,19 +44,6 @@ export const mobileApps: MobileApp[] = [
     downloads: "50K+",
     contribution: "Разработка на мобилното приложение",
     accentColor: "text-red-500"
-  },
-  {
-    id: "smule",
-    name: "Smule: Sing & Record Karaoke",
-    subtitle: "Duets, Reverse Singing, AI FX",
-    description: "Водещо караоке приложение с над 10 милиона песни. Потребителите могат да записват, да пеят дуети с приятели или артисти и да използват професионални AI гласови ефекти.",
-    category: "Музика",
-    appStoreUrl: "https://apps.apple.com/bg/app/smule-sing-record-karaoke/id509993510",
-    image: smuleImg,
-    rating: "4.5",
-    downloads: "100M+",
-    contribution: "Част от екипа за разработка",
-    accentColor: "text-pink-500"
   },
   {
     id: "thisisdope",

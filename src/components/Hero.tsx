@@ -5,16 +5,16 @@ import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 
 // Import client logos for social proof
-import supercreditLogo from "@/assets/clients/supercredit.svg";
+import amaLogo from "@/assets/clients/ama.png";
 import athleticiqLogo from "@/assets/clients/athleticiq.png";
-import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.png";
+import webxoticLogo from "@/assets/clients/webxotic.png";
 import fmlLogo from "@/assets/clients/fml.png";
 import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
 
 const clientLogos = [
-  { name: "SuperCredit", logo: supercreditLogo },
+  { name: "AMA Dental", logo: amaLogo },
   { name: "AthleticIQ", logo: athleticiqLogo },
-  { name: "Body Aesthetics", logo: bodyaestheticsLogo },
+  { name: "WebXotic", logo: webxoticLogo },
   { name: "FML-BD", logo: fmlLogo },
   { name: "Amelia Diva", logo: ameliadivaLogo },
 ];
@@ -48,16 +48,20 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 mb-8"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-            </span>
-            <span className="text-sm text-primary font-medium">
-              Бърз старт за бизнеса
-            </span>
-            <ArrowRight size={14} className="text-primary" />
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 cursor-pointer mb-8 group"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+              </span>
+              <span className="text-sm text-primary font-medium">
+                Бърз старт за бизнеса
+              </span>
+              <ArrowRight size={14} className="text-primary group-hover:translate-x-1 transition-transform" />
+            </Link>
           </motion.div>
 
           {/* Headline */}
@@ -119,7 +123,7 @@ const Hero = () => {
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="h-full w-auto max-w-[100px] object-contain opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                    className="h-full w-auto max-w-[100px] object-contain opacity-75 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
                   />
                 </motion.div>
               ))}
