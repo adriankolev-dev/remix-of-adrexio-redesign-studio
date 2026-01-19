@@ -114,15 +114,12 @@ const Hero = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 + i * 0.1 }}
-                  className="h-8 md:h-10 transition-all duration-300 group"
+                  className="h-8 md:h-10 opacity-50 hover:opacity-80 transition-opacity grayscale hover:grayscale-0"
                 >
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="h-full w-auto max-w-[100px] object-contain brightness-0 invert opacity-40 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-300"
-                    style={{ filter: 'brightness(0) invert(1)' }}
-                    onMouseEnter={(e) => e.currentTarget.style.filter = 'none'}
-                    onMouseLeave={(e) => e.currentTarget.style.filter = 'brightness(0) invert(1)'}
+                    className="h-full w-auto max-w-[100px] object-contain"
                   />
                 </motion.div>
               ))}
