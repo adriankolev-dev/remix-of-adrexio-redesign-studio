@@ -56,12 +56,15 @@ const ClientLogos = () => {
             {[...clients, ...clients].map((client, i) => (
               <div
                 key={i}
-                className="shrink-0 h-12 md:h-14 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                className="shrink-0 h-12 md:h-14 flex items-center justify-center transition-all duration-300 group"
               >
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="h-full w-auto max-w-[160px] object-contain"
+                  className="h-full w-auto max-w-[160px] object-contain brightness-0 invert opacity-50 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-300"
+                  style={{ filter: 'brightness(0) invert(1)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.filter = 'none'}
+                  onMouseLeave={(e) => e.currentTarget.style.filter = 'brightness(0) invert(1)'}
                 />
               </div>
             ))}
