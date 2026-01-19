@@ -4,6 +4,21 @@ import { ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 
+// Import client logos for social proof
+import supercreditLogo from "@/assets/clients/supercredit.svg";
+import athleticiqLogo from "@/assets/clients/athleticiq.png";
+import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.png";
+import fmlLogo from "@/assets/clients/fml.png";
+import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
+
+const clientLogos = [
+  { name: "SuperCredit", logo: supercreditLogo },
+  { name: "AthleticIQ", logo: athleticiqLogo },
+  { name: "Body Aesthetics", logo: bodyaestheticsLogo },
+  { name: "FML-BD", logo: fmlLogo },
+  { name: "Amelia Diva", logo: ameliadivaLogo },
+];
+
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -84,23 +99,33 @@ const Hero = () => {
             </Button>
           </motion.div>
 
-          {/* Social Proof */}
+          {/* Social Proof with real logos */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-col items-center gap-4"
+            className="flex flex-col items-center gap-6"
           >
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
+            {/* Client logos */}
+            <div className="flex items-center justify-center gap-6 md:gap-8 flex-wrap">
+              {clientLogos.map((client, i) => (
+                <motion.div
                   key={i}
-                  className="w-10 h-10 rounded-full bg-gradient-to-br from-secondary to-muted border-2 border-background flex items-center justify-center text-xs font-bold text-muted-foreground"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 + i * 0.1 }}
+                  className="h-8 md:h-10 opacity-50 hover:opacity-80 transition-opacity grayscale hover:grayscale-0"
                 >
-                  {String.fromCharCode(64 + i)}
-                </div>
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="h-full w-auto max-w-[100px] object-contain"
+                  />
+                </motion.div>
               ))}
             </div>
+            
+            {/* Rating */}
             <div className="flex items-center gap-2">
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((i) => (
