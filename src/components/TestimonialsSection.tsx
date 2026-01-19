@@ -2,36 +2,48 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 
+// Import client logos
+import supercreditLogo from "@/assets/clients/supercredit.svg";
+import fmlLogo from "@/assets/clients/fml.png";
+import athleticiqLogo from "@/assets/clients/athleticiq.png";
+import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.png";
+import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
+
 const testimonials = [
   {
     quote: "Adrexio надминаха очакванията ми. Успяха да разберат визията ми още от първия разговор и я реализираха в изключително функционален и добре структуриран сайт. Харесва ми, че мислят не само за дизайна, но и за потребителското изживяване и бързината. Истински професионалисти!",
     author: "Борислав Гоцев",
     role: "Директор, SuperCredit",
-    initials: "БГ"
+    initials: "БГ",
+    logo: supercreditLogo
   },
   {
     quote: "Търсех надежден партньор за уеб сайт и го намерих в лицето на Adrexio. Процесът беше ясен, комуникацията — отлична, а крайният резултат — напълно отговарящ на бизнес целите ми. Сайтът изглежда сериозно и вдъхва доверие на клиентите ми.",
     author: "Николай Кирилов",
     role: "HR, FML-BD",
-    initials: "НК"
+    initials: "НК",
+    logo: fmlLogo
   },
   {
     quote: "Супер доволна съм от съвместната работа с Adrexio. Сайтът за AthleticiqApp е модерен, интуитивен и много добре оптимизиран. Екипът даде ценни идеи и подобрения, за които дори не бях се сетила. Препоръчвам ги на всеки, който иска качествено онлайн присъствие!",
     author: "Гергана Драгиева",
     role: "PO, Athleticiqapp",
-    initials: "ГД"
+    initials: "ГД",
+    logo: athleticiqLogo
   },
   {
     quote: "Работата с Adrexio беше истинско удоволствие. От самото начало разбрах, че съм попаднала на професионалисти, които знаят как да превърнат една идея в работещ и красив уеб сайт. Дизайнът е елегантен, сайтът е бърз и клиентите ми го харесват.",
     author: "Камелия Петрова",
     role: "Собственик, Body Aesthetics",
-    initials: "КП"
+    initials: "КП",
+    logo: bodyaestheticsLogo
   },
   {
     quote: "Изключително коректен и креативен екип! Adrexio ми създадоха модерен уеб сайт, който отговаря напълно на нуждите на бизнеса ми. Комуникацията беше лесна, всичко се случи навреме и с внимание към детайла.",
     author: "Ивана Иванова",
     role: "Собственик, Amelia Diva",
-    initials: "ИИ"
+    initials: "ИИ",
+    logo: ameliadivaLogo
   }
 ];
 
@@ -92,18 +104,29 @@ const TestimonialsSection = () => {
                   "{testimonials[currentIndex].quote}"
                 </blockquote>
 
-                {/* Author */}
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-display font-bold text-lg">
-                    {testimonials[currentIndex].initials}
+                {/* Author with company logo */}
+                <div className="flex items-center justify-between gap-4 flex-wrap">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-display font-bold text-lg">
+                      {testimonials[currentIndex].initials}
+                    </div>
+                    <div>
+                      <div className="font-display font-semibold text-foreground">
+                        {testimonials[currentIndex].author}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {testimonials[currentIndex].role}
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-display font-semibold text-foreground">
-                      {testimonials[currentIndex].author}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {testimonials[currentIndex].role}
-                    </div>
+                  
+                  {/* Company logo */}
+                  <div className="h-10 md:h-12 opacity-60">
+                    <img
+                      src={testimonials[currentIndex].logo}
+                      alt=""
+                      className="h-full w-auto max-w-[140px] object-contain"
+                    />
                   </div>
                 </div>
               </motion.div>
