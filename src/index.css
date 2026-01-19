@@ -212,4 +212,19 @@
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
+
+  /* Logo white filter - handles white backgrounds */
+  .logo-white {
+    filter: brightness(0) saturate(100%) invert(1);
+    -webkit-filter: brightness(0) saturate(100%) invert(1);
+  }
+
+  .logo-white::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
 }

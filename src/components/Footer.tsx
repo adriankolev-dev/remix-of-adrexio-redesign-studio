@@ -1,16 +1,30 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone, ArrowUpRight } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import logo from "@/assets/logo.svg";
+import logoDark from "@/assets/logo-dark.svg";
 
 const Footer = () => {
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Use dark logo for light theme, white logo for dark theme
+  const currentLogo = mounted && resolvedTheme === "light" ? logoDark : logo;
+
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <span className="text-2xl font-display font-bold text-gradient">
-              adrexio
-            </span>
+            <Link to="/" className="inline-block">
+              <img src={currentLogo} alt="adrexio" className="h-8 w-auto" />
+            </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Създаваме бързи и оптимизирани сайтове, които помагат на бизнеса да расте в дигиталната ера.
             </p>

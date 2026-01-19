@@ -58,11 +58,17 @@ const ClientLogos = () => {
                 key={i}
                 className="shrink-0 h-12 md:h-14 flex items-center justify-center transition-all duration-300 group"
               >
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="h-full w-auto max-w-[160px] object-contain opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
+                <div className="bg-white rounded-lg px-4 py-2 h-full flex items-center justify-center transition-all duration-300 group-hover:bg-white/90">
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="h-full w-auto max-w-[160px] object-contain"
+                    style={client.name === "WebXotic" ? { 
+                      filter: 'brightness(0) saturate(100%)',
+                      WebkitFilter: 'brightness(0) saturate(100%)'
+                    } : undefined}
+                  />
+                </div>
               </div>
             ))}
           </motion.div>
