@@ -125,10 +125,7 @@ const TestimonialsSection = () => {
                     <img
                       src={testimonials[currentIndex].logo}
                       alt=""
-                      className="h-full w-auto max-w-[140px] object-contain brightness-0 invert opacity-60 group-hover/logo:brightness-100 group-hover/logo:invert-0 group-hover/logo:opacity-100 transition-all duration-300"
-                      style={{ filter: 'brightness(0) invert(1)' }}
-                      onMouseEnter={(e) => e.currentTarget.style.filter = 'none'}
-                      onMouseLeave={(e) => e.currentTarget.style.filter = 'brightness(0) invert(1)'}
+                      className="h-full w-auto max-w-[140px] object-contain opacity-70 grayscale group-hover/logo:opacity-100 group-hover/logo:grayscale-0 transition-all duration-300"
                     />
                   </div>
                 </div>
