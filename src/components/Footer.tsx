@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone, ArrowUpRight } from "lucide-react";
+import { Mail, MapPin, Phone, ArrowUpRight, Cookie } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo.svg";
@@ -118,13 +118,30 @@ const Footer = () => {
           <p className="text-muted-foreground text-sm">
             © 2024 Adrexio. Всички права запазени.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 flex-wrap">
             <Link to="/privacy" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               Политика за поверителност
             </Link>
             <Link to="/terms" className="text-muted-foreground hover:text-primary text-sm transition-colors">
               Общи условия
             </Link>
+            <button
+              onClick={() => {
+                // Try to open cookie settings dialog
+                if (typeof (window as any).openCookieSettings === 'function') {
+                  (window as any).openCookieSettings();
+                } else {
+                  // Fallback: clear consent and reload to show banner
+                  localStorage.removeItem("adrexio_cookie_consent");
+                  localStorage.removeItem("adrexio_cookie_preferences");
+                  window.location.reload();
+                }
+              }}
+              className="text-muted-foreground hover:text-primary text-sm transition-colors flex items-center gap-1"
+            >
+              <Cookie size={14} />
+              Управление на бисквитки
+            </button>
           </div>
         </div>
       </div>
