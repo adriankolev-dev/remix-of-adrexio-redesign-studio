@@ -17,6 +17,10 @@ import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 const UIUXDesign = () => {
   return (
     <ServiceLandingTemplate
+      seoTitle="UI/UX Дизайн - Adrexio | Професионален дизайн на интерфейси в София"
+      seoDescription="Професионален UI/UX дизайн в София. Създаваме интуитивни и конвертиращи потребителски интерфейси, базирани на данни и потребителско проучване."
+      seoKeywords="UI дизайн, UX дизайн, дизайн интерфейс, потребителско изживяване, дизайн уебсайт, UI/UX София, дизайн приложение"
+      serviceName="UI/UX Дизайн"
       heroTitle="Дизайн, който"
       heroHighlight="конвертира и впечатлява."
       heroSubtitle="Създаваме интуитивни потребителски изживявания, които превръщат посетителите в лоялни клиенти. Дизайн, базиран на данни и психология."

@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import { getServiceSchema } from "@/lib/structuredData";
 
 interface ServiceFeature {
   title: string;
@@ -45,6 +47,12 @@ interface WhyChooseUs {
 }
 
 export interface ServiceLandingProps {
+  // SEO
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
+  serviceName?: string;
+  
   // Hero section
   heroTitle: string;
   heroHighlight: string;
@@ -128,8 +136,18 @@ const ServiceLandingTemplate = ({
   ctaTitle,
   ctaSubtitle,
 }: ServiceLandingProps) => {
+  const structuredData = serviceName 
+    ? getServiceSchema(serviceName, seoDescription || heroSubtitle)
+    : undefined;
+
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        structuredData={structuredData}
+      />
       <Navbar />
 
       {/* Hero Section */}
@@ -163,9 +181,9 @@ const ServiceLandingTemplate = ({
                 </Link>
               </Button>
               <Button variant="heroOutline" size="xl" asChild>
-                <a href="tel:+359888123456">
+                <a href="tel:+359896173743">
                   <Phone size={20} />
-                  +359 888 123 456
+                  +359 896 173 743
                 </a>
               </Button>
             </div>
@@ -597,9 +615,9 @@ const ServiceLandingTemplate = ({
                 </Link>
               </Button>
               <Button variant="heroOutline" size="xl" asChild>
-                <a href="tel:+359888123456">
+                <a href="tel:+359896173743">
                   <Phone size={20} />
-                  +359 888 123 456
+                  +359 896 173 743
                 </a>
               </Button>
             </div>

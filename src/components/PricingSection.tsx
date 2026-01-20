@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Check, ArrowRight, Sparkles, Zap, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const plans = [
   {
@@ -22,12 +23,12 @@ const plans = [
     popular: false
   },
   {
-    name: "PROFESSIONAL",
+    name: "BUSINESS",
     originalPrice: "1.999",
     price: "649",
     period: "еднократно",
-    description: "Подходящ за бизнеси, които продават онлайн",
-    highlight: "Спестявате €1.350 днес",
+    description: "Идеален за бизнеси, които искат да продават онлайн и да растат",
+    highlight: "Спестявате €1.350 днес | Възвращаемост за 2-3 месеца",
     features: [
       "Всичко от план ESSENTIAL",
       "Онлайн магазин",
@@ -115,6 +116,7 @@ const PricingSection = () => {
               )}
 
               <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-sm text-muted-foreground">от</span>
                 <span className="text-muted-foreground">€</span>
                 <span className="text-5xl font-display font-bold text-gradient">{plan.price}</span>
               </div>
@@ -161,10 +163,10 @@ const PricingSection = () => {
         >
           <div className="border-gradient p-6 rounded-xl text-center">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
-              Внимание!
+              Условия за плащане
             </span>
             <p className="text-foreground mt-2">
-              <strong>Първо резултати, после плащане:</strong> Без риск и без скрити такси. Започваме с безплатно демо, изграждаме проекта ви и плащате само след финално одобрение.
+              <strong>50/50 плащане:</strong> Плащате 50% от сумата в началото на проекта. Останалите 50% плащате след като видите резултата и преди официалното издаване на проекта. Без скрити такси и без риск.
             </p>
             <p className="text-muted-foreground text-sm mt-2">
               Всички планове са с възможност за допълнителна техническа поддръжка.

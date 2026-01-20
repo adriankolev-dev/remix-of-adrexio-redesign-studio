@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUpRight, TrendingUp, Clock, Users, ExternalLink } from
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import CaseStudyFilters from "@/components/case-studies/CaseStudyFilters";
 import MobileAppsSection from "@/components/case-studies/MobileAppsSection";
@@ -35,6 +36,11 @@ const CaseStudies = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="Case Studies - Adrexio | Портфолио с успешни проекти"
+        description="Разгледайте нашите успешни проекти и case studies. Уебсайтове, мобилни приложения и дигитални решения, които помогнаха на бизнесите да растат."
+        keywords="case studies, портфолио, проекти Adrexio, успешни уебсайтове, примерни проекти, референции"
+      />
       <Navbar />
 
       {/* Hero */}

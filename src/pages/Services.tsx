@@ -13,6 +13,8 @@ import {
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import { getServiceSchema } from "@/lib/structuredData";
 
 const services = [
   {
@@ -96,8 +98,19 @@ const services = [
 ];
 
 const Services = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": services.map((service) => getServiceSchema(service.title, service.description)),
+  };
+
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="Услуги - Adrexio | Уеб разработка, Мобилни приложения, SEO, Дигитален маркетинг"
+        description="Професионални услуги за уеб разработка, мобилни приложения, UI/UX дизайн, SEO оптимизация, дигитален маркетинг и техническа поддръжка в София, България."
+        keywords="уеб разработка услуги, мобилни приложения, UI/UX дизайн, SEO оптимизация, дигитален маркетинг, техническа поддръжка, уеб студио услуги София"
+        structuredData={structuredData}
+      />
       <Navbar />
 
       <section className="pt-32 pb-24 relative overflow-hidden">

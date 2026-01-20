@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import { getLocalBusinessSchema } from "@/lib/structuredData";
 import emailjs from "@emailjs/browser";
 
 interface FormData {
@@ -89,6 +91,12 @@ const Contact = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="Контакти - Adrexio | Свържете се с нас за безплатна консултация"
+        description="Свържете се с Adrexio за безплатна консултация по вашия проект. Телефон: +359 896 173 743, Email: hello@adrexio.com. София, България."
+        keywords="контакт Adrexio, уеб студио София, консултация уебсайт, разработка сайт България, свържете се с нас"
+        structuredData={getLocalBusinessSchema()}
+      />
       <Navbar />
 
       <section className="pt-32 pb-24 relative overflow-hidden">
@@ -149,8 +157,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Телефон</h3>
-                    <a href="tel:+359888888888" className="text-muted-foreground hover:text-primary transition-colors">
-                      +359 888 888 888
+                    <a href="tel:+359896173743" className="text-muted-foreground hover:text-primary transition-colors">
+                      +359 896 173 743
                     </a>
                   </div>
                 </div>
@@ -268,7 +276,7 @@ const Contact = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="+359 888 888 888"
+                      placeholder="+359 896 173 743"
                       className="bg-secondary/50 border-border"
                     />
                   </div>

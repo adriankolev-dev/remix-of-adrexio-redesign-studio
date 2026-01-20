@@ -17,6 +17,10 @@ import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 const WebDevelopment = () => {
   return (
     <ServiceLandingTemplate
+      seoTitle="Уеб разработка - Adrexio | Професионални уебсайтове в София, България"
+      seoDescription="Професионална уеб разработка в София. Създаваме модерни, бързи и SEO-оптимизирани уебсайтове, корпоративни сайтове, лендинг страници и e-commerce магазини."
+      seoKeywords="уеб разработка, уебсайт София, разработка сайт, корпоративен уебсайт, лендинг страница, e-commerce, уеб студио България, React, Next.js"
+      serviceName="Уеб разработка"
       heroTitle="Фокусирайте се върху резултата,"
       heroHighlight="а не върху процеса."
       heroSubtitle="Превръщаме вашите посетители в лоялни клиенти с високопроизводителни уебсайтове, които работят за вашия бизнес 24/7."

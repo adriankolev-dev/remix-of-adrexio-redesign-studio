@@ -21,6 +21,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import emailjs from "@emailjs/browser";
 
 interface ProjectFormData {
@@ -152,6 +153,12 @@ const ProjectInquiry = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="Запитване за проект - Adrexio | Попълнете формата за ваш проект"
+        description="Попълнете подробната форма за ваш проект. Ще се свържем с вас възможно най-скоро, за да обсъдим как можем да ви помогнем с уеб разработка, мобилни приложения и дигитални решения."
+        keywords="запитване проект, форма за проект, консултация проект, запитване уебсайт"
+        noindex={true}
+      />
       <Navbar />
 
       <section className="pt-32 pb-24 relative overflow-hidden">
@@ -251,7 +258,7 @@ const ProjectInquiry = () => {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+359 888 888 888"
+                        placeholder="+359 896 173 743"
                         className="bg-secondary/50 border-border"
                       />
                     </div>
@@ -339,23 +346,23 @@ const ProjectInquiry = () => {
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="under-5000" id="under-5000" />
-                        <Label htmlFor="under-5000" className="cursor-pointer">Под 5,000 лв.</Label>
+                        <Label htmlFor="under-5000" className="cursor-pointer">Под 5,000 €</Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="5000-10000" id="5000-10000" />
-                        <Label htmlFor="5000-10000" className="cursor-pointer">5,000 - 10,000 лв.</Label>
+                        <Label htmlFor="5000-10000" className="cursor-pointer">5,000 - 10,000 €</Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="10000-25000" id="10000-25000" />
-                        <Label htmlFor="10000-25000" className="cursor-pointer">10,000 - 25,000 лв.</Label>
+                        <Label htmlFor="10000-25000" className="cursor-pointer">10,000 - 25,000 €</Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="25000-50000" id="25000-50000" />
-                        <Label htmlFor="25000-50000" className="cursor-pointer">25,000 - 50,000 лв.</Label>
+                        <Label htmlFor="25000-50000" className="cursor-pointer">25,000 - 50,000 €</Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="over-50000" id="over-50000" />
-                        <Label htmlFor="over-50000" className="cursor-pointer">Над 50,000 лв.</Label>
+                        <Label htmlFor="over-50000" className="cursor-pointer">Над 50,000 €</Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="discuss" id="discuss-budget" />

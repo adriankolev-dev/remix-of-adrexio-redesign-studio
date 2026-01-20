@@ -2,10 +2,16 @@ import { motion } from "framer-motion";
 import { Shield, Lock, Eye, FileText, Mail, Phone, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const Privacy = () => {
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="Политика за поверителност - Adrexio | GDPR съобразна политика"
+        description="Политика за поверителност на Adrexio. Научете как събираме, използваме и защитаваме вашите лични данни в съответствие с GDPR и българското законодателство."
+        keywords="политика поверителност, GDPR, защита данни, лични данни, поверителност Adrexio"
+      />
       <Navbar />
 
       <section className="pt-32 pb-24 relative overflow-hidden">
@@ -66,7 +72,7 @@ const Privacy = () => {
                     <p><strong className="text-foreground">Име:</strong> Adrexio</p>
                     <p><strong className="text-foreground">Адрес:</strong> София, България</p>
                     <p><strong className="text-foreground">Имейл за връзка относно лични данни:</strong> hello@adrexio.com</p>
-                    <p><strong className="text-foreground">Телефон:</strong> +359 888 888 888</p>
+                    <p><strong className="text-foreground">Телефон:</strong> +359 896 173 743</p>
                   </div>
                 </motion.div>
 
@@ -287,7 +293,7 @@ const Privacy = () => {
                       </div>
                       <div className="flex items-center gap-3">
                         <Phone className="w-5 h-5 text-primary" />
-                        <a href="tel:+359888888888" className="text-primary hover:underline">+359 888 888 888</a>
+                        <a href="tel:+359896173743" className="text-primary hover:underline">+359 896 173 743</a>
                       </div>
                       <div className="flex items-center gap-3">
                         <MapPin className="w-5 h-5 text-primary" />

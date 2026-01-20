@@ -17,6 +17,10 @@ import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 const SEO = () => {
   return (
     <ServiceLandingTemplate
+      seoTitle="SEO оптимизация - Adrexio | Подобряване на позициите в Google, София"
+      seoDescription="Професионална SEO оптимизация в София. Увеличаваме органичния трафик и подобряваме позициите в Google с доказани SEO стратегии и техники."
+      seoKeywords="SEO оптимизация, SEO София, позиции Google, органичен трафик, SEO услуги България, технически SEO, on-page SEO, линк билдинг"
+      serviceName="SEO оптимизация"
       heroTitle="Бъдете #1 в Google."
       heroHighlight="Повече трафик, повече клиенти."
       heroSubtitle="Увеличете органичния трафик и конверсиите с доказани SEO стратегии. Изкачете се на върха на търсачките и останете там."

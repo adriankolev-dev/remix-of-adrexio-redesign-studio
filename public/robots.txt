@@ -1,14 +1,8 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Disallow project inquiry form from indexing
+Disallow: /project-inquiry
+
+# Sitemap
+Sitemap: https://www.adrexio.com/sitemap.xml

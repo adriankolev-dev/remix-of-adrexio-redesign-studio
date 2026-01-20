@@ -17,6 +17,10 @@ import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 const MobileApps = () => {
   return (
     <ServiceLandingTemplate
+      seoTitle="Мобилни приложения - Adrexio | iOS и Android разработка в София"
+      seoDescription="Професионална разработка на мобилни приложения за iOS и Android в София. Native и cross-platform решения с отлично потребителско изживяване."
+      seoKeywords="мобилни приложения, iOS приложение, Android приложение, разработка приложения София, mobile app development, React Native, Flutter"
+      serviceName="Мобилни приложения"
       heroTitle="Вашият бизнес в джоба"
       heroHighlight="на всеки клиент."
       heroSubtitle="Създаваме иновативни мобилни приложения за iOS и Android, които предоставят изключително потребителско изживяване и реални бизнес резултати."

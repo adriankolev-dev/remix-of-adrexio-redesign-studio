@@ -14,6 +14,8 @@ import {
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import { getOrganizationSchema } from "@/lib/structuredData";
 
 const values = [
   {
@@ -57,6 +59,12 @@ const team = [
 const About = () => {
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="За нас - Adrexio | Професионално уеб студио в София"
+        description="Adrexio е уеб студио в София, специализирано в създаването на модерни уебсайтове, мобилни приложения и дигитални решения. Над 50+ завършени проекта, 30+ доволни клиенти."
+        keywords="за нас Adrexio, уеб студио София, екип уеб разработка, история Adrexio, опит уеб дизайн"
+        structuredData={getOrganizationSchema()}
+      />
       <Navbar />
 
       {/* Hero */}

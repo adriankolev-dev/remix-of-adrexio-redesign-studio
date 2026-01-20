@@ -2,10 +2,16 @@ import { motion } from "framer-motion";
 import { FileText, Scale, AlertCircle, CheckCircle, Mail, Phone, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const Terms = () => {
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="Общи условия - Adrexio | Условия за използване"
+        description="Общи условия за използване на услугите на Adrexio. Прочетете нашите условия за поръчки, плащания, интелектуална собственост и гаранции."
+        keywords="общи условия, условия използване, условия Adrexio, договорни условия"
+      />
       <Navbar />
 
       <section className="pt-32 pb-24 relative overflow-hidden">
@@ -123,7 +129,7 @@ const Terms = () => {
                   <div className="space-y-3 text-muted-foreground">
                     <ul className="list-disc list-inside space-y-2 ml-4">
                       <li>Всички поръчки се приемат при наличие на писмено потвърждение от двете страни</li>
-                      <li>Цените са посочени в български лева (BGN), освен ако не е посочено друго</li>
+                      <li>Цените са посочени в евро (EUR), освен ако не е посочено друго</li>
                       <li>Плащанията се извършват според договорените условия в договора</li>
                       <li>Всички цени включват ДДС, където е приложимо</li>
                       <li>При забавяне на плащането, запазваме правото да приостановим или прекратим услугите</li>
@@ -282,7 +288,7 @@ const Terms = () => {
                       </div>
                       <div className="flex items-center gap-3">
                         <Phone className="w-5 h-5 text-primary" />
-                        <a href="tel:+359888888888" className="text-primary hover:underline">+359 888 888 888</a>
+                        <a href="tel:+359896173743" className="text-primary hover:underline">+359 896 173 743</a>
                       </div>
                       <div className="flex items-center gap-3">
                         <MapPin className="w-5 h-5 text-primary" />
