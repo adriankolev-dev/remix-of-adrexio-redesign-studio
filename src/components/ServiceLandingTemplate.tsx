@@ -106,6 +106,10 @@ export interface ServiceLandingProps {
 }
 
 const ServiceLandingTemplate = ({
+  seoTitle,
+  seoDescription,
+  seoKeywords,
+  serviceName,
   heroTitle,
   heroHighlight,
   heroSubtitle,

@@ -30,7 +30,7 @@ const services = [
     title: "UI/UX Дизайн",
     subtitle: "& Стратегия",
     description: "Интуитивен дизайн за отлично потребителско изживяване.",
-    href: "/services/design"
+    href: "/services/ui-ux-design"
   },
   {
     icon: Search,
@@ -44,14 +44,14 @@ const services = [
     title: "Дигитален маркетинг",
     subtitle: "Digital Marketing",
     description: "Стратегии за растеж и увеличаване на онлайн присъствието ви.",
-    href: "/services/marketing"
+    href: "/services/digital-marketing"
   },
   {
     icon: Wrench,
     title: "Поддръжка",
     subtitle: "Support & Maintenance",
     description: "Постоянна техническа поддръжка и актуализации за безпроблемна работа.",
-    href: "/services/support"
+    href: "/services/technical-support"
   }
 ];
 
