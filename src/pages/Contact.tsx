@@ -1,18 +1,90 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, ArrowRight, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Mail, Phone, MapPin, Send, ArrowRight, CheckCircle, Loader2, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import emailjs from "@emailjs/browser";
+
+interface FormData {
+  from_name: string;
+  from_email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
 
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState<FormData>({
+    from_name: "",
+    from_email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      // Replace these with your EmailJS credentials
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+
+      const timestamp = new Date().toLocaleString('bg-BG', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.from_name,
+          from_email: formData.from_email,
+          phone: formData.phone || "Не е посочен",
+          subject: formData.subject,
+          message: formData.message,
+          time: timestamp,
+          to_email: "adrkolev@gmail.com", // Your receiving email
+        },
+        publicKey
+      );
+
+      setIsSubmitted(true);
+      setFormData({
+        from_name: "",
+        from_email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setError("Възникна грешка при изпращането на съобщението. Моля, опитайте отново или се свържете директно на hello@adrexio.com");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -135,11 +207,41 @@ const Contact = () => {
                   </Button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="border-gradient p-8 rounded-2xl space-y-6">
+                <div className="space-y-6">
+                  {/* Project Inquiry Link */}
+                  <div className="border-gradient p-6 rounded-xl bg-primary/5 border-primary/20">
+                    <div className="flex items-start gap-4">
+                      <div className="p-2 rounded-lg bg-primary/10 shrink-0">
+                        <FileText className="w-5 h-5 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm text-foreground mb-3 font-semibold">
+                          Ако имате ясна визия за проекта, може да попълните нашата подробна форма. Много ще ни улесните и ще ни помогнете да разберем по-добре вашите нужди.
+                        </p>
+                        <Button variant="outline" size="sm" asChild>
+                          <Link to="/project-inquiry" className="flex items-center gap-2">
+                            Попълнете подробната форма
+                            <ArrowRight size={14} />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="border-gradient p-8 rounded-2xl space-y-6">
+                    {error && (
+                      <div className="p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+                        {error}
+                      </div>
+                    )}
+                  
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Име</label>
                       <Input
+                        name="from_name"
+                        value={formData.from_name}
+                        onChange={handleChange}
                         placeholder="Вашето име"
                         required
                         className="bg-secondary/50 border-border"
@@ -148,7 +250,10 @@ const Contact = () => {
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Email</label>
                       <Input
+                        name="from_email"
                         type="email"
+                        value={formData.from_email}
+                        onChange={handleChange}
                         placeholder="email@example.com"
                         required
                         className="bg-secondary/50 border-border"
@@ -159,7 +264,10 @@ const Contact = () => {
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Телефон</label>
                     <Input
+                      name="phone"
                       type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
                       placeholder="+359 888 888 888"
                       className="bg-secondary/50 border-border"
                     />
@@ -168,6 +276,9 @@ const Contact = () => {
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Тема</label>
                     <Input
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
                       placeholder="Относно какво е вашето запитване?"
                       required
                       className="bg-secondary/50 border-border"
@@ -177,6 +288,9 @@ const Contact = () => {
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Съобщение</label>
                     <Textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       placeholder="Разкажете ни повече за вашия проект..."
                       rows={5}
                       required
@@ -184,11 +298,27 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button variant="hero" size="lg" type="submit" className="w-full">
-                    Изпратете съобщение
-                    <Send size={18} />
+                  <Button 
+                    variant="hero" 
+                    size="lg" 
+                    type="submit" 
+                    className="w-full"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Изпращане...
+                      </>
+                    ) : (
+                      <>
+                        Изпратете съобщение
+                        <Send size={18} />
+                      </>
+                    )}
                   </Button>
                 </form>
+                </div>
               )}
             </motion.div>
           </div>
