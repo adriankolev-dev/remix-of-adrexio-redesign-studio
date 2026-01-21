@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { getCaseStudyById, caseStudies } from "@/data/caseStudies";
 import { useEffect } from "react";
 
@@ -28,6 +29,14 @@ const CaseStudyDetail = () => {
   const prevStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
   const nextStudy =
     currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
+
+  // Truncate description for SEO (optimal length: 140-150 characters)
+  const truncateDescription = (text: string, maxLength: number = 145): string => {
+    if (text.length <= maxLength) return text;
+    const truncated = text.substring(0, maxLength);
+    const lastSpace = truncated.lastIndexOf(' ');
+    return lastSpace > 0 ? truncated.substring(0, lastSpace) + '...' : truncated + '...';
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,7 +56,7 @@ const CaseStudyDetail = () => {
           <Button variant="hero" asChild>
             <Link to="/case-studies">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Към всички проекти
+              Към проектите
             </Link>
           </Button>
         </div>
@@ -58,6 +67,14 @@ const CaseStudyDetail = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title={`${study.title} - ${study.subtitle} | Adrexio Case Study`}
+        description={truncateDescription(study.overview)}
+        keywords={`${study.title}, ${study.category}, уеб разработка, case study, ${study.technologies.join(", ")}`}
+        image={study.image}
+        type="article"
+        noindex={!study.isPublic}
+      />
       <Navbar />
 
       {/* Hero Section */}
@@ -337,7 +354,7 @@ const CaseStudyDetail = () => {
               to="/case-studies"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
-              Всички проекти
+              Нашите проекти
             </Link>
 
             {nextStudy ? (

@@ -1,4 +1,7 @@
 // Case Study Data - Centralized for scalability
+import innitiImg from "@/assets/case-studies/inniti.png";
+import oraqorImg from "@/assets/case-studies/oraqor.png";
+import riactImg from "@/assets/case-studies/riact.png";
 import bodyaestheticsImg from "@/assets/case-studies/bodyaesthetics.png";
 import booomImg from "@/assets/case-studies/booom.png";
 import athleticiqImg from "@/assets/case-studies/athleticiq.png";
@@ -55,6 +58,90 @@ export const categories = [
 ];
 
 export const caseStudies: CaseStudy[] = [
+  // INNITI
+  {
+    id: "inniti",
+    title: "Inniti",
+    subtitle: "Middleware между лабораторни инструменти & LIMS/ELN/AI",
+    category: "Технологии",
+    url: "https://www.inniti.io/",
+    isPublic: true,
+    isFeatured: false,
+    image: innitiImg,
+    overview: "Inniti е middleware платформа, която свързва всякакви лабораторни инструменти с LIMS, ELN или SDMS системи, включително legacy устройства. Платформата е manufacturer-agnostic и работи с над 3,300 различни инструмента, осигурявайки нормализация, стандартизация и структуриране на данни според FAIR принципите.",
+    challenge: "Inniti се нуждаеше от професионален корпоративен уебсайт, който ясно да обясни сложната middleware технология на B2B клиенти от life science и biotech индустриите, да демонстрира библиотеката от свързани инструменти и да улесни процеса на запитване за демо.",
+    solution: [
+      "Изградихме корпоративен уебсайт с техническа, но достъпна естетика",
+      "Създадохме детайлни секции за всяка функционалност (Control & Automate, Track & Trace, Lab Monitoring)",
+      "Разработихме визуализация на библиотеката от 3,300+ инструмента",
+      "Внедрихме форма за запитване за демо с автоматични известия",
+      "Интегрирахме секция с use cases и success stories от големи компании"
+    ],
+    results: [
+      { metric: "3300+", label: "Инструмента" },
+      { metric: "200-800%", label: "ROI" },
+      { metric: "Global", label: "Клиенти" }
+    ],
+    technologies: ["Next.js", "Headless CMS", "API Integration", "B2B SEO"],
+    gradient: "from-purple-500/20 to-indigo-500/20",
+    accentColor: "text-purple-500"
+  },
+  // ORAQOR
+  {
+    id: "oraqor",
+    title: "Oraqor",
+    subtitle: "Платформа за ангажираност и производителност на служители",
+    category: "Технологии",
+    url: "https://www.oraqor.com/",
+    isPublic: true,
+    isFeatured: false,
+    image: oraqorImg,
+    overview: "Oraqor е платформа, която балансира ангажираността на служителите и производителността, за да задвижи бизнес растежа. Платформата включва Oraqor Pulse за бърза диагностика на проблеми с хората и Oraqor Navigator за превръщане на ангажираността в производителност.",
+    challenge: "Oraqor имаше нужда от убедителен уебсайт, който да демонстрира как платформата решава проблема с недоволството на служителите (което струва 34% от заплатите), да обясни двата модула и да привлече HR и бизнес лидери.",
+    solution: [
+      "Създадохме модерен, ориентиран към данни уебсайт с впечатляващи статистики",
+      "Разработихме ясни секции за всеки модул (Pulse и Navigator)",
+      "Внедрихме секция с бизнес резултати и метрики за влияние",
+      "Изградихме форма за запитване за демо с персонализирани полета",
+      "Оптимизирахме за B2B ключови думи в HR tech пространството"
+    ],
+    results: [
+      { metric: "34%", label: "Спестени разходи" },
+      { metric: "20-30%", label: "Намалена неадекватност" },
+      { metric: "+150%", label: "Запитвания" }
+    ],
+    technologies: ["React", "TypeScript", "Custom Design", "Analytics"],
+    gradient: "from-blue-500/20 to-cyan-500/20",
+    accentColor: "text-blue-500"
+  },
+  // RIACT
+  {
+    id: "riact",
+    title: "RiACT",
+    subtitle: "Софтуер за роботи - skill-based платформа за управление",
+    category: "Технологии",
+    url: "https://www.riact.ai/",
+    isPublic: true,
+    isFeatured: false,
+    image: riactImg,
+    overview: "RiACT е skill-based платформа за управление на роботи, която премахва сложността на програмирането на роботи и ускорява настройката, конфигурацията и работата с индустриални роботи. Платформата е hardware agnostic и работи с cobots, индустриални роботи и други устройства.",
+    challenge: "RiACT се нуждаеше от технически, но достъпен уебсайт, който да обясни платформата на производители и системни интегратори, да демонстрира готовите application templates и да покаже интеграциите с различни роботи и машини.",
+    solution: [
+      "Изградихме технически уебсайт с индустриална естетика",
+      "Създадохме секции за готовите application templates (Machine Tending, Pick & Place, Palletizing)",
+      "Разработихме визуализация на екосистемата от партньори и интеграции",
+      "Внедрихме секция за success stories и case studies",
+      "Интегрирахме форма за beta достъп до RiFLEX Developer платформата"
+    ],
+    results: [
+      { metric: "50%", label: "Намалено време" },
+      { metric: "3x", label: "По-бърза реконфигурация" },
+      { metric: "100%", label: "Потребителска автономия" }
+    ],
+    technologies: ["Next.js", "Custom Design", "API Integration", "Technical SEO"],
+    gradient: "from-slate-600/20 to-gray-600/20",
+    accentColor: "text-slate-500"
+  },
   // FML-BD (NEW)
   {
     id: "fml-bd",

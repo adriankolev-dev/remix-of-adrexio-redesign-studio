@@ -111,7 +111,7 @@ const Pricing = () => {
     <main className="min-h-screen bg-background">
       <SEO
         title="Цени - Adrexio | Прозрачни цени за уеб разработка и дигитални услуги"
-        description="Прозрачни и конкурентни цени за уеб разработка, мобилни приложения, SEO и дигитален маркетинг. 50/50 плащане - 50% в началото, 50% след резултата. Безплатна консултация."
+        description="Прозрачни цени за уеб разработка, мобилни приложения, SEO и дигитален маркетинг. 50/50 плащане. Безплатна консултация."
         keywords="цени уебсайт, цена уеб разработка, цена мобилно приложение, цена SEO, цена дигитален маркетинг, цени уеб студио София, цени в евро, уебсайт цена София"
         structuredData={faqSchema}
       />
@@ -208,8 +208,8 @@ const Pricing = () => {
                 </div>
               </div>
               <div className="border-gradient p-6 rounded-xl text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-2">30+</div>
-                <div className="text-sm text-muted-foreground">Доволни клиенти</div>
+                <div className="text-3xl font-display font-bold text-primary mb-2">100%</div>
+                <div className="text-sm text-muted-foreground">Доверие и качество</div>
               </div>
             </div>
           </motion.div>

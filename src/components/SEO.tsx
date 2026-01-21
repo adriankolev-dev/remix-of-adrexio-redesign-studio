@@ -22,7 +22,27 @@ const SEO = ({
 }: SEOProps) => {
   const location = useLocation();
   const baseUrl = "https://www.adrexio.com";
-  const url = `${baseUrl}${location.pathname}`;
+  
+  // Normalize pathname: remove trailing slash (except for root)
+  let normalizedPath = location.pathname;
+  if (normalizedPath !== "/" && normalizedPath.endsWith("/")) {
+    normalizedPath = normalizedPath.slice(0, -1);
+  }
+  
+  // Normalize duplicate routes to canonical version
+  // /contacts -> /contact (both routes point to the same page)
+  if (normalizedPath === "/contacts") {
+    normalizedPath = "/contact";
+  }
+  
+  const url = `${baseUrl}${normalizedPath}`;
+  
+  // Normalize image URL: if it's a relative path, make it absolute
+  const normalizedImage = image?.startsWith("http") 
+    ? image 
+    : image?.startsWith("/") 
+    ? `${baseUrl}${image}`
+    : image;
 
   useEffect(() => {
     // Update document title
@@ -67,7 +87,7 @@ const SEO = ({
     updateMetaTag("og:url", url, true);
     updateMetaTag("og:title", title, true);
     updateMetaTag("og:description", description, true);
-    updateMetaTag("og:image", image, true);
+    updateMetaTag("og:image", normalizedImage || image, true);
     updateMetaTag("og:image:width", "1200", true);
     updateMetaTag("og:image:height", "630", true);
     updateMetaTag("og:locale", "bg_BG", true);
@@ -78,7 +98,7 @@ const SEO = ({
     updateMetaTag("twitter:url", url);
     updateMetaTag("twitter:title", title);
     updateMetaTag("twitter:description", description);
-    updateMetaTag("twitter:image", image);
+    updateMetaTag("twitter:image", normalizedImage || image);
 
     // Structured Data (JSON-LD)
     if (structuredData) {
@@ -90,7 +110,7 @@ const SEO = ({
       }
       script.textContent = JSON.stringify(structuredData);
     }
-  }, [title, description, keywords, image, type, url, noindex, structuredData]);
+  }, [title, description, keywords, image, normalizedImage, type, url, noindex, structuredData]);
 
   return null;
 };

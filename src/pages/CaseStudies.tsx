@@ -101,10 +101,10 @@ const CaseStudies = () => {
               className="mb-8"
             >
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
-                Всички <span className="text-gradient">проекти</span>
+                Нашите <span className="text-gradient">проекти</span>
               </h2>
               <p className="text-muted-foreground">
-                Пълното ни портфолио от завършени проекти
+                Избрани проекти от нашето портфолио
               </p>
             </motion.div>
           )}
@@ -160,8 +160,8 @@ const CaseStudies = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { icon: Users, value: "30+", label: "Доволни клиенти" },
               { icon: ExternalLink, value: "50+", label: "Завършени проекта" },
+              { icon: TrendingUp, value: "7+", label: "Години опит" },
               { icon: TrendingUp, value: "+150%", label: "Среден растеж" },
               { icon: Clock, value: "< 2сек", label: "Време за зареждане" }
             ].map((stat, index) => (
