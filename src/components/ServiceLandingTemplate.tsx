@@ -252,26 +252,47 @@ const ServiceLandingTemplate = ({
                   {/* Abstract decorative visual */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-3xl blur-3xl" />
                   
-                  {/* Floating stat cards */}
+                  {/* Floating benefit cards */}
                   <div className="relative grid grid-cols-2 gap-4">
-                    {stats.slice(0, 4).map((stat, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20, rotate: index % 2 === 0 ? -3 : 3 }}
-                        whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -3 : 3 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 + index * 0.1 }}
-                        whileHover={{ scale: 1.05, rotate: 0 }}
-                        className={`p-6 rounded-2xl backdrop-blur-sm border border-primary/20 bg-card/80 ${
-                          index === 0 ? 'col-span-2' : ''
-                        }`}
-                      >
-                        <div className="text-2xl md:text-3xl font-display font-bold text-gradient mb-1">
-                          {stat.value}
-                        </div>
-                        <div className="text-sm text-muted-foreground">{stat.label}</div>
-                      </motion.div>
-                    ))}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20, rotate: -3 }}
+                      whileInView={{ opacity: 1, y: 0, rotate: -3 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 }}
+                      whileHover={{ scale: 1.05, rotate: 0 }}
+                      className="p-6 rounded-2xl backdrop-blur-sm border border-primary/20 bg-card/80 col-span-2"
+                    >
+                      <div className="text-2xl md:text-3xl font-display font-bold text-gradient mb-1">
+                        50/50
+                      </div>
+                      <div className="text-sm text-muted-foreground">Плащане след одобрение</div>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20, rotate: 3 }}
+                      whileInView={{ opacity: 1, y: 0, rotate: 3 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 }}
+                      whileHover={{ scale: 1.05, rotate: 0 }}
+                      className="p-6 rounded-2xl backdrop-blur-sm border border-primary/20 bg-card/80"
+                    >
+                      <div className="text-2xl md:text-3xl font-display font-bold text-gradient mb-1">
+                        100%
+                      </div>
+                      <div className="text-sm text-muted-foreground">Гаранция за качество</div>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20, rotate: -3 }}
+                      whileInView={{ opacity: 1, y: 0, rotate: -3 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 }}
+                      whileHover={{ scale: 1.05, rotate: 0 }}
+                      className="p-6 rounded-2xl backdrop-blur-sm border border-primary/20 bg-card/80"
+                    >
+                      <div className="text-2xl md:text-3xl font-display font-bold text-gradient mb-1">
+                        24/7
+                      </div>
+                      <div className="text-sm text-muted-foreground">Техническа поддръжка</div>
+                    </motion.div>
                   </div>
                   
                   {/* Decorative elements */}

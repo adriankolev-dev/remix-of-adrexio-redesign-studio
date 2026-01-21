@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Shield, Zap } from "lucide-react";
+import { ArrowRight, TrendingUp, DollarSign, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const stats = [
-  { value: "99%", label: "Гарантирана стабилност на системите", icon: Shield },
-  { value: "3x", label: "По-бързо време за зареждане", icon: Zap },
+  { value: "+150%", label: "Среден ръст на продажбите", icon: DollarSign },
+  { value: "+85%", label: "Увеличение на конверсиите", icon: TrendingUp },
 ];
 
 const ResultsSection = () => {

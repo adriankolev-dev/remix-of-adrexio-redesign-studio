@@ -48,7 +48,16 @@ const Navbar = () => {
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
+        <Link 
+          to="/" 
+          className="flex items-center"
+          onClick={(e) => {
+            if (location.pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
           <img src={currentLogo} alt="adrexio" className="h-8 w-auto" />
         </Link>
 

@@ -27,8 +27,8 @@ const DigitalMarketing = () => {
       heroCTAText="БЕЗПЛАТНА КОНСУЛТАЦИЯ"
       
       stats={[
-        { value: "50+", label: "Успешни кампании" },
         { value: "3.5x", label: "Средна възвръщаемост" },
+        { value: "+200%", label: "Увеличение на трафика" },
         { value: "100%", label: "Доверие и качество" }
       ]}
       

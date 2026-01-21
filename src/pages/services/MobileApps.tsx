@@ -27,9 +27,9 @@ const MobileApps = () => {
       heroCTAText="ЗАПОЧНИ СВОЯ ПРОЕКТ"
       
       stats={[
-        { value: "20+", label: "Мобилни приложения" },
         { value: "4.8★", label: "Средна оценка" },
-        { value: "50K+", label: "Общо изтегляния" }
+        { value: "< 1сек", label: "Време за стартиране" },
+        { value: "99%", label: "Гарантирана стабилност" }
       ]}
       
       introTitle="Защо да инвестирате в мобилно приложение?"
@@ -168,7 +168,7 @@ const MobileApps = () => {
         {
           icon: Award,
           title: "Доказан опит",
-          description: "Над 20 успешни мобилни проекта с десетки хиляди изтегляния."
+          description: "7+ години опит в мобилна разработка с високи оценки в App Store и Google Play."
         },
         {
           icon: Code,

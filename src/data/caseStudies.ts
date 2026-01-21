@@ -107,7 +107,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     results: [
       { metric: "34%", label: "Спестени разходи" },
-      { metric: "20-30%", label: "Намалена неадекватност" },
+      { metric: "20-30%", label: "Повишена ефективност" },
       { metric: "+150%", label: "Запитвания" }
     ],
     technologies: ["React", "TypeScript", "Custom Design", "Analytics"],

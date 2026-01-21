@@ -107,8 +107,12 @@ const TestimonialsSection = () => {
                 {/* Author with company logo */}
                 <div className="flex items-center justify-between gap-4 flex-wrap">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-display font-bold text-lg">
-                      {testimonials[currentIndex].initials}
+                    <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center overflow-hidden border-2 border-border shadow-sm">
+                      <img
+                        src={testimonials[currentIndex].logo}
+                        alt={`${testimonials[currentIndex].author} company logo`}
+                        className="w-full h-full object-contain p-2"
+                      />
                     </div>
                     <div>
                       <div className="font-display font-semibold text-foreground">
@@ -118,15 +122,6 @@ const TestimonialsSection = () => {
                         {testimonials[currentIndex].role}
                       </div>
                     </div>
-                  </div>
-                  
-                  {/* Company logo */}
-                  <div className="h-10 md:h-12 transition-all duration-300 group/logo">
-                    <img
-                      src={testimonials[currentIndex].logo}
-                      alt=""
-                      className="h-full w-auto max-w-[140px] object-contain opacity-70 grayscale group-hover/logo:opacity-100 group-hover/logo:grayscale-0 transition-all duration-300"
-                    />
                   </div>
                 </div>
               </motion.div>

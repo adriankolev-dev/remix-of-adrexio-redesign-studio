@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone, ArrowUpRight, Cookie } from "lucide-react";
+import { Mail, MapPin, Phone, ArrowUpRight, Cookie, Linkedin } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo.svg";
@@ -28,9 +28,24 @@ const Footer = () => {
             <p className="text-muted-foreground text-sm leading-relaxed">
               Създаваме бързи и оптимизирани сайтове, които помагат на бизнеса да расте в дигиталната ера.
             </p>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
               Оценка 5/5 от нашите клиенти
+            </div>
+            {/* Social Media */}
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-foreground">Социални мрежи:</p>
+              <div className="flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/company/adrexio/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-lg bg-card border border-border hover:border-primary hover:bg-primary/10 flex items-center justify-center transition-all group"
+                aria-label="Последвайте ни в LinkedIn"
+              >
+                <Linkedin size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+              </a>
+              </div>
             </div>
           </div>
 

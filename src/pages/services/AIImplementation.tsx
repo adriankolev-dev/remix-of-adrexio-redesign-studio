@@ -27,9 +27,9 @@ const AIImplementation = () => {
       heroCTAText="ЗАПОЧНИ AI ПРОЕКТ"
       
       stats={[
-        { value: "50+", label: "Автоматизирани процеса" },
         { value: "60%", label: "Средно намаление на разходите" },
-        { value: "24/7", label: "Автоматизация" }
+        { value: "24/7", label: "Автоматизация" },
+        { value: "3x", label: "Повишена ефективност" }
       ]}
       
       introTitle="Защо вашият бизнес се нуждае от AI?"

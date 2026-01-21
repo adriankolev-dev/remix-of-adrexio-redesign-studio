@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, TrendingUp, Clock, Users, ExternalLink } from "lucide-react";
+import { ArrowRight, ArrowUpRight, TrendingUp, Clock, Users, Zap, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -160,10 +160,10 @@ const CaseStudies = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { icon: ExternalLink, value: "50+", label: "Завършени проекта" },
-              { icon: TrendingUp, value: "7+", label: "Години опит" },
-              { icon: TrendingUp, value: "+150%", label: "Среден растеж" },
-              { icon: Clock, value: "< 2сек", label: "Време за зареждане" }
+              { icon: TrendingUp, value: "+150%", label: "Среден растеж на трафика" },
+              { icon: Users, value: "+85%", label: "Увеличение на конверсиите" },
+              { icon: ArrowUpRight, value: "+200%", label: "Ръст на продажбите" },
+              { icon: Zap, value: "4.9/5", label: "Средна клиентска оценка" }
             ].map((stat, index) => (
               <motion.div
                 key={index}
