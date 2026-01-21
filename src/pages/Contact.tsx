@@ -104,7 +104,7 @@ const Contact = () => {
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 overflow-x-hidden">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -121,13 +121,13 @@ const Contact = () => {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 max-w-6xl mx-auto w-full">
             {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              className="space-y-8"
+              className="space-y-8 w-full"
             >
               <div>
                 <h2 className="text-2xl font-display font-bold mb-6">
@@ -139,35 +139,35 @@ const Contact = () => {
               </div>
 
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-primary/10">
-                    <Mail className="w-6 h-6 text-primary" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="p-2 sm:p-3 rounded-lg bg-primary/10 shrink-0">
+                    <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <a href="mailto:hello@adrexio.com" className="text-muted-foreground hover:text-primary transition-colors">
+                    <a href="mailto:hello@adrexio.com" className="text-muted-foreground hover:text-primary transition-colors break-words">
                       hello@adrexio.com
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-primary/10">
-                    <Phone className="w-6 h-6 text-primary" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="p-2 sm:p-3 rounded-lg bg-primary/10 shrink-0">
+                    <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h3 className="font-semibold mb-1">Телефон</h3>
-                    <a href="tel:+359896173743" className="text-muted-foreground hover:text-primary transition-colors">
+                    <a href="tel:+359896173743" className="text-muted-foreground hover:text-primary transition-colors break-words">
                       +359 896 173 743
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-primary/10">
-                    <MapPin className="w-6 h-6 text-primary" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="p-2 sm:p-3 rounded-lg bg-primary/10 shrink-0">
+                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h3 className="font-semibold mb-1">Локация</h3>
                     <p className="text-muted-foreground">София, България</p>
                   </div>
@@ -175,8 +175,8 @@ const Contact = () => {
               </div>
 
               {/* Quick info */}
-              <div className="border-gradient p-6 rounded-xl">
-                <h3 className="font-display font-semibold mb-4">Защо да ни изберете?</h3>
+              <div className="border-gradient p-4 sm:p-6 rounded-xl w-full overflow-hidden">
+                <h3 className="font-display font-semibold mb-4 text-base sm:text-lg">Защо да ни изберете?</h3>
                 <ul className="space-y-3">
                   {[
                     "Безплатна първоначална консултация",
@@ -184,9 +184,9 @@ const Contact = () => {
                     "Гарантирано качество на работа",
                     "Постоянна техническа поддръжка"
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
-                      <CheckCircle size={16} className="text-primary" />
-                      {item}
+                    <li key={i} className="flex items-start gap-2 sm:gap-3 text-sm text-muted-foreground">
+                      <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
+                      <span className="break-words">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -198,6 +198,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
+              className="w-full"
             >
               {isSubmitted ? (
                 <div className="border-gradient p-12 rounded-2xl text-center">
@@ -215,19 +216,19 @@ const Contact = () => {
                   </Button>
                 </div>
               ) : (
-                <div className="space-y-6">
+                <div className="space-y-6 w-full">
                   {/* Project Inquiry Link */}
-                  <div className="border-gradient p-6 rounded-xl bg-primary/5 border-primary/20">
-                    <div className="flex items-start gap-4">
+                  <div className="border-gradient p-4 sm:p-6 rounded-xl bg-primary/5 border-primary/20 w-full overflow-hidden">
+                    <div className="flex items-start gap-3 sm:gap-4">
                       <div className="p-2 rounded-lg bg-primary/10 shrink-0">
-                        <FileText className="w-5 h-5 text-primary" />
+                        <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                       </div>
-                      <div className="flex-1">
-                        <p className="text-sm text-foreground mb-3 font-semibold">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs sm:text-sm text-foreground mb-3 font-semibold break-words">
                           Ако имате ясна визия за проекта, може да попълните нашата подробна форма. Много ще ни улесните и ще ни помогнете да разберем по-добре вашите нужди.
                         </p>
-                        <Button variant="outline" size="sm" asChild>
-                          <Link to="/project-inquiry" className="flex items-center gap-2">
+                        <Button variant="outline" size="sm" asChild className="w-full sm:w-auto text-xs sm:text-sm">
+                          <Link to="/project-inquiry" className="flex items-center justify-center gap-2">
                             Попълнете подробната форма
                             <ArrowRight size={14} />
                           </Link>
@@ -236,7 +237,7 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="border-gradient p-8 rounded-2xl space-y-6">
+                  <form onSubmit={handleSubmit} className="border-gradient p-4 sm:p-6 lg:p-8 rounded-2xl space-y-6 w-full overflow-hidden">
                     {error && (
                       <div className="p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">
                         {error}
