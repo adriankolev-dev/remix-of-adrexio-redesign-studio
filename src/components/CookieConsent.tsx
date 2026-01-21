@@ -127,65 +127,73 @@ const CookieConsent = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
+            className="fixed bottom-0 left-0 right-0 z-50 p-3 sm:p-4 md:p-6"
           >
             <div className="container mx-auto max-w-6xl">
-              <div className="border-gradient bg-card/95 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-2xl">
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="p-3 rounded-xl bg-primary/10 shrink-0">
-                      <Cookie className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-display font-semibold mb-2">
-                        Използваме бисквитки
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Използваме бисквитки, за да подобрим вашето изживяване, да анализираме използването на сайта и да персонализираме съдържанието. Като продължите да използвате нашия сайт, вие се съгласявате с използването на бисквитки.{" "}
-                        <Link
-                          to="/privacy"
-                          className="text-primary hover:underline font-medium"
-                        >
-                          Научете повече
-                        </Link>
-                      </p>
-                      <div className="flex flex-wrap gap-3">
-                        <Button
-                          variant="hero"
-                          size="sm"
-                          onClick={handleAcceptAll}
-                          className="flex items-center gap-2"
-                        >
-                          <CheckCircle className="w-4 h-4" />
-                          Приемам всички
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setShowSettings(true)}
-                          className="flex items-center gap-2"
-                        >
-                          <Settings className="w-4 h-4" />
-                          Настройки
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={handleRejectAll}
-                        >
-                          Отхвърлям
-                        </Button>
+              <div className="border-gradient bg-card/95 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl">
+                <div className="flex flex-col gap-4 sm:gap-6">
+                  {/* Header with icon and close button */}
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
+                      <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-primary/10 shrink-0">
+                        <Cookie className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-base sm:text-lg font-display font-semibold mb-1 sm:mb-2">
+                          Използваме бисквитки
+                        </h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                          Използваме бисквитки, за да подобрим вашето изживяване, да анализираме използването на сайта и да персонализираме съдържанието.{" "}
+                          <Link
+                            to="/privacy"
+                            className="text-primary hover:underline font-medium whitespace-nowrap"
+                          >
+                            Научете повече
+                          </Link>
+                        </p>
                       </div>
                     </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="shrink-0 h-8 w-8 sm:h-10 sm:w-10 -mt-1 -mr-1"
+                      onClick={handleRejectAll}
+                    >
+                      <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </Button>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="shrink-0"
-                    onClick={handleRejectAll}
-                  >
-                    <X className="w-5 h-5" />
-                  </Button>
+                  
+                  {/* Action buttons */}
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                    <Button
+                      variant="hero"
+                      size="sm"
+                      onClick={handleAcceptAll}
+                      className="flex items-center justify-center gap-2 w-full sm:w-auto"
+                    >
+                      <CheckCircle className="w-4 h-4" />
+                      Приемам всички
+                    </Button>
+                    <div className="flex gap-2 sm:gap-3">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowSettings(true)}
+                        className="flex items-center justify-center gap-2 flex-1 sm:flex-initial"
+                      >
+                        <Settings className="w-4 h-4" />
+                        Настройки
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleRejectAll}
+                        className="flex-1 sm:flex-initial"
+                      >
+                        Отхвърлям
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -195,30 +203,30 @@ const CookieConsent = () => {
 
       {/* Cookie Settings Dialog */}
       <Dialog open={showSettings} onOpenChange={setShowSettings}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
+            <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl">
               <Settings className="w-5 h-5 text-primary" />
               Настройки на бисквитките
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-sm">
               Изберете кои бисквитки искате да приемете. Необходимите бисквитки са задължителни за функционирането на сайта.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-6 py-4">
+          <div className="space-y-4 sm:space-y-6 py-4">
             {/* Necessary Cookies */}
-            <div className="flex items-start justify-between p-4 rounded-lg border border-border bg-card/50">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <Label htmlFor="necessary" className="font-semibold cursor-pointer">
+            <div className="flex flex-col sm:flex-row items-start justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border border-border bg-card/50">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <Label htmlFor="necessary" className="font-semibold cursor-pointer text-sm sm:text-base">
                     Необходими бисквитки
                   </Label>
-                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">
+                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded whitespace-nowrap">
                     Винаги активни
                   </span>
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Тези бисквитки са необходими за основното функциониране на сайта и не могат да бъдат деактивирани.
                 </p>
               </div>
@@ -226,17 +234,17 @@ const CookieConsent = () => {
                 id="necessary"
                 checked={preferences.necessary}
                 disabled
-                className="ml-4"
+                className="shrink-0 sm:ml-4"
               />
             </div>
 
             {/* Analytics Cookies */}
-            <div className="flex items-start justify-between p-4 rounded-lg border border-border bg-card/50">
-              <div className="flex-1">
-                <Label htmlFor="analytics" className="font-semibold cursor-pointer mb-2 block">
+            <div className="flex flex-col sm:flex-row items-start justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border border-border bg-card/50">
+              <div className="flex-1 min-w-0">
+                <Label htmlFor="analytics" className="font-semibold cursor-pointer mb-2 block text-sm sm:text-base">
                   Аналитични бисквитки
                 </Label>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Помагат ни да разберем как посетителите използват нашия сайт, като събират анонимна информация.
                 </p>
               </div>
@@ -246,17 +254,17 @@ const CookieConsent = () => {
                 onCheckedChange={(checked) =>
                   handlePreferenceChange("analytics", checked)
                 }
-                className="ml-4"
+                className="shrink-0 sm:ml-4"
               />
             </div>
 
             {/* Marketing Cookies */}
-            <div className="flex items-start justify-between p-4 rounded-lg border border-border bg-card/50">
-              <div className="flex-1">
-                <Label htmlFor="marketing" className="font-semibold cursor-pointer mb-2 block">
+            <div className="flex flex-col sm:flex-row items-start justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border border-border bg-card/50">
+              <div className="flex-1 min-w-0">
+                <Label htmlFor="marketing" className="font-semibold cursor-pointer mb-2 block text-sm sm:text-base">
                   Маркетингови бисквитки
                 </Label>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Използват се за показване на релевантна реклама и проследяване на ефективността на кампаниите.
                 </p>
               </div>
@@ -266,16 +274,24 @@ const CookieConsent = () => {
                 onCheckedChange={(checked) =>
                   handlePreferenceChange("marketing", checked)
                 }
-                className="ml-4"
+                className="shrink-0 sm:ml-4"
               />
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t">
-            <Button variant="outline" onClick={() => setShowSettings(false)}>
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3 pt-4 border-t">
+            <Button 
+              variant="outline" 
+              onClick={() => setShowSettings(false)}
+              className="w-full sm:w-auto"
+            >
               Отказ
             </Button>
-            <Button variant="hero" onClick={handleSavePreferences}>
+            <Button 
+              variant="hero" 
+              onClick={handleSavePreferences}
+              className="w-full sm:w-auto"
+            >
               Запази настройките
             </Button>
           </div>

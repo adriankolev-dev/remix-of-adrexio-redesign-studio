@@ -44,7 +44,7 @@ const stats = [
   { value: "50+", label: "Завършени проекта" },
   { value: "30+", label: "Доволни клиенти" },
   { value: "5/5", label: "Клиентска оценка" },
-  { value: "3+", label: "Години опит" }
+  { value: "7+", label: "Години опит" }
 ];
 
 const team = [

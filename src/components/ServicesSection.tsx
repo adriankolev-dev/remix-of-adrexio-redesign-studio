@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { 
   Globe, 
+  Brain,
   Smartphone, 
   Palette, 
   Search, 
@@ -17,6 +18,13 @@ const services = [
     subtitle: "Web Development",
     description: "Модерни сайтове за вашия бизнес и неговият растеж.",
     href: "/services/web-development"
+  },
+  {
+    icon: Brain,
+    title: "AI Implementation",
+    subtitle: "Изкуствен интелект",
+    description: "Автоматизация и AI решения за оптимизация на бизнес процесите.",
+    href: "/services/ai-implementation"
   },
   {
     icon: Smartphone,

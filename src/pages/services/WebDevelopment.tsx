@@ -27,8 +27,8 @@ const WebDevelopment = () => {
       heroCTAText="ЗАПОЧНИ СВОЯ ПРОЕКТ"
       
       stats={[
-        { value: "100+", label: "Реализирани проекта" },
-        { value: "98%", label: "Доволни клиенти" },
+        { value: "50+", label: "Завършени проекта" },
+        { value: "30+", label: "Доволни клиенти" },
         { value: "7+", label: "Години опит" }
       ]}
       
@@ -170,7 +170,7 @@ const WebDevelopment = () => {
         {
           icon: Award,
           title: "Доказан опит",
-          description: "Над 100 успешни проекта и 7+ години в индустрията."
+          description: "Над 50 успешни проекта и 7+ години в индустрията."
         },
         {
           icon: Code,

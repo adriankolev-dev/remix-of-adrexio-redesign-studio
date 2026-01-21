@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { categories } from "@/data/caseStudies";
 
 interface CaseStudyFiltersProps {
@@ -17,21 +24,21 @@ const CaseStudyFilters = ({
   onSearchChange,
 }: CaseStudyFiltersProps) => {
   return (
-    <div className="mb-12 space-y-6">
+    <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
       {/* Search */}
       <div className="relative max-w-md mx-auto">
-        <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute left-3 sm:left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           type="text"
           placeholder="Търсене по име или категория..."
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-11 pr-10 h-12 bg-card border-border focus:border-primary"
+          className="pl-9 sm:pl-11 pr-8 sm:pr-10 h-10 sm:h-12 bg-card border-border focus:border-primary text-sm sm:text-base"
         />
         {searchQuery && (
           <button
             onClick={() => onSearchChange("")}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+            className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
           >
             <X className="h-4 w-4" />
           </button>
@@ -39,7 +46,24 @@ const CaseStudyFilters = ({
       </div>
 
       {/* Category filters */}
-      <div className="flex flex-wrap justify-center gap-2">
+      {/* Mobile: Dropdown */}
+      <div className="sm:hidden">
+        <Select value={activeCategory} onValueChange={onCategoryChange}>
+          <SelectTrigger className="w-full h-11 bg-card border-border focus:border-primary">
+            <SelectValue placeholder="Изберете категория" />
+          </SelectTrigger>
+          <SelectContent>
+            {categories.map((category) => (
+              <SelectItem key={category} value={category}>
+                {category}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Desktop: Button filters */}
+      <div className="hidden sm:flex flex-wrap justify-center gap-2">
         {categories.map((category) => (
           <motion.button
             key={category}

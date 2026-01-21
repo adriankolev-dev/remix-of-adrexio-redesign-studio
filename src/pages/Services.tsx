@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { 
   Globe, 
+  Brain,
   Smartphone, 
   Palette, 
   Search, 
@@ -28,6 +29,19 @@ const services = [
       "Лендинг страници",
       "E-commerce магазини",
       "Web приложения"
+    ]
+  },
+  {
+    icon: Brain,
+    title: "AI Implementation",
+    subtitle: "Изкуствен интелект",
+    description: "Автоматизация и AI решения за оптимизация на бизнес процесите. Чатботове, машинно обучение и интелигентни системи.",
+    href: "/services/ai-implementation",
+    features: [
+      "Чатботове и виртуални асистенти",
+      "Автоматизация на процеси",
+      "Машинно обучение",
+      "AI аналитика"
     ]
   },
   {
@@ -113,7 +127,7 @@ const Services = () => {
       />
       <Navbar />
 
-      <section className="pt-32 pb-24 relative overflow-hidden">
+      <section className="pt-32 pb-16 relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
@@ -135,46 +149,46 @@ const Services = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {services.map((service, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="border-gradient p-8 rounded-2xl group hover:scale-[1.02] transition-transform"
+                className="border-gradient p-6 rounded-2xl group hover:scale-[1.02] transition-transform flex flex-col"
               >
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="p-4 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10">
-                    <service.icon className="w-8 h-8 text-primary" />
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 shrink-0">
+                    <service.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-display font-bold mb-1">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-display font-bold mb-1">
                       {service.title}
                     </h3>
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       {service.subtitle}
                     </span>
                   </div>
                 </div>
 
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed flex-1">
                   {service.description}
                 </p>
 
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-2 mb-4">
                   {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm">
-                      <CheckCircle size={16} className="text-primary" />
+                    <li key={i} className="flex items-center gap-2 text-xs">
+                      <CheckCircle size={14} className="text-primary shrink-0" />
                       <span className="text-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                <Button variant="outline" size="lg" asChild className="w-full group-hover:border-primary/50">
+                <Button variant="outline" size="sm" asChild className="w-full group-hover:border-primary/50 mt-auto">
                   <Link to={service.href}>
                     Научете повече
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
               </motion.div>

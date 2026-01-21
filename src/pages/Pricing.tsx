@@ -208,7 +208,7 @@ const Pricing = () => {
                 </div>
               </div>
               <div className="border-gradient p-6 rounded-xl text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-2">100%</div>
+                <div className="text-3xl font-display font-bold text-primary mb-2">30+</div>
                 <div className="text-sm text-muted-foreground">Доволни клиенти</div>
               </div>
             </div>
@@ -297,9 +297,11 @@ const Pricing = () => {
                   asChild
                   className="w-full"
                 >
-                  <Link to="/contact">
-                    {plan.name === "ENTERPRISE" ? "Заявете консултация" : plan.name === "BUSINESS" ? "Започнете сега" : "Започнете проект"}
-                    <ArrowRight size={18} />
+                  <Link to="/contact" className="flex items-center justify-center gap-2 text-sm sm:text-base whitespace-normal sm:whitespace-nowrap text-center">
+                    <span>
+                      {plan.name === "ENTERPRISE" ? "Заявете консултация" : plan.name === "BUSINESS" ? "Започнете сега" : "Започнете проект"}
+                    </span>
+                    <ArrowRight size={18} className="shrink-0" />
                   </Link>
                 </Button>
               </motion.div>

@@ -27,7 +27,7 @@ const UIUXDesign = () => {
       heroCTAText="ЗАПОЧНИ СВОЯ ПРОЕКТ"
       
       stats={[
-        { value: "200+", label: "UI/UX проекта" },
+        { value: "50+", label: "UI/UX проекта" },
         { value: "+45%", label: "Средно увеличение на конверсиите" },
         { value: "98%", label: "Удовлетвореност" }
       ]}
@@ -178,7 +178,7 @@ const UIUXDesign = () => {
         {
           icon: Award,
           title: "Богат опит",
-          description: "Над 200 успешни UI/UX проекта в различни индустрии."
+          description: "Над 50 успешни UI/UX проекта в различни индустрии."
         },
         {
           icon: Sparkles,

@@ -20,6 +20,7 @@ import NotFound from "./pages/NotFound";
 
 // Service landing pages
 import WebDevelopment from "./pages/services/WebDevelopment";
+import AIImplementation from "./pages/services/AIImplementation";
 import MobileApps from "./pages/services/MobileApps";
 import UIUXDesign from "./pages/services/UIUXDesign";
 import SEO from "./pages/services/SEO";
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />
             <Route path="/services/web-development" element={<WebDevelopment />} />
+            <Route path="/services/ai-implementation" element={<AIImplementation />} />
             <Route path="/services/mobile-apps" element={<MobileApps />} />
             <Route path="/services/ui-ux-design" element={<UIUXDesign />} />
             <Route path="/services/seo" element={<SEO />} />
