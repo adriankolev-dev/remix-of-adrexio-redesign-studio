@@ -19,6 +19,7 @@ import fmlbdImg from "@/assets/case-studies/fml-bd.png";
 import koniImg from "@/assets/case-studies/koni.png"; 
 import kapabayImg from "@/assets/case-studies/kappabay.png"; 
 import mehannaImg from "@/assets/case-studies/mehana.png";
+import legendsVillasImg from "@/assets/case-studies/legends.png";
 export interface CaseStudyResult {
   metric: string;
   label: string;
@@ -58,6 +59,7 @@ export const categories = [
   "Технологии",
   "Логистика",
   "Образование",
+  "Туризъм & Хотели",
 ];
 
 export const caseStudies: CaseStudy[] = [
@@ -611,6 +613,34 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["WordPress", "WooCommerce", "Product Catalog", "B2B SEO"],
     gradient: "from-slate-500/20 to-zinc-500/20",
     accentColor: "text-slate-400"
+  },
+  {
+    id: "legends-villas",
+    title: "The Legends Villas",
+    subtitle: "Къщи за гости и щастие - Място за гости и споделеност",
+    category: "Туризъм & Хотели",
+    url: "https://thelegends-villas.bg/",
+    isPublic: true,
+    isFeatured: false,
+    image: legendsVillasImg,
+    overview: "The Legends Villas е уникално място за настаняване в сърцето на природата, предлагащо две къщи за гости (Къща Легенди и Къща Сър Коев), споделено пространство за събития (ПЛЕВНЯТА) и концепция за wellbeing настаняване. Проектът комбинира автентичността на селския живот с модерен дизайн и изкуство.",
+    challenge: "Клиентът се нуждаеше от уебсайт, който да предаде уникалната атмосфера на мястото, да представи двете къщи за гости, споделеното пространство за събития и ритрийти, и да свърже гостите с местната общност чрез програмата 'Аз съм местен'.",
+    solution: [
+      "Създадохме атмосферен уебсайт, отразяващ философията на мястото",
+      "Разработихме детайлни страници за всяка къща с галерии и информация",
+      "Внедрихме секция за събития и ритрийти с календар и резервации",
+      "Изградихме секция 'Аз съм местен' за свързване с местни партньори",
+      "Интегрирахме онлайн резервационна система",
+      "Създадохме визуална история за концепцията Art & Forest"
+    ],
+    results: [
+      { metric: "2", label: "Къщи за гости" },
+      { metric: "1", label: "Зала за събития" },
+      { metric: "15", label: "Къщи в селото" }
+    ],
+    technologies: ["WordPress", "Booking System", "Custom Design", "SEO", "Multilingual"],
+    gradient: "from-forest-500/20 to-green-600/20",
+    accentColor: "text-green-600"
   }
 ];
 
