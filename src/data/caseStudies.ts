@@ -16,7 +16,9 @@ import amadentImg from "@/assets/case-studies/amadent.png";
 import boasImg from "@/assets/case-studies/boas.png";
 import bulbiochemImg from "@/assets/case-studies/bulbiochem.png";
 import fmlbdImg from "@/assets/case-studies/fml-bd.png";
-
+import koniImg from "@/assets/case-studies/koni.png"; 
+import kapabayImg from "@/assets/case-studies/kappabay.png"; 
+import mehannaImg from "@/assets/case-studies/mehana.png";
 export interface CaseStudyResult {
   metric: string;
   label: string;
@@ -55,9 +57,38 @@ export const categories = [
   "Организации",
   "Технологии",
   "Логистика",
+  "Образование",
 ];
 
 export const caseStudies: CaseStudy[] = [
+  // KONI JEWELLERY
+  {
+    id: "koni-jewellery",
+    title: "Koni Jewellery",
+    subtitle: "Ръчно изработени бижута от сребро и злато",
+    category: "Електронна търговия",
+    url: "https://konii.ro/",
+    isPublic: true,
+    isFeatured: true,
+    image: koniImg,
+    overview: "Koni Jewellery е онлайн магазин за ръчно изработени бижута от сребро и злато, предлагащ уникални дизайни за специални моменти. Платформата е изградена изцяло на Symfony за максимална производителност и сигурност.",
+    challenge: "Клиентът се нуждаеше от високопроизводителна и мащабируема e-commerce платформа, която да се отличава с уникален дизайн и да предоставя безупречно потребителско изживяване, отговарящо на качеството на техните продукти.",
+    solution: [
+      "Разработихме изцяло персонализирана e-commerce система, базирана на Symfony",
+      "Създадохме уникален UX/UI дизайн, подчертаващ детайлите на бижутата",
+      "Внедрихме сложна филтрираща система за различни категории и атрибути",
+      "Оптимизирахме перформанса за светкавично зареждане на висококачествени изображения",
+      "Интегрирахме персонализиран административен панел за управление на поръчки и наличности"
+    ],
+    results: [
+      { metric: "Symfony", label: "Custom Engine" },
+      { metric: "MySQL", label: "Database" },
+      { metric: "Global", label: "Доставки" }
+    ],
+    technologies: ["Symfony", "PHP", "MySQL", "Dedicated Server", "Custom API"],
+    gradient: "from-rose-400/20 to-pink-500/20",
+    accentColor: "text-rose-400"
+  },
   // INNITI
   {
     id: "inniti",
@@ -127,7 +158,7 @@ export const caseStudies: CaseStudy[] = [
     overview: "RiACT е skill-based платформа за управление на роботи, която премахва сложността на програмирането на роботи и ускорява настройката, конфигурацията и работата с индустриални роботи. Платформата е hardware agnostic и работи с cobots, индустриални роботи и други устройства.",
     challenge: "RiACT се нуждаеше от технически, но достъпен уебсайт, който да обясни платформата на производители и системни интегратори, да демонстрира готовите application templates и да покаже интеграциите с различни роботи и машини.",
     solution: [
-      "Изградихме технически уебсайт с индустриална естетика",
+      "Изградихме технически уебсайт with индустриална естетика",
       "Създадохме секции за готовите application templates (Machine Tending, Pick & Place, Palletizing)",
       "Разработихме визуализация на екосистемата от партньори и интеграции",
       "Внедрихме секция за success stories и case studies",
@@ -141,6 +172,90 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["Next.js", "Custom Design", "API Integration", "Technical SEO"],
     gradient: "from-slate-600/20 to-gray-600/20",
     accentColor: "text-slate-500"
+  },
+  // THE MEHANNA GROUP
+  {
+    id: "mehanna-group",
+    title: "The Mehanna Group",
+    subtitle: "Премиум академични услуги и консултации",
+    category: "Образование",
+    url: "https://signup.mehannagroup.com",
+    isPublic: true,
+    isFeatured: false,
+    image: mehannaImg,
+    overview: "The Mehanna Group е водеща платформа за академични услуги, предлагаща помощ при писане на научни трудове, подготовка за изпити и приемни консултации за студенти по целия свят. Платформата осигурява достъп до над 60 експерти в различни области.",
+    challenge: "Компанията се нуждаеше от мащабируема и сигурна платформа за управление на запитвания, регистрация на потребители и координация между студенти и академични експерти, осигуряваща 24/7 поддръжка.",
+    solution: [
+      "Изградихме комплексен портал за регистрация и управление на поръчки",
+      "Внедрихме сигурна система за плащания и качване на файлове",
+      "Създадохме интуитивен интерфейс за проследяване на прогреса по проекти",
+      "Оптимизирахме административния панел за бърза обработка на запитвания"
+    ],
+    results: [
+      { metric: "60+", label: "Експерти" },
+      { metric: "24/7", label: "Поддръжка" },
+      { metric: "Global", label: "Обхват" }
+    ],
+    technologies: ["Next.js", "TypeScript", "App Integration", "Payment Gateway", "Custom API"],
+    gradient: "from-indigo-500/20 to-purple-600/20",
+    accentColor: "text-indigo-500"
+  },
+  // SUPERCREDIT
+  {
+    id: "super-credit",
+    title: "SuperCredit",
+    subtitle: "Вътрешна система за управление на кредити",
+    category: "Финанси & FinTech",
+    url: null,
+    isPublic: false,
+    isFeatured: false,
+    image: supercreditImg,
+    overview: "SuperCredit е водеща българска кредитна брокерска компания, помагаща на клиентите да намерят най-добрите оферти за ипотечни, потребителски и инвестиционни кредити. С над 2 600 обслужени клиенти и 900+ млн. € обработени кредити.",
+    challenge: "SuperCredit се нуждаеше от вътрешна система за оптимизиране на работните процеси по обработка на заеми, сигурно управление на клиентски данни и проследяване на статуса на заявленията.",
+    solution: [
+      "Разработихме сигурна вътрешна платформа за управление",
+      "Създадохме база данни с клиенти с разширено търсене и филтриране",
+      "Изградихме проследяване на кредитни заявления with актуализации на статус",
+      "Внедрихме контрол на достъпа базиран на роли",
+      "Интегрирахме табло за отчети и анализ на представянето"
+    ],
+    results: [
+      { metric: "+65%", label: "Скорост на обработка" },
+      { metric: "MySQL", label: "База данни" },
+      { metric: "100%", label: "Сигурност на данните" }
+    ],
+    technologies: ["Next.js", "NestJS", "TypeScript", "MySQL", "Role-Based Access"],
+    gradient: "from-orange-500/20 to-amber-500/20",
+    accentColor: "text-orange-500",
+    internalNote: "Това е вътрешна система, достъпна само за служители на SuperCredit."
+  },
+  // KAPABAY
+  {
+    id: "kapabay",
+    title: "Kapabay",
+    subtitle: "B2B платформа за свързване на брандове с производители",
+    category: "Електронна търговия",
+    url: "https://www.kapabay.com/",
+    isPublic: true,
+    isFeatured: false,
+    image: kapabayImg,
+    overview: "Kapabay е иновативна B2B платформа, която свързва бизнеси в Обединеното кралство с проверени производители на облекло в Бангладеш. Тя оптимизира целия процес на доставка – от дизайна до логистиката.",
+    challenge: "Клиентът се нуждаеше от мащабируема и сигурна платформа, която да улесни международната търговия, да осигури прозрачност при поръчките и да внедри сложна система за управление на доставките.",
+    solution: [
+      "Разработихме цялостна B2B екосистема с Next.js и NestJS",
+      "Внедрихме сигурна система за управление на плащания и поръчки",
+      "Създадохме интуитивен интерфейс за производители и купувачи",
+      "Оптимизирахме процеса на проследяване на пратки в реално време",
+      "Интегрирахме персонализиран модул за комуникация между страните"
+    ],
+    results: [
+      { metric: "Next.js", label: "Frontend" },
+      { metric: "NestJS", label: "Backend" },
+      { metric: "Global", label: "B2B Scale" }
+    ],
+    technologies: ["Next.js", "NestJS", "TypeScript", "MySQL", "Custom Design", "API Integration"],
+    gradient: "from-green-500/20 to-emerald-500/20",
+    accentColor: "text-green-500"
   },
   // FML-BD (NEW)
   {
@@ -496,35 +611,6 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["WordPress", "WooCommerce", "Product Catalog", "B2B SEO"],
     gradient: "from-slate-500/20 to-zinc-500/20",
     accentColor: "text-slate-400"
-  },
-  // INTERNAL PROJECT
-  {
-    id: "super-credit",
-    title: "SuperCredit",
-    subtitle: "Вътрешна система за управление на кредити",
-    category: "Финанси & FinTech",
-    url: null,
-    isPublic: false,
-    isFeatured: false,
-    image: supercreditImg,
-    overview: "SuperCredit е водеща българска кредитна брокерска компания, помагаща на клиентите да намерят най-добрите оферти за ипотечни, потребителски и инвестиционни кредити. С над 2 600 обслужени клиенти и 900+ млн. € обработени кредити.",
-    challenge: "SuperCredit се нуждаеше от вътрешна система за оптимизиране на работните процеси по обработка на заеми, сигурно управление на клиентски данни и проследяване на статуса на заявленията.",
-    solution: [
-      "Разработихме сигурна вътрешна платформа за управление",
-      "Създадохме база данни с клиенти с разширено търсене и филтриране",
-      "Изградихме проследяване на кредитни заявления с актуализации на статус",
-      "Внедрихме контрол на достъпа базиран на роли",
-      "Интегрирахме табло за отчети и анализ на представянето"
-    ],
-    results: [
-      { metric: "+65%", label: "Скорост на обработка" },
-      { metric: "2600+", label: "Управлявани клиенти" },
-      { metric: "100%", label: "Сигурност на данните" }
-    ],
-    technologies: ["React", "TypeScript", "Supabase", "Role-Based Access"],
-    gradient: "from-orange-500/20 to-amber-500/20",
-    accentColor: "text-orange-500",
-    internalNote: "Това е вътрешна система, достъпна само за служители на SuperCredit."
   }
 ];
 
