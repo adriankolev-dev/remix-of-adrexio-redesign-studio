@@ -20,6 +20,7 @@ import koniImg from "@/assets/case-studies/koni.png";
 import kapabayImg from "@/assets/case-studies/kappabay.png"; 
 import mehannaImg from "@/assets/case-studies/mehana.png";
 import legendsVillasImg from "@/assets/case-studies/legends.png";
+import breezypointvillasImg from "@/assets/case-studies/breezypointvillas.png";
 export interface CaseStudyResult {
   metric: string;
   label: string;
@@ -640,6 +641,34 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["WordPress", "Booking System", "Custom Design", "SEO", "Multilingual"],
     gradient: "from-forest-500/20 to-green-600/20",
     accentColor: "text-green-600"
+  },
+  {
+    id: "breezy-point-villas",
+    title: "Breezy Point Villas",
+    subtitle: "Частни вили в Нуса Дуа, Бали - Вашият личен оазис",
+    category: "Туризъм & Хотели",
+    url: "https://breezypointvillas.com/",
+    isPublic: true,
+    isFeatured: false,
+    image: breezypointvillasImg,
+    overview: "Breezy Point Villas предлага три уникални частни вили в сърцето на Нуса Дуа, Бали - Elora, Emerald и Flamboyant. Всяка вила разполага с частен басейн, красиво оформен градина и уединение, създадени за релакс и спокойствие в тропическия рай на Бали.",
+    challenge: "Клиентът се нуждаеше от модерен уебсайт, който да представи трите вили с техните уникални характеристики, да улесни онлайн резервации и да привлече международни гости, търсещи спокойствие и уединение в Бали.",
+    solution: [
+      "Създадохме елегантен уебсайт с тропическа естетика, отразяваща спокойствието на Бали",
+      "Разработихме детайлни страници за всяка вила с галерии и спецификации",
+      "Внедрихме система за онлайн резервации с календар за наличност",
+      "Интегрирахме секции за допълнителни услуги (масаж, закуска, частен готвач)",
+      "Добавихме информация за островни дейности и локални забележителности",
+      "Оптимизирахме за международно SEO търсене"
+    ],
+    results: [
+      { metric: "3", label: "Частни вили" },
+      { metric: "6", label: "Гости капацитет" },
+      { metric: "100%", label: "Уединение" }
+    ],
+    technologies: ["WordPress", "Booking System", "Custom Design", "SEO", "Multilingual"],
+    gradient: "from-teal-400/20 to-cyan-500/20",
+    accentColor: "text-teal-400"
   }
 ];
 
