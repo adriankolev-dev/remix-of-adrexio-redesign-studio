@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { Mail, Phone, MapPin, Send, ArrowRight, CheckCircle, Loader2, FileText } from "lucide-react";
@@ -10,6 +10,14 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { getLocalBusinessSchema } from "@/lib/structuredData";
 import emailjs from "@emailjs/browser";
+import { 
+  HONEYPOT_FIELD_NAME, 
+  checkRateLimit, 
+  checkFormFillTime, 
+  checkHoneypot, 
+  checkSpamPatterns,
+  isValidEmail 
+} from "@/lib/spamProtection";
 
 interface FormData {
   from_name: string;
@@ -17,10 +25,12 @@ interface FormData {
   phone: string;
   subject: string;
   message: string;
+  [HONEYPOT_FIELD_NAME]: string; // Honeypot field
 }
 
 const Contact = () => {
   const location = useLocation();
+  const formStartTime = useRef<number>(Date.now());
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +40,13 @@ const Contact = () => {
     phone: "",
     subject: "",
     message: "",
+    [HONEYPOT_FIELD_NAME]: "", // Honeypot field
   });
+
+  // Initialize form start time when component mounts
+  useEffect(() => {
+    formStartTime.current = Date.now();
+  }, []);
 
   // Check if coming from affiliate page
   useEffect(() => {
@@ -64,6 +80,46 @@ const Contact = () => {
     setError(null);
 
     try {
+      // Spam protection checks
+      // 1. Check honeypot
+      const honeypotCheck = checkHoneypot(formData[HONEYPOT_FIELD_NAME]);
+      if (!honeypotCheck.allowed) {
+        setError(honeypotCheck.message || "Спам детектиран.");
+        setIsLoading(false);
+        return;
+      }
+
+      // 2. Check rate limit
+      const rateLimitCheck = checkRateLimit();
+      if (!rateLimitCheck.allowed) {
+        setError(rateLimitCheck.message || "Твърде много изпращания. Моля, изчакайте.");
+        setIsLoading(false);
+        return;
+      }
+
+      // 3. Check form fill time
+      const fillTimeCheck = checkFormFillTime(formStartTime.current);
+      if (!fillTimeCheck.allowed) {
+        setError(fillTimeCheck.message || "Формата е попълнена твърде бързо.");
+        setIsLoading(false);
+        return;
+      }
+
+      // 4. Validate email
+      if (!isValidEmail(formData.from_email)) {
+        setError("Моля, въведете валиден email адрес.");
+        setIsLoading(false);
+        return;
+      }
+
+      // 5. Check spam patterns
+      const spamCheck = checkSpamPatterns(formData.message, formData.subject);
+      if (!spamCheck.allowed) {
+        setError(spamCheck.message || "Съобщението изглежда като спам.");
+        setIsLoading(false);
+        return;
+      }
+
       // Replace these with your EmailJS credentials
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
@@ -93,12 +149,14 @@ const Contact = () => {
       );
 
       setIsSubmitted(true);
+      formStartTime.current = Date.now(); // Reset timer
       setFormData({
         from_name: "",
         from_email: "",
         phone: "",
         subject: "",
         message: "",
+        [HONEYPOT_FIELD_NAME]: "",
       });
     } catch (err) {
       console.error("EmailJS error:", err);
@@ -323,6 +381,20 @@ const Contact = () => {
                       rows={5}
                       required
                       className="bg-secondary/50 border-border resize-none"
+                    />
+                  </div>
+
+                  {/* Honeypot field - hidden from users but visible to bots */}
+                  <div style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}>
+                    <label htmlFor={HONEYPOT_FIELD_NAME}>Не попълвайте това поле</label>
+                    <Input
+                      id={HONEYPOT_FIELD_NAME}
+                      name={HONEYPOT_FIELD_NAME}
+                      type="text"
+                      value={formData[HONEYPOT_FIELD_NAME]}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
                     />
                   </div>
 

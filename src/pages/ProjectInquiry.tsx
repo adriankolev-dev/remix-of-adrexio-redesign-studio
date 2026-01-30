@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { 
   Send, 
@@ -23,6 +23,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import emailjs from "@emailjs/browser";
+import { 
+  HONEYPOT_FIELD_NAME, 
+  checkRateLimit, 
+  checkFormFillTime, 
+  checkHoneypot, 
+  checkSpamPatterns,
+  isValidEmail 
+} from "@/lib/spamProtection";
 
 interface ProjectFormData {
   name: string;
@@ -38,9 +46,11 @@ interface ProjectFormData {
   target_audience: string;
   existing_website: string;
   additional_info: string;
+  [HONEYPOT_FIELD_NAME]: string; // Honeypot field
 }
 
 const ProjectInquiry = () => {
+  const formStartTime = useRef<number>(Date.now());
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -58,7 +68,13 @@ const ProjectInquiry = () => {
     target_audience: "",
     existing_website: "",
     additional_info: "",
+    [HONEYPOT_FIELD_NAME]: "", // Honeypot field
   });
+
+  // Initialize form start time when component mounts
+  useEffect(() => {
+    formStartTime.current = Date.now();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -83,6 +99,46 @@ const ProjectInquiry = () => {
     setError(null);
 
     try {
+      // Spam protection checks
+      // 1. Check honeypot
+      const honeypotCheck = checkHoneypot(formData[HONEYPOT_FIELD_NAME]);
+      if (!honeypotCheck.allowed) {
+        setError(honeypotCheck.message || "Спам детектиран.");
+        setIsLoading(false);
+        return;
+      }
+
+      // 2. Check rate limit
+      const rateLimitCheck = checkRateLimit();
+      if (!rateLimitCheck.allowed) {
+        setError(rateLimitCheck.message || "Твърде много изпращания. Моля, изчакайте.");
+        setIsLoading(false);
+        return;
+      }
+
+      // 3. Check form fill time
+      const fillTimeCheck = checkFormFillTime(formStartTime.current);
+      if (!fillTimeCheck.allowed) {
+        setError(fillTimeCheck.message || "Формата е попълнена твърде бързо.");
+        setIsLoading(false);
+        return;
+      }
+
+      // 4. Validate email
+      if (!isValidEmail(formData.email)) {
+        setError("Моля, въведете валиден email адрес.");
+        setIsLoading(false);
+        return;
+      }
+
+      // 5. Check spam patterns
+      const spamCheck = checkSpamPatterns(formData.description, formData.additional_info);
+      if (!spamCheck.allowed) {
+        setError(spamCheck.message || "Съобщението изглежда като спам.");
+        setIsLoading(false);
+        return;
+      }
+
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
       const templateId = import.meta.env.VITE_EMAILJS_PROJECT_TEMPLATE_ID || import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
@@ -119,6 +175,7 @@ const ProjectInquiry = () => {
       );
 
       setIsSubmitted(true);
+      formStartTime.current = Date.now(); // Reset timer
       setFormData({
         name: "",
         email: "",
@@ -133,6 +190,7 @@ const ProjectInquiry = () => {
         target_audience: "",
         existing_website: "",
         additional_info: "",
+        [HONEYPOT_FIELD_NAME]: "",
       });
     } catch (err) {
       console.error("EmailJS error:", err);
@@ -471,6 +529,20 @@ const ProjectInquiry = () => {
                     placeholder="Всичко друго, което искате да споделите с нас..."
                     rows={4}
                     className="bg-secondary/50 border-border resize-none"
+                  />
+                </div>
+
+                {/* Honeypot field - hidden from users but visible to bots */}
+                <div style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}>
+                  <Label htmlFor={HONEYPOT_FIELD_NAME}>Не попълвайте това поле</Label>
+                  <Input
+                    id={HONEYPOT_FIELD_NAME}
+                    name={HONEYPOT_FIELD_NAME}
+                    type="text"
+                    value={formData[HONEYPOT_FIELD_NAME]}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
                   />
                 </div>
 
