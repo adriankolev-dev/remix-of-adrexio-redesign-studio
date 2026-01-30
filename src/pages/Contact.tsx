@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Mail, Phone, MapPin, Send, ArrowRight, CheckCircle, Loader2, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,6 +20,7 @@ interface FormData {
 }
 
 const Contact = () => {
+  const location = useLocation();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -30,6 +31,24 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+
+  // Check if coming from affiliate page
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const isAffiliate = urlParams.get('affiliate') === 'true' || 
+                       document.referrer.includes('/affiliate') ||
+                       sessionStorage.getItem('fromAffiliate') === 'true';
+    
+    if (isAffiliate) {
+      setFormData(prev => ({
+        ...prev,
+        subject: prev.subject || "Партньорска програма / Affiliate програма"
+      }));
+    }
+    
+    // Clear the flag after use
+    sessionStorage.removeItem('fromAffiliate');
+  }, [location.search]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;

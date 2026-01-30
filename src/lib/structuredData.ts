@@ -21,7 +21,8 @@ export const getOrganizationSchema = () => ({
     availableLanguage: "Bulgarian",
   },
   sameAs: [
-    // Add your social media links here when available
+    "https://www.linkedin.com/company/adrexio/",
+    "https://www.instagram.com/adrexio_/",
   ],
 });
 

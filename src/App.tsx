@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ScrollToTop from "@/components/ScrollToTop";
+import BackToTop from "@/components/BackToTop";
 import CookieConsent from "@/components/CookieConsent";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
@@ -16,6 +17,7 @@ import Contact from "./pages/Contact";
 import ProjectInquiry from "./pages/ProjectInquiry";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Affiliate from "./pages/Affiliate";
 import NotFound from "./pages/NotFound";
 
 // Service landing pages
@@ -37,6 +39,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <BackToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />
@@ -56,6 +59,7 @@ const App = () => (
             <Route path="/project-inquiry" element={<ProjectInquiry />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/affiliate" element={<Affiliate />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

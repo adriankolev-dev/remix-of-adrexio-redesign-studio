@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone, ArrowUpRight, Cookie, Linkedin } from "lucide-react";
+import { Mail, MapPin, Phone, ArrowUpRight, Cookie, Linkedin, Instagram } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo.svg";
@@ -36,15 +36,24 @@ const Footer = () => {
             <div className="space-y-2">
               <p className="text-sm font-medium text-foreground">Социални мрежи:</p>
               <div className="flex items-center gap-3">
-              <a
-                href="https://www.linkedin.com/company/adrexio/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-card border border-border hover:border-primary hover:bg-primary/10 flex items-center justify-center transition-all group"
-                aria-label="Последвайте ни в LinkedIn"
-              >
-                <Linkedin size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
-              </a>
+                <a
+                  href="https://www.linkedin.com/company/adrexio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-lg bg-card border border-border hover:border-primary hover:bg-primary/10 flex items-center justify-center transition-all group"
+                  aria-label="Последвайте ни в LinkedIn"
+                >
+                  <Linkedin size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                </a>
+                <a
+                  href="https://www.instagram.com/adrexio_/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-lg bg-card border border-border hover:border-primary hover:bg-primary/10 flex items-center justify-center transition-all group"
+                  aria-label="Последвайте ни в Instagram"
+                >
+                  <Instagram size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                </a>
               </div>
             </div>
           </div>
@@ -58,6 +67,7 @@ const Footer = () => {
                 { label: "Цени", path: "/pricing" },
                 { label: "За нас", path: "/about" },
                 { label: "Case Studies", path: "/case-studies" },
+                { label: "Affiliate програма", path: "/affiliate" },
                 { label: "Контакти", path: "/contact" }
               ].map((link) => (
                 <li key={link.path}>
