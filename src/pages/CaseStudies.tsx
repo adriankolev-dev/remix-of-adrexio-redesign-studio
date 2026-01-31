@@ -1,11 +1,10 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, TrendingUp, Clock, Users, Zap, Search } from "lucide-react";
+import { ArrowRight, ArrowUpRight, TrendingUp, Clock, Users, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SEO from "@/components/SEO";
 import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import CaseStudyFilters from "@/components/case-studies/CaseStudyFilters";
 import MobileAppsSection from "@/components/case-studies/MobileAppsSection";
@@ -36,11 +35,6 @@ const CaseStudies = () => {
 
   return (
     <main className="min-h-screen bg-background">
-      <SEO
-        title="Case Studies - Adrexio | Портфолио с успешни проекти"
-        description="Разгледайте нашите успешни проекти и case studies. Уебсайтове, мобилни приложения и дигитални решения, които помогнаха на бизнесите да растат."
-        keywords="case studies, портфолио, проекти Adrexio, успешни уебсайтове, примерни проекти, референции"
-      />
       <Navbar />
 
       {/* Hero */}
@@ -101,10 +95,10 @@ const CaseStudies = () => {
               className="mb-8"
             >
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
-                Нашите <span className="text-gradient">проекти</span>
+                Всички <span className="text-gradient">проекти</span>
               </h2>
               <p className="text-muted-foreground">
-                Избрани проекти от нашето портфолио
+                Пълното ни портфолио от завършени проекти
               </p>
             </motion.div>
           )}
@@ -160,10 +154,10 @@ const CaseStudies = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { icon: TrendingUp, value: "+150%", label: "Среден растеж на трафика" },
-              { icon: Users, value: "+85%", label: "Увеличение на конверсиите" },
-              { icon: ArrowUpRight, value: "+200%", label: "Ръст на продажбите" },
-              { icon: Zap, value: "4.9/5", label: "Средна клиентска оценка" }
+              { icon: Users, value: "30+", label: "Доволни клиенти" },
+              { icon: ExternalLink, value: "50+", label: "Завършени проекта" },
+              { icon: TrendingUp, value: "+150%", label: "Среден растеж" },
+              { icon: Clock, value: "< 2сек", label: "Време за зареждане" }
             ].map((stat, index) => (
               <motion.div
                 key={index}
