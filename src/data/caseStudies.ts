@@ -1,4 +1,5 @@
 // Case Study Data - Centralized for scalability
+import koleffHouseImg from "@/assets/case-studies/koleff-house.png";
 import innitiImg from "@/assets/case-studies/inniti.png";
 import oraqorImg from "@/assets/case-studies/oraqor.png";
 import riactImg from "@/assets/case-studies/riact.png";
@@ -64,6 +65,36 @@ export const categories = [
 ];
 
 export const caseStudies: CaseStudy[] = [
+  // KOLEFF HOUSE
+  {
+    id: "koleff-house",
+    title: "Koleff House",
+    subtitle: "Къща за гости в Твърдица, Сливен",
+    category: "Туризъм & Хотели",
+    url: "https://koleff-house.com/",
+    isPublic: true,
+    isFeatured: true,
+    image: koleffHouseImg,
+    overview: "Koleff House - къща за гости в Твърдица, Сливен с 11 леглови места. Модерен Next.js уебсайт за резервации. Собственик, управител и разработчик: Стефан Колев.",
+    challenge: "Клиентът се нуждаеше от модерен, професионален уебсайт, който да представи къщата за гости с нейните удобства, да улесни онлайн резервации и да привлече гости, търсещи спокойствие и комфорт в региона на Сливен.",
+    solution: [
+      "Изградихме модерен уебсайт с Next.js за оптимална производителност и SEO",
+      "Създадохме детайлни страници за стаите с информация за удобствата и цените",
+      "Внедрихме секция за услуги (зала, кухня, двор с басейн и барбекю)",
+      "Разработихме система за онлайн резервации",
+      "Оптимизирахме за локално SEO търсене в региона на Твърдица и Сливен",
+      "Интегрирахме контактна информация и директни комуникационни канали"
+    ],
+    results: [
+      { metric: "11", label: "Леглови места" },
+      { metric: "Next.js", label: "Технология" },
+      { metric: "100%", label: "Оптимизация" }
+    ],
+    technologies: ["Next.js", "React", "TypeScript", "SEO", "Booking System", "Custom Design"],
+    gradient: "from-blue-500/20 to-indigo-500/20",
+    accentColor: "text-blue-500",
+    internalNote: "Стефан Колев е собственик и управител на Koleff House. Основна заслуга за разработката на сайта има именно той."
+  },
   // KONI JEWELLERY
   {
     id: "koni-jewellery",

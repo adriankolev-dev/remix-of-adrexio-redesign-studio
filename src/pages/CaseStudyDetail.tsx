@@ -17,6 +17,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { getCaseStudyById, caseStudies } from "@/data/caseStudies";
+import { getBreadcrumbSchema } from "@/lib/structuredData";
 import { useEffect } from "react";
 
 const CaseStudyDetail = () => {
@@ -41,6 +42,51 @@ const CaseStudyDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  // Generate structured data for SEO
+  const baseUrl = "https://www.adrexio.com";
+  const structuredData = study ? {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${baseUrl}/case-studies/${study.id}`,
+        "headline": `${study.title} - ${study.subtitle}`,
+        "description": truncateDescription(study.overview, 160),
+        "image": study.image?.startsWith("http") 
+          ? study.image 
+          : study.image?.startsWith("/") 
+          ? `${baseUrl}${study.image}`
+          : `${baseUrl}/${study.image}`,
+        "datePublished": new Date().toISOString(),
+        "dateModified": new Date().toISOString(),
+        "author": {
+          "@type": "Organization",
+          "name": "Adrexio",
+          "url": baseUrl
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Adrexio",
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${baseUrl}/logo.svg`
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": `${baseUrl}/case-studies/${study.id}`
+        },
+        "articleSection": study.category,
+        "keywords": `${study.title}, ${study.category}, ${study.technologies.join(", ")}, уеб разработка, case study`
+      },
+      getBreadcrumbSchema([
+        { name: "Начало", url: baseUrl },
+        { name: "Case Studies", url: `${baseUrl}/case-studies` },
+        { name: study.title, url: `${baseUrl}/case-studies/${study.id}` }
+      ])
+    ]
+  } : null;
 
   if (!study) {
     return (
@@ -68,12 +114,21 @@ const CaseStudyDetail = () => {
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title={`${study.title} - ${study.subtitle} | Adrexio Case Study`}
+        title={
+          study.id === "koleff-house"
+            ? `${study.title} - Къща за гости Твърдица, Сливен | Next.js Уебсайт | Adrexio Case Study`
+            : `${study.title} - ${study.subtitle} | Adrexio Case Study`
+        }
         description={truncateDescription(study.overview)}
-        keywords={`${study.title}, ${study.category}, уеб разработка, case study, ${study.technologies.join(", ")}`}
+        keywords={
+          study.id === "koleff-house"
+            ? `${study.title}, къща за гости Твърдица, настаняване Сливен, Next.js уебсайт, Stefan Kolev, ${study.category}, уеб разработка, case study, ${study.technologies.join(", ")}`
+            : `${study.title}, ${study.category}, уеб разработка, case study, ${study.technologies.join(", ")}`
+        }
         image={study.image}
         type="article"
         noindex={!study.isPublic}
+        structuredData={structuredData}
       />
       <Navbar />
 
