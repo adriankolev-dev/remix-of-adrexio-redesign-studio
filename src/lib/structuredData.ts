@@ -5,7 +5,12 @@ export const getOrganizationSchema = () => ({
   "@type": "Organization",
   name: "Adrexio",
   url: "https://www.adrexio.com",
-  logo: "https://www.adrexio.com/logo.svg",
+  logo: {
+    "@type": "ImageObject",
+    "url": "https://www.adrexio.com/favicon.svg",
+    "width": 512,
+    "height": 512
+  },
   description: "Създаваме бързи и оптимизирани уебсайтове, мобилни приложения и дигитални решения, които помагат на бизнеса да расте в дигиталната ера.",
   address: {
     "@type": "PostalAddress",
@@ -71,7 +76,13 @@ export const getLocalBusinessSchema = () => ({
   "@type": "LocalBusiness",
   "@id": "https://www.adrexio.com",
   name: "Adrexio",
-  image: "https://www.adrexio.com/logo.svg",
+  image: "https://www.adrexio.com/favicon.svg",
+  logo: {
+    "@type": "ImageObject",
+    "url": "https://www.adrexio.com/favicon.svg",
+    "width": 512,
+    "height": 512
+  },
   description: "Уеб дизайн и разработка, мобилни приложения, SEO оптимизация",
   address: {
     "@type": "PostalAddress",

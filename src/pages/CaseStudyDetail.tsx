@@ -70,7 +70,9 @@ const CaseStudyDetail = () => {
           "name": "Adrexio",
           "logo": {
             "@type": "ImageObject",
-            "url": `${baseUrl}/logo.svg`
+            "url": `${baseUrl}/favicon.svg`,
+            "width": 512,
+            "height": 512
           }
         },
         "mainEntityOfPage": {
