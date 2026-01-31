@@ -1,73 +1,67 @@
-# Welcome to your Lovable project
+# Adrexio - Модерни уебсайтове и дигитални решения
 
-## Project info
+## За проекта
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Adrexio е уеб студио в София, специализирано в създаването на модерни уебсайтове, мобилни приложения и дигитални решения.
 
-## How can I edit this code?
+## Технологии
 
-There are several ways of editing your application.
+Проектът е изграден с:
 
-**Use Lovable**
+- **Vite** - Бърз build tool и dev server
+- **TypeScript** - Type-safe JavaScript
+- **React** - UI библиотека
+- **shadcn-ui** - UI компоненти
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Router** - Client-side routing
+- **Framer Motion** - Анимации
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Локална разработка
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+За да стартирате проекта локално:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Инсталиране на зависимости
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Стартиране на development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Проектът ще се отвори на `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Build за production
 
-**Use GitHub Codespaces**
+```sh
+# Build за production
+npm run build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Preview на production build
+npm run preview
+```
 
-## What technologies are used for this project?
+## Структура на проекта
 
-This project is built with:
+```
+src/
+├── assets/          # Статични файлове (изображения, логота)
+├── components/      # React компоненти
+├── data/           # Данни и конфигурации
+├── hooks/          # Custom React hooks
+├── lib/            # Utility функции
+├── pages/          # Страници и routes
+└── test/           # Тестове
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Скриптове
 
-## How can I deploy this project?
+- `npm run dev` - Стартира development server
+- `npm run build` - Build за production
+- `npm run preview` - Preview на production build
+- `npm run lint` - Проверка за грешки в кода
+- `npm test` - Стартира тестове
+- `npm run test:watch` - Тестове в watch mode
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## Лиценз
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Всички права запазени © Adrexio
