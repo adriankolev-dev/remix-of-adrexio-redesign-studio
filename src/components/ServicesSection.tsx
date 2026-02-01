@@ -14,7 +14,7 @@ import {
 const services = [
   {
     icon: Globe,
-    title: "Уеб разработка",
+    title: "Уеб сайт разработка",
     subtitle: "Web Development",
     description: "Модерни сайтове за вашия бизнес и неговият растеж.",
     href: "/services/web-development"

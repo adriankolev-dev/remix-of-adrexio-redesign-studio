@@ -97,7 +97,7 @@ const Footer = () => {
             <h4 className="font-display font-semibold text-foreground">Услуги</h4>
             <ul className="space-y-3">
               {[
-                { label: "Уеб разработка", path: "/services/web-development" },
+                { label: "Уеб сайт разработка", path: "/services/web-development" },
                 { label: "Мобилни приложения", path: "/services/mobile-apps" },
                 { label: "UI/UX Дизайн", path: "/services/ui-ux-design" },
                 { label: "SEO и GEO оптимизация", path: "/services/seo" },
