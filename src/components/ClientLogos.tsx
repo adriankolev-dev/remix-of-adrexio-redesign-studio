@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 // Import client logos
-import supercreditLogo from "@/assets/clients/supercredit.svg";
+import bulbioLogo from "@/assets/clients/bulbio.webp";
 import athleticiqLogo from "@/assets/clients/athleticiq.png";
 import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.png";
 import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
@@ -15,7 +15,7 @@ import tajmahalLogo from "@/assets/clients/tajmahal.png";
 import booomLogo from "@/assets/clients/booom.webp";
 
 const clients = [
-  { name: "SuperCredit", logo: supercreditLogo },
+  { name: "Bulbiochem", logo: bulbioLogo },
   { name: "AthleticIQ", logo: athleticiqLogo },
   { name: "Body Aesthetics", logo: bodyaestheticsLogo },
   { name: "Amelia Diva", logo: ameliadivaLogo },
@@ -56,17 +56,13 @@ const ClientLogos = () => {
             {[...clients, ...clients].map((client, i) => (
               <div
                 key={i}
-                className="shrink-0 h-12 md:h-14 flex items-center justify-center transition-all duration-300 group"
+                className="shrink-0 h-12 md:h-14 flex items-center justify-center"
               >
-                <div className="bg-white rounded-lg px-4 py-2 h-full flex items-center justify-center transition-all duration-300 group-hover:bg-white/90">
+                <div className="bg-white rounded-lg px-4 py-2 h-full flex items-center justify-center">
                   <img
                     src={client.logo}
                     alt={client.name}
                     className="h-full w-auto max-w-[160px] object-contain"
-                    style={client.name === "WebXotic" ? { 
-                      filter: 'brightness(0) saturate(100%)',
-                      WebkitFilter: 'brightness(0) saturate(100%)'
-                    } : undefined}
                   />
                 </div>
               </div>

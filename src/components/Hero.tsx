@@ -5,14 +5,14 @@ import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 
 // Import client logos for social proof
-import supercreditLogo from "@/assets/clients/supercredit.svg";
+import bulbioLogo from "@/assets/clients/bulbio.webp";
 import athleticiqLogo from "@/assets/clients/athleticiq.png";
 import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.png";
 import fmlLogo from "@/assets/clients/fml.png";
 import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
 
 const clientLogos = [
-  { name: "SuperCredit", logo: supercreditLogo },
+  { name: "Bulbiochem", logo: bulbioLogo },
   { name: "AthleticIQ", logo: athleticiqLogo },
   { name: "Body Aesthetics", logo: bodyaestheticsLogo },
   { name: "FML-BD", logo: fmlLogo },
@@ -114,15 +114,12 @@ const Hero = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 + i * 0.1 }}
-                  className="h-8 md:h-10 transition-all duration-300 group"
+                  className="h-8 md:h-10"
                 >
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="h-full w-auto max-w-[100px] object-contain brightness-0 invert opacity-40 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100 transition-all duration-300"
-                    style={{ filter: 'brightness(0) invert(1)' }}
-                    onMouseEnter={(e) => e.currentTarget.style.filter = 'none'}
-                    onMouseLeave={(e) => e.currentTarget.style.filter = 'brightness(0) invert(1)'}
+                    className="h-full w-auto max-w-[100px] object-contain"
                   />
                 </motion.div>
               ))}
