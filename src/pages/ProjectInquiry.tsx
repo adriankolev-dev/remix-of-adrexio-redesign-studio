@@ -204,7 +204,7 @@ const ProjectInquiry = () => {
     { id: "web-development", label: "Уеб разработка", icon: Globe },
     { id: "mobile-apps", label: "Мобилни приложения", icon: Smartphone },
     { id: "ui-ux-design", label: "UI/UX Дизайн", icon: Palette },
-    { id: "seo", label: "SEO оптимизация", icon: Target },
+    { id: "seo", label: "SEO и GEO оптимизация", icon: Target },
     { id: "digital-marketing", label: "Дигитален маркетинг", icon: Users },
     { id: "technical-support", label: "Техническа поддръжка", icon: Briefcase },
   ];

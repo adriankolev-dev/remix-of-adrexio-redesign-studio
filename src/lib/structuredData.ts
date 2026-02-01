@@ -28,6 +28,7 @@ export const getOrganizationSchema = () => ({
   sameAs: [
     "https://www.linkedin.com/company/adrexio/",
     "https://www.instagram.com/adrexio_/",
+    "https://www.facebook.com/profile.php?id=61587315031705",
   ],
 });
 
@@ -83,7 +84,7 @@ export const getLocalBusinessSchema = () => ({
     "width": 512,
     "height": 512
   },
-  description: "Уеб дизайн и разработка, мобилни приложения, SEO оптимизация",
+  description: "Уеб дизайн и разработка, мобилни приложения, SEO и GEO оптимизация",
   address: {
     "@type": "PostalAddress",
     addressLocality: "София",

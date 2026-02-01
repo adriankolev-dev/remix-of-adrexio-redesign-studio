@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone, ArrowUpRight, Cookie, Linkedin, Instagram } from "lucide-react";
+import { Mail, MapPin, Phone, ArrowUpRight, Cookie, Linkedin, Instagram, Facebook } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo.svg";
@@ -54,6 +54,15 @@ const Footer = () => {
                 >
                   <Instagram size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
                 </a>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61587315031705"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-lg bg-card border border-border hover:border-primary hover:bg-primary/10 flex items-center justify-center transition-all group"
+                  aria-label="Последвайте ни във Facebook"
+                >
+                  <Facebook size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                </a>
               </div>
             </div>
           </div>
@@ -91,7 +100,7 @@ const Footer = () => {
                 { label: "Уеб разработка", path: "/services/web-development" },
                 { label: "Мобилни приложения", path: "/services/mobile-apps" },
                 { label: "UI/UX Дизайн", path: "/services/ui-ux-design" },
-                { label: "SEO оптимизация", path: "/services/seo" },
+                { label: "SEO и GEO оптимизация", path: "/services/seo" },
                 { label: "Дигитален маркетинг", path: "/services/digital-marketing" },
                 { label: "Техническа поддръжка", path: "/services/technical-support" }
               ].map((service) => (

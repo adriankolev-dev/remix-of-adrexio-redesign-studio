@@ -103,6 +103,12 @@ export interface ServiceLandingProps {
   // CTA section
   ctaTitle: string;
   ctaSubtitle: string;
+  
+  // Optional custom section before CTA
+  customSectionBeforeCTA?: React.ReactNode;
+  
+  // Optional custom section before Footer
+  customSection?: React.ReactNode;
 }
 
 const ServiceLandingTemplate = ({
@@ -139,6 +145,8 @@ const ServiceLandingTemplate = ({
   faqs,
   ctaTitle,
   ctaSubtitle,
+  customSectionBeforeCTA,
+  customSection,
 }: ServiceLandingProps) => {
   const structuredData = serviceName 
     ? getServiceSchema(serviceName, seoDescription || heroSubtitle)
@@ -611,6 +619,9 @@ const ServiceLandingTemplate = ({
         </div>
       </section>
 
+      {/* Custom Section Before CTA (optional) */}
+      {customSectionBeforeCTA}
+
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-b from-card to-background relative overflow-hidden">
         {/* Background glow */}
@@ -649,6 +660,9 @@ const ServiceLandingTemplate = ({
           </motion.div>
         </div>
       </section>
+
+      {/* Custom Section (optional) */}
+      {customSection}
 
       <Footer />
     </main>

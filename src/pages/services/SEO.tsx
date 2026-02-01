@@ -10,21 +10,33 @@ import {
   FileText,
   Link as LinkIcon,
   MapPin,
-  Zap
+  Zap,
+  Settings,
+  Edit,
+  Shield,
+  Sparkles,
+  Code,
+  Table,
+  Eye,
+  Building2,
+  TrendingDown,
+  Video,
+  BarChart
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import { motion } from "framer-motion";
 
 const SEO = () => {
   return (
     <ServiceLandingTemplate
-      seoTitle="SEO оптимизация - Adrexio | Подобряване на позициите в Google, София"
-      seoDescription="Професионална SEO оптимизация в София. Увеличаваме органичния трафик и подобряваме позициите в Google с доказани SEO стратегии и техники."
-      seoKeywords="SEO оптимизация, SEO София, позиции Google, органичен трафик, SEO услуги България, технически SEO, on-page SEO, линк билдинг"
-      serviceName="SEO оптимизация"
-      heroTitle="Бъдете #1 в Google."
+      seoTitle="SEO и GEO оптимизация - Adrexio | Google и AI търсене, София"
+      seoDescription="SEO и GEO оптимизация в София. Традиционен SEO за Google + GEO за AI търсачки като ChatGPT и Perplexity. Пълна оптимизация за всички търсачки."
+      seoKeywords="SEO оптимизация, GEO оптимизация, SEO София, AI търсене, ChatGPT оптимизация, позиции Google, органичен трафик, SEO услуги България, технически SEO, on-page SEO, линк билдинг"
+      serviceName="SEO и GEO оптимизация"
+      heroTitle="Бъдете #1 в Google и AI търсачките."
       heroHighlight="Повече трафик, повече клиенти."
-      heroSubtitle="Увеличете органичния трафик и конверсиите с доказани SEO стратегии. Изкачете се на върха на търсачките и останете там."
-      heroCTAText="БЕЗПЛАТЕН SEO АНАЛИЗ"
+      heroSubtitle="Традиционен SEO за Google + GEO оптимизация за ChatGPT, Perplexity и Google SGE. Пълна оптимизация за всички търсачки."
+      heroCTAText="БЕЗПЛАТЕН SEO И GEO АНАЛИЗ"
       
       stats={[
         { value: "+300%", label: "Средно увеличение на трафика" },
@@ -32,11 +44,11 @@ const SEO = () => {
         { value: "95%", label: "Клиенти с ръст" }
       ]}
       
-      introTitle="Защо SEO е най-важната инвестиция за вашия бизнес?"
-      introDescription="75% от потребителите никога не скролват под първата страница в Google. Ако не сте там, просто не съществувате за тях. SEO не е разход – това е инвестиция с най-висока възвръщаемост в дигиталния маркетинг."
+      introTitle="Защо SEO и GEO са най-важната инвестиция за вашия бизнес?"
+      introDescription="75% от потребителите никога не скролват под първата страница в Google. Ако не сте там, просто не съществувате за тях. С нарастването на AI търсачките като ChatGPT и Perplexity, GEO оптимизацията става все по-важна. SEO и GEO не са разход – това е инвестиция с най-висока възвръщаемост в дигиталния маркетинг."
       
-      featuresTitle="Какво включва нашата SEO услуга?"
-      featuresSubtitle="Пълен спектър SEO"
+      featuresTitle="Какво включва нашата SEO и GEO услуга?"
+      featuresSubtitle="Пълен спектър SEO + GEO оптимизация"
       features={[
         {
           title: "Технически SEO одит",
@@ -230,8 +242,266 @@ const SEO = () => {
         }
       ]}
       
-      ctaTitle="Готови да доминирате в Google?"
-      ctaSubtitle="Заявете безплатен SEO одит на вашия сайт и разберете потенциала си за растеж."
+      ctaTitle="Готови да доминирате в Google и AI търсачките?"
+      ctaSubtitle="Заявете безплатен SEO и GEO одит на вашия сайт и разберете потенциала си за растеж."
+      customSectionBeforeCTA={
+        <section className="py-24 bg-gradient-to-b from-card to-background">
+          <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Подготовка за <span className="text-gradient">AI Търсене</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Стратегическа карта за GEO (Generative Engine Optimization)
+            </p>
+            <p className="text-sm text-muted-foreground mt-4 max-w-2xl mx-auto">
+              С нарастването на AI търсачките като ChatGPT, Perplexity и Google SGE, 
+              оптимизацията за генеративни търсачки става все по-важна. GEO ви помага 
+              да бъдете видими в отговорите на AI асистентите.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Technical Skeleton */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
+                  <Settings className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-display font-bold">Технически скелет</h3>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <Code className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">JSON-LD (Schema):</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Преведи данните на езика на роботите. Структурирани данни за по-добро разбиране от AI.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FileText className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">FAQPage Schema:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Най-прекият път към директен отговор в чата. Оптимизирай за въпроси, не за ключови думи.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Zap className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">SSR Rendering:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Подавай чист HTML, не карай бота да чака JavaScript. Server-side rendering за по-добро индексиране.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Shield className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Robots.txt:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Разреши достъп на ботовете на OpenAI, Google и Bing. Не блокирай AI crawlers.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
+                  <Edit className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-display font-bold">Съдържание</h3>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <Target className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">BLUF Метод:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Отговорът най-отпред, детайлите после. Bottom Line Up Front за по-бързо разбиране.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Table className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Структура:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Използвай HTML таблици и списъци за данни. Структурирано съдържание е по-лесно за AI.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Eye className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Контекст:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Всяка секция трябва да има смисъл самостоятелно. Независими блокове съдържание.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <TrendingUp className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Information Gain:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Добави уникални данни, които ги няма другаде. Ексклузивна информация за по-висок ранг.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Authority E-E-A-T */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
+                  <Shield className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-display font-bold">Авторитет (E-E-A-T)</h3>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <Users className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Реални автори:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Биографии с линкове към LinkedIn/социални профили. Доверие чрез прозрачност.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Award className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Личен опит:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Използвай фрази като "От нашите тестове...", "Ние открихме...". Първо лице за автентичност.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Building2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Brand Identity:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Страница "За нас" с пълни контакти и история. Изграждане на бранд авторитет.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Globe className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Споменавания:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Изгради присъствие на бранда извън сайта си. PR и медийно покритие.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Future & Zero Click */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-display font-bold">Бъдеще & Нулев клик</h3>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <BarChart className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Share of Voice:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Целта е брандът да бъде споменат в отговора на AI. Видимост в AI отговорите.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Search className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Сценарии:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Оптимизирай за дълги въпроси и казуси, не за ключови думи. Контекстуални заявки.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Video className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Мултимедия:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Собствени снимки и видео с пълна транскрипция. Rich media за по-добро разбиране.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <TrendingDown className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <div>
+                    <strong className="text-foreground">Метрики:</strong>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Следи "Търсене по бранд" и "Директен трафик" за успех. Новые метрики за GEO.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="mt-12 text-center"
+          >
+            <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
+              GEO оптимизацията е следващата стъпка в SEO. Докато традиционният SEO се фокусира 
+              върху класиране в резултатите от търсенето, GEO ви помага да бъдете включени в 
+              отговорите на AI асистентите като ChatGPT, Perplexity и Google SGE.
+            </p>
+          </motion.div>
+          </motion.div>
+        </div>
+      </section>
+      }
     />
   );
 };

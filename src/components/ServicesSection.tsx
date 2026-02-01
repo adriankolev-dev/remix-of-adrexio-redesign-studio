@@ -42,9 +42,9 @@ const services = [
   },
   {
     icon: Search,
-    title: "SEO",
-    subtitle: "Оптимизация",
-    description: "Подобряване на видимостта в търсачките за повече органичен трафик.",
+    title: "SEO и GEO оптимизация",
+    subtitle: "Search & AI Optimization",
+    description: "Подобряване на видимостта в Google и AI търсачките за повече органичен трафик.",
     href: "/services/seo"
   },
   {
