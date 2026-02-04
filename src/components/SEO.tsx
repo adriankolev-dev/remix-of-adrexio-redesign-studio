@@ -15,7 +15,7 @@ const SEO = ({
   title = "Adrexio - Модерни уебсайтове и дигитални решения",
   description = "Създаваме бързи и оптимизирани уебсайтове, мобилни приложения и дигитални решения, които помагат на бизнеса да расте в дигиталната ера.",
   keywords = "уеб дизайн, уебсайт, мобилни приложения, SEO и GEO оптимизация, дигитален маркетинг, UI/UX дизайн, България, София, уеб разработка",
-  image = "https://www.adrexio.com/og-image.svg",
+  image = "https://www.adrexio.com/og-image.png",
   type = "website",
   noindex = false,
   structuredData,
@@ -88,8 +88,11 @@ const SEO = ({
     updateMetaTag("og:title", title, true);
     updateMetaTag("og:description", description, true);
     updateMetaTag("og:image", normalizedImage || image, true);
+    updateMetaTag("og:image:secure_url", normalizedImage || image, true);
+    updateMetaTag("og:image:type", normalizedImage?.endsWith(".svg") ? "image/svg+xml" : normalizedImage?.endsWith(".jpg") || normalizedImage?.endsWith(".jpeg") ? "image/jpeg" : "image/png", true);
     updateMetaTag("og:image:width", "1200", true);
     updateMetaTag("og:image:height", "630", true);
+    updateMetaTag("og:image:alt", title, true);
     updateMetaTag("og:locale", "bg_BG", true);
     updateMetaTag("og:site_name", "Adrexio", true);
 
