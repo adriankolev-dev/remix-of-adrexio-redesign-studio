@@ -10,6 +10,7 @@ import BackToTop from "@/components/BackToTop";
 import CookieConsent from "@/components/CookieConsent";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
+import ServicesDemo from "./pages/ServicesDemo";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import CaseStudies from "./pages/CaseStudies";
@@ -45,6 +46,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/services-demo" element={<ServicesDemo />} />
             <Route path="/services/web-development" element={<WebDevelopment />} />
             <Route path="/services/ai-implementation" element={<AIImplementation />} />
             <Route path="/services/mobile-apps" element={<MobileApps />} />
@@ -62,6 +64,7 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/affiliate" element={<Affiliate />} />
+            
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
