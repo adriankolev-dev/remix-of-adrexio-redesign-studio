@@ -63,6 +63,11 @@ const ClientLogos = () => {
                     src={client.logo}
                     alt={client.name}
                     className="h-full w-auto max-w-[160px] object-contain"
+                    style={
+                      (client.name === "WebXotic" || client.name === "Bulbiochem") 
+                        ? { filter: 'brightness(0) saturate(100%)' }
+                        : {}
+                    }
                   />
                 </div>
               </div>
