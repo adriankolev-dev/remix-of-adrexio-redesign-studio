@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MeetTheTeam from "@/components/MeetTheTeam";
 import SEO from "@/components/SEO";
 import { getOrganizationSchema } from "@/lib/structuredData";
 
@@ -243,6 +244,9 @@ const About = () => {
         </div>
       </section>
 
+      {/* Meet the Team */}
+      <MeetTheTeam />
+
       {/* What we offer */}
       <section className="py-24 bg-gradient-to-b from-card to-background">
         <div className="container mx-auto px-6">
@@ -276,8 +280,8 @@ const About = () => {
               className="border-gradient p-8 rounded-2xl"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-display font-bold text-primary-foreground">
-                  A
+                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center p-3">
+                  <img src="/favicon.svg" alt="Adrexio Logo" className="w-full h-full" />
                 </div>
                 <div>
                   <h3 className="font-display font-bold text-xl">Екипът на Adrexio</h3>
