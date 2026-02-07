@@ -214,19 +214,21 @@ const ProblemSolutionSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="mt-16 text-center"
+          className="mt-16"
         >
-          <div className="inline-block p-8 rounded-2xl border-gradient bg-gradient-to-br from-primary/10 to-accent/5">
-            <p className="text-lg font-semibold mb-2">
+          <div className="max-w-2xl mx-auto p-6 sm:p-8 rounded-2xl border-gradient bg-gradient-to-br from-primary/10 to-accent/5 text-center">
+            <p className="text-base sm:text-lg font-semibold mb-2">
               Готови ли сте да трансформирате бизнеса си?
             </p>
-            <p className="text-muted-foreground text-sm mb-6">
+            <p className="text-muted-foreground text-sm sm:text-base mb-6">
               Нека поговорим как можем да автоматизираме растежа ви и да увеличим печалбата.
             </p>
-            <Button variant="hero" size="lg" asChild>
-              <Link to="/contact">
-                Увеличете печалбите си сега
-                <ArrowRight size={18} />
+            <Button variant="hero" size="lg" asChild className="w-full sm:w-auto">
+              <Link to="/contact" className="flex items-center justify-center gap-2">
+                <span className="whitespace-normal sm:whitespace-nowrap">
+                  Увеличете печалбите си сега
+                </span>
+                <ArrowRight size={18} className="flex-shrink-0" />
               </Link>
             </Button>
           </div>
