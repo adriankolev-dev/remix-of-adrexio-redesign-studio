@@ -38,34 +38,62 @@ const CaseStudies = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-32 pb-16 relative overflow-hidden">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
+      <section className="pt-32 pb-20 relative overflow-hidden">
+        {/* Animated background gradients */}
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-pulse delay-700" />
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block"
+            >
               Нашето портфолио
-            </span>
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
-              Реални проекти, <span className="text-gradient">реални резултати</span>
-            </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            </motion.span>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6"
+            >
+              Реални проекти,{" "}
+              <span className="text-gradient inline-block">
+                реални резултати
+              </span>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+            >
               Разгледайте как помогнахме на бизнеси от различни индустрии да постигнат дигитален успех чрез иновативни решения и стратегическо мислене.
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Filters */}
-          <CaseStudyFilters
-            activeCategory={activeCategory}
-            onCategoryChange={setActiveCategory}
-            searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <CaseStudyFilters
+              activeCategory={activeCategory}
+              onCategoryChange={setActiveCategory}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+            />
+          </motion.div>
         </div>
       </section>
 
@@ -76,12 +104,12 @@ const CaseStudies = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-8"
+              className="mb-12"
             >
-              <h2 className="text-2xl font-display font-bold mb-2">
+              <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
                 {activeCategory === "Всички" ? "Резултати от търсене" : activeCategory}
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-lg">
                 {filteredStudies.length} {filteredStudies.length === 1 ? "проект" : "проекта"}
               </p>
             </motion.div>
@@ -92,22 +120,41 @@ const CaseStudies = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-8"
+              className="mb-12"
             >
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-3">
                 Всички <span className="text-gradient">проекти</span>
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-lg">
                 Пълното ни портфолио от завършени проекти
               </p>
             </motion.div>
           )}
 
           {filteredStudies.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredStudies.map((study, index) => (
-                <CaseStudyCard key={study.id} study={study} index={index} />
-              ))}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6 auto-rows-[200px] md:auto-rows-[240px] lg:auto-rows-[280px]" style={{ gridAutoFlow: 'dense' }}>
+              {filteredStudies.map((study, index) => {
+                // agma.bg pattern: Alternating large and small cards
+                // Large cards every 5th position for balanced distribution
+                const isFeatured = index % 5 === 0;
+                
+                return (
+                  <div
+                    key={study.id}
+                    className={
+                      isFeatured 
+                        ? "col-span-2 row-span-2" 
+                        : "col-span-1 row-span-1"
+                    }
+                  >
+                    <CaseStudyCard 
+                      study={study} 
+                      index={index}
+                      variant={isFeatured ? "featured" : "default"}
+                    />
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <motion.div
