@@ -5,139 +5,139 @@ import { useEffect, useState } from "react";
 const projects = [
   {
     id: 1,
-    image: "/src/assets/case-studies/amadent.png",
+    image: "/images/projects/amadent.png",
     title: "Дентална клиника",
     category: "Медицина"
   },
   {
     id: 2,
-    image: "/src/assets/case-studies/ameliadiva.png",
+    image: "/images/projects/ameliadiva.png",
     title: "Модна къща",
     category: "Мода"
   },
   {
     id: 3,
-    image: "/src/assets/case-studies/athleticiq.png",
+    image: "/images/projects/athleticiq.png",
     title: "Спортен център",
     category: "Спорт & Фитнес"
   },
   {
     id: 4,
-    image: "/src/assets/case-studies/bitcoinempires.png",
+    image: "/images/projects/bitcoinempires.png",
     title: "Crypto платформа",
     category: "Финтех"
   },
   {
     id: 5,
-    image: "/src/assets/case-studies/boas.png",
+    image: "/images/projects/boas.png",
     title: "Tech стартъп",
     category: "Технологии"
   },
   {
     id: 6,
-    image: "/src/assets/case-studies/bodyaesthetics.png",
+    image: "/images/projects/bodyaesthetics.png",
     title: "Beauty студио",
     category: "Красота & Здраве"
   },
   {
     id: 7,
-    image: "/src/assets/case-studies/booom.png",
+    image: "/images/projects/booom.png",
     title: "Маркетинг агенция",
     category: "Digital маркетинг"
   },
   {
     id: 8,
-    image: "/src/assets/case-studies/breezypointvillas.png",
+    image: "/images/projects/breezypointvillas.png",
     title: "Луксозни вили",
     category: "Недвижими имоти"
   },
   {
     id: 9,
-    image: "/src/assets/case-studies/bulbiochem.png",
+    image: "/images/projects/bulbiochem.png",
     title: "Biotech компания",
     category: "Биотехнологии"
   },
   {
     id: 10,
-    image: "/src/assets/case-studies/fml-bd.png",
+    image: "/images/projects/fml-bd.png",
     title: "Софтуерна платформа",
     category: "SaaS"
   },
   {
     id: 11,
-    image: "/src/assets/case-studies/globalstreetart.png",
+    image: "/images/projects/globalstreetart.png",
     title: "Арт галерия",
     category: "Изкуство & Култура"
   },
   {
     id: 12,
-    image: "/src/assets/case-studies/inniti.png",
+    image: "/images/projects/inniti.png",
     title: "IT консултантска фирма",
     category: "Enterprise"
   },
   {
     id: 13,
-    image: "/src/assets/case-studies/kappabay.png",
+    image: "/images/projects/kappabay.png",
     title: "Бутиков хотел",
     category: "Хотелиерство"
   },
   {
     id: 14,
-    image: "/src/assets/case-studies/koleff-house.png",
+    image: "/images/projects/koleff-house.png",
     title: "Архитектурно студио",
     category: "Архитектура"
   },
   {
     id: 15,
-    image: "/src/assets/case-studies/koni.png",
+    image: "/images/projects/koni.png",
     title: "Cloud решения",
     category: "Технологии"
   },
   {
     id: 16,
-    image: "/src/assets/case-studies/legends.png",
+    image: "/images/projects/legends.png",
     title: "Gaming платформа",
     category: "eSports & Gaming"
   },
   {
     id: 17,
-    image: "/src/assets/case-studies/mehana.png",
+    image: "/images/projects/mehana.png",
     title: "Ресторантска верига",
     category: "Ресторантьорство"
   },
   {
     id: 18,
-    image: "/src/assets/case-studies/nfclogo.png",
+    image: "/images/projects/nfclogo.png",
     title: "IoT решения",
     category: "Smart технологии"
   },
   {
     id: 19,
-    image: "/src/assets/case-studies/oraqor.png",
+    image: "/images/projects/oraqor.png",
     title: "E-commerce магазин",
     category: "Онлайн търговия"
   },
   {
     id: 20,
-    image: "/src/assets/case-studies/riact.png",
+    image: "/images/projects/riact.png",
     title: "Web приложение",
     category: "Web развитие"
   },
   {
     id: 21,
-    image: "/src/assets/case-studies/supercredit.png",
+    image: "/images/projects/supercredit.png",
     title: "Финансова платформа",
     category: "Финанси"
   },
   {
     id: 22,
-    image: "/src/assets/case-studies/tajmahal.png",
+    image: "/images/projects/tajmahal.png",
     title: "Етнически ресторант",
     category: "Гастрономия"
   },
   {
     id: 23,
-    image: "/src/assets/case-studies/webxotic.png",
+    image: "/images/projects/webxotic.png",
     title: "Дигитална агенция",
     category: "Creative Studio"
   }
