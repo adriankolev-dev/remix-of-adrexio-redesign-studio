@@ -20,6 +20,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import ProjectsCarousel from "@/components/ProjectsCarousel";
 
 const plans = [
   {
@@ -83,6 +84,12 @@ const plans = [
 ];
 
 const WebDevelopment = () => {
+  const projectsSection = (
+    <>
+      <ProjectsCarousel />
+    </>
+  );
+
   const pricingSection = (
     <section className="py-24 bg-gradient-to-b from-background to-card/50">
       <div className="container mx-auto px-6">
@@ -446,7 +453,12 @@ const WebDevelopment = () => {
       
       ctaTitle="Готови ли сте да трансформирате вашия бизнес онлайн?"
       ctaSubtitle="Свържете се с нас днес за безплатна консултация и нека обсъдим вашата идея."
-      customSectionBeforeCTA={pricingSection}
+      customSectionBeforeCTA={
+        <>
+          {projectsSection}
+          {pricingSection}
+        </>
+      }
     />
   );
 };
