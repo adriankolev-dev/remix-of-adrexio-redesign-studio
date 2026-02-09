@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Check, ArrowRight, Sparkles, Zap, Crown, HelpCircle } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Zap, Crown, HelpCircle, DollarSign, Rocket, TrendingUp, Shield, Clock, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -310,77 +310,151 @@ const Pricing = () => {
             ))}
           </div>
 
-          {/* Value Comparison */}
+          {/* Value Comparison - 3D Floating Elements */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mt-16 max-w-4xl mx-auto"
+            className="mt-16 max-w-6xl mx-auto"
           >
-            <div className="border-gradient p-8 rounded-2xl">
-              <h3 className="text-2xl font-display font-bold text-center mb-6">
-                Защо избират Adrexio?
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-semibold text-foreground">Прозрачни цени</div>
-                      <div className="text-sm text-muted-foreground">Без скрити такси или неочаквани разходи</div>
+            <h3 className="text-3xl md:text-4xl font-display font-bold text-center mb-4">
+              Защо избират <span className="text-gradient">Adrexio?</span>
+            </h3>
+            <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
+              Комбинация от качество, прозрачност и доказани резултати
+            </p>
+            
+            {/* Staggered 3D Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16" style={{ perspective: "1000px" }}>
+              {[
+                {
+                  icon: DollarSign,
+                  title: "Прозрачни цени",
+                  description: "Без скрити такси или неочаkvани разходи",
+                  color: "from-cyan-400 to-blue-500",
+                },
+                {
+                  icon: Shield,
+                  title: "50/50 плащане",
+                  description: "50% в началото, 50% след като видите резултата",
+                  color: "from-blue-400 to-purple-500",
+                },
+                {
+                  icon: TrendingUp,
+                  title: "Гарантиран ROI",
+                  description: "Вашият сайт се изплаща за 2-3 месеца",
+                  color: "from-purple-400 to-pink-500",
+                  tooltip: "ROI (Return on Investment) - възвращаемост на инвестицията"
+                },
+                {
+                  icon: Sparkles,
+                  title: "Безплатна поддръжка",
+                  description: "30-60 дни поддръжка включена",
+                  color: "from-pink-400 to-red-500",
+                },
+                {
+                  icon: Rocket,
+                  title: "Бързо завършване",
+                  description: "1-4 седмици в зависимост от плана",
+                  color: "from-red-400 to-orange-500",
+                },
+                {
+                  icon: Award,
+                  title: "100% собственост",
+                  description: "Собственост върху кода и дизайна",
+                  color: "from-orange-400 to-yellow-500",
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ 
+                    opacity: 0,
+                    rotateX: -90,
+                    y: 100,
+                  }}
+                  whileInView={{ 
+                    opacity: 1,
+                    rotateX: 0,
+                    y: 0,
+                  }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ 
+                    delay: index * 0.15,
+                    duration: 0.8,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  whileHover={{
+                    y: -20,
+                    rotateX: 10,
+                    rotateY: 5,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="group flex flex-col items-center text-center"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  {/* Glow Background */}
+                  <motion.div 
+                    className={`absolute inset-0 bg-gradient-to-br ${item.color} blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 -z-10`}
+                    style={{ transform: "translateZ(-50px)" }}
+                  />
+                  
+                  {/* 3D Icon */}
+                  <motion.div 
+                    className="relative mb-6"
+                    whileHover={{ 
+                      rotateY: 180,
+                      transition: { duration: 0.6 }
+                    }}
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    {/* Icon Circle */}
+                    <div className={`w-24 h-24 rounded-full bg-gradient-to-br ${item.color} p-5 shadow-2xl relative`}
+                         style={{ 
+                           transform: "translateZ(30px)",
+                         }}>
+                      <item.icon className="w-full h-full text-white" strokeWidth={2.5} />
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-semibold text-foreground">50/50 плащане</div>
-                      <div className="text-sm text-muted-foreground">50% в началото, 50% след като видите резултата</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-semibold text-foreground flex items-center gap-1">
-                        Гарантиран{" "}
+                    
+                    {/* Shadow */}
+                    <div className="absolute inset-0 rounded-full bg-black/30 blur-2xl scale-90 -z-10" 
+                         style={{ transform: "translateZ(-20px) translateY(10px)" }} />
+                  </motion.div>
+
+                  {/* Text Content */}
+                  <motion.div
+                    style={{ transform: "translateZ(20px)" }}
+                    className="space-y-3"
+                  >
+                    <h4 className="font-display font-bold text-xl text-foreground group-hover:text-primary transition-colors flex items-center justify-center gap-2">
+                      {item.title}
+                      {item.tooltip && (
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <span className="underline decoration-dotted cursor-help">ROI</span>
+                            <HelpCircle className="w-4 h-4 text-muted-foreground hover:text-primary cursor-help" />
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p className="max-w-xs">
-                              ROI (Return on Investment) - възвращаемост на инвестицията. Когато печалбите от сайта надхвърлят инвестираната сума.
-                            </p>
+                            <p className="max-w-xs">{item.tooltip}</p>
                           </TooltipContent>
                         </Tooltip>
-                      </div>
-                      <div className="text-sm text-muted-foreground">Вашият сайт се изплаща за 2-3 месеца</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-semibold text-foreground">Безплатна поддръжка</div>
-                      <div className="text-sm text-muted-foreground">30-60 дни поддръжка включена</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-semibold text-foreground">Бързо завършване</div>
-                      <div className="text-sm text-muted-foreground">1-4 седмици в зависимост от плана</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <div>
-                      <div className="font-semibold text-foreground">100% собственост</div>
-                      <div className="text-sm text-muted-foreground">Собственост върху кода и дизайна</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                      )}
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed max-w-xs mx-auto">
+                      {item.description}
+                    </p>
+                  </motion.div>
+
+                  {/* Decorative line */}
+                  <motion.div
+                    className={`mt-6 h-1 w-16 bg-gradient-to-r ${item.color} rounded-full`}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: 64 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 + 0.5 }}
+                    style={{ transform: "translateZ(10px)" }}
+                  />
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 

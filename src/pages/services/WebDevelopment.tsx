@@ -350,13 +350,15 @@ const WebDevelopment = () => {
         { name: "TypeScript" },
         { name: "Node.js" },
         { name: "WordPress" },
-        { name: "Shopify" },
-        { name: "WooCommerce" },
         { name: "Tailwind CSS" },
-        { name: "PostgreSQL" },
-        { name: "MongoDB" },
+        { name: "MySQL" },
+        { name: "PHP" },
+        { name: "Symfony" },
+        { name: "Laravel" },
         { name: "AWS" },
-        { name: "Vercel" }
+        { name: "Docker" },
+        { name: "AI" },
+,
       ]}
       
       useCasesTitle="За кого е подходящо?"
