@@ -274,17 +274,17 @@ const SEO = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors"
+              className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-6 hover:border-blue-400 dark:hover:border-blue-600 transition-colors"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
-                  <Settings className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                  <Settings className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 </div>
-                <h3 className="text-xl font-display font-bold">Технически скелет</h3>
+                <h3 className="text-xl font-display font-bold">⚙️ Технически скелет</h3>
               </div>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <Code className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Code className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">JSON-LD (Schema):</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -293,7 +293,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <FileText className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <FileText className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">FAQPage Schema:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -302,7 +302,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Zap className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">SSR Rendering:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -311,7 +311,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Shield className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Robots.txt:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -328,17 +328,17 @@ const SEO = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors"
+              className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border-2 border-orange-200 dark:border-orange-800 rounded-2xl p-6 hover:border-orange-400 dark:hover:border-orange-600 transition-colors"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
-                  <Edit className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900 flex items-center justify-center">
+                  <Edit className="w-6 h-6 text-orange-600 dark:text-orange-400" />
                 </div>
-                <h3 className="text-xl font-display font-bold">Съдържание</h3>
+                <h3 className="text-xl font-display font-bold">📝 Съдържание</h3>
               </div>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <Target className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Target className="w-5 h-5 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">BLUF Метод:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -347,7 +347,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Table className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Table className="w-5 h-5 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Структура:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -356,7 +356,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Eye className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Eye className="w-5 h-5 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Контекст:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -365,7 +365,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <TrendingUp className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <TrendingUp className="w-5 h-5 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Information Gain:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -382,17 +382,17 @@ const SEO = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors"
+              className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border-2 border-green-200 dark:border-green-800 rounded-2xl p-6 hover:border-green-400 dark:hover:border-green-600 transition-colors"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                  <Shield className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
-                <h3 className="text-xl font-display font-bold">Авторитет (E-E-A-T)</h3>
+                <h3 className="text-xl font-display font-bold">🛡️ Авторитет (E-E-A-T)</h3>
               </div>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <Users className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Users className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Реални автори:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -401,7 +401,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Award className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Award className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Личен опит:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -410,7 +410,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Building2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Building2 className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Brand Identity:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -419,7 +419,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Globe className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Globe className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Споменавания:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -436,17 +436,17 @@ const SEO = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="bg-card border border-border rounded-2xl p-6 hover:border-primary/50 transition-colors"
+              className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-2 border-purple-200 dark:border-purple-800 rounded-2xl p-6 hover:border-purple-400 dark:hover:border-purple-600 transition-colors"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
-                  <Sparkles className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                 </div>
-                <h3 className="text-xl font-display font-bold">Бъдеще & Нулев клик</h3>
+                <h3 className="text-xl font-display font-bold">✨ Бъдеще & Нулев клик</h3>
               </div>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <BarChart className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <BarChart className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Share of Voice:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -455,7 +455,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Search className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Search className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Сценарии:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -464,7 +464,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Video className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <Video className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Мултимедия:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -473,7 +473,7 @@ const SEO = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <TrendingDown className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <TrendingDown className="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" />
                   <div>
                     <strong className="text-foreground">Метрики:</strong>
                     <p className="text-sm text-muted-foreground mt-1">
