@@ -6,6 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import DesignedForSection from "@/components/DesignedForSection";
 import { getServiceSchema } from "@/lib/structuredData";
 
 interface ServiceFeature {
@@ -104,6 +105,9 @@ export interface ServiceLandingProps {
   ctaTitle: string;
   ctaSubtitle: string;
   
+  // Optional: show "Designed For" / Проектиран за section (e.g. Web Development only)
+  showDesignedForSection?: boolean;
+
   // Optional custom section before CTA
   customSectionBeforeCTA?: React.ReactNode;
   
@@ -145,6 +149,7 @@ const ServiceLandingTemplate = ({
   faqs,
   ctaTitle,
   ctaSubtitle,
+  showDesignedForSection = false,
   customSectionBeforeCTA,
   customSection,
 }: ServiceLandingProps) => {
@@ -312,6 +317,9 @@ const ServiceLandingTemplate = ({
           </div>
         </div>
       </section>
+
+      {/* Designed For Section – only when enabled (e.g. Web Development page) */}
+      {showDesignedForSection && <DesignedForSection />}
 
       {/* Features Section */}
       <section className="py-24">
