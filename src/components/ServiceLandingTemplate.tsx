@@ -110,6 +110,9 @@ export interface ServiceLandingProps {
 
   // Optional custom section before CTA
   customSectionBeforeCTA?: React.ReactNode;
+
+  // Optional section between Technologies and Use Cases / Why Choose Us (e.g. 3D separator)
+  customSectionAfterTechnologies?: React.ReactNode;
   
   // Optional custom section before Footer
   customSection?: React.ReactNode;
@@ -151,6 +154,7 @@ const ServiceLandingTemplate = ({
   ctaSubtitle,
   showDesignedForSection = false,
   customSectionBeforeCTA,
+  customSectionAfterTechnologies,
   customSection,
 }: ServiceLandingProps) => {
   const structuredData = serviceName 
@@ -502,12 +506,16 @@ const ServiceLandingTemplate = ({
                   {tech.name}
                 </motion.div>
               ))}
-            </div>
           </div>
+        </div>
         </section>
       )}
 
-      {/* Use Cases Section */}
+      {/* Optional section after technologies (e.g. 3D separator) */}
+      {customSectionAfterTechnologies}
+
+      {/* Use Cases Section - only when there are use cases */}
+      {useCases.length > 0 && (
       <section className="py-24">
         <div className="container mx-auto px-6">
           <motion.div
@@ -543,6 +551,7 @@ const ServiceLandingTemplate = ({
           </div>
         </div>
       </section>
+      )}
 
       {/* Why Choose Us Section */}
       <section className="py-24 bg-gradient-to-b from-card/50 to-background">

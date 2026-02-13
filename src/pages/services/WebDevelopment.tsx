@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
+import SectionSeparator3D from "@/components/SectionSeparator3D";
 
 const plans = [
   {
@@ -360,8 +361,9 @@ const WebDevelopment = () => {
         { name: "AWS" },
         { name: "Docker" },
         { name: "AI" },
-,
       ]}
+      
+      customSectionAfterTechnologies={<SectionSeparator3D />}
       
       // Индустрии и приложения / За кого е подходящо? - section hidden (empty useCases)
       useCasesTitle=""

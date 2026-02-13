@@ -1,3 +1,4 @@
+import useSmoothScroll from "@/hooks/use-smooth-scroll";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -33,7 +34,10 @@ import TechnicalSupport from "./pages/services/TechnicalSupport";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = () => {
+  useSmoothScroll();
+
+  return (
   <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -73,6 +77,7 @@ const App = () => (
       </TooltipProvider>
     </QueryClientProvider>
   </ThemeProvider>
-);
+  );
+};
 
 export default App;
