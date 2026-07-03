@@ -34,7 +34,9 @@ const PageIntro = ({ index, label, title, description, actions, meta, aside }: P
     <div className="container relative z-10 mx-auto px-6">
       <div
         className={
-          aside ? "grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16" : undefined
+          aside
+            ? "flex flex-col gap-12 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16"
+            : undefined
         }
       >
         <div>
