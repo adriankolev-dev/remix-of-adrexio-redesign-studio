@@ -13,6 +13,7 @@ import {
   Headphones
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import GearMascot from "@/components/mascots/GearMascot";
 
 const TechnicalSupport = () => {
   return (
@@ -25,6 +26,7 @@ const TechnicalSupport = () => {
       heroHighlight="онлайн бизнес."
       heroSubtitle="24/7 техническа поддръжка и мониторинг, за да работи сайтът ви безотказно. Ние се грижим за техниката, вие се фокусирате върху бизнеса."
       heroCTAText="ЗАЯВЕТЕ ПОДДРЪЖКА"
+      heroAside={<GearMascot />}
       
       stats={[
         { value: "99.9%", label: "Uptime гаранция" },

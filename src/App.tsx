@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import ScrollToTop from "@/components/ScrollToTop";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
+import FloatingContact from "@/components/FloatingContact";
 import CookieConsent from "@/components/CookieConsent";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
@@ -38,7 +39,7 @@ const App = () => {
   useSmoothScroll();
 
   return (
-  <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+  <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
@@ -47,6 +48,7 @@ const App = () => {
           <ScrollProgress />
           <ScrollToTop />
           <BackToTop />
+          <FloatingContact />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />

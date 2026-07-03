@@ -1,16 +1,27 @@
 {
-  "name": "Adrexio",
+  "name": "Adrexio — Модерни уебсайтове и дигитални решения",
   "short_name": "Adrexio",
-  "description": "Модерни уебсайтове и дигитални решения",
+  "description": "Модерни уебсайтове, мобилни приложения и дигитални решения за бизнеса.",
+  "lang": "bg",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#3cd2f9",
+  "background_color": "#ffffff",
+  "categories": ["business", "productivity", "web development"],
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
-  ],
-  "theme_color": "#3cd2f9",
-  "background_color": "#000000",
-  "display": "standalone",
-  "start_url": "/"
+  ]
 }

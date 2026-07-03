@@ -1,11 +1,23 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Check, ArrowRight, Users, TrendingUp, DollarSign, Shield, Zap, HelpCircle, Gift, Target, Clock, Award } from "lucide-react";
+import {
+  Check,
+  ArrowRight,
+  TrendingUp,
+  DollarSign,
+  Shield,
+  Zap,
+  Clock,
+  Award,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import PageIntro from "@/components/editorial/PageIntro";
+import RewardMascot from "@/components/mascots/RewardMascot";
+import Reveal from "@/components/editorial/Reveal";
+import SectionEyebrow from "@/components/editorial/SectionEyebrow";
+import SectionHeader from "@/components/editorial/SectionHeader";
 import {
   Accordion,
   AccordionContent,
@@ -18,88 +30,101 @@ const benefits = [
   {
     icon: DollarSign,
     title: "20% комисионна",
-    description: "Получавайте 20% от стойността на всеки успешно завършен проект"
+    description: "Получавайте 20% от стойността на всеки успешно завършен проект.",
   },
   {
     icon: Clock,
     title: "Бързо плащане",
-    description: "Плащане веднага след като клиентът е платил и проектът е завършен"
+    description: "Плащане веднага след като клиентът е платил и проектът е завършен.",
   },
   {
     icon: TrendingUp,
     title: "Неограничен потенциал",
-    description: "Няма ограничение за броя проекти, които можете да привлечете"
+    description: "Няма ограничение за броя проекти, които можете да привлечете.",
   },
   {
     icon: Shield,
     title: "Без риск",
-    description: "Плащаме само след като клиентът е доволен и е платил"
+    description: "Плащаме само след като клиентът е доволен и е платил.",
   },
   {
     icon: Zap,
     title: "Лесно и просто",
-    description: "Няма сложни процеси - просто споделете и печелете"
+    description: "Няма сложни процеси — просто споделете и печелете.",
   },
   {
     icon: Award,
     title: "Бонус програми",
-    description: "Специални бонуси за топ партньори и редовни реферали"
-  }
+    description: "Специални бонуси за топ партньори и редовни реферали.",
+  },
 ];
 
 const steps = [
   {
     number: "01",
     title: "Свържете се с нас",
-    description: "Свържете се с нас чрез контактната форма или имейл. В темата на запитването напишете 'Партньорска програма' или 'Affiliate програма'. Процесът е бърз и безплатен."
+    description:
+      "Свържете се с нас чрез контактната форма или имейл. В темата на запитването напишете «Партньорска програма» или «Affiliate програма». Процесът е бърз и безплатен.",
   },
   {
     number: "02",
     title: "Споделете и препоръчайте",
-    description: "Споделете нашите услуги с хора, които имат нужда от уеб разработка или дигитални решения. Клиентът трябва да спомене вашето име при контакт или да напише 'Партньорска програма' / 'Affiliate програма' в темата на запитването."
+    description:
+      "Споделете нашите услуги с хора, които имат нужда от уеб разработка или дигитални решения. Клиентът трябва да спомене вашето име при контакт или да напише «Партньорска програма» / «Affiliate програма» в темата на запитването.",
   },
   {
     number: "03",
     title: "Ние проследяваме",
-    description: "Когато клиентът се свърже и спомене вашето име, ние автоматично го свързваме с вас и започваме да проследяваме проекта."
+    description:
+      "Когато клиентът се свърже и спомене вашето име, ние автоматично го свързваме с вас и започваме да проследяваме проекта.",
   },
   {
     number: "04",
     title: "Получавайте комисионна",
-    description: "Когато клиентът плати и проектът е завършен, получавате вашата 20% комисионна."
-  }
+    description:
+      "Когато клиентът плати и проектът е завършен, получавате вашата 20% комисионна.",
+  },
 ];
 
 const faqs = [
   {
     question: "Как работи комисионната от 20%?",
-    answer: "Когато някой, когото сте препоръчали, стане клиент и спомене вашето име при контакт с нас или напише 'Партньорска програма' / 'Affiliate програма' в темата на запитването, вие получавате 20% от финалната сума на проекта. Плащането се извършва след като клиентът е платил всички такси и проектът е успешно завършен."
+    answer:
+      "Когато някой, когото сте препоръчали, стане клиент и спомене вашето име при контакт с нас или напише «Партньорска програма» / «Affiliate програма» в темата на запитването, вие получавате 20% от финалната сума на проекта. Плащането се извършва след като клиентът е платил всички такси и проектът е успешно завършен.",
   },
   {
     question: "Кога получавам комисионната?",
-    answer: "Получавате комисионната след като клиентът е направил финалното плащане и проектът е официално завършен и предаден. Обикновено това е в рамките на 7-14 дни след завършване на проекта."
+    answer:
+      "Получавате комисионната след като клиентът е направил финалното плащане и проектът е официално завършен и предаден. Обикновено това е в рамките на 7-14 дни след завършване на проекта.",
   },
   {
     question: "Има ли минимална сума за плащане?",
-    answer: "Не, няма минимална сума. Получавате комисионната независимо от размера на проекта, веднага след като клиентът е платил."
+    answer:
+      "Не, няма минимална сума. Получавате комисионната независимо от размера на проекта, веднага след като клиентът е платил.",
   },
   {
     question: "Мога ли да препоръчам няколко проекта?",
-    answer: "Абсолютно! Няма ограничение за броя проекти, които можете да препоръчате. Колкото повече успешни реферали, толкова повече комисионни получавате."
+    answer:
+      "Абсолютно! Няма ограничение за броя проекти, които можете да препоръчате. Колкото повече успешни реферали, толкова повече комисионни получавате.",
   },
   {
     question: "Как проследявам моите реферали?",
-    answer: "Можете да се свържете с нас по всяко време, за да разберете статуса на вашите препоръчани клиенти. Ние ще ви информираме за всеки нов проект, свързан с ваше име, и ще ви уведомим кога комисионната е готова за плащане."
+    answer:
+      "Можете да се свържете с нас по всяко време, за да разберете статуса на вашите препоръчани клиенти. Ние ще ви информираме за всеки нов проект, свързан с ваше име, и ще ви уведомим кога комисионната е готова за плащане.",
   },
   {
     question: "Какви са изискванията за участие?",
-    answer: "Няма специални изисквания! Всеки може да се присъедини към програмата - независимо дали сте блогър, бизнес консултант, маркетолог или просто някой, който познава хора с нужда от дигитални услуги."
+    answer:
+      "Няма специални изисквания! Всеки може да се присъедини към програмата — независимо дали сте блогър, бизнес консултант, маркетолог или просто някой, който познава хора с нужда от дигитални услуги.",
   },
   {
     question: "Как се извършва плащането?",
-    answer: "Плащането се извършва чрез банков превод или друг удобен за вас метод. Всички детайли ще бъдат обсъдени при регистрацията."
-  }
+    answer:
+      "Плащането се извършва чрез банков превод или друг удобен за вас метод. Всички детайли ще бъдат обсъдени при регистрацията.",
+  },
 ];
+
+const goToContact = () => sessionStorage.setItem("fromAffiliate", "true");
 
 const Affiliate = () => {
   const faqSchema = getFAQSchema(faqs);
@@ -118,337 +143,208 @@ const Affiliate = () => {
       <SEO
         title="Affiliate програма - Adrexio | Печелете 20% комисионна за всяка препоръка"
         description="Affiliate програма с 20% комисионна за всеки успешен проект. Безплатна регистрация и бързо плащане. Партньорство за уеб разработка и дигитални услуги."
-        keywords="affiliate програма, партньорска програма, реферална програма, комисионна 20%, партньорство, Adrexio affiliate, печели с препоръки, партньорска програма уеб разработка, реферална програма България, affiliate маркетинг, партньорска комисионна"
+        keywords="affiliate програма, партньорска програма, реферална програма, комисионна 20%, партньорство, Adrexio affiliate, печели с препоръки"
         structuredData={structuredData}
       />
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-32 pb-16 relative overflow-hidden">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
-
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              Affiliate програма
-            </span>
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
-              Печелете <span className="text-gradient">20% комисионна</span> за всяка препоръка
-            </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-6">
-              Препоръчайте нашите услуги и получавайте справедлива комисионна за всеки успешно завършен проект. 
-              Клиентът трябва да спомене вашето име при контакт или да напише <strong className="text-foreground">"Партньорска програма"</strong> / <strong className="text-foreground">"Affiliate програма"</strong> в темата на запитването. Плащаме след като клиентът е платил и проектът е завършен.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-              <div className="flex items-center gap-2">
-                <Check className="w-5 h-5 text-primary" />
-                <span className="text-foreground">20% комисионна</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="w-5 h-5 text-primary" />
-                <span className="text-foreground">Безплатна регистрация</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="w-5 h-5 text-primary" />
-                <span className="text-foreground">Бързо плащане</span>
-              </div>
-            </div>
-            <div className="mt-8">
-              <Button variant="hero" size="xl" asChild>
-                <Link 
-                  to="/contact?affiliate=true"
-                  onClick={() => sessionStorage.setItem('fromAffiliate', 'true')}
-                >
-                  Присъединете се сега
-                  <ArrowRight size={18} className="ml-2" />
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Value Proposition */}
-      <section className="pb-16">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              <div className="border-gradient p-6 rounded-xl text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-2">20%</div>
-                <div className="text-sm text-muted-foreground">Комисионна от всеки проект</div>
-              </div>
-              <div className="border-gradient p-6 rounded-xl text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-2">0</div>
-                <div className="text-sm text-muted-foreground">Такси за регистрация</div>
-              </div>
-              <div className="border-gradient p-6 rounded-xl text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-2">∞</div>
-                <div className="text-sm text-muted-foreground">Неограничени препоръки</div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <PageIntro
+        label="Affiliate програма"
+        title={
+          <>
+            Печелете <span className="accent-mark">20% комисионна</span> за всяка препоръка
+          </>
+        }
+        description="Препоръчайте нашите услуги и получавайте справедлива комисионна за всеки успешно завършен проект. Плащаме след като клиентът е платил и проектът е завършен."
+        actions={
+          <Button variant="ink" size="lg" asChild>
+            <Link to="/contact?affiliate=true" onClick={goToContact}>
+              Присъединете се сега
+              <ArrowRight size={18} />
+            </Link>
+          </Button>
+        }
+        meta={[
+          { value: "20%", label: "Комисионна от всеки проект" },
+          { value: "0", label: "Такси за регистрация" },
+          { value: "∞", label: "Неограничени препоръки" },
+        ]}
+        aside={<RewardMascot />}
+      />
 
       {/* Benefits */}
-      <section className="py-24 bg-gradient-to-b from-card to-background">
+      <section className="relative bg-secondary/30 py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              Защо да се присъедините?
-            </span>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              Предимства на <span className="text-gradient">програмата</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="border-gradient p-6 rounded-xl"
-              >
-                <benefit.icon className="w-10 h-10 text-primary mb-4" />
-                <h3 className="font-display font-bold text-xl mb-2">{benefit.title}</h3>
-                <p className="text-muted-foreground text-sm">{benefit.description}</p>
-              </motion.div>
+          <SectionHeader index="02" label="Защо да се присъедините" title="Предимства на програмата" />
+          <div className="grid gap-x-10 border-t border-border sm:grid-cols-2">
+            {benefits.map((benefit, i) => (
+              <Reveal key={benefit.title} delay={(i % 2) * 0.06}>
+                <div className="flex gap-5 border-b border-border py-8">
+                  <benefit.icon className="mt-1 h-6 w-6 shrink-0 text-primary" strokeWidth={1.75} />
+                  <div>
+                    <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+                      {benefit.title}
+                    </h3>
+                    <p className="mt-2 max-w-md text-base leading-relaxed text-muted-foreground">
+                      {benefit.description}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-24">
+      {/* How it works */}
+      <section className="relative bg-background py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              Как работи?
-            </span>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              Четири <span className="text-gradient">прости стъпки</span>
-            </h2>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              {steps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex gap-6 items-start"
-                >
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-2xl font-display font-bold text-primary">{step.number}</span>
-                    </div>
+          <SectionHeader index="03" label="Как работи?" title="Четири прости стъпки" />
+          <div className="border-t border-border">
+            {steps.map((step) => (
+              <Reveal key={step.number}>
+                <div className="grid grid-cols-[auto_1fr] items-start gap-5 border-b border-border py-8 md:gap-10 md:py-10">
+                  <span className="font-display text-4xl font-bold leading-none text-foreground/10 md:text-6xl">
+                    {step.number}
+                  </span>
+                  <div className="pt-1">
+                    <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                      {step.description}
+                    </p>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-display font-bold text-xl mb-2">{step.title}</h3>
-                    <p className="text-muted-foreground">{step.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Important Notice */}
-      <section className="py-16">
+      {/* Important notice + example calculation */}
+      <section className="relative bg-secondary/30 py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="border-gradient p-6 rounded-2xl bg-primary/5 border-primary/20">
-              <div className="flex items-start gap-4">
-                <Target className="w-6 h-6 text-primary shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="font-display font-bold text-lg mb-2">
-                    Важно за вашите клиенти
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-2">
-                    Когато препоръчвате наши услуги, моля инструктирайте клиента да:
-                  </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      <span>Спомене вашето име при контакт с нас, или</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      <span>Напише <strong className="text-foreground">"Партньорска програма"</strong> или <strong className="text-foreground">"Affiliate програма"</strong> в темата на запитването</span>
-                    </li>
-                  </ul>
-                  <p className="text-muted-foreground text-sm mt-3">
-                    Това ни помага да проследяваме вашите препоръки и да ви изплатим комисионната правилно.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+          <div className="mx-auto grid max-w-5xl gap-14 lg:grid-cols-2 lg:gap-20">
+            <Reveal>
+              <SectionEyebrow label="Важно за клиентите" index="04" />
+              <h3 className="font-display mt-6 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                Как да проследим вашата препоръка
+              </h3>
+              <p className="mt-5 text-muted-foreground">
+                Когато препоръчвате наши услуги, инструктирайте клиента да:
+              </p>
+              <ul className="mt-5 space-y-3">
+                <li className="flex items-start gap-3 text-muted-foreground">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>Спомене вашето име при контакт с нас, или</span>
+                </li>
+                <li className="flex items-start gap-3 text-muted-foreground">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>
+                    Напише{" "}
+                    <strong className="text-foreground">«Партньорска програма»</strong> или{" "}
+                    <strong className="text-foreground">«Affiliate програма»</strong> в темата на
+                    запитването
+                  </span>
+                </li>
+              </ul>
+              <p className="mt-5 text-sm text-muted-foreground">
+                Това ни помага да проследяваме вашите препоръки и да ви изплатим комисионната
+                правилно.
+              </p>
+            </Reveal>
 
-      {/* Example Calculation */}
-      <section className="py-24 bg-gradient-to-b from-background to-card">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="border-gradient p-8 rounded-2xl">
-              <div className="text-center mb-8">
-                <Gift className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-2xl font-display font-bold mb-4">
-                  Пример за изчисление
-                </h3>
-                <p className="text-muted-foreground">
-                  Вижте колко можете да спечелите с нашата програма
+            <Reveal delay={0.1}>
+              <SectionEyebrow label="Пример за изчисление" index="05" />
+              <h3 className="font-display mt-6 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                Колко можете да спечелите
+              </h3>
+              <dl className="mt-8 border-t border-border">
+                {[
+                  { label: "Среден проект (BUSINESS план)", value: "€649" },
+                  { label: "Вашата комисионна", value: "20%" },
+                  { label: "Вашето плащане за проект", value: "€129.80" },
+                ].map((row) => (
+                  <div
+                    key={row.label}
+                    className="flex items-baseline justify-between border-b border-border py-4"
+                  >
+                    <dt className="text-muted-foreground">{row.label}</dt>
+                    <dd className="font-display text-2xl font-bold text-foreground">{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-6 border-l-2 border-primary pl-5">
+                <p className="text-sm text-muted-foreground">
+                  При <strong className="text-foreground">5 проекта</strong> на месец:
                 </p>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="text-center p-6 bg-primary/5 rounded-xl">
-                  <div className="text-sm text-muted-foreground mb-2">Среден проект</div>
-                  <div className="text-3xl font-display font-bold text-primary">€649</div>
-                  <div className="text-xs text-muted-foreground mt-2">BUSINESS план</div>
-                </div>
-                <div className="text-center p-6 bg-primary/5 rounded-xl">
-                  <div className="text-sm text-muted-foreground mb-2">Вашата комисионна</div>
-                  <div className="text-3xl font-display font-bold text-primary">20%</div>
-                  <div className="text-xs text-muted-foreground mt-2">от стойността</div>
-                </div>
-                <div className="text-center p-6 bg-primary/5 rounded-xl">
-                  <div className="text-sm text-muted-foreground mb-2">Вашето плащане</div>
-                  <div className="text-3xl font-display font-bold text-primary">€129.80</div>
-                  <div className="text-xs text-muted-foreground mt-2">за един проект</div>
-                </div>
-              </div>
-
-              <div className="text-center p-6 bg-accent/10 rounded-xl">
-                <p className="text-sm text-muted-foreground mb-2">
-                  Ако препоръчате <strong className="text-foreground">5 проекта</strong> на месец:
-                </p>
-                <p className="text-2xl font-display font-bold text-primary">
+                <p className="font-display mt-1 text-2xl font-bold text-primary">
                   €649 месечно пасивен доход
                 </p>
               </div>
-            </div>
-          </motion.div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-gradient-to-b from-card to-background">
+      <section className="relative bg-background py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <HelpCircle className="w-5 h-5 text-primary" />
-              <span className="text-primary text-sm font-medium uppercase tracking-wider">
-                FAQ
-              </span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              Често задавани <span className="text-gradient">въпроси</span>
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
-          >
-            <Accordion type="single" collapsible className="space-y-4">
+          <SectionHeader index="06" label="FAQ" title="Често задавани въпроси" />
+          <div className="mx-auto max-w-3xl border-t border-border">
+            <Accordion type="single" collapsible>
               {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="border-gradient px-6 rounded-xl"
-                >
-                  <AccordionTrigger className="text-left font-display font-semibold hover:text-primary">
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-border">
+                  <AccordionTrigger className="py-6 text-left font-display text-base font-semibold hover:text-primary hover:no-underline md:text-lg">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
+                  <AccordionContent className="pb-6 text-base leading-relaxed text-muted-foreground">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+      <section className="layer-dark relative overflow-hidden py-28 md:py-36">
+        <div className="canvas-grid absolute inset-0 opacity-[0.07]" aria-hidden />
+        <div className="container relative z-10 mx-auto px-6 text-center">
+          <Reveal>
+            <SectionEyebrow label="Следваща стъпка" index="07" className="justify-center" />
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h2 className="font-display text-display-sm mx-auto mt-8 max-w-3xl font-bold text-foreground">
               Готови ли сте да започнете да печелите?
             </h2>
-            <p className="text-muted-foreground mb-8">
-              Присъединете се към нашата affiliate програма днес и започнете да печелите комисионни 
-              за всяка успешна препоръка. Регистрацията е безплатна и отнема само минути.
+          </Reveal>
+          <Reveal delay={0.16}>
+            <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
+              Присъединете се към нашата affiliate програма днес. Регистрацията е безплатна и отнема
+              само минути.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="hero" size="xl" asChild>
-                <Link 
-                  to="/contact?affiliate=true"
-                  onClick={() => sessionStorage.setItem('fromAffiliate', 'true')}
-                >
+          </Reveal>
+          <Reveal delay={0.24}>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button variant="accent" size="xl" asChild>
+                <Link to="/contact?affiliate=true" onClick={goToContact}>
                   Присъединете се сега
-                  <ArrowRight size={18} className="ml-2" />
+                  <ArrowRight size={18} />
                 </Link>
               </Button>
-              <Button variant="outline" size="xl" asChild>
-                <Link to="/case-studies">
-                  Вижте нашите проекти
-                </Link>
+              <Button
+                variant="line"
+                size="xl"
+                asChild
+                className="border-foreground/25 text-foreground hover:border-foreground/50"
+              >
+                <Link to="/case-studies">Вижте нашите проекти</Link>
               </Button>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 

@@ -87,7 +87,7 @@ const Navbar = () => {
         {/* Theme Toggle & CTA Button */}
         <div className="hidden md:flex items-center gap-4">
           <ThemeToggle />
-          <Button variant="hero" size="lg" asChild>
+          <Button variant="ink" size="lg" asChild>
             <Link to="/contact">Свържи се с нас</Link>
           </Button>
         </div>
@@ -128,7 +128,7 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <Button variant="hero" size="lg" asChild className="mt-2">
+              <Button variant="ink" size="lg" asChild className="mt-2">
                 <Link to="/contact">Свържи се с нас</Link>
               </Button>
             </div>

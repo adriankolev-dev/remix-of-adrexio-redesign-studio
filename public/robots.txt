@@ -4,5 +4,8 @@ Allow: /
 # Disallow project inquiry form from indexing
 Disallow: /project-inquiry
 
+# Disallow internal animation/demo page
+Disallow: /services-demo
+
 # Sitemap
 Sitemap: https://www.adrexio.com/sitemap.xml

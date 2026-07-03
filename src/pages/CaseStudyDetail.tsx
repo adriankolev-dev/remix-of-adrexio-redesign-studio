@@ -1,13 +1,8 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
   ExternalLink,
-  Target,
-  Lightbulb,
-  CheckCircle,
-  BarChart3,
   Lock,
   ChevronLeft,
   ChevronRight,
@@ -16,94 +11,88 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import Reveal from "@/components/editorial/Reveal";
+import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import { getCaseStudyById, caseStudies } from "@/data/caseStudies";
 import { getBreadcrumbSchema } from "@/lib/structuredData";
 import { useEffect } from "react";
 
 const CaseStudyDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const study = getCaseStudyById(id || "");
 
-  // Get adjacent case studies for navigation
   const currentIndex = caseStudies.findIndex((s) => s.id === id);
   const prevStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
   const nextStudy =
     currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
 
-  // Truncate description for SEO (optimal length: 140-150 characters)
   const truncateDescription = (text: string, maxLength: number = 145): string => {
     if (text.length <= maxLength) return text;
     const truncated = text.substring(0, maxLength);
-    const lastSpace = truncated.lastIndexOf(' ');
-    return lastSpace > 0 ? truncated.substring(0, lastSpace) + '...' : truncated + '...';
+    const lastSpace = truncated.lastIndexOf(" ");
+    return lastSpace > 0 ? truncated.substring(0, lastSpace) + "..." : truncated + "...";
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  // Generate structured data for SEO
   const baseUrl = "https://www.adrexio.com";
-  const structuredData = study ? {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Article",
-        "@id": `${baseUrl}/case-studies/${study.id}`,
-        "headline": `${study.title} - ${study.subtitle}`,
-        "description": truncateDescription(study.overview, 160),
-        "image": study.image?.startsWith("http") 
-          ? study.image 
-          : study.image?.startsWith("/") 
-          ? `${baseUrl}${study.image}`
-          : `${baseUrl}/${study.image}`,
-        "datePublished": new Date().toISOString(),
-        "dateModified": new Date().toISOString(),
-        "author": {
-          "@type": "Organization",
-          "name": "Adrexio",
-          "url": baseUrl
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Adrexio",
-          "logo": {
-            "@type": "ImageObject",
-            "url": `${baseUrl}/favicon.svg`,
-            "width": 512,
-            "height": 512
-          }
-        },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": `${baseUrl}/case-studies/${study.id}`
-        },
-        "articleSection": study.category,
-        "keywords": `${study.title}, ${study.category}, ${study.technologies.join(", ")}, уеб разработка, case study`
-      },
-      getBreadcrumbSchema([
-        { name: "Начало", url: baseUrl },
-        { name: "Case Studies", url: `${baseUrl}/case-studies` },
-        { name: study.title, url: `${baseUrl}/case-studies/${study.id}` }
-      ])
-    ]
-  } : null;
+  const structuredData = study
+    ? {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Article",
+            "@id": `${baseUrl}/case-studies/${study.id}`,
+            headline: `${study.title} - ${study.subtitle}`,
+            description: truncateDescription(study.overview, 160),
+            image: study.image?.startsWith("http")
+              ? study.image
+              : study.image?.startsWith("/")
+                ? `${baseUrl}${study.image}`
+                : `${baseUrl}/${study.image}`,
+            datePublished: new Date().toISOString(),
+            dateModified: new Date().toISOString(),
+            author: { "@type": "Organization", name: "Adrexio", url: baseUrl },
+            publisher: {
+              "@type": "Organization",
+              name: "Adrexio",
+              logo: {
+                "@type": "ImageObject",
+                url: `${baseUrl}/favicon.svg`,
+                width: 512,
+                height: 512,
+              },
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `${baseUrl}/case-studies/${study.id}`,
+            },
+            articleSection: study.category,
+            keywords: `${study.title}, ${study.category}, ${study.technologies.join(", ")}, уеб разработка, case study`,
+          },
+          getBreadcrumbSchema([
+            { name: "Начало", url: baseUrl },
+            { name: "Case Studies", url: `${baseUrl}/case-studies` },
+            { name: study.title, url: `${baseUrl}/case-studies/${study.id}` },
+          ]),
+        ],
+      }
+    : null;
 
   if (!study) {
     return (
       <main className="min-h-screen bg-background">
         <Navbar />
-        <div className="container mx-auto px-6 py-32 text-center">
-          <h1 className="text-4xl font-display font-bold mb-4">
-            Проектът не е намерен
-          </h1>
-          <p className="text-muted-foreground mb-8">
+        <div className="container mx-auto px-6 py-40 text-center">
+          <h1 className="font-display text-4xl font-bold">Проектът не е намерен</h1>
+          <p className="mt-4 text-muted-foreground">
             Този проект не съществува или е бил премахнат.
           </p>
-          <Button variant="hero" asChild>
+          <Button variant="ink" className="mt-8" asChild>
             <Link to="/case-studies">
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              <ArrowLeft className="h-4 w-4" />
               Към проектите
             </Link>
           </Button>
@@ -134,273 +123,175 @@ const CaseStudyDetail = () => {
       />
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-12 relative overflow-hidden">
-        {/* Background elements */}
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
-
-        <div className="container mx-auto px-6 relative z-10">
-          {/* Breadcrumb */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
-          >
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-background pt-32 pb-12 md:pt-40">
+        <div className="canvas-grid canvas-grid-fade absolute inset-0 opacity-60" aria-hidden />
+        <div className="container relative z-10 mx-auto px-6">
+          <Reveal immediate>
             <Link
               to="/case-studies"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
             >
               <ArrowLeft className="h-4 w-4" />
               Назад към портфолио
             </Link>
-          </motion.div>
+          </Reveal>
 
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="max-w-4xl"
-          >
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span
-                className={`text-sm font-medium uppercase tracking-wider ${study.accentColor}`}
-              >
-                {study.category}
-              </span>
-              {!study.isPublic && (
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-muted text-muted-foreground text-xs">
-                  <Lock className="w-3 h-3" />
-                  Вътрешна система
-                </span>
-              )}
-            </div>
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-4">
-              {study.title}
-            </h1>
-            <p className="text-xl text-muted-foreground">{study.subtitle}</p>
-          </motion.div>
+          <div className="mt-8 max-w-4xl">
+            <Reveal immediate delay={0.06}>
+              <div className="flex flex-wrap items-center gap-3">
+                <SectionEyebrow label={study.category} />
+                {!study.isPublic && (
+                  <span className="font-mono-meta inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
+                    <Lock className="h-3 w-3" />
+                    Вътрешна система
+                  </span>
+                )}
+              </div>
+            </Reveal>
+            <Reveal immediate delay={0.12}>
+              <h1 className="font-display text-display-sm mt-6 font-bold text-foreground">
+                {study.title}
+              </h1>
+            </Reveal>
+            <Reveal immediate delay={0.18}>
+              <p className="mt-4 text-xl text-muted-foreground">{study.subtitle}</p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* Main Screenshot */}
+      {/* Main screenshot */}
       <section className="pb-16">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className={`relative rounded-2xl overflow-hidden border-gradient bg-gradient-to-br ${study.gradient}`}
-          >
-            <div className="p-4 md:p-8">
-              <div className="rounded-xl overflow-hidden border border-border shadow-2xl">
-                <img
-                  src={study.image}
-                  alt={`${study.title} уебсайт`}
-                  className="w-full h-auto"
-                />
-              </div>
+          <Reveal>
+            <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
+              <img src={study.image} alt={`${study.title} уебсайт`} className="h-auto w-full" />
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Results Highlight */}
-      <section className="py-12">
+      {/* Results */}
+      <section className="pb-16">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-          >
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-x-10 border-t border-border sm:grid-cols-3">
             {study.results.map((result, i) => (
-              <div
-                key={i}
-                className="text-center p-8 rounded-2xl border-gradient"
-              >
-                <div className="text-4xl md:text-5xl font-display font-bold text-gradient mb-2">
-                  {result.metric}
+              <Reveal key={i} delay={i * 0.06}>
+                <div className="border-b border-border py-8 sm:border-b-0">
+                  <div className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+                    {result.metric}
+                  </div>
+                  <div className="font-mono-meta mt-2 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
+                    {result.label}
+                  </div>
                 </div>
-                <div className="text-muted-foreground">{result.label}</div>
-              </div>
+              </Reveal>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Content Grid */}
-      <section className="py-16">
+      {/* Content */}
+      <section className="pb-16">
         <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Left Column */}
-            <div className="space-y-12">
-              {/* Overview */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="flex items-center gap-3 font-display font-bold text-2xl mb-4">
-                  <div
-                    className={`p-2 rounded-lg bg-primary/10 ${study.accentColor}`}
-                  >
-                    <Target className="w-5 h-5" />
-                  </div>
-                  Преглед
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">
+          <div className="mx-auto max-w-3xl">
+            <Reveal>
+              <div className="border-t border-border py-10">
+                <SectionEyebrow label="Преглед" index="01" />
+                <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                   {study.overview}
                 </p>
-              </motion.div>
+              </div>
+            </Reveal>
 
-              {/* Challenge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="flex items-center gap-3 font-display font-bold text-2xl mb-4">
-                  <div
-                    className={`p-2 rounded-lg bg-primary/10 ${study.accentColor}`}
-                  >
-                    <Lightbulb className="w-5 h-5" />
-                  </div>
-                  Предизвикателството
-                </h2>
-                <p className="text-muted-foreground leading-relaxed text-lg">
+            <Reveal>
+              <div className="border-t border-border py-10">
+                <SectionEyebrow label="Предизвикателството" index="02" />
+                <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                   {study.challenge}
                 </p>
-              </motion.div>
-            </div>
+              </div>
+            </Reveal>
 
-            {/* Right Column */}
-            <div className="space-y-12">
-              {/* Solution */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="flex items-center gap-3 font-display font-bold text-2xl mb-4">
-                  <div
-                    className={`p-2 rounded-lg bg-primary/10 ${study.accentColor}`}
-                  >
-                    <CheckCircle className="w-5 h-5" />
-                  </div>
-                  Нашето решение
-                </h2>
-                <ul className="space-y-4">
+            <Reveal>
+              <div className="border-t border-border py-10">
+                <SectionEyebrow label="Нашето решение" index="03" />
+                <ul className="mt-6 space-y-4">
                   {study.solution.map((item, i) => (
-                    <motion.li
-                      key={i}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className="flex items-start gap-3"
-                    >
-                      <div
-                        className={`mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center ${study.accentColor}`}
-                      >
-                        <ArrowRight className="w-3 h-3" />
-                      </div>
-                      <span className="text-muted-foreground">{item}</span>
-                    </motion.li>
+                    <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                      <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-primary" />
+                      <span className="leading-relaxed">{item}</span>
+                    </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
+            </Reveal>
 
-              {/* Technologies */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="flex items-center gap-3 font-display font-bold text-2xl mb-4">
-                  <div
-                    className={`p-2 rounded-lg bg-primary/10 ${study.accentColor}`}
-                  >
-                    <BarChart3 className="w-5 h-5" />
-                  </div>
-                  Използвани технологии
-                </h2>
-                <div className="flex flex-wrap gap-2">
+            <Reveal>
+              <div className="border-t border-border py-10">
+                <SectionEyebrow label="Използвани технологии" index="04" />
+                <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
                   {study.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-4 py-2 rounded-full bg-card text-foreground text-sm border border-border"
+                      className="font-mono-meta text-sm uppercase tracking-[0.14em] text-foreground/80"
                     >
+                      <span className="mr-2 text-primary">/</span>
                       {tech}
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
+            </Reveal>
 
-              {/* Internal Note */}
-              {study.internalNote && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="p-6 rounded-2xl bg-muted/50 border border-border"
-                >
-                  <p className="text-sm text-muted-foreground flex items-start gap-3">
-                    <Lock className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                    {study.internalNote}
-                  </p>
-                </motion.div>
-              )}
+            {study.internalNote && (
+              <Reveal>
+                <div className="mt-4 flex items-start gap-3 border-l-2 border-primary bg-secondary/40 p-5 text-sm text-muted-foreground">
+                  <Lock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  {study.internalNote}
+                </div>
+              </Reveal>
+            )}
+
+            {/* CTA */}
+            <div className="mt-12 flex flex-col gap-4 sm:flex-row">
+              {study.isPublic && study.url ? (
+                <Button variant="ink" size="lg" asChild>
+                  <a href={study.url} target="_blank" rel="noopener noreferrer">
+                    Посетете проекта
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </Button>
+              ) : null}
+              <Button variant="line" size="lg" asChild>
+                <Link to="/contact">
+                  Започнете подобен проект
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-2xl mx-auto text-center"
-          >
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              {study.isPublic && study.url ? (
-                <Button variant="hero" size="lg" asChild>
-                  <a href={study.url} target="_blank" rel="noopener noreferrer">
-                    Посетете проекта
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              ) : null}
-              <Button variant="heroOutline" size="lg" asChild>
-                <Link to="/contact">
-                  Започнете подобен проект
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Navigation */}
-      <section className="py-12 border-t border-border">
+      <section className="border-t border-border py-12">
         <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between max-w-4xl mx-auto">
+          <div className="mx-auto flex max-w-4xl items-center justify-between">
             {prevStudy ? (
               <Link
                 to={`/case-studies/${prevStudy.id}`}
-                className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                className="group flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border group-hover:border-primary/50 transition-colors">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors group-hover:border-primary/50">
                   <ChevronLeft className="h-5 w-5" />
                 </div>
                 <div className="hidden sm:block">
-                  <div className="text-xs text-muted-foreground">Предишен</div>
-                  <div className="font-medium">{prevStudy.title}</div>
+                  <div className="font-mono-meta text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
+                    Предишен
+                  </div>
+                  <div className="font-medium text-foreground">{prevStudy.title}</div>
                 </div>
               </Link>
             ) : (
@@ -409,7 +300,7 @@ const CaseStudyDetail = () => {
 
             <Link
               to="/case-studies"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm text-muted-foreground transition-colors hover:text-primary"
             >
               Нашите проекти
             </Link>
@@ -417,13 +308,15 @@ const CaseStudyDetail = () => {
             {nextStudy ? (
               <Link
                 to={`/case-studies/${nextStudy.id}`}
-                className="group flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                className="group flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
               >
-                <div className="hidden sm:block text-right">
-                  <div className="text-xs text-muted-foreground">Следващ</div>
-                  <div className="font-medium">{nextStudy.title}</div>
+                <div className="hidden text-right sm:block">
+                  <div className="font-mono-meta text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
+                    Следващ
+                  </div>
+                  <div className="font-medium text-foreground">{nextStudy.title}</div>
                 </div>
-                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border group-hover:border-primary/50 transition-colors">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors group-hover:border-primary/50">
                   <ChevronRight className="h-5 w-5" />
                 </div>
               </Link>

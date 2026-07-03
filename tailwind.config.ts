@@ -14,9 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
-        signature: ['Dancing Script', 'cursive'],
+        sans: ['Manrope', 'system-ui', 'sans-serif'],
+        display: ['Unbounded', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        hand: ['Caveat', 'cursive'],
       },
       animationDelay: {
         '700': '700ms',

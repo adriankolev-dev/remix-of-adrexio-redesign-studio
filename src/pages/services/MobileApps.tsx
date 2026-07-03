@@ -13,6 +13,7 @@ import {
   Fingerprint
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import PhoneMascot from "@/components/mascots/PhoneMascot";
 
 const MobileApps = () => {
   return (
@@ -25,6 +26,7 @@ const MobileApps = () => {
       heroHighlight="на всеки клиент."
       heroSubtitle="Създаваме иновативни мобилни приложения за iOS и Android, които предоставят изключително потребителско изживяване и реални бизнес резултати."
       heroCTAText="ЗАПОЧНИ СВОЯ ПРОЕКТ"
+      heroAside={<PhoneMascot />}
       
       stats={[
         { value: "4.8★", label: "Средна оценка" },

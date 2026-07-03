@@ -13,6 +13,7 @@ import {
   Sparkles
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import DesignMascot from "@/components/mascots/DesignMascot";
 
 const UIUXDesign = () => {
   return (
@@ -25,6 +26,7 @@ const UIUXDesign = () => {
       heroHighlight="конвертира и впечатлява."
       heroSubtitle="Създаваме интуитивни потребителски изживявания, които превръщат посетителите в лоялни клиенти. Дизайн, базиран на данни и психология."
       heroCTAText="ЗАПОЧНИ СВОЯ ПРОЕКТ"
+      heroAside={<DesignMascot />}
       
       stats={[
         { value: "+45%", label: "Средно увеличение на конверсиите" },

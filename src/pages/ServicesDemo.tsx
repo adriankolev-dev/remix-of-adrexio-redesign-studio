@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import InteractiveServicesGrid from "@/components/InteractiveServicesGrid";
 import ServicesSection from "@/components/ServicesSection";
@@ -12,6 +13,7 @@ const ServicesDemo = () => {
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO title="Animation Showcase — Adrexio" noindex />
       <Navbar />
 
       {/* Demo Selector */}

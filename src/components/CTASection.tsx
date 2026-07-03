@@ -1,44 +1,63 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Reveal from "@/components/editorial/Reveal";
+import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 
 const CTASection = () => {
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Background gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl" />
+    <section className="layer-dark relative overflow-hidden py-28 md:py-36">
+      <div className="canvas-grid absolute inset-0 opacity-[0.07]" aria-hidden />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
-            Готови ли сте за <span className="text-gradient glow-text">дигитализация</span>?
+      <div className="container relative z-10 mx-auto px-6 text-center">
+        <Reveal>
+          <SectionEyebrow label="Следваща стъпка" index="10" />
+        </Reveal>
+
+        <Reveal delay={0.08}>
+          <h2 className="font-display text-display-sm mx-auto mt-8 max-w-3xl font-bold text-foreground">
+            Готови ли сте за сайт, който{" "}
+            <span className="text-primary">не прилича на всеки втори</span>?
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Свържете се и разберете как нашите решения могат да ускорят вашия растеж.
+        </Reveal>
+
+        <Reveal delay={0.16}>
+          <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
+            Разкажете ни за проекта си — ще отговорим с ясен план, срок и оферта. Без
+            задължения.
           </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="hero" size="xl" asChild>
+        </Reveal>
+
+        <Reveal delay={0.24}>
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button variant="accent" size="xl" asChild>
               <Link to="/contact">
-                <Calendar size={20} />
-                Запазете час
-              </Link>
-            </Button>
-            <Button variant="heroOutline" size="xl" asChild>
-              <Link to="/case-studies">
-                Вижте проектите ни
+                Направи запитване
                 <ArrowRight size={18} />
               </Link>
             </Button>
+            <Button
+              variant="line"
+              size="xl"
+              asChild
+              className="border-foreground/25 text-foreground hover:border-foreground/50"
+            >
+              <Link to="/project-inquiry">Попълни бриф</Link>
+            </Button>
           </div>
-        </motion.div>
+        </Reveal>
+
+        <Reveal delay={0.3}>
+          <p className="font-mono-meta mx-auto mt-8 text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">
+            Отговор до 24ч · Плащаш след като видиш резултата · Без обвързващи договори
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.38}>
+          <p className="font-hand mt-8 text-2xl text-primary/90">
+            или просто пишете на hello@adrexio.com
+          </p>
+        </Reveal>
       </div>
     </section>
   );

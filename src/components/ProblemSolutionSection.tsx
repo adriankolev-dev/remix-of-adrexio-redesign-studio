@@ -1,238 +1,101 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { 
-  AlertCircle, 
-  DollarSign, 
-  Users, 
-  Clock, 
-  Zap, 
-  TrendingUp, 
-  Sparkles,
-  ArrowRight
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Reveal from "@/components/editorial/Reveal";
+import SectionHeader from "@/components/editorial/SectionHeader";
 
-const painPoints = [
+// Each row reframes a familiar pain as the shift we deliver — a "from → to".
+const shifts = [
   {
-    icon: DollarSign,
-    title: "Скъпа реклама, която не се изплаща?",
-    description: "Харчите хиляди за реклама, но резултатите не оправдават инвестицията. Парите изчезват без ясен ROI."
+    problem: "Скъпа реклама без ROI",
+    psub: "Плащате за трафик, който не се превръща в клиенти.",
+    solution: "Сайт, който носи резултат",
+    ssub: "Бърз, оптимизиран и измерим — инвестицията се вижда.",
   },
   {
-    icon: Users,
-    title: "Клиенти, които купуват веднъж и изчезват?",
-    description: "Привличате нови клиенти, но те не се връщат. Всеки нов клиент струва повече от предишния."
+    problem: "Клиенти, които не се връщат",
+    psub: "Идват веднъж и изчезват без следа.",
+    solution: "UX, който води до действие",
+    ssub: "Всяка секция е режисирана към едно ясно действие.",
   },
   {
-    icon: Clock,
-    title: "Ръчна работа, която убива растежа?",
-    description: "Вашият екип е зает с повторящи се задачи вместо да фокусира върху стратегия и растеж."
-  }
+    problem: "Шаблон като всеки втори",
+    psub: "Няма доверие, няма запомняне, няма заявки.",
+    solution: "Дизайн от нулата",
+    ssub: "Структура и визуал, които са само ваши.",
+  },
 ];
-
-const adrexioSolutions = [
-  {
-    icon: Zap,
-    title: "Retention Machine",
-    subtitle: "Автоматизирани кампании, базирани на поведение",
-    description: "Системи, които автоматично идентифицират и ангажират клиенти в критични моменти. Спестете време и пари, като автоматизирате маркетинга си.",
-    benefit: "Спестете до 40% от маркетинговия бюджет"
-  },
-  {
-    icon: TrendingUp,
-    title: "Predictive LTV",
-    subtitle: "Знаете кога и какво ще купи клиентът ви отново",
-    description: "AI-модели предсказват следващата покупка на всеки клиент. Фокусирайте усилията си там, където има най-голям потенциал за печалба.",
-    benefit: "Увеличете повторните продажби с до 200%"
-  },
-  {
-    icon: Sparkles,
-    title: "Seamless Experience",
-    subtitle: "Интуитивен UX, който кара хората да се връщат",
-    description: "Дизайн, който не само изглежда добре, но и води до действия. Всеки клик е оптимизиран за конверсия и връщане.",
-    benefit: "Намалете bounce rate с до 60%"
-  }
-];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
-};
 
 const ProblemSolutionSection = () => {
   return (
-    <section className="py-24 relative overflow-hidden bg-gradient-to-b from-background via-card to-background">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-500/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-            Проблемът и решението
-          </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-            Престанете да <span className="text-red-500">губите пари</span>.
-            <br />
-            Започнете да <span className="text-gradient">печелите</span>.
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Повечето бизнеси харчат пари за реклама и губят клиенти. Ние създаваме системи, които автоматизират растежа и увеличават печалбата.
-          </p>
-        </motion.div>
+    <section className="relative overflow-hidden bg-background py-24 md:py-32">
+      <div className="container mx-auto px-6">
+        <SectionHeader
+          index="04"
+          label="Проблем → Решение"
+          title="Шаблонът ви струва повече, отколкото мислите."
+          description='Повечето бизнеси не се нуждаят от „още един красив сайт". Имат нужда от преход — от шаблон към нещо, което носи запитвания.'
+          note="звучи ли ви познато?"
+        />
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Pain Points */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <AlertCircle className="w-6 h-6 text-red-500" />
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-red-500">
-                  Проблемите, които убиват растежа
-                </h3>
-              </div>
-              <p className="text-muted-foreground">
-                Ако разпознавате тези проблеми, не сте сами. Повечето бизнеси се сблъскват с тях всеки ден.
-              </p>
-            </div>
+        {/* Column labels */}
+        <Reveal>
+          <div className="grid grid-cols-1 gap-4 border-b border-border pb-4 md:grid-cols-[1fr_auto_1fr] md:gap-8">
+            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.2em] text-muted-foreground">
+              От шаблона
+            </span>
+            <span className="hidden w-8 md:block" aria-hidden />
+            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.2em] text-primary">
+              Към Adrexio
+            </span>
+          </div>
+        </Reveal>
 
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              {painPoints.map((point, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="group relative p-6 rounded-xl border border-red-500/20 bg-red-500/5 hover:bg-red-500/10 hover:border-red-500/30 transition-all"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg bg-red-500/20 group-hover:bg-red-500/30 transition-colors">
-                      <point.icon className="w-6 h-6 text-red-500" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-display font-semibold text-lg mb-2 text-foreground">
-                        {point.title}
-                      </h4>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {point.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
+        {/* Transformation rows */}
+        <div>
+          {shifts.map((shift, i) => (
+            <Reveal key={shift.problem} delay={i * 0.08}>
+              <div className="grid grid-cols-1 items-center gap-4 border-b border-border py-8 md:grid-cols-[1fr_auto_1fr] md:gap-8 md:py-10">
+                {/* Problem side — muted, receding */}
+                <div className="text-muted-foreground">
+                  <h3 className="text-xl font-semibold tracking-tight text-foreground/55 md:text-2xl">
+                    {shift.problem}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed">{shift.psub}</p>
+                </div>
 
-          {/* The Adrexio Way */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <Sparkles className="w-6 h-6 text-primary" />
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-gradient">
-                  Начинът на Adrexio
-                </h3>
-              </div>
-              <p className="text-muted-foreground">
-                Ние не просто създаваме уебсайтове. Създаваме системи за растеж, които автоматизират печалбата ви.
-              </p>
-            </div>
+                {/* Connector */}
+                <div className="flex items-center gap-2 text-primary md:justify-center">
+                  <span className="font-mono-meta text-[0.6rem] uppercase tracking-[0.16em] md:hidden">
+                    води до
+                  </span>
+                  <ArrowRight size={22} className="rotate-90 md:rotate-0" />
+                </div>
 
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              {adrexioSolutions.map((solution, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="group relative p-6 rounded-xl border-gradient bg-gradient-to-br from-primary/5 to-accent/5 hover:from-primary/10 hover:to-accent/10 transition-all hover:shadow-xl hover:shadow-primary/10"
-                >
-                  <div className="flex items-start gap-4 mb-3">
-                    <div className="p-3 rounded-lg bg-gradient-to-br from-primary/20 to-accent/10 group-hover:from-primary/30 group-hover:to-accent/20 transition-colors">
-                      <solution.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-display font-semibold text-lg mb-1 text-foreground">
-                        {solution.title}
-                      </h4>
-                      <p className="text-sm font-medium text-primary mb-2">
-                        {solution.subtitle}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-3">
-                    {solution.description}
-                  </p>
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-                    <TrendingUp className="w-4 h-4 text-primary" />
-                    <span className="text-xs font-semibold text-primary">
-                      {solution.benefit}
+                {/* Solution side — foreground, cyan accent */}
+                <div>
+                  <h3 className="text-xl font-bold tracking-tight text-foreground md:text-2xl">
+                    <span className="bg-[linear-gradient(transparent_65%,hsl(var(--primary)/0.28)_65%)]">
+                      {shift.solution}
                     </span>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    {shift.ssub}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-16"
-        >
-          <div className="max-w-2xl mx-auto p-6 sm:p-8 rounded-2xl border-gradient bg-gradient-to-br from-primary/10 to-accent/5 text-center">
-            <p className="text-base sm:text-lg font-semibold mb-2">
-              Готови ли сте да трансформирате бизнеса си?
-            </p>
-            <p className="text-muted-foreground text-sm sm:text-base mb-6">
-              Нека поговорим как можем да автоматизираме растежа ви и да увеличим печалбата.
-            </p>
-            <Button variant="hero" size="lg" asChild className="w-full sm:w-auto">
-              <Link to="/contact" className="flex items-center justify-center gap-2">
-                <span className="whitespace-normal sm:whitespace-nowrap">
-                  Увеличете печалбите си сега
-                </span>
-                <ArrowRight size={18} className="flex-shrink-0" />
-              </Link>
-            </Button>
-          </div>
-        </motion.div>
+        <Reveal delay={0.2} className="mt-14">
+          <Button variant="ink" size="lg" asChild>
+            <Link to="/contact">
+              Разкажете ни за проекта си
+              <ArrowRight size={18} />
+            </Link>
+          </Button>
+        </Reveal>
       </div>
     </section>
   );

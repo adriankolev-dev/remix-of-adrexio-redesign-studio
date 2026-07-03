@@ -1,8 +1,10 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { motion } from "framer-motion";
 import { ArrowLeft, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Reveal from "@/components/editorial/Reveal";
+import SectionEyebrow from "@/components/editorial/SectionEyebrow";
+import RobotMascot from "@/components/mascots/RobotMascot";
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,46 +14,57 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
+    <main className="relative flex min-h-screen items-center overflow-hidden bg-background">
+      <div className="canvas-grid canvas-grid-fade absolute inset-0 opacity-60" aria-hidden />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-2xl mx-auto text-center"
-        >
-          <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-8xl md:text-9xl font-display font-bold text-gradient mb-4"
-          >
-            404
-          </motion.div>
-          <h1 className="text-2xl md:text-3xl font-display font-bold mb-4">
-            Страницата не е намерена
-          </h1>
-          <p className="text-muted-foreground mb-8">
-            Съжаляваме, но страницата, която търсите, не съществува или е била преместена.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="hero" size="lg" asChild>
-              <Link to="/">
-                <Home size={18} />
-                Към началото
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" onClick={() => window.history.back()}>
-              <ArrowLeft size={18} />
-              Назад
-            </Button>
+      <div className="container relative z-10 mx-auto px-6">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          <div className="max-w-3xl">
+          <Reveal immediate>
+            <SectionEyebrow label="Грешка" index="404" />
+          </Reveal>
+
+          <Reveal immediate delay={0.08}>
+            <p className="font-display mt-6 select-none text-[26vw] font-bold leading-[0.8] tracking-tighter text-foreground/10 md:text-[16rem]">
+              404
+            </p>
+          </Reveal>
+
+          <Reveal immediate delay={0.16}>
+            <h1 className="font-display mt-2 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+              Тази страница я <span className="accent-mark">няма на картата.</span>
+            </h1>
+          </Reveal>
+
+          <Reveal immediate delay={0.24}>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
+              Страницата, която търсите, не съществува или е била преместена. Да ви върнем на
+              позната територия.
+            </p>
+          </Reveal>
+
+          <Reveal immediate delay={0.32}>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Button variant="ink" size="lg" asChild>
+                <Link to="/">
+                  <Home size={18} />
+                  Към началото
+                </Link>
+              </Button>
+              <Button variant="line" size="lg" onClick={() => window.history.back()}>
+                <ArrowLeft size={18} />
+                Назад
+              </Button>
+            </div>
+          </Reveal>
           </div>
-        </motion.div>
+
+          <Reveal immediate delay={0.2} className="hidden lg:block">
+            <RobotMascot variant="lost" />
+          </Reveal>
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 

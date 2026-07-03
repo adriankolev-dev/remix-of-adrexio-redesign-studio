@@ -13,6 +13,7 @@ import {
   BarChart3
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import RobotMascot from "@/components/mascots/RobotMascot";
 
 const AIImplementation = () => {
   return (
@@ -25,6 +26,7 @@ const AIImplementation = () => {
       heroHighlight="с изкуствен интелект."
       heroSubtitle="Интегрираме AI решения, които оптимизират процесите, намаляват разходите и увеличават ефективността на вашия бизнес. От чатботове до машинно обучение."
       heroCTAText="ЗАПОЧНИ AI ПРОЕКТ"
+      heroAside={<RobotMascot />}
       
       stats={[
         { value: "60%", label: "Средно намаление на разходите" },

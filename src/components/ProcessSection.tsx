@@ -1,101 +1,95 @@
-import { motion } from "framer-motion";
-import { MessageSquare, PenTool, Code, TestTube, Rocket } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Reveal from "@/components/editorial/Reveal";
+import SectionHeader from "@/components/editorial/SectionHeader";
 
 const steps = [
   {
     number: "01",
-    icon: MessageSquare,
-    title: "Консултация и Анализ",
-    description: "Започваме с детайлен разговор, за да разберем вашите бизнес цели, нуждите на потребителите и техническите изисквания на проекта."
+    phase: "chat",
+    title: "Консултация",
+    description: "Разговаряме за целите, аудиторията и какво трябва да постигне сайтът.",
   },
   {
     number: "02",
-    icon: PenTool,
-    title: "Проектиране и Прототипиране",
-    description: "Създаваме интерактивни прототипи и модерен UI/UX дизайн, за да визуализираме продукта още преди да е написан първият ред код."
+    phase: "sketch",
+    title: "Проектиране",
+    description: "Wireframe, UI/UX и прототип — виждате структурата преди един ред код.",
   },
   {
     number: "03",
-    icon: Code,
-    title: "Гъвкава разработка",
-    description: "Използваме съвременни технологии и Agile методология, като ви предоставяме редовни актуализации и възможност за обратна връзка."
+    phase: "build",
+    title: "Разработка",
+    description: "Изграждаме слой по слой — дизайн, frontend, backend, интеграции.",
   },
   {
     number: "04",
-    icon: TestTube,
-    title: "Тестване и Контрол",
-    description: "Подлагаме софтуера на строги тестове за скорост, сигурност и съвместимост, за да гарантираме безпрецедентно качество."
+    phase: "tweak",
+    title: "Тестване",
+    description: "Скорост, сигурност, мобилни устройства — без компромис с качеството.",
   },
   {
     number: "05",
-    icon: Rocket,
-    title: "Стартиране и Поддръжка",
-    description: "Ние сме до вас по време на официалния старт и осигуряваме последваща техническа поддръжка за дългосрочен успех."
-  }
+    phase: "launch",
+    title: "Старт",
+    description: "Пускаме сайта и оставаме до вас за поддръжка и растеж.",
+  },
 ];
 
 const ProcessSection = () => {
   return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-            Как <span className="text-gradient">работим</span>?
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            В Adrexio вярваме, че успешните дигитални продукти се раждат от тясно сътрудничество и прецизно планиране.
-          </p>
-        </motion.div>
+    <section className="relative overflow-hidden bg-secondary/40 py-24 md:py-32">
+      <div className="canvas-grid canvas-grid-fade absolute inset-0 opacity-50" aria-hidden />
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/50 to-transparent hidden lg:block" />
+      <div className="container relative z-10 mx-auto px-6">
+        <SectionHeader
+          index="05"
+          label="Процес"
+          title="Сглобяваме сайта ви слой по слой."
+          description="Пет ясни фази — от първия разговор до пускането. Всяка стъпка е видима, не е черна кутия."
+          note="виждаш всяка стъпка"
+        />
 
-          <div className="space-y-12">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`flex items-center gap-8 ${
-                  index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                }`}
-              >
-                <div className={`flex-1 ${index % 2 === 0 ? "lg:text-right" : "lg:text-left"}`}>
-                  <div className={`border-gradient p-6 rounded-xl inline-block ${
-                    index % 2 === 0 ? "lg:ml-auto" : "lg:mr-auto"
-                  }`}>
-                    <div className="flex items-center gap-4 mb-3">
-                      <span className="text-4xl font-display font-bold text-gradient opacity-50">
-                        {step.number}
-                      </span>
-                      <h3 className="text-xl font-display font-semibold">
-                        {step.title}
-                      </h3>
-                    </div>
-                    <p className="text-muted-foreground text-sm leading-relaxed max-w-md">
-                      {step.description}
-                    </p>
-                  </div>
+        {/* Layered steps — oversized ghost numerals stacked along a single rule */}
+        <div className="relative mx-auto max-w-4xl">
+          <div
+            className="absolute bottom-0 left-0 top-0 hidden w-px bg-border md:block"
+            aria-hidden
+          />
+
+          {steps.map((step, i) => (
+            <Reveal key={step.number} delay={i * 0.06}>
+              <div className="group relative grid grid-cols-[auto_1fr] items-baseline gap-6 border-b border-border py-8 md:gap-12 md:py-10 md:pl-10">
+                {/* Ghost numeral — the "layer" marker */}
+                <span className="font-display select-none text-5xl font-bold leading-none tracking-tight text-foreground/10 transition-colors duration-500 group-hover:text-primary/25 md:text-7xl">
+                  {step.number}
+                </span>
+
+                <div>
+                  <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.22em] text-primary">
+                    {step.phase}
+                  </span>
+                  <h3 className="mt-2 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 max-w-xl text-base leading-relaxed text-muted-foreground">
+                    {step.description}
+                  </p>
                 </div>
-
-                {/* Center icon */}
-                <div className="hidden lg:flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent shadow-lg glow-primary z-10">
-                  <step.icon className="w-7 h-7 text-primary-foreground" />
-                </div>
-
-                <div className="flex-1 hidden lg:block" />
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
+
+        <Reveal delay={0.25} className="mt-12">
+          <Button variant="line" size="lg" asChild>
+            <Link to="/project-inquiry">
+              Попълнете бриф за проект
+              <ArrowRight size={18} />
+            </Link>
+          </Button>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,17 +1,16 @@
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { 
-  Send, 
-  CheckCircle, 
-  Loader2, 
-  Briefcase, 
-  Calendar, 
+import {
+  Send,
+  CheckCircle,
+  Loader2,
+  Briefcase,
+  Calendar,
   DollarSign,
   Target,
   Users,
   Globe,
   Smartphone,
-  Palette
+  Palette,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,14 +21,16 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import PageIntro from "@/components/editorial/PageIntro";
+import ClipboardMascot from "@/components/mascots/ClipboardMascot";
 import emailjs from "@emailjs/browser";
-import { 
-  HONEYPOT_FIELD_NAME, 
-  checkRateLimit, 
-  checkFormFillTime, 
-  checkHoneypot, 
+import {
+  HONEYPOT_FIELD_NAME,
+  checkRateLimit,
+  checkFormFillTime,
+  checkHoneypot,
   checkSpamPatterns,
-  isValidEmail 
+  isValidEmail,
 } from "@/lib/spamProtection";
 
 interface ProjectFormData {
@@ -48,6 +49,27 @@ interface ProjectFormData {
   additional_info: string;
   [HONEYPOT_FIELD_NAME]: string; // Honeypot field
 }
+
+const FieldGroup = ({
+  index,
+  title,
+  icon: Icon,
+  children,
+}: {
+  index: string;
+  title: string;
+  icon?: typeof Users;
+  children: React.ReactNode;
+}) => (
+  <div className="space-y-5 border-t border-border pt-8">
+    <div className="flex items-center gap-3">
+      <span className="font-mono-meta text-[0.7rem] text-primary">{index}</span>
+      {Icon && <Icon className="h-4 w-4 text-primary" strokeWidth={1.75} />}
+      <h2 className="font-display text-lg font-semibold tracking-tight text-foreground">{title}</h2>
+    </div>
+    {children}
+  </div>
+);
 
 const ProjectInquiry = () => {
   const formStartTime = useRef<number>(Date.now());
@@ -71,7 +93,6 @@ const ProjectInquiry = () => {
     [HONEYPOT_FIELD_NAME]: "", // Honeypot field
   });
 
-  // Initialize form start time when component mounts
   useEffect(() => {
     formStartTime.current = Date.now();
   }, []);
@@ -99,8 +120,6 @@ const ProjectInquiry = () => {
     setError(null);
 
     try {
-      // Spam protection checks
-      // 1. Check honeypot
       const honeypotCheck = checkHoneypot(formData[HONEYPOT_FIELD_NAME]);
       if (!honeypotCheck.allowed) {
         setError(honeypotCheck.message || "Спам детектиран.");
@@ -108,7 +127,6 @@ const ProjectInquiry = () => {
         return;
       }
 
-      // 2. Check rate limit
       const rateLimitCheck = checkRateLimit();
       if (!rateLimitCheck.allowed) {
         setError(rateLimitCheck.message || "Твърде много изпращания. Моля, изчакайте.");
@@ -116,7 +134,6 @@ const ProjectInquiry = () => {
         return;
       }
 
-      // 3. Check form fill time
       const fillTimeCheck = checkFormFillTime(formStartTime.current);
       if (!fillTimeCheck.allowed) {
         setError(fillTimeCheck.message || "Формата е попълнена твърде бързо.");
@@ -124,14 +141,12 @@ const ProjectInquiry = () => {
         return;
       }
 
-      // 4. Validate email
       if (!isValidEmail(formData.email)) {
         setError("Моля, въведете валиден email адрес.");
         setIsLoading(false);
         return;
       }
 
-      // 5. Check spam patterns
       const spamCheck = checkSpamPatterns(formData.description, formData.additional_info);
       if (!spamCheck.allowed) {
         setError(spamCheck.message || "Съобщението изглежда като спам.");
@@ -140,15 +155,18 @@ const ProjectInquiry = () => {
       }
 
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-      const templateId = import.meta.env.VITE_EMAILJS_PROJECT_TEMPLATE_ID || import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+      const templateId =
+        import.meta.env.VITE_EMAILJS_PROJECT_TEMPLATE_ID ||
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID ||
+        "YOUR_TEMPLATE_ID";
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
 
-      const timestamp = new Date().toLocaleString('bg-BG', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
+      const timestamp = new Date().toLocaleString("bg-BG", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
       });
 
       await emailjs.send(
@@ -171,11 +189,11 @@ const ProjectInquiry = () => {
           time: timestamp,
           to_email: "hello@adrexio.com",
         },
-        publicKey
+        publicKey,
       );
 
       setIsSubmitted(true);
-      formStartTime.current = Date.now(); // Reset timer
+      formStartTime.current = Date.now();
       setFormData({
         name: "",
         email: "",
@@ -194,7 +212,9 @@ const ProjectInquiry = () => {
       });
     } catch (err) {
       console.error("EmailJS error:", err);
-      setError("Възникна грешка при изпращането на запитването. Моля, опитайте отново или се свържете директно на hello@adrexio.com");
+      setError(
+        "Възникна грешка при изпращането на запитването. Моля, опитайте отново или се свържете директно на hello@adrexio.com",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -219,68 +239,47 @@ const ProjectInquiry = () => {
       />
       <Navbar />
 
-      <section className="pt-32 pb-24 relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
+      <PageIntro
+        label="Запитване за проект"
+        title={
+          <>
+            Разкажете ни за <span className="accent-mark">вашия проект</span>
+          </>
+        }
+        description="Попълнете формата по-долу с детайли за вашия проект. Ще се свържем с вас възможно най-скоро, за да обсъдим как можем да ви помогнем."
+        aside={<ClipboardMascot />}
+      />
 
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16 max-w-3xl mx-auto"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              Запитване за проект
-            </span>
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">
-              Разкажете ни за <span className="text-gradient">вашия проект</span>
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              Попълнете формата по-долу с детайли за вашия проект. Ще се свържем с вас възможно най-скоро, за да обсъдим как можем да ви помогнем.
-            </p>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto">
+      <section className="relative bg-background pb-24 md:pb-32">
+        <div className="container mx-auto px-6">
+          <div className="mx-auto max-w-3xl">
             {isSubmitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="border-gradient p-12 rounded-2xl text-center"
-              >
-                <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle className="w-8 h-8 text-green-500" />
+              <div className="flex flex-col items-center rounded-2xl border border-border p-12 text-center">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <CheckCircle className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-2xl font-display font-bold mb-4">
-                  Благодарим ви!
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  Вашето запитване беше изпратено успешно. Ще прегледаме информацията и ще се свържем с вас в рамките на 24 часа.
+                <h3 className="font-display text-2xl font-bold">Благодарим ви!</h3>
+                <p className="mt-4 text-muted-foreground">
+                  Вашето запитване беше изпратено успешно. Ще прегледаме информацията и ще се свържем
+                  с вас в рамките на 24 часа.
                 </p>
-                <Button variant="outline" onClick={() => setIsSubmitted(false)}>
+                <Button variant="line" className="mt-6" onClick={() => setIsSubmitted(false)}>
                   Изпратете ново запитване
                 </Button>
-              </motion.div>
+              </div>
             ) : (
-              <motion.form
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+              <form
                 onSubmit={handleSubmit}
-                className="border-gradient p-8 rounded-2xl space-y-8"
+                className="space-y-10 rounded-2xl border border-border p-6 md:p-10"
               >
                 {error && (
-                  <div className="p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+                  <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-4 text-sm text-destructive">
                     {error}
                   </div>
                 )}
 
-                {/* Personal Information */}
-                <div className="space-y-6">
-                  <h2 className="text-xl font-display font-semibold flex items-center gap-2">
-                    <Users className="w-5 h-5 text-primary" />
-                    Лична информация
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FieldGroup index="01" title="Лична информация" icon={Users}>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="name">Име *</Label>
                       <Input
@@ -290,7 +289,7 @@ const ProjectInquiry = () => {
                         onChange={handleChange}
                         placeholder="Вашето име"
                         required
-                        className="bg-secondary/50 border-border"
+                        className="border-border bg-secondary/50"
                       />
                     </div>
                     <div className="space-y-2">
@@ -303,11 +302,11 @@ const ProjectInquiry = () => {
                         onChange={handleChange}
                         placeholder="email@example.com"
                         required
-                        className="bg-secondary/50 border-border"
+                        className="border-border bg-secondary/50"
                       />
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="phone">Телефон</Label>
                       <Input
@@ -317,7 +316,7 @@ const ProjectInquiry = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+359 896 173 743"
-                        className="bg-secondary/50 border-border"
+                        className="border-border bg-secondary/50"
                       />
                     </div>
                     <div className="space-y-2">
@@ -328,75 +327,78 @@ const ProjectInquiry = () => {
                         value={formData.company}
                         onChange={handleChange}
                         placeholder="Име на компанията"
-                        className="bg-secondary/50 border-border"
+                        className="border-border bg-secondary/50"
                       />
                     </div>
                   </div>
-                </div>
+                </FieldGroup>
 
-                {/* Project Type */}
-                <div className="space-y-4">
-                  <h2 className="text-xl font-display font-semibold flex items-center gap-2">
-                    <Briefcase className="w-5 h-5 text-primary" />
-                    Тип проект *
-                  </h2>
+                <FieldGroup index="02" title="Тип проект *" icon={Briefcase}>
                   <RadioGroup
                     value={formData.project_type}
-                    onValueChange={(value) => setFormData((prev) => ({ ...prev, project_type: value }))}
+                    onValueChange={(value) =>
+                      setFormData((prev) => ({ ...prev, project_type: value }))
+                    }
                     required
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="new-project" id="new-project" />
-                      <Label htmlFor="new-project" className="cursor-pointer">Нов проект</Label>
+                      <Label htmlFor="new-project" className="cursor-pointer">
+                        Нов проект
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="redesign" id="redesign" />
-                      <Label htmlFor="redesign" className="cursor-pointer">Редизайн на съществуващ проект</Label>
+                      <Label htmlFor="redesign" className="cursor-pointer">
+                        Редизайн на съществуващ проект
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="enhancement" id="enhancement" />
-                      <Label htmlFor="enhancement" className="cursor-pointer">Подобряване/разширяване</Label>
+                      <Label htmlFor="enhancement" className="cursor-pointer">
+                        Подобряване/разширяване
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="other" id="other-type" />
-                      <Label htmlFor="other-type" className="cursor-pointer">Друго</Label>
+                      <Label htmlFor="other-type" className="cursor-pointer">
+                        Друго
+                      </Label>
                     </div>
                   </RadioGroup>
-                </div>
+                </FieldGroup>
 
-                {/* Services */}
-                <div className="space-y-4">
-                  <h2 className="text-xl font-display font-semibold flex items-center gap-2">
-                    <Target className="w-5 h-5 text-primary" />
-                    Нужни услуги *
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FieldGroup index="03" title="Нужни услуги *" icon={Target}>
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                     {services.map((service) => {
                       const Icon = service.icon;
                       return (
-                        <div key={service.id} className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:bg-card/50 transition-colors">
+                        <div
+                          key={service.id}
+                          className="flex items-center space-x-3 rounded-lg border border-border p-4 transition-colors hover:border-primary/40"
+                        >
                           <Checkbox
                             id={service.id}
                             checked={formData.services.includes(service.id)}
-                            onCheckedChange={(checked) => handleServiceChange(service.id, checked as boolean)}
+                            onCheckedChange={(checked) =>
+                              handleServiceChange(service.id, checked as boolean)
+                            }
                           />
-                          <Label htmlFor={service.id} className="flex items-center gap-2 cursor-pointer flex-1">
-                            <Icon className="w-4 h-4 text-primary" />
+                          <Label
+                            htmlFor={service.id}
+                            className="flex flex-1 cursor-pointer items-center gap-2"
+                          >
+                            <Icon className="h-4 w-4 text-primary" />
                             {service.label}
                           </Label>
                         </div>
                       );
                     })}
                   </div>
-                </div>
+                </FieldGroup>
 
-                {/* Budget & Timeline */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <h2 className="text-xl font-display font-semibold flex items-center gap-2">
-                      <DollarSign className="w-5 h-5 text-primary" />
-                      Бюджет *
-                    </h2>
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+                  <FieldGroup index="04" title="Бюджет *" icon={DollarSign}>
                     <RadioGroup
                       value={formData.budget}
                       onValueChange={(value) => setFormData((prev) => ({ ...prev, budget: value }))}
@@ -404,68 +406,86 @@ const ProjectInquiry = () => {
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="under-5000" id="under-5000" />
-                        <Label htmlFor="under-5000" className="cursor-pointer">Под 5,000 €</Label>
+                        <Label htmlFor="under-5000" className="cursor-pointer">
+                          Под 5,000 €
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="5000-10000" id="5000-10000" />
-                        <Label htmlFor="5000-10000" className="cursor-pointer">5,000 - 10,000 €</Label>
+                        <Label htmlFor="5000-10000" className="cursor-pointer">
+                          5,000 - 10,000 €
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="10000-25000" id="10000-25000" />
-                        <Label htmlFor="10000-25000" className="cursor-pointer">10,000 - 25,000 €</Label>
+                        <Label htmlFor="10000-25000" className="cursor-pointer">
+                          10,000 - 25,000 €
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="25000-50000" id="25000-50000" />
-                        <Label htmlFor="25000-50000" className="cursor-pointer">25,000 - 50,000 €</Label>
+                        <Label htmlFor="25000-50000" className="cursor-pointer">
+                          25,000 - 50,000 €
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="over-50000" id="over-50000" />
-                        <Label htmlFor="over-50000" className="cursor-pointer">Над 50,000 €</Label>
+                        <Label htmlFor="over-50000" className="cursor-pointer">
+                          Над 50,000 €
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="discuss" id="discuss-budget" />
-                        <Label htmlFor="discuss-budget" className="cursor-pointer">Предпочитам да обсъдим</Label>
+                        <Label htmlFor="discuss-budget" className="cursor-pointer">
+                          Предпочитам да обсъдим
+                        </Label>
                       </div>
                     </RadioGroup>
-                  </div>
+                  </FieldGroup>
 
-                  <div className="space-y-4">
-                    <h2 className="text-xl font-display font-semibold flex items-center gap-2">
-                      <Calendar className="w-5 h-5 text-primary" />
-                      Срок за завършване *
-                    </h2>
+                  <FieldGroup index="05" title="Срок за завършване *" icon={Calendar}>
                     <RadioGroup
                       value={formData.timeline}
-                      onValueChange={(value) => setFormData((prev) => ({ ...prev, timeline: value }))}
+                      onValueChange={(value) =>
+                        setFormData((prev) => ({ ...prev, timeline: value }))
+                      }
                       required
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="asap" id="asap" />
-                        <Label htmlFor="asap" className="cursor-pointer">Възможно най-скоро</Label>
+                        <Label htmlFor="asap" className="cursor-pointer">
+                          Възможно най-скоро
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="1-3-months" id="1-3-months" />
-                        <Label htmlFor="1-3-months" className="cursor-pointer">1-3 месеца</Label>
+                        <Label htmlFor="1-3-months" className="cursor-pointer">
+                          1-3 месеца
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="3-6-months" id="3-6-months" />
-                        <Label htmlFor="3-6-months" className="cursor-pointer">3-6 месеца</Label>
+                        <Label htmlFor="3-6-months" className="cursor-pointer">
+                          3-6 месеца
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="6-12-months" id="6-12-months" />
-                        <Label htmlFor="6-12-months" className="cursor-pointer">6-12 месеца</Label>
+                        <Label htmlFor="6-12-months" className="cursor-pointer">
+                          6-12 месеца
+                        </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="flexible" id="flexible" />
-                        <Label htmlFor="flexible" className="cursor-pointer">Гъвкав срок</Label>
+                        <Label htmlFor="flexible" className="cursor-pointer">
+                          Гъвкав срок
+                        </Label>
                       </div>
                     </RadioGroup>
-                  </div>
+                  </FieldGroup>
                 </div>
 
-                {/* Project Description */}
-                <div className="space-y-4">
-                  <h2 className="text-xl font-display font-semibold">Описание на проекта *</h2>
+                <FieldGroup index="06" title="Описание на проекта *">
                   <Textarea
                     name="description"
                     value={formData.description}
@@ -473,67 +493,71 @@ const ProjectInquiry = () => {
                     placeholder="Разкажете ни подробно за вашия проект. Какво искате да постигнете? Какви са основните функционалности?"
                     rows={6}
                     required
-                    className="bg-secondary/50 border-border resize-none"
+                    className="resize-none border-border bg-secondary/50"
                   />
-                </div>
+                </FieldGroup>
 
-                {/* Goals */}
-                <div className="space-y-4">
-                  <Label htmlFor="goals">Основни цели на проекта</Label>
-                  <Textarea
-                    id="goals"
-                    name="goals"
-                    value={formData.goals}
-                    onChange={handleChange}
-                    placeholder="Какви са основните цели, които искате да постигнете с този проект?"
-                    rows={4}
-                    className="bg-secondary/50 border-border resize-none"
-                  />
-                </div>
+                <FieldGroup index="07" title="Детайли">
+                  <div className="space-y-2">
+                    <Label htmlFor="goals">Основни цели на проекта</Label>
+                    <Textarea
+                      id="goals"
+                      name="goals"
+                      value={formData.goals}
+                      onChange={handleChange}
+                      placeholder="Какви са основните цели, които искате да постигнете с този проект?"
+                      rows={4}
+                      className="resize-none border-border bg-secondary/50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="target_audience">Целева аудитория</Label>
+                    <Textarea
+                      id="target_audience"
+                      name="target_audience"
+                      value={formData.target_audience}
+                      onChange={handleChange}
+                      placeholder="Опишете вашата целева аудитория. Кой е вашият идеален клиент?"
+                      rows={3}
+                      className="resize-none border-border bg-secondary/50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="existing_website">
+                      Имате ли съществуващ уебсайт/приложение?
+                    </Label>
+                    <Input
+                      id="existing_website"
+                      name="existing_website"
+                      value={formData.existing_website}
+                      onChange={handleChange}
+                      placeholder="Ако имате, моля споделете линк"
+                      className="border-border bg-secondary/50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="additional_info">Допълнителна информация</Label>
+                    <Textarea
+                      id="additional_info"
+                      name="additional_info"
+                      value={formData.additional_info}
+                      onChange={handleChange}
+                      placeholder="Всичко друго, което искате да споделите с нас..."
+                      rows={4}
+                      className="resize-none border-border bg-secondary/50"
+                    />
+                  </div>
+                </FieldGroup>
 
-                {/* Target Audience */}
-                <div className="space-y-4">
-                  <Label htmlFor="target_audience">Целева аудитория</Label>
-                  <Textarea
-                    id="target_audience"
-                    name="target_audience"
-                    value={formData.target_audience}
-                    onChange={handleChange}
-                    placeholder="Опишете вашата целева аудитория. Кой е вашият идеален клиент?"
-                    rows={3}
-                    className="bg-secondary/50 border-border resize-none"
-                  />
-                </div>
-
-                {/* Existing Website */}
-                <div className="space-y-4">
-                  <Label htmlFor="existing_website">Имате ли съществуващ уебсайт/приложение?</Label>
-                  <Input
-                    id="existing_website"
-                    name="existing_website"
-                    value={formData.existing_website}
-                    onChange={handleChange}
-                    placeholder="Ако имате, моля споделете линк"
-                    className="bg-secondary/50 border-border"
-                  />
-                </div>
-
-                {/* Additional Info */}
-                <div className="space-y-4">
-                  <Label htmlFor="additional_info">Допълнителна информация</Label>
-                  <Textarea
-                    id="additional_info"
-                    name="additional_info"
-                    value={formData.additional_info}
-                    onChange={handleChange}
-                    placeholder="Всичко друго, което искате да споделите с нас..."
-                    rows={4}
-                    className="bg-secondary/50 border-border resize-none"
-                  />
-                </div>
-
-                {/* Honeypot field - hidden from users but visible to bots */}
-                <div style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}>
+                {/* Honeypot field */}
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "-9999px",
+                    opacity: 0,
+                    pointerEvents: "none",
+                  }}
+                >
                   <Label htmlFor={HONEYPOT_FIELD_NAME}>Не попълвайте това поле</Label>
                   <Input
                     id={HONEYPOT_FIELD_NAME}
@@ -546,16 +570,16 @@ const ProjectInquiry = () => {
                   />
                 </div>
 
-                <Button 
-                  variant="hero" 
-                  size="lg" 
-                  type="submit" 
+                <Button
+                  variant="ink"
+                  size="lg"
+                  type="submit"
                   className="w-full"
                   disabled={isLoading}
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="h-4 w-4 animate-spin" />
                       Изпращане...
                     </>
                   ) : (
@@ -565,7 +589,7 @@ const ProjectInquiry = () => {
                     </>
                   )}
                 </Button>
-              </motion.form>
+              </form>
             )}
           </div>
         </div>

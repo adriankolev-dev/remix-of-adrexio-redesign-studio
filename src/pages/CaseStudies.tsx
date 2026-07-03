@@ -1,178 +1,124 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, TrendingUp, Clock, Users, ExternalLink } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import CaseStudyFilters from "@/components/case-studies/CaseStudyFilters";
 import MobileAppsSection from "@/components/case-studies/MobileAppsSection";
+import PageIntro from "@/components/editorial/PageIntro";
+import Reveal from "@/components/editorial/Reveal";
+import SectionHeader from "@/components/editorial/SectionHeader";
+import RobotMascot from "@/components/mascots/RobotMascot";
+import CTASection from "@/components/CTASection";
 import { caseStudies, getCaseStudiesByCategory } from "@/data/caseStudies";
+import { getBreadcrumbSchema } from "@/lib/structuredData";
+
+const summaryStats = [
+  { value: "30+", label: "Доволни клиенти" },
+  { value: "50+", label: "Завършени проекта" },
+  { value: "+150%", label: "Среден растеж" },
+  { value: "< 2 сек", label: "Време за зареждане" },
+];
 
 const CaseStudies = () => {
   const [activeCategory, setActiveCategory] = useState("Всички");
-  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredStudies = useMemo(() => {
-    let result = getCaseStudiesByCategory(activeCategory);
-    
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(
-        (study) =>
-          study.title.toLowerCase().includes(query) ||
-          study.subtitle.toLowerCase().includes(query) ||
-          study.category.toLowerCase().includes(query) ||
-          study.technologies.some((tech) => tech.toLowerCase().includes(query))
-      );
-    }
-    
-    return result;
-  }, [activeCategory, searchQuery]);
+  const filteredStudies = getCaseStudiesByCategory(activeCategory);
+  const isFiltering = activeCategory !== "Всички";
 
-  const isFiltering = activeCategory !== "Всички" || searchQuery.trim();
+  const publicStudies = caseStudies.filter((s) => s.isPublic);
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: "Портфолио — Adrexio",
+      description:
+        "Реални проекти на Adrexio: уебсайтове, мобилни приложения и дигитални решения за бизнеси от различни индустрии.",
+      url: "https://www.adrexio.com/case-studies",
+      inLanguage: "bg-BG",
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: publicStudies.length,
+        itemListElement: publicStudies.map((study, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: study.title,
+          url: `https://www.adrexio.com/case-studies/${study.id}`,
+        })),
+      },
+    },
+    getBreadcrumbSchema([
+      { name: "Начало", url: "https://www.adrexio.com/" },
+      { name: "Портфолио", url: "https://www.adrexio.com/case-studies" },
+    ]),
+  ];
 
   return (
     <main className="min-h-screen bg-background">
+      <SEO
+        title="Портфолио — реални проекти на Adrexio"
+        description="Разгледайте реални проекти на Adrexio — уебсайтове, мобилни приложения, UI/UX дизайн и дигитални решения, изградени от нулата за бизнеси от различни индустрии."
+        keywords="портфолио, проекти, case studies, уеб дизайн, уебсайтове, мобилни приложения, Adrexio, България"
+        structuredData={structuredData}
+      />
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
-        {/* Animated background gradients */}
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-pulse delay-700" />
-        
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
+      <PageIntro
+        index="01"
+        label="Портфолио"
+        title={
+          <>
+            Реални проекти, <span className="accent-mark">реални резултати</span>.
+          </>
+        }
+        description="Разгледайте как помогнахме на бизнеси от различни индустрии да постигнат дигитален успех — с решения, изградени от нулата, а не от шаблон."
+      />
 
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <motion.span 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block"
-            >
-              Нашето портфолио
-            </motion.span>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6"
-            >
-              Реални проекти,{" "}
-              <span className="text-gradient inline-block">
-                реални резултати
-              </span>
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-muted-foreground text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
-            >
-              Разгледайте как помогнахме на бизнеси от различни индустрии да постигнат дигитален успех чрез иновативни решения и стратегическо мислене.
-            </motion.p>
-          </motion.div>
-
-          {/* Filters */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <CaseStudyFilters
-              activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
-              searchQuery={searchQuery}
-              onSearchChange={setSearchQuery}
-            />
-          </motion.div>
+      {/* Filters */}
+      <section className="relative bg-background pb-12">
+        <div className="container mx-auto px-6">
+          <CaseStudyFilters
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+          />
         </div>
       </section>
 
       {/* All Projects Grid */}
       <section className="pb-24">
         <div className="container mx-auto px-6">
-          {isFiltering && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-2">
-                {activeCategory === "Всички" ? "Резултати от търсене" : activeCategory}
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                {filteredStudies.length} {filteredStudies.length === 1 ? "проект" : "проекта"}
-              </p>
-            </motion.div>
-          )}
-
-          {!isFiltering && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-3">
-                Всички <span className="text-gradient">проекти</span>
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                Пълното ни портфолио от завършени проекти
-              </p>
-            </motion.div>
-          )}
+          <div className="mb-10 border-t border-border pt-8">
+            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
+              {isFiltering ? activeCategory : "Всички проекти"}
+            </span>
+            <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+              {filteredStudies.length}{" "}
+              {filteredStudies.length === 1 ? "проект" : "проекта"} в портфолиото
+            </h2>
+          </div>
 
           {filteredStudies.length > 0 ? (
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6 auto-rows-[200px] md:auto-rows-[240px] lg:auto-rows-[280px]" style={{ gridAutoFlow: 'dense' }}>
-              {filteredStudies.map((study, index) => {
-                // agma.bg pattern: Alternating large and small cards
-                // Large cards every 5th position for balanced distribution
-                const isFeatured = index % 5 === 0;
-                
-                return (
-                  <div
-                    key={study.id}
-                    className={
-                      isFeatured 
-                        ? "col-span-2 row-span-2" 
-                        : "col-span-1 row-span-1"
-                    }
-                  >
-                    <CaseStudyCard 
-                      study={study} 
-                      index={index}
-                      variant={isFeatured ? "featured" : "default"}
-                    />
-                  </div>
-                );
-              })}
+            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredStudies.map((study, index) => (
+                <CaseStudyCard key={study.id} study={study} index={index} />
+              ))}
             </div>
           ) : (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-16"
+              className="flex flex-col items-center border-t border-border py-16 text-center"
             >
-              <p className="text-muted-foreground text-lg mb-4">
-                Няма намерени проекти за "{searchQuery}"
+              <RobotMascot variant="lost" className="mb-8 max-w-[220px]" />
+              <p className="mb-4 text-lg text-muted-foreground">
+                Няма проекти в тази категория
               </p>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setSearchQuery("");
-                  setActiveCategory("Всички");
-                }}
-              >
-                Изчисти филтрите
+              <Button variant="line" onClick={() => setActiveCategory("Всички")}>
+                Виж всички проекти
               </Button>
             </motion.div>
           )}
@@ -182,84 +128,61 @@ const CaseStudies = () => {
       {/* Mobile Apps Section */}
       {!isFiltering && <MobileAppsSection />}
 
-      {/* Stats Summary */}
-      <section className="py-24 bg-gradient-to-b from-card to-background">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Нашата история на <span className="text-gradient">успеха</span>
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Числа, които отразяват нашия ангажимент да доставяме изключителни резултати за всеки клиент.
-            </p>
-          </motion.div>
+      {/* Stats — editorial dark band, big numbers on hairlines */}
+      <section className="layer-dark relative overflow-hidden py-24 md:py-32">
+        <div className="canvas-grid absolute inset-0 opacity-[0.06]" aria-hidden />
+        <div className="container relative z-10 mx-auto px-6">
+          <SectionHeader
+            index="02"
+            label="Резултати"
+            title={
+              <>
+                Нашата история на <span className="text-primary">успеха</span>.
+              </>
+            }
+            description="Числа, които отразяват ангажимента ни да доставяме изключителни резултати за всеки клиент."
+          />
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              { icon: Users, value: "30+", label: "Доволни клиенти" },
-              { icon: ExternalLink, value: "50+", label: "Завършени проекта" },
-              { icon: TrendingUp, value: "+150%", label: "Среден растеж" },
-              { icon: Clock, value: "< 2сек", label: "Време за зареждане" }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="border-gradient p-6 rounded-xl text-center"
-              >
-                <stat.icon className="w-8 h-8 text-primary mx-auto mb-3" />
-                <div className="text-3xl font-display font-bold text-gradient mb-1">
-                  {stat.value}
+          <div className="grid grid-cols-2 border-t border-border sm:grid-cols-4">
+            {summaryStats.map((stat, i) => (
+              <Reveal key={stat.label} delay={i * 0.06}>
+                <div className="border-b border-border py-8 md:py-10">
+                  <div className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+                    {stat.value}
+                  </div>
+                  <div className="font-mono-meta mt-3 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  {stat.label}
-                </div>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* CTA */}
-      <section className="py-24">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-              Готови ли сте да станете следващата ни история на успеха?
-            </h2>
-            <p className="text-muted-foreground mb-8 text-lg">
-              Нека обсъдим как можем да помогнем на вашия бизнес да постигне подобни резултати. Свържете се с нас за безплатна консултация.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="hero" size="xl" asChild>
+          <Reveal delay={0.24} className="mt-12">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Button variant="accent" size="lg" asChild>
                 <Link to="/contact">
-                  Започнете проект
+                  Започни проект
                   <ArrowRight size={18} />
                 </Link>
               </Button>
-              <Button variant="heroOutline" size="xl" asChild>
+              <Button
+                variant="line"
+                size="lg"
+                asChild
+                className="border-foreground/25 text-foreground hover:border-foreground/50"
+              >
                 <Link to="/services">
-                  Разгледайте услугите ни
+                  Разгледай услугите
                   <ArrowUpRight size={18} />
                 </Link>
               </Button>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
+      <CTASection />
       <Footer />
     </main>
   );

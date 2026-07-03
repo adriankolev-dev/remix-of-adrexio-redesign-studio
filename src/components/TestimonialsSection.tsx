@@ -1,7 +1,10 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
 import { Star } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import Reveal from "@/components/editorial/Reveal";
+import SectionEyebrow from "@/components/editorial/SectionEyebrow";
+import { EASE_OUT } from "@/components/editorial/motion";
 
-// Import client logos
 import supercreditLogo from "@/assets/clients/supercredit.svg";
 import fmlLogo from "@/assets/clients/fml.png";
 import athleticiqLogo from "@/assets/clients/athleticiq.png";
@@ -10,20 +13,20 @@ import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
 
 const testimonials = [
   {
-    quote: "Adrexio надминаха очакванията ми. Успяха да разберат визията ми още от първия разговор и я реализираха в изключително функционален и добре структуриран сайт.",
-    highlight: "Харесва ми, че мислят не само за дизайна, но и за потребителското изживяване и бързината.",
+    quote: "Adrexio надминаха очакванията ми. Успяха да разберат визията ми още от първия разговор.",
+    highlight: "Мислят не само за дизайна, но и за UX и бързината.",
     author: "Борислав Гоцев",
     role: "Директор",
     company: "SuperCredit",
-    logo: supercreditLogo
+    logo: supercreditLogo,
   },
   {
     quote: "Търсех надежден партньор за уеб сайт и го намерих в лицето на Adrexio.",
-    highlight: "Процесът беше ясен, комуникацията — отлична, а крайният резултат — напълно отговарящ на бизнес целите ми.",
+    highlight: "Процесът беше ясен, комуникацията — отлична.",
     author: "Николай Кирилов",
     role: "HR",
     company: "FML-BD",
-    logo: fmlLogo
+    logo: fmlLogo,
   },
   {
     quote: "Супер доволна съм от съвместната работа с Adrexio.",
@@ -31,7 +34,7 @@ const testimonials = [
     author: "Гергана Драгиева",
     role: "PO",
     company: "Athleticiqapp",
-    logo: athleticiqLogo
+    logo: athleticiqLogo,
   },
   {
     quote: "Работата с Adrexio беше истинско удоволствие.",
@@ -39,152 +42,104 @@ const testimonials = [
     author: "Камелия Петрова",
     role: "Собственик",
     company: "Body Aesthetics",
-    logo: bodyaestheticsLogo
+    logo: bodyaestheticsLogo,
   },
   {
     quote: "Изключително коректен и креативен екип!",
-    highlight: "Adrexio ми създадоха модерен уеб сайт, който отговаря напълно на нуждите на бизнеса ми.",
+    highlight: "Създадоха модерен сайт, който отговаря напълно на нуждите на бизнеса ми.",
     author: "Ивана Иванова",
     role: "Собственик",
     company: "Amelia Diva",
-    logo: ameliadivaLogo
-  }
+    logo: ameliadivaLogo,
+  },
 ];
 
-// Duplicate testimonials for infinite scroll effect
-const testimonialsRow1 = [...testimonials, ...testimonials];
-const testimonialsRow2 = [...testimonials.slice(2), ...testimonials.slice(0, 2), ...testimonials.slice(2), ...testimonials.slice(0, 2)];
-
 const TestimonialsSection = () => {
+  const reduceMotion = useReducedMotion();
+  const [active, setActive] = useState(0);
+  const t = testimonials[active];
+
   return (
-    <section className="py-24 relative overflow-hidden bg-background">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-          Adrexio
-          </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-            Какво споделят <span className="text-gradient">клиентите</span> ни
-          </h2>
-        </motion.div>
+    <section className="relative overflow-hidden bg-background py-24 md:py-32">
+      <div className="container mx-auto px-6">
+        <Reveal>
+          <SectionEyebrow label="Отзиви" index="08" />
+        </Reveal>
 
-        {/* Vertical scrolling testimonials - 3 columns */}
-        <div className="relative max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Column 1 - scroll down */}
-            <div className="overflow-hidden h-[600px]">
-              <motion.div
-                className="flex flex-col gap-6"
-                animate={{
-                  y: [0, -1200],
-                }}
-                transition={{
-                  y: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 30,
-                    ease: "linear",
-                  },
-                }}
-              >
-                {testimonialsRow1.map((testimonial, index) => (
-                  <TestimonialCard key={`col1-${index}`} testimonial={testimonial} />
+        {/* Featured pull-quote — magazine scale, no card */}
+        <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-16">
+          <div>
+            <Reveal delay={0.06}>
+              <div className="mb-6 flex gap-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} size={16} className="fill-primary text-primary" />
                 ))}
-              </motion.div>
-            </div>
+              </div>
+            </Reveal>
 
-            {/* Column 2 - scroll up (reverse) */}
-            <div className="overflow-hidden h-[600px] hidden md:block">
-              <motion.div
-                className="flex flex-col gap-6"
-                animate={{
-                  y: [-1200, 0],
-                }}
-                transition={{
-                  y: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 30,
-                    ease: "linear",
-                  },
-                }}
-              >
-                {testimonialsRow2.map((testimonial, index) => (
-                  <TestimonialCard key={`col2-${index}`} testimonial={testimonial} />
-                ))}
-              </motion.div>
+            <div className="min-h-[220px] md:min-h-[240px]">
+              <AnimatePresence mode="wait">
+                <motion.blockquote
+                  key={active}
+                  initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduceMotion ? undefined : { opacity: 0, y: -12 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.4, ease: EASE_OUT }}
+                  className="font-display text-2xl font-bold leading-snug tracking-tight text-foreground md:text-4xl"
+                >
+                  „{t.quote}{" "}
+                  <span className="bg-[linear-gradient(transparent_68%,hsl(var(--primary)/0.3)_68%)]">
+                    {t.highlight}
+                  </span>
+                  "
+                  <footer className="mt-8 flex items-center gap-4">
+                    <img
+                      src={t.logo}
+                      alt={t.company}
+                      className="h-8 w-auto max-w-[96px] object-contain"
+                    />
+                    <span className="text-sm font-normal text-muted-foreground">
+                      <span className="font-semibold text-foreground">{t.author}</span>
+                      {" — "}
+                      {t.role}, {t.company}
+                    </span>
+                  </footer>
+                </motion.blockquote>
+              </AnimatePresence>
             </div>
+          </div>
 
-            {/* Column 3 - scroll down (slightly different speed) */}
-            <div className="overflow-hidden h-[600px] hidden lg:block">
-              <motion.div
-                className="flex flex-col gap-6"
-                animate={{
-                  y: [0, -1200],
-                }}
-                transition={{
-                  y: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 35,
-                    ease: "linear",
-                  },
-                }}
-              >
-                {testimonialsRow1.map((testimonial, index) => (
-                  <TestimonialCard key={`col3-${index}`} testimonial={testimonial} />
-                ))}
-              </motion.div>
-            </div>
+          {/* Author selector — hairline list, cyan active marker */}
+          <div className="border-t border-border lg:w-64 lg:border-l lg:border-t-0 lg:pl-8">
+            {testimonials.map((item, i) => {
+              const isActive = i === active;
+              return (
+                <button
+                  key={item.author}
+                  onClick={() => setActive(i)}
+                  onMouseEnter={() => setActive(i)}
+                  className="group flex w-full items-center gap-3 border-b border-border py-3.5 text-left lg:border-b-0 lg:py-2.5"
+                >
+                  <span
+                    className={`h-px transition-all duration-300 ${
+                      isActive ? "w-6 bg-primary" : "w-3 bg-border group-hover:w-5 group-hover:bg-foreground/40"
+                    }`}
+                    aria-hidden
+                  />
+                  <span
+                    className={`text-sm font-medium transition-colors ${
+                      isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+                    }`}
+                  >
+                    {item.company}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
     </section>
-  );
-};
-
-// Testimonial Card Component
-const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => {
-  return (
-    <div className="flex-shrink-0 group">
-      <div className="h-full p-6 rounded-2xl bg-card/80 dark:bg-card/90 backdrop-blur-sm border border-border/50 hover:border-primary/50 shadow-lg hover:shadow-xl transition-all duration-300">
-        <div className="flex gap-1 mb-4">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <Star key={i} size={14} className="fill-primary text-primary" />
-          ))}
-        </div>
-
-        <blockquote className="text-sm text-foreground/90 leading-relaxed mb-4">
-          {testimonial.quote} <span className="font-semibold text-foreground">{testimonial.highlight}</span>
-        </blockquote>
-
-        <div className="flex items-center gap-3 pt-4 border-t border-border/50">
-          <div className="w-10 h-10 rounded-full bg-white dark:bg-white/95 flex items-center justify-center overflow-hidden border border-border shadow-sm flex-shrink-0">
-            <img
-              src={testimonial.logo}
-              alt={`${testimonial.author} company logo`}
-              className="w-full h-full object-contain p-1.5"
-            />
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="font-semibold text-foreground text-sm">
-              {testimonial.author}
-            </div>
-            <div className="text-xs text-muted-foreground">
-              {testimonial.role} / <span className="text-primary font-medium">{testimonial.company}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 };
 

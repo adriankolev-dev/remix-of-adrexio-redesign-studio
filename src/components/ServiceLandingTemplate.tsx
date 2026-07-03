@@ -1,13 +1,22 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { LucideIcon, ArrowRight, CheckCircle, Phone, ChevronDown } from "lucide-react";
+import { LucideIcon, ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import DesignedForSection from "@/components/DesignedForSection";
-import { getServiceSchema } from "@/lib/structuredData";
+import PageIntro from "@/components/editorial/PageIntro";
+import Reveal from "@/components/editorial/Reveal";
+import SectionEyebrow from "@/components/editorial/SectionEyebrow";
+import SectionHeader from "@/components/editorial/SectionHeader";
+import { useLocation } from "react-router-dom";
+import { getServiceSchema, getFAQSchema, getBreadcrumbSchema } from "@/lib/structuredData";
 
 interface ServiceFeature {
   title: string;
@@ -53,58 +62,60 @@ export interface ServiceLandingProps {
   seoDescription?: string;
   seoKeywords?: string;
   serviceName?: string;
-  
+
   // Hero section
   heroTitle: string;
   heroHighlight: string;
   heroSubtitle: string;
   heroCTAText?: string;
-  
+  /** Optional visual accent shown beside the hero copy on large screens. */
+  heroAside?: React.ReactNode;
+
   // Stats
   stats: { value: string; label: string }[];
-  
+
   // Introduction section
   introTitle: string;
   introDescription: string;
   introImage?: string;
-  
+
   // What you get / Features section
   featuresTitle: string;
   featuresSubtitle: string;
   features: ServiceFeature[];
-  
+
   // Benefits section
   benefitsTitle: string;
   benefitsSubtitle: string;
   benefits: Benefit[];
-  
+
   // Process section
   processTitle: string;
   processSubtitle: string;
   steps: ProcessStep[];
-  
+
   // Technologies section (optional)
   technologiesTitle?: string;
   technologies?: Technology[];
-  
+
   // Use cases section
   useCasesTitle: string;
   useCasesSubtitle: string;
   useCases: UseCase[];
-  
+
   // Why choose us section
   whyChooseUsTitle: string;
   whyChooseUsSubtitle: string;
   whyChooseUs: WhyChooseUs[];
-  
+
   // FAQ section
   faqTitle: string;
   faqs: FAQ[];
-  
+
   // CTA section
   ctaTitle: string;
   ctaSubtitle: string;
-  
+
   // Optional: show "Designed For" / Проектиран за section (e.g. Web Development only)
   showDesignedForSection?: boolean;
 
@@ -113,10 +124,12 @@ export interface ServiceLandingProps {
 
   // Optional section between Technologies and Use Cases / Why Choose Us (e.g. 3D separator)
   customSectionAfterTechnologies?: React.ReactNode;
-  
+
   // Optional custom section before Footer
   customSection?: React.ReactNode;
 }
+
+const num = (i: number) => String(i + 1).padStart(2, "0");
 
 const ServiceLandingTemplate = ({
   seoTitle,
@@ -126,11 +139,11 @@ const ServiceLandingTemplate = ({
   heroTitle,
   heroHighlight,
   heroSubtitle,
-  heroCTAText = "ЗАПОЧНИ СВОЯ ПРОЕКТ",
+  heroCTAText = "Започни своя проект",
+  heroAside,
   stats,
   introTitle,
   introDescription,
-  introImage,
   featuresTitle,
   featuresSubtitle,
   features,
@@ -157,9 +170,18 @@ const ServiceLandingTemplate = ({
   customSectionAfterTechnologies,
   customSection,
 }: ServiceLandingProps) => {
-  const structuredData = serviceName 
-    ? getServiceSchema(serviceName, seoDescription || heroSubtitle)
-    : undefined;
+  const location = useLocation();
+  const serviceUrl = `https://www.adrexio.com${location.pathname.replace(/\/$/, "")}`;
+
+  const structuredData = [
+    serviceName ? getServiceSchema(serviceName, seoDescription || heroSubtitle) : null,
+    faqs && faqs.length > 0 ? getFAQSchema(faqs) : null,
+    getBreadcrumbSchema([
+      { name: "Начало", url: "https://www.adrexio.com/" },
+      { name: "Услуги", url: "https://www.adrexio.com/services" },
+      { name: serviceName || heroTitle, url: serviceUrl },
+    ]),
+  ].filter(Boolean);
 
   return (
     <main className="min-h-screen bg-background">
@@ -171,510 +193,297 @@ const ServiceLandingTemplate = ({
       />
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-20 right-1/4 w-[400px] h-[400px] bg-accent/15 rounded-full blur-[100px]" />
-        </div>
+      {/* Hero — shared editorial intro */}
+      <PageIntro
+        index="01"
+        label={serviceName || "Услуга"}
+        title={
+          <>
+            {heroTitle} <span className="accent-mark">{heroHighlight}</span>
+          </>
+        }
+        description={heroSubtitle}
+        actions={
+          <>
+            <Button variant="ink" size="lg" asChild>
+              <Link to="/contact">
+                {heroCTAText}
+                <ArrowRight size={18} />
+              </Link>
+            </Button>
+            <Button variant="line" size="lg" asChild>
+              <a href="tel:+359896173743">
+                <Phone size={18} />
+                +359 896 173 743
+              </a>
+            </Button>
+          </>
+        }
+        meta={stats}
+        aside={heroAside}
+      />
 
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
-              {heroTitle}{" "}
-              <span className="text-gradient">{heroHighlight}</span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-              {heroSubtitle}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Button variant="hero" size="xl" asChild>
-                <Link to="/contact">
-                  {heroCTAText}
-                  <ArrowRight size={20} />
-                </Link>
-              </Button>
-              <Button variant="heroOutline" size="xl" asChild>
-                <a href="tel:+359896173743">
-                  <Phone size={20} />
-                  +359 896 173 743
-                </a>
-              </Button>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="text-3xl md:text-4xl font-display font-bold text-gradient mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Introduction Section */}
-      <section className="py-24 bg-card/50">
+      {/* Introduction — two-column editorial statement */}
+      <section className="relative bg-background py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-                Какво получавате?
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                {introTitle}
-              </h2>
-              <p className="text-muted-foreground leading-relaxed text-lg">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+            <div className="lg:sticky lg:top-32 lg:self-start">
+              <Reveal>
+                <SectionEyebrow label="Какво получавате" index="02" />
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="font-display mt-6 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  {introTitle}
+                </h2>
+              </Reveal>
+            </div>
+            <Reveal delay={0.12} className="lg:pt-2">
+              <p className="text-lg leading-relaxed text-muted-foreground md:text-xl md:leading-relaxed">
                 {introDescription}
               </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              {introImage ? (
-                <div className="aspect-video rounded-2xl overflow-hidden border-gradient">
-                  <img
-                    src={introImage}
-                    alt={introTitle}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ) : (
-                <div className="relative">
-                  {/* Abstract decorative visual */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-3xl blur-3xl" />
-                  
-                  {/* Floating benefit cards */}
-                  <div className="relative grid grid-cols-2 gap-4">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20, rotate: -3 }}
-                      whileInView={{ opacity: 1, y: 0, rotate: -3 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 }}
-                      whileHover={{ scale: 1.05, rotate: 0 }}
-                      className="p-6 rounded-2xl backdrop-blur-sm border border-primary/20 bg-card/80 col-span-2"
-                    >
-                      <div className="text-2xl md:text-3xl font-display font-bold text-gradient mb-1">
-                        50/50
-                      </div>
-                      <div className="text-sm text-muted-foreground">Плащане след одобрение</div>
-                    </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20, rotate: 3 }}
-                      whileInView={{ opacity: 1, y: 0, rotate: 3 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 }}
-                      whileHover={{ scale: 1.05, rotate: 0 }}
-                      className="p-6 rounded-2xl backdrop-blur-sm border border-primary/20 bg-card/80"
-                    >
-                      <div className="text-2xl md:text-3xl font-display font-bold text-gradient mb-1">
-                        100%
-                      </div>
-                      <div className="text-sm text-muted-foreground">Гаранция за качество</div>
-                    </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20, rotate: -3 }}
-                      whileInView={{ opacity: 1, y: 0, rotate: -3 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.4 }}
-                      whileHover={{ scale: 1.05, rotate: 0 }}
-                      className="p-6 rounded-2xl backdrop-blur-sm border border-primary/20 bg-card/80"
-                    >
-                      <div className="text-2xl md:text-3xl font-display font-bold text-gradient mb-1">
-                        24/7
-                      </div>
-                      <div className="text-sm text-muted-foreground">Техническа поддръжка</div>
-                    </motion.div>
-                  </div>
-                  
-                  {/* Decorative elements */}
-                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
-                  <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
-                </div>
-              )}
-            </motion.div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Designed For Section – only when enabled (e.g. Web Development page) */}
+      {/* Designed For — only when enabled */}
       {showDesignedForSection && <DesignedForSection />}
 
-      {/* Features Section */}
-      <section className="py-24">
+      {/* Features — full-width numbered index, hairlines, no cards */}
+      <section className="relative bg-secondary/30 py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              {featuresSubtitle}
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              {featuresTitle}
-            </h2>
-          </motion.div>
+          <SectionHeader index="03" label={featuresSubtitle} title={featuresTitle} />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-gradient group hover:scale-[1.02] transition-transform"
-              >
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+          <div className="border-t border-border">
+            {features.map((feature, i) => (
+              <Reveal key={feature.title} delay={(i % 3) * 0.05}>
+                <div className="grid grid-cols-[auto_1fr] gap-5 border-b border-border py-6 md:gap-8 md:py-7">
+                  <span className="font-mono-meta pt-1 text-[0.7rem] text-primary">{num(i)}</span>
                   <div>
-                    <h3 className="font-display font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
                       {feature.description}
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Button variant="outline" size="lg" asChild>
+          <Reveal delay={0.16} className="mt-12">
+            <Button variant="line" size="lg" asChild>
               <Link to="/case-studies">
-                РАЗГЛЕДАЙ ПОРТФОЛИОТО НИ
+                Разгледай портфолиото ни
                 <ArrowRight size={18} />
               </Link>
             </Button>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-24 bg-gradient-to-b from-card/50 to-background">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              {benefitsSubtitle}
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              {benefitsTitle}
-            </h2>
-          </motion.div>
+      {/* Benefits — dark layer band with big numbered outcomes */}
+      <section className="layer-dark relative overflow-hidden py-24 md:py-32">
+        <div className="canvas-grid absolute inset-0 opacity-[0.06]" aria-hidden />
+        <div className="container relative z-10 mx-auto px-6">
+          <SectionHeader index="04" label={benefitsSubtitle} title={benefitsTitle} />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-gradient text-center group hover:scale-[1.02] transition-transform"
-              >
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center mx-auto mb-4">
-                  <benefit.icon className="w-7 h-7 text-primary" />
+          <div className="grid gap-x-10 border-t border-border sm:grid-cols-2">
+            {benefits.map((benefit, i) => (
+              <Reveal key={benefit.title} delay={(i % 2) * 0.06}>
+                <div className="flex gap-5 border-b border-border py-8 md:py-9">
+                  <benefit.icon className="mt-1 h-6 w-6 shrink-0 text-primary" strokeWidth={1.75} />
+                  <div>
+                    <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+                      {benefit.title}
+                    </h3>
+                    <p className="mt-2 max-w-md text-base leading-relaxed text-muted-foreground">
+                      {benefit.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="font-display font-semibold mb-2">{benefit.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {benefit.description}
-                </p>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-24">
+      {/* Process — vertical timeline with oversized ghost numbers */}
+      <section className="relative bg-background py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              {processSubtitle}
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              {processTitle}
-            </h2>
-          </motion.div>
+          <SectionHeader index="05" label={processSubtitle} title={processTitle} />
 
-          <div className="max-w-4xl mx-auto">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative flex gap-6 mb-8 last:mb-0"
-              >
-                {/* Timeline line */}
-                {index < steps.length - 1 && (
-                  <div className="absolute left-6 top-14 w-0.5 h-full bg-gradient-to-b from-primary/50 to-transparent" />
-                )}
-                
-                {/* Step number */}
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 z-10">
-                  <span className="font-display font-bold text-primary-foreground">
-                    {step.number}
+          <div className="border-t border-border">
+            {steps.map((step, i) => (
+              <Reveal key={step.title} delay={i * 0.04}>
+                <div className="grid grid-cols-[auto_1fr] items-start gap-5 border-b border-border py-8 md:gap-10 md:py-10">
+                  <span className="font-display text-4xl font-bold leading-none text-foreground/10 md:text-6xl">
+                    {step.number.padStart(2, "0")}
                   </span>
+                  <div className="pt-1">
+                    <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-
-                {/* Content */}
-                <div className="flex-1 p-6 rounded-xl border-gradient">
-                  <h3 className="font-display font-bold text-lg mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Technologies Section */}
+      {/* Technologies — mono tag row on a hairline */}
       {technologies && technologies.length > 0 && (
-        <section className="py-24 bg-card/50">
+        <section className="relative bg-secondary/30 py-24 md:py-32">
           <div className="container mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-                Технологии
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display font-bold">
-                {technologiesTitle || "Технологии, които използваме"}
-              </h2>
-            </motion.div>
-
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-              {technologies.map((tech, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  className="px-6 py-3 rounded-full border-gradient text-sm font-medium hover:scale-105 transition-transform"
-                >
-                  {tech.name}
-                </motion.div>
+            <SectionHeader
+              index="06"
+              label="Технологии"
+              title={technologiesTitle || "Технологии, които използваме"}
+            />
+            <div className="flex flex-wrap gap-x-8 gap-y-4 border-t border-border pt-10">
+              {technologies.map((tech, i) => (
+                <Reveal key={tech.name} delay={(i % 6) * 0.04}>
+                  <span className="font-mono-meta text-sm uppercase tracking-[0.14em] text-foreground/80">
+                    <span className="mr-2 text-primary">/</span>
+                    {tech.name}
+                  </span>
+                </Reveal>
               ))}
+            </div>
           </div>
-        </div>
         </section>
       )}
 
       {/* Optional section after technologies (e.g. 3D separator) */}
       {customSectionAfterTechnologies}
 
-      {/* Use Cases Section - only when there are use cases */}
+      {/* Use Cases — numbered index (only when provided) */}
       {useCases.length > 0 && (
-      <section className="py-24">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              {useCasesSubtitle}
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              {useCasesTitle}
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {useCases.map((useCase, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-gradient group hover:scale-[1.02] transition-transform"
-              >
-                <h3 className="font-display font-semibold mb-3 text-lg">{useCase.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {useCase.description}
-                </p>
-              </motion.div>
-            ))}
+        <section className="relative bg-background py-24 md:py-32">
+          <div className="container mx-auto px-6">
+            <SectionHeader index="07" label={useCasesSubtitle} title={useCasesTitle} />
+            <div className="border-t border-border">
+              {useCases.map((useCase, i) => (
+                <Reveal key={useCase.title} delay={(i % 3) * 0.05}>
+                  <div className="grid grid-cols-[auto_1fr] gap-5 border-b border-border py-6 md:gap-8 md:py-7">
+                    <span className="font-mono-meta pt-1 text-[0.7rem] text-primary">{num(i)}</span>
+                    <div>
+                      <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
+                        {useCase.title}
+                      </h3>
+                      <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+                        {useCase.description}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
 
-      {/* Why Choose Us Section */}
-      <section className="py-24 bg-gradient-to-b from-card/50 to-background">
+      {/* Why Choose Us — sticky heading + numbered manifest */}
+      <section className="relative bg-secondary/30 py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              {whyChooseUsSubtitle}
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              {whyChooseUsTitle}
-            </h2>
-          </motion.div>
+          <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
+            <div className="lg:sticky lg:top-32 lg:self-start">
+              <Reveal>
+                <SectionEyebrow label={whyChooseUsSubtitle} index="08" />
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="font-display mt-6 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+                  {whyChooseUsTitle}
+                </h2>
+              </Reveal>
+            </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {whyChooseUs.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-xl border-gradient group hover:scale-[1.02] transition-transform"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-display font-semibold mb-2 text-lg">{item.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
+            <div className="border-t border-border">
+              {whyChooseUs.map((item, i) => (
+                <Reveal key={item.title} delay={i * 0.05}>
+                  <div className="flex gap-5 border-b border-border py-7 md:py-8">
+                    <item.icon className="mt-1 h-6 w-6 shrink-0 text-primary" strokeWidth={1.75} />
+                    <div>
+                      <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 max-w-lg text-base leading-relaxed text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-24">
+      {/* FAQ — hairline accordion */}
+      <section className="relative bg-background py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm font-medium uppercase tracking-wider mb-4 block">
-              FAQ
-            </span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              {faqTitle}
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
-          >
-            <Accordion type="single" collapsible className="space-y-4">
+          <SectionHeader index="09" label="FAQ" title={faqTitle} />
+          <div className="mx-auto max-w-3xl border-t border-border">
+            <Accordion type="single" collapsible>
               {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`faq-${index}`}
-                  className="border-gradient rounded-xl px-6 overflow-hidden"
-                >
-                  <AccordionTrigger className="text-left font-display font-semibold hover:no-underline py-5">
+                <AccordionItem key={index} value={`faq-${index}`} className="border-b border-border">
+                  <AccordionTrigger className="py-6 text-left font-display text-base font-semibold hover:text-primary hover:no-underline md:text-lg">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                  <AccordionContent className="pb-6 text-base leading-relaxed text-muted-foreground">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Custom Section Before CTA (optional) */}
+      {/* Custom Section Before CTA (optional — e.g. pricing / projects) */}
       {customSectionBeforeCTA}
 
-      {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-b from-card to-background relative overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px]" />
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
+      {/* CTA — dark layer band */}
+      <section className="layer-dark relative overflow-hidden py-28 md:py-36">
+        <div className="canvas-grid absolute inset-0 opacity-[0.07]" aria-hidden />
+        <div className="container relative z-10 mx-auto px-6 text-center">
+          <Reveal>
+            <SectionEyebrow label="Следваща стъпка" index="10" className="justify-center" />
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h2 className="font-display text-display-sm mx-auto mt-8 max-w-3xl font-bold text-foreground">
               {ctaTitle}
             </h2>
-            <p className="text-lg text-muted-foreground mb-10">
-              {ctaSubtitle}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="xl" asChild>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">{ctaSubtitle}</p>
+          </Reveal>
+          <Reveal delay={0.24}>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button variant="accent" size="xl" asChild>
                 <Link to="/contact">
-                  ЗАПОЧНИ СЕГА
-                  <ArrowRight size={20} />
+                  Започни сега
+                  <ArrowRight size={18} />
                 </Link>
               </Button>
-              <Button variant="heroOutline" size="xl" asChild>
+              <Button
+                variant="line"
+                size="xl"
+                asChild
+                className="border-foreground/25 text-foreground hover:border-foreground/50"
+              >
                 <a href="tel:+359896173743">
-                  <Phone size={20} />
+                  <Phone size={18} />
                   +359 896 173 743
                 </a>
               </Button>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 

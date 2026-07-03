@@ -13,6 +13,7 @@ import {
   MousePointer
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import MegaphoneMascot from "@/components/mascots/MegaphoneMascot";
 
 const DigitalMarketing = () => {
   return (
@@ -25,6 +26,7 @@ const DigitalMarketing = () => {
       heroHighlight="генерира приходи."
       heroSubtitle="Стратегически дигитален маркетинг, който достига правилните хора в правилния момент. Повече leads, повече продажби, повече растеж."
       heroCTAText="БЕЗПЛАТНА КОНСУЛТАЦИЯ"
+      heroAside={<MegaphoneMascot />}
       
       stats={[
         { value: "3.5x", label: "Средна възвръщаемост" },
