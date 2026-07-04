@@ -14,6 +14,7 @@ const navLinks = [
   { name: "Цени", href: "/pricing" },
   { name: "За нас", href: "/about" },
   { name: "Case Studies", href: "/case-studies" },
+  { name: "Блог", href: "/blog" },
 ];
 
 const Navbar = () => {

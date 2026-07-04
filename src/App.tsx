@@ -17,6 +17,8 @@ import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudyDetail from "./pages/CaseStudyDetail";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import ProjectInquiry from "./pages/ProjectInquiry";
 import Privacy from "./pages/Privacy";
@@ -64,6 +66,8 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/contacts" element={<Contact />} />
             <Route path="/project-inquiry" element={<ProjectInquiry />} />
