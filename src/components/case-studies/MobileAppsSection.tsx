@@ -1,111 +1,88 @@
-import { motion } from "framer-motion";
-import { ExternalLink, Star, Download, Smartphone } from "lucide-react";
+import { ExternalLink, Star, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Reveal from "@/components/editorial/Reveal";
+import SectionHeader from "@/components/editorial/SectionHeader";
 import { mobileApps } from "@/data/mobileApps";
 
 const MobileAppsSection = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-card">
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
-            <Smartphone className="w-4 h-4" />
-            <span className="text-sm font-medium">Мобилни приложения</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Приложения, в които <span className="text-gradient">участвахме</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Нашият екип е създал или допринесъл за разработката на тези мобилни приложения, достъпни в App Store.
-          </p>
-        </motion.div>
+    <section className="relative overflow-hidden border-t border-border bg-background py-24 md:py-32">
+      <div className="canvas-grid canvas-grid-fade pointer-events-none absolute inset-0 opacity-50" aria-hidden />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="container relative z-10 mx-auto px-6">
+        <SectionHeader
+          label="Мобилни приложения"
+          title={
+            <>
+              Приложения, в които{" "}
+              <span className="accent-mark">участвахме</span>.
+            </>
+          }
+          description="Нашият екип е създал или допринесъл за разработката на тези мобилни приложения, достъпни в App Store."
+          note="на живо в App Store"
+        />
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {mobileApps.map((app, index) => (
-            <motion.article
-              key={app.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative"
-            >
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5">
-                {/* App Screenshot */}
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={app.image}
-                    alt={app.name}
-                    className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent" />
-                </div>
-
-                {/* Content */}
-                <div className="p-6 -mt-12 relative z-10">
-                  {/* Category & Rating */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`inline-block rounded-full bg-background/80 px-3 py-1 text-xs font-medium uppercase tracking-wider backdrop-blur-sm ${app.accentColor}`}>
-                      {app.category}
-                    </span>
-                    {app.rating && (
-                      <div className="flex items-center gap-1 text-yellow-500">
-                        <Star className="w-4 h-4 fill-current" />
-                        <span className="text-sm font-medium">{app.rating}</span>
-                      </div>
-                    )}
+            <Reveal key={app.id} delay={(index % 3) * 0.06}>
+              <article className="group">
+                <div className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-300 hover:border-primary/40">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
+                    <img
+                      src={app.image}
+                      alt={app.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-display font-bold text-foreground mb-1">
-                    {app.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {app.subtitle}
-                  </p>
+                  <div className="p-6">
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <span className="font-mono-meta text-[0.6rem] uppercase tracking-[0.14em] text-primary">
+                        {app.category}
+                      </span>
+                      {app.rating && (
+                        <div className="flex items-center gap-1 text-primary">
+                          <Star className="h-3.5 w-3.5 fill-current" />
+                          <span className="font-mono-meta text-[0.62rem]">{app.rating}</span>
+                        </div>
+                      )}
+                    </div>
 
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {app.description}
-                  </p>
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                      {app.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{app.subtitle}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {app.description}
+                    </p>
 
-                  {/* Contribution Badge & Downloads */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full">
-                      {app.contribution}
-                    </span>
-                    {app.downloads && (
-                      <div className="flex items-center gap-1 text-muted-foreground text-xs">
-                        <Download className="w-3 h-3" />
-                        {app.downloads}
-                      </div>
-                    )}
+                    <div className="mt-4 flex items-center justify-between gap-3">
+                      <span className="font-mono-meta text-[0.58rem] uppercase tracking-[0.12em] text-muted-foreground">
+                        {app.contribution}
+                      </span>
+                      {app.downloads && (
+                        <div className="flex items-center gap-1 text-muted-foreground">
+                          <Download className="h-3 w-3" />
+                          <span className="font-mono-meta text-[0.58rem]">{app.downloads}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <Button variant="line" size="sm" className="mt-5 w-full" asChild>
+                      <a
+                        href={app.appStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Вижте в App Store
+                      </a>
+                    </Button>
                   </div>
-
-                  {/* App Store Button */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full group/btn"
-                    asChild
-                  >
-                    <a
-                      href={app.appStoreUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2 transition-transform group-hover/btn:translate-x-0.5" />
-                      Вижте в App Store
-                    </a>
-                  </Button>
                 </div>
-              </div>
-            </motion.article>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>
