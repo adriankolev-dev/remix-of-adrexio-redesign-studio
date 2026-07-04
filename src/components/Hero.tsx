@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Lock, Star } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
@@ -187,16 +187,62 @@ const MobileCanvasMessage = () => (
  */
 const MobileCanvasHero = () => {
   const ref = useRef<HTMLElement>(null);
+  const mockupRef = useRef<HTMLDivElement>(null);
+  const chromeRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const restScaleRef = useRef(1);
+  const fitScaleRef = useRef(0.82);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  const sceneScale = useTransform(scrollYProgress, [0, 0.9], [1, 0.86]);
-  const frameOpacity = useTransform(scrollYProgress, [0.08, 0.6], [0, 1]);
-  const chromeY = useTransform(scrollYProgress, [0.08, 0.6], [-10, 0]);
-  const captionOpacity = useTransform(scrollYProgress, [0.55, 0.95], [0, 1]);
-  const captionY = useTransform(scrollYProgress, [0.55, 0.95], [16, 0]);
+  const scaleFor = (v: number) => {
+    const p = Math.min(v / 0.6, 1);
+    const start = restScaleRef.current;
+    const end = fitScaleRef.current;
+    return start - p * (start - end);
+  };
+  const sceneScale = useTransform(scrollYProgress, scaleFor);
+
+  useLayoutEffect(() => {
+    const mockup = mockupRef.current;
+    const chrome = chromeRef.current;
+    const viewport = viewportRef.current;
+    if (!mockup || !chrome || !viewport) return;
+
+    const measure = () => {
+      const GAP = 24;
+      const chromeGap = 36; // -top-9 between chrome and viewport
+      const bottomExtras = 56; // caption below the phone
+      const naturalW = mockup.offsetWidth;
+      const naturalH = chromeGap + chrome.offsetHeight + viewport.offsetHeight + bottomExtras;
+      const availW = window.innerWidth - GAP * 2;
+      const availH = window.innerHeight - GAP * 2;
+
+      const scaleToFit = Math.min(availW / naturalW, availH / naturalH);
+      restScaleRef.current = Math.min(1, scaleToFit);
+      fitScaleRef.current = Math.max(0.5, scaleToFit * 0.9);
+      sceneScale.set(scaleFor(scrollYProgress.get()));
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(mockup);
+    ro.observe(viewport);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const frameOpacity = useTransform(scrollYProgress, [0.14, 0.5], [0, 1]);
+  const chromeY = useTransform(scrollYProgress, [0.14, 0.5], [-10, 0]);
+  const captionOpacity = useTransform(scrollYProgress, [0.4, 0.72], [0, 1]);
+  const captionY = useTransform(scrollYProgress, [0.4, 0.72], [12, 0]);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
 
   return (
@@ -204,14 +250,14 @@ const MobileCanvasHero = () => {
       <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden bg-background">
         <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
 
-        {/* the scene that zooms out to reveal it was a phone canvas all along */}
         <motion.div
-          style={{ scale: sceneScale }}
-          className="relative flex h-[100svh] w-full items-center justify-center"
+          style={{ scale: sceneScale, transformOrigin: "center center" }}
+          className="relative flex w-full items-center justify-center"
         >
-          <div className="relative mx-auto w-[min(400px,90vw)]">
-            {/* mobile chrome — status + url bar that fades/slides in */}
+          <div ref={mockupRef} className="relative mx-auto w-[min(400px,90vw)]">
+            {/* phone chrome — status + url bar */}
             <motion.div
+              ref={chromeRef}
               style={{ opacity: frameOpacity, y: chromeY }}
               className="pointer-events-none absolute -top-9 left-0 right-0 flex items-center rounded-t-[2rem] border border-b-0 border-border bg-card px-5 py-2.5"
             >
@@ -225,27 +271,29 @@ const MobileCanvasHero = () => {
               <span className="absolute right-5 h-1.5 w-6 rounded-full bg-muted-foreground/30" />
             </motion.div>
 
-            {/* phone bezel that materialises */}
-            <motion.div
-              style={{ opacity: frameOpacity }}
-              className="layer-shadow pointer-events-none absolute -inset-x-4 -inset-y-5 rounded-[2.6rem] border-[3px] border-border"
-            />
-
-            {/* the actual hero message (always readable) */}
-            <div className="relative px-1 py-2">
-              <MobileCanvasMessage />
+            {/* phone viewport — clips content; bezel fades in separately */}
+            <div className="relative overflow-hidden rounded-[2rem]">
+              <div ref={viewportRef} className="relative px-1 py-2">
+                <MobileCanvasMessage />
+              </div>
+              <motion.div
+                style={{ opacity: frameOpacity }}
+                className="layer-shadow pointer-events-none absolute inset-0 rounded-[2rem] border-[3px] border-border"
+                aria-hidden
+              />
             </div>
-          </div>
 
-          {/* handwritten caption — appears on zoom-out */}
-          <motion.div
-            style={{ opacity: captionOpacity, y: captionY }}
-            className="absolute bottom-[6vh] right-[5vw] max-w-[170px] rotate-[-4deg] text-right"
-          >
-            <p className="font-hand text-xl leading-tight text-foreground">
-              изградено от нулата, слой по слой
-            </p>
-          </motion.div>
+            {/* caption below the phone — always visible on narrow screens */}
+            <motion.div
+              style={{ opacity: captionOpacity, y: captionY }}
+              className="pointer-events-none absolute inset-x-0 top-full z-10 mx-auto mt-3 max-w-[240px] rotate-[-3deg] text-center"
+            >
+              <p className="font-hand text-lg leading-tight text-foreground">
+                изградено от нулата,
+                <br /> слой по слой
+              </p>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* scroll cue at rest */}
@@ -269,15 +317,67 @@ const Hero = () => {
   const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
   const ref = useRef<HTMLElement>(null);
+  const mockupRef = useRef<HTMLDivElement>(null);
+  const chromeRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  // Start scale keeps the mockup inside the sticky viewport; end scale zooms out further.
+  const restScaleRef = useRef(1);
+  const fitScaleRef = useRef(0.78);
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  const sceneScale = useTransform(scrollYProgress, [0, 0.6], [1, 0.72]);
-  const frameOpacity = useTransform(scrollYProgress, [0.08, 0.46], [0, 1]);
-  const chromeY = useTransform(scrollYProgress, [0.08, 0.46], [-14, 0]);
+  const scaleFor = (v: number) => {
+    const p = Math.min(v / 0.6, 1);
+    const start = restScaleRef.current;
+    const end = fitScaleRef.current;
+    return start - p * (start - end);
+  };
+  const sceneScale = useTransform(scrollYProgress, scaleFor);
+
+  useLayoutEffect(() => {
+    const mockup = mockupRef.current;
+    const chrome = chromeRef.current;
+    const viewport = viewportRef.current;
+    if (!mockup || !chrome || !viewport) return;
+
+    const measure = () => {
+      const GAP = 32;
+      const HEADER = 80; // sticky pt-20 — keeps room for the fixed navbar
+
+      const chromeH = chrome.offsetHeight;
+      const chromeGap = 44; // -top-11 between chrome and viewport
+      // Side annotations sit outside the mockup only on ultrawide — laptops use a caption below the frame.
+      const sideExtras = window.innerWidth >= 1600 ? 300 : 0;
+      const bottomExtras =
+        window.innerWidth >= 1024 && window.innerWidth < 1600 ? 80 : 0;
+      const naturalW = mockup.offsetWidth + sideExtras;
+      const naturalH = chromeGap + chromeH + viewport.offsetHeight + bottomExtras;
+      const availW = window.innerWidth - GAP * 2;
+      const availH = window.innerHeight - HEADER - GAP * 2;
+
+      const scaleToFit = Math.min(availW / naturalW, availH / naturalH);
+      restScaleRef.current = Math.min(1, scaleToFit);
+      fitScaleRef.current = Math.max(0.45, scaleToFit * 0.88);
+      sceneScale.set(scaleFor(scrollYProgress.get()));
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(mockup);
+    ro.observe(viewport);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const frameOpacity = useTransform(scrollYProgress, [0.14, 0.5], [0, 1]);
+  const chromeY = useTransform(scrollYProgress, [0.14, 0.5], [-14, 0]);
   const overlayOpacity = useTransform(scrollYProgress, [0.4, 0.72], [0, 1]);
   const overlayY = useTransform(scrollYProgress, [0.4, 0.72], [18, 0]);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
@@ -301,17 +401,18 @@ const Hero = () => {
 
   return (
     <section ref={ref} className="relative" style={{ height: "280vh" }}>
-      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden bg-background">
+      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden bg-background pt-20">
         <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
 
         {/* The scene that zooms out to reveal it was a canvas all along */}
         <motion.div
-          style={{ scale: sceneScale }}
-          className="relative flex h-screen w-full items-center justify-center"
+          style={{ scale: sceneScale, transformOrigin: "center center" }}
+          className="relative flex w-full items-center justify-center"
         >
-          <div className="relative mx-auto w-[min(1180px,92vw)]">
+          <div ref={mockupRef} className="relative mx-auto w-[min(1180px,92vw)]">
             {/* browser chrome — fades/slides in as the frame is revealed */}
             <motion.div
+              ref={chromeRef}
               style={{ opacity: frameOpacity, y: chromeY }}
               className="pointer-events-none absolute -top-11 left-0 right-0 flex items-center rounded-t-2xl border border-b-0 border-border bg-card px-4 py-3"
             >
@@ -326,63 +427,89 @@ const Hero = () => {
               </span>
             </motion.div>
 
-            {/* the canvas frame ring (border + depth) that materialises */}
-            <motion.div
-              style={{ opacity: frameOpacity }}
-              className="layer-shadow pointer-events-none absolute -inset-x-8 -inset-y-8 rounded-2xl border border-border"
-            />
+            {/* browser viewport — clips content; border overlay fades in separately */}
+            <div className="relative overflow-hidden rounded-2xl">
+              <div ref={viewportRef} className="relative px-2 py-6 md:px-8">
+                <HeroMessage />
+              </div>
 
-            {/* the actual hero message (always readable) */}
-            <div className="relative px-2 py-6 md:px-8">
-              <HeroMessage />
-            </div>
-          </div>
-
-          {/* floating "Слоеве" panel — appears on zoom-out */}
-          <motion.div
-            style={{ opacity: overlayOpacity, y: overlayY }}
-            className="absolute left-[3vw] top-[16vh] hidden rounded-lg border border-border bg-card/95 p-2 backdrop-blur xl:block"
-          >
-            <p className="eyebrow mb-2 px-1">Слоеве</p>
-            <ul className="space-y-1">
-              {["Хедър", "Съдържание", "Проекти", "CTA"].map((layer, i) => (
-                <li
-                  key={layer}
-                  className={`font-mono-meta flex items-center gap-2 rounded px-2 py-1 text-[0.7rem] ${
-                    i === 2 ? "bg-primary/15 text-foreground" : "text-muted-foreground"
-                  }`}
-                >
-                  <span className="h-2 w-2 rounded-[3px] border border-current opacity-60" />
-                  {layer}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* handwritten caption — the second playful accent */}
-          <motion.div
-            style={{ opacity: overlayOpacity, y: overlayY }}
-            className="absolute bottom-[14vh] right-[5vw] hidden max-w-[220px] rotate-[-4deg] text-right lg:block"
-          >
-            <p className="font-hand text-2xl leading-tight text-foreground">
-              изградено от нулата,
-              <br /> слой по слой — не от шаблон
-            </p>
-            <svg
-              className="ml-auto mt-1 h-8 w-24 overflow-visible"
-              viewBox="0 0 120 40"
-              fill="none"
-              aria-hidden
-            >
-              <path
-                d="M110 4 C 80 10, 40 12, 12 30 M12 30 L 26 22 M12 30 L 22 36"
-                stroke="hsl(var(--primary))"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <motion.div
+                style={{ opacity: frameOpacity }}
+                className="layer-shadow pointer-events-none absolute inset-0 rounded-2xl border border-border"
+                aria-hidden
               />
-            </svg>
-          </motion.div>
+            </div>
+
+            {/* laptop caption — below the frame so it never covers the headline */}
+            <motion.div
+              style={{ opacity: overlayOpacity, y: overlayY }}
+              className="pointer-events-none absolute right-4 top-full z-10 mt-3 hidden max-w-[210px] rotate-[-4deg] text-right lg:block min-[1600px]:hidden"
+            >
+              <p className="font-hand text-xl leading-tight text-foreground">
+                изградено от нулата,
+                <br /> слой по слой — не от шаблон
+              </p>
+              <svg
+                className="mr-auto mt-1 h-6 w-20 rotate-180 overflow-visible"
+                viewBox="0 0 120 40"
+                fill="none"
+                aria-hidden
+              >
+                <path
+                  d="M110 4 C 80 10, 40 12, 12 30 M12 30 L 26 22 M12 30 L 22 36"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </motion.div>
+
+            {/* side overlays for ultrawide (≥ 1600px) — hug the mockup edges */}
+            <motion.div
+              style={{ opacity: overlayOpacity, y: overlayY }}
+              className="absolute right-full top-[18%] z-10 mr-5 hidden shrink-0 rounded-lg border border-border bg-card/95 p-2 backdrop-blur min-[1600px]:block"
+            >
+              <p className="eyebrow mb-2 px-1">Слоеве</p>
+              <ul className="space-y-1">
+                {["Хедър", "Съдържание", "Проекти", "CTA"].map((layer, i) => (
+                  <li
+                    key={layer}
+                    className={`font-mono-meta flex items-center gap-2 rounded px-2 py-1 text-[0.7rem] ${
+                      i === 2 ? "bg-primary/15 text-foreground" : "text-muted-foreground"
+                    }`}
+                  >
+                    <span className="h-2 w-2 rounded-[3px] border border-current opacity-60" />
+                    {layer}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div
+              style={{ opacity: overlayOpacity, y: overlayY }}
+              className="absolute left-full bottom-[18%] z-10 ml-5 hidden max-w-[220px] shrink-0 rotate-[-4deg] text-right min-[1600px]:block"
+            >
+              <p className="font-hand text-2xl leading-tight text-foreground">
+                изградено от нулата,
+                <br /> слой по слой — не от шаблон
+              </p>
+              <svg
+                className="ml-auto mt-1 h-8 w-24 overflow-visible"
+                viewBox="0 0 120 40"
+                fill="none"
+                aria-hidden
+              >
+                <path
+                  d="M110 4 C 80 10, 40 12, 12 30 M12 30 L 26 22 M12 30 L 22 36"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* scroll cue at rest */}
