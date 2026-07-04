@@ -15,6 +15,7 @@ import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import { getCaseStudyById, caseStudies } from "@/data/caseStudies";
 import { getBreadcrumbSchema } from "@/lib/structuredData";
+import { scrollToTop } from "@/lib/lenis";
 import { useEffect } from "react";
 
 const CaseStudyDetail = () => {
@@ -34,7 +35,7 @@ const CaseStudyDetail = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    scrollToTop(true);
   }, [id]);
 
   const baseUrl = "https://www.adrexio.com";

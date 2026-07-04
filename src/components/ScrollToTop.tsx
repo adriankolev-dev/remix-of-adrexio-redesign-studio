@@ -1,29 +1,16 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { scrollToTop } from "@/lib/lenis";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
-  const prevPathname = useRef(pathname);
 
   useEffect(() => {
-    // Only scroll to top when navigating to a different major section
-    // This prevents jarring scroll when navigating between related pages
-    const isMajorSectionChange = 
-      prevPathname.current.split('/')[1] !== pathname.split('/')[1];
-    
-    // Always scroll to top when going to homepage
-    const isHomepage = pathname === '/';
-    
-    if (isMajorSectionChange || isHomepage) {
-      // Use smooth scroll for better UX
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
-    }
-    
-    prevPathname.current = pathname;
+    // Jump instantly to the top on every route change. An instant jump (instead
+    // of a smooth scroll) keeps the Lenis engine in sync and prevents scrolling
+    // through every section on the way up, which would otherwise trigger and
+    // "use up" the `whileInView` entrance animations before the user sees them.
+    scrollToTop(true);
   }, [pathname]);
 
   return null;

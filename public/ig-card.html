@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { background: #060a0e; }
+      .card {
+        position: relative;
+        width: 1080px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(120% 80% at 80% -10%, rgba(34, 211, 238, 0.16), transparent 60%),
+          #070c11;
+        font-family: "Manrope", system-ui, sans-serif;
+        color: #fff;
+      }
+      /* blueprint grid */
+      .grid {
+        position: absolute; inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: radial-gradient(120% 90% at 50% 30%, #000 55%, transparent 100%);
+        -webkit-mask-image: radial-gradient(120% 90% at 50% 30%, #000 55%, transparent 100%);
+      }
+      .cover-wrap { position: absolute; top: 0; left: 0; right: 0; height: 560px; }
+      .cover {
+        width: 100%; height: 100%; object-fit: cover; object-position: center;
+        opacity: 0.92;
+      }
+      .cover-fade {
+        position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(7,12,17,0) 40%, rgba(7,12,17,0.7) 78%, #070c11 100%);
+      }
+      .content {
+        position: absolute; left: 0; right: 0; bottom: 0;
+        padding: 0 72px 76px;
+      }
+      .eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px; font-weight: 600;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        color: #22d3ee;
+        display: flex; align-items: center; gap: 14px;
+        margin-bottom: 28px;
+      }
+      .eyebrow::before {
+        content: ""; width: 46px; height: 2px; background: #22d3ee; display: inline-block;
+      }
+      .title {
+        font-family: "Unbounded", sans-serif;
+        font-weight: 700;
+        font-size: 74px;
+        line-height: 1.05;
+        letter-spacing: -0.01em;
+        color: #ffffff;
+        text-wrap: balance;
+      }
+      .title .accent { color: #22d3ee; }
+      .footer {
+        position: absolute; left: 72px; right: 72px; bottom: 40px;
+        display: flex; align-items: center; justify-content: space-between;
+        padding-top: 26px;
+        border-top: 1px solid rgba(255,255,255,0.12);
+      }
+      .brand {
+        font-family: "Unbounded", sans-serif; font-weight: 700;
+        font-size: 30px; letter-spacing: -0.01em; color: #fff;
+        display: flex; align-items: center; gap: 4px;
+      }
+      .brand .dot { color: #22d3ee; }
+      .cta {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 20px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+        color: rgba(255,255,255,0.62);
+      }
+      /* long titles shrink */
+      .title.small { font-size: 60px; }
+    </style>
+  </head>
+  <body>
+    <div class="card" id="card">
+      <div class="grid"></div>
+      <div class="cover-wrap">
+        <img class="cover" id="cover" alt="" />
+        <div class="cover-fade"></div>
+      </div>
+      <div class="content">
+        <div class="eyebrow" id="eyebrow">БЛОГ</div>
+        <h1 class="title" id="title"></h1>
+      </div>
+      <div class="footer">
+        <div class="brand">adrexio<span class="dot">.</span></div>
+        <div class="cta">Прочети в блога →</div>
+      </div>
+    </div>
+    <script>
+      const POSTS = [
+        {
+          t: "Как AI чатботовете създават по-добро клиентско изживяване",
+          c: "Изкуствен интелект",
+          img: "/blog-covers/ai-chatbotove-klientsko-izzhivyavane.png",
+        },
+        {
+          t: "AI интеграция, без да чупиш това, което работи",
+          c: "AI Стратегия",
+          img: "/blog-covers/ai-integraciya-bez-da-chupish.png",
+        },
+        {
+          t: "Изграждане на AI агент: от концепция до внедряване",
+          c: "AI Разработка",
+          img: "/blog-covers/izgrazhdane-na-ai-agent.png",
+        },
+      ];
+      const i = parseInt(new URLSearchParams(location.search).get("i") || "0", 10);
+      const post = POSTS[i] || POSTS[0];
+      document.getElementById("title").textContent = post.t;
+      document.getElementById("eyebrow").textContent = post.c.toUpperCase();
+      document.getElementById("cover").src = post.img;
+      if (post.t.length > 46) document.getElementById("title").classList.add("small");
+      document.title = post.t;
+    </script>
+  </body>
+</html>

@@ -7,6 +7,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { useTheme } from "next-themes";
 import logo from "@/assets/logo.svg";
 import logoDark from "@/assets/logo-dark.svg";
+import { scrollToTop } from "@/lib/lenis";
 
 const navLinks = [
   { name: "Начало", href: "/" },
@@ -55,7 +56,7 @@ const Navbar = () => {
           onClick={(e) => {
             if (location.pathname === "/") {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              scrollToTop();
             }
           }}
         >

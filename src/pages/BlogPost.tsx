@@ -16,13 +16,14 @@ import {
 } from "@/data/blog";
 import { renderMarkdown } from "@/lib/blog/markdown";
 import { getBreadcrumbSchema } from "@/lib/structuredData";
+import { scrollToTop } from "@/lib/lenis";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = getPostBySlug(slug || "");
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    scrollToTop(true);
   }, [slug]);
 
   const html = useMemo(

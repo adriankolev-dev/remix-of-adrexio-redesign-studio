@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
+import { setLenis } from '@/lib/lenis';
 
 const useSmoothScroll = () => {
   useEffect(() => {
@@ -9,6 +10,8 @@ const useSmoothScroll = () => {
       smoothWheel: true,
       touchMultiplier: 2,
     });
+
+    setLenis(lenis);
 
     let rafId: number;
 
@@ -22,6 +25,7 @@ const useSmoothScroll = () => {
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      setLenis(null);
     };
   }, []);
 };

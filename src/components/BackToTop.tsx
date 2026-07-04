@@ -8,6 +8,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { scrollToTop as scrollTopLenis } from "@/lib/lenis";
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -27,7 +28,7 @@ const BackToTop = () => {
   });
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    scrollTopLenis(reduceMotion);
   };
 
   return (
