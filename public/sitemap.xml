@@ -55,6 +55,35 @@
     <priority>0.7</priority>
   </url>
   
+  <!-- Blog -->
+  <url>
+    <loc>https://www.adrexio.com/blog</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.adrexio.com/blog/izgrazhdane-na-ai-agent</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.adrexio.com/blog/ai-integraciya-bez-da-chupish</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.adrexio.com/blog/ai-chatbotove-klientsko-izzhivyavane</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Service Pages -->
   <url>
     <loc>https://www.adrexio.com/services/web-development</loc>
