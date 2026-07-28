@@ -1,6 +1,5 @@
 // Case Study Data - Centralized for scalability
 import koleffHouseImg from "@/assets/case-studies/koleff-house.png";
-import innitiImg from "@/assets/case-studies/inniti.png";
 import oraqorImg from "@/assets/case-studies/oraqor.png";
 import riactImg from "@/assets/case-studies/riact.png";
 import bodyaestheticsImg from "@/assets/case-studies/bodyaesthetics.png";
@@ -182,34 +181,6 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["WordPress", "WooCommerce", "WPML", "Custom Design", "B2B SEO"],
     gradient: "from-amber-500/20 to-zinc-700/20",
     accentColor: "text-amber-500"
-  },
-  // INNITI
-  {
-    id: "inniti",
-    title: "Inniti",
-    subtitle: "Middleware между лабораторни инструменти & LIMS/ELN/AI",
-    category: "Технологии",
-    url: "https://www.inniti.io/",
-    isPublic: true,
-    isFeatured: false,
-    image: innitiImg,
-    overview: "Inniti е middleware платформа, която свързва всякакви лабораторни инструменти с LIMS, ELN или SDMS системи, включително legacy устройства. Платформата е manufacturer-agnostic и работи с над 3,300 различни инструмента, осигурявайки нормализация, стандартизация и структуриране на данни според FAIR принципите.",
-    challenge: "Inniti се нуждаеше от професионален корпоративен уебсайт, който ясно да обясни сложната middleware технология на B2B клиенти от life science и biotech индустриите, да демонстрира библиотеката от свързани инструменти и да улесни процеса на запитване за демо.",
-    solution: [
-      "Изградихме корпоративен уебсайт с техническа, но достъпна естетика",
-      "Създадохме детайлни секции за всяка функционалност (Control & Automate, Track & Trace, Lab Monitoring)",
-      "Разработихме визуализация на библиотеката от 3,300+ инструмента",
-      "Внедрихме форма за запитване за демо с автоматични известия",
-      "Интегрирахме секция с use cases и success stories от големи компании"
-    ],
-    results: [
-      { metric: "3300+", label: "Инструмента" },
-      { metric: "200-800%", label: "ROI" },
-      { metric: "Global", label: "Клиенти" }
-    ],
-    technologies: ["Next.js", "Headless CMS", "API Integration", "B2B SEO"],
-    gradient: "from-purple-500/20 to-indigo-500/20",
-    accentColor: "text-purple-500"
   },
   // ORAQOR
   {

@@ -14,7 +14,7 @@ const FEATURED_IDS = [
   "body-aesthetics",
   "koleff-house",
   "webxotic",
-  "inniti",
+  "zdravec",
 ];
 
 const featured = FEATURED_IDS.map((id) => getCaseStudyById(id)).filter(
