@@ -13,6 +13,7 @@ import nfclogoImg from "@/assets/case-studies/nfclogo.png";
 import ameliadivaImg from "@/assets/case-studies/ameliadiva.png";
 import tajmahalImg from "@/assets/case-studies/tajmahal.png";
 import amadentImg from "@/assets/case-studies/amadent.png";
+import drmariaraykovaImg from "@/assets/case-studies/drmariaraykova.png";
 import boasImg from "@/assets/case-studies/boas.png";
 import bulbiochemImg from "@/assets/case-studies/bulbiochem.png";
 import fmlbdImg from "@/assets/case-studies/fml-bd.png";
@@ -622,6 +623,34 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["WordPress", "Custom Design", "SEO", "Analytics"],
     gradient: "from-teal-500/20 to-cyan-500/20",
     accentColor: "text-teal-500"
+  },
+  {
+    id: "drmariaraykova",
+    title: "Д-р Мария Райкова",
+    subtitle: "Акушер-гинеколог в София — премиум медицински сайт",
+    category: "Медицина & Дентална",
+    url: "https://drmariaraykova.com/",
+    isPublic: true,
+    isFeatured: true,
+    image: drmariaraykovaImg,
+    overview: "Премиум уебсайт за д-р Мария Райкова — акушер-гинеколог в София. Информативен сайт с услуги, медицински наръчник, FAQ, многоезичност (BG/EN/ES) и записване на час през Superdoc.",
+    challenge: "Клиентът се нуждаеше от спокоен, вдъхващ доверие онлайн образ, който ясно да представи обхвата на грижата, да насочи пациентките към онлайн записване и да работи добре за SEO на български, английски и испански — без да обещава услуги извън реалната практика.",
+    solution: [
+      "Изградихме модерен Next.js сайт с премиум визуална идентичност и спокойна медицинска естетика",
+      "Създадохме страници за услуги, за лекаря, контакти, наръчник и често задавани въпроси",
+      "Внедрихме многоезичност на български, английски и испански",
+      "Интегрирахме записване през Superdoc и ясни CTA към телефон и кабинет",
+      "Добавихме GDPR политика, cookie съгласие и структурирани данни за SEO",
+      "Оптимизирахме за локално търсене в София и Open Graph превюта при споделяне"
+    ],
+    results: [
+      { metric: "3", label: "Езика" },
+      { metric: "Next.js", label: "Технология" },
+      { metric: "100%", label: "Mobile ready" }
+    ],
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "next-intl", "SEO", "Netlify"],
+    gradient: "from-rose-400/20 to-pink-500/20",
+    accentColor: "text-rose-400"
   },
   {
     id: "boas",

@@ -10,11 +10,11 @@ import { getCaseStudyById, type CaseStudy } from "@/data/caseStudies";
 // The hero zooms out to reveal a browser on the canvas. Here that same window
 // stays open — and we flip through real projects inside it, like tabs.
 const FEATURED_IDS = [
+  "drmariaraykova",
   "koni-jewellery",
   "body-aesthetics",
   "koleff-house",
   "webxotic",
-  "zdravec",
 ];
 
 const featured = FEATURED_IDS.map((id) => getCaseStudyById(id)).filter(
