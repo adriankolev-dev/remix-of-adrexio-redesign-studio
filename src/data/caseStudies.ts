@@ -24,6 +24,7 @@ import legendsVillasImg from "@/assets/case-studies/legends.png";
 import breezypointvillasImg from "@/assets/case-studies/breezypointvillas.png";
 import zdravecImg from "@/assets/case-studies/zdravec.png";
 import wexelImg from "@/assets/case-studies/wexel.png";
+import firescapeImg from "@/assets/case-studies/firescape.png";
 export interface CaseStudyResult {
   metric: string;
   label: string;
@@ -67,6 +68,35 @@ export const categories = [
 ];
 
 export const caseStudies: CaseStudy[] = [
+  // FIRESCAPE PARTNERS
+  {
+    id: "firescape-partners",
+    title: "Firescape Partners",
+    subtitle: "Инженерство по пожарна безопасност и онлайн магазин",
+    category: "Индустрия",
+    url: "https://firescapepartners.com/",
+    isPublic: true,
+    isFeatured: true,
+    image: firescapeImg,
+    overview: "Файърскейп Партнърс ООД предоставя интегрирани решения по пожарна безопасност — проектиране, документация, надзор и доставка на оборудване. Създадохме корпоративен уебсайт с портфолио от референции и WooCommerce магазин за пожарогасители, с многоезичност BG/EN.",
+    challenge: "Клиентът се нуждаеше от професионален онлайн образ, който ясно да представи инженерните услуги по пожарна безопасност, да покаже реални проекти и референции, и същевременно да отвори нов канал за продажби чрез онлайн магазин за пожарно оборудване — в съответствие с изискванията за EU финансиране и GDPR.",
+    solution: [
+      "Изградихме корпоративен WordPress сайт с индустриална естетика и ясна структура за услуги, референции и контакти",
+      "Създадохме WooCommerce магазин за прахови и CO₂ пожарогасители с количка, поръчки и доставка",
+      "Внедрихме многоезичност на български и английски за по-широк обхват",
+      "Разработихме секция с референции и портфолио от реални обекти (жилищни, хотели, индустриални)",
+      "Добавихме cookie съгласие, правни страници и GDPR-съвместими процеси за магазина",
+      "Оптимизирахме за локално SEO и представяне на експертизата по нормативна пожарна безопасност"
+    ],
+    results: [
+      { metric: "150+", label: "Успешни проекта" },
+      { metric: "6+", label: "Години опит" },
+      { metric: "BG/EN", label: "Многоезичност" }
+    ],
+    technologies: ["WordPress", "WooCommerce", "Custom Design", "Multilingual", "SEO", "GDPR"],
+    gradient: "from-orange-500/20 to-red-600/20",
+    accentColor: "text-orange-500"
+  },
   // KOLEFF HOUSE
   {
     id: "koleff-house",
