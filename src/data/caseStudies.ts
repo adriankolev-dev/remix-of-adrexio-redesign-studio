@@ -89,8 +89,8 @@ export const caseStudies: CaseStudy[] = [
       "Оптимизирахме за локално SEO и представяне на експертизата по нормативна пожарна безопасност"
     ],
     results: [
-      { metric: "150+", label: "Успешни проекта" },
-      { metric: "6+", label: "Години опит" },
+      { metric: "250+", label: "Успешни проекта" },
+      { metric: "10+", label: "Години опит" },
       { metric: "BG/EN", label: "Многоезичност" }
     ],
     technologies: ["WordPress", "WooCommerce", "Custom Design", "Multilingual", "SEO", "GDPR"],
