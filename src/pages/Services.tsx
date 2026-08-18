@@ -159,7 +159,7 @@ const Services = () => {
                 </Link>
               </Button>
               <Button variant="line" size="lg" asChild>
-                <Link to="/pricing">Виж цените</Link>
+                <Link to="/pricing">Цени за уеб проекти</Link>
               </Button>
             </div>
           </Reveal>

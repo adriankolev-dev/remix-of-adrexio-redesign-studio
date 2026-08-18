@@ -12,7 +12,6 @@ import { scrollToTop } from "@/lib/lenis";
 const navLinks = [
   { name: "Начало", href: "/" },
   { name: "Услуги", href: "/services" },
-  { name: "Цени", href: "/pricing" },
   { name: "За нас", href: "/about" },
   { name: "Case Studies", href: "/case-studies" },
   { name: "Блог", href: "/blog" },

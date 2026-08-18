@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { PRICING } from "@/data/pricing";
 import PageIntro from "@/components/editorial/PageIntro";
 import RewardMascot from "@/components/mascots/RewardMascot";
 import Reveal from "@/components/editorial/Reveal";
@@ -262,9 +263,18 @@ const Affiliate = () => {
               </h3>
               <dl className="mt-8 border-t border-border">
                 {[
-                  { label: "Среден проект (BUSINESS план)", value: "€649" },
-                  { label: "Вашата комисионна", value: "20%" },
-                  { label: "Вашето плащане за проект", value: "€129.80" },
+                  {
+                    label: "Среден уеб проект",
+                    value: `€${PRICING.ecommerce.label}`,
+                  },
+                  {
+                    label: "Вашата комисионна",
+                    value: `${PRICING.affiliate.commissionPct}%`,
+                  },
+                  {
+                    label: "Вашето плащане за проект",
+                    value: `€${(PRICING.affiliate.exampleProject * PRICING.affiliate.commissionPct) / 100}`,
+                  },
                 ].map((row) => (
                   <div
                     key={row.label}
@@ -280,7 +290,14 @@ const Affiliate = () => {
                   При <strong className="text-foreground">5 проекта</strong> на месец:
                 </p>
                 <p className="font-display mt-1 text-2xl font-bold text-primary">
-                  €649 месечно пасивен доход
+                  €
+                  {(
+                    (5 *
+                      PRICING.affiliate.exampleProject *
+                      PRICING.affiliate.commissionPct) /
+                    100
+                  ).toLocaleString("de-DE")}{" "}
+                  месечно пасивен доход
                 </p>
               </div>
             </Reveal>

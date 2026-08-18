@@ -5,9 +5,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import PageIntro from "@/components/editorial/PageIntro";
-import SectionHeader from "@/components/editorial/SectionHeader";
-import PricingSection from "@/components/PricingSection";
-import CTASection from "@/components/CTASection";
+import SectionEyebrow from "@/components/editorial/SectionEyebrow";
+import Reveal from "@/components/editorial/Reveal";
+import HandNote from "@/components/editorial/HandNote";
+import PricingOverview from "@/components/pricing/PricingOverview";
+import PricingFactors from "@/components/pricing/PricingFactors";
 import { getFAQSchema } from "@/lib/structuredData";
 import {
   Accordion,
@@ -20,37 +22,42 @@ const faqs = [
   {
     question: "Колко време отнема изграждането на уебсайт?",
     answer:
-      "Времето за разработка зависи от сложността на проекта. За презентационни сайтове — 1-2 седмици, за онлайн магазини — 2-4 седмици, а за custom решения — по договаряне.",
+      "Времето зависи от обхвата. Презентационните сайтове са готови за 2–3 седмици, онлайн магазините — за 4–6 седмици, а по-сложните custom решения — по договаряне.",
   },
   {
     question: "Какво включва безплатната поддръжка?",
     answer:
-      "Безплатната поддръжка включва технически консултации, малки корекции по съдържанието, мониторинг на сайта и помощ при възникнали проблеми.",
+      "Технически консултации, малки корекции по съдържанието, мониторинг и помощ при проблеми. След гаранционния период предлагаме месечен абонамент за поддръжка.",
   },
   {
     question: "Мога ли да добавя функционалности след стартиране?",
     answer:
-      "Да, всички наши решения са мащабируеми. Можете да добавяте нови функционалности по всяко време срещу допълнително заплащане.",
+      "Да. Решенията са мащабируеми — оценяваме новия обхват и ви даваме конкретна оферта.",
   },
   {
     question: "Какви методи на плащане приемате?",
     answer:
-      "Приемаме банков превод, картово плащане и възможност за разсрочено плащане при по-големи проекти. Работим с 50/50 модел — 50% в началото, останалите 50% след като видите резултата и преди официалното издаване.",
+      "Банков превод, картово плащане и разсрочено плащане при по-големи проекти. Работим с 50/50 модел.",
   },
   {
     question: "Включена ли е хостинг услугата в цената?",
     answer:
-      "Хостингът не е включен в еднократната цена, но можем да ви предложим надеждни хостинг решения на конкурентни цени.",
+      "Не е част от еднократната цена на проекта. Организираме го вместо вас и можем да го включим в месечната поддръжка.",
   },
   {
     question: "Получавам ли собственост върху сайта?",
     answer:
-      "Да, след финалното плащане получавате пълна собственост върху кода и дизайна на вашия уебсайт.",
+      "Да — след финалното плащане получавате пълна собственост върху кода и дизайна.",
   },
   {
     question: "Как работи 50/50 плащането?",
     answer:
-      "Плащате 50% в началото на проекта, което покрива първоначалната работа по дизайн и разработка. Останалите 50% плащате след като видите резултата и сте доволни, но преди официалното издаване. Това гарантира, че и двете страни са защитени.",
+      "50% в началото покрива дизайна и разработката. Останалите 50% — след като видите резултата и преди официалното издаване.",
+  },
+  {
+    question: "Как определяте крайната цена?",
+    answer:
+      "Изхождаме от ориентировъчната начална цена и добавяме обхват съобразно нуждите. След консултация ви изпращаме точна оферта.",
   },
 ];
 
@@ -60,72 +67,129 @@ const Pricing = () => {
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title="Цени - Adrexio | Прозрачни цени за уеб разработка и дигитални услуги"
-        description="Прозрачни цени за уеб разработка, мобилни приложения, SEO и GEO оптимизация и дигитален маркетинг. 50/50 плащане. Безплатна консултация."
-        keywords="цени уебсайт, цена уеб разработка, цена мобилно приложение, цена SEO и GEO, цена дигитален маркетинг, цени уеб студио София, цени в евро, уебсайт цена София"
+        title="Цени за уеб проекти - Adrexio | Уеб сайтове, онлайн магазини и поддръжка"
+        description="Ориентировъчни цени за уеб сайтове, онлайн магазини и месечна поддръжка. За SEO, маркетинг и AI — оферта след консултация. 50/50 плащане."
+        keywords="цени уебсайт, цена уеб разработка, цена онлайн магазин, цена поддръжка сайт, цени уеб студио София, уебсайт цена България"
         structuredData={faqSchema}
       />
       <Navbar />
 
       <PageIntro
         index="01"
-        label="Цени"
+        label="Цени за уеб проекти"
         title={
           <>
-            Инвестиция, която <span className="accent-mark">се изплаща</span>.
+            Ясни цени за уеб проекти. <span className="accent-mark">Без изненади.</span>
           </>
         }
-        description="Прозрачни цени без скрити такси. Плащате половината в началото и останалото — след като видите резултата. Повечето клиенти виждат възвращаемост за 2-3 месеца."
+        description="Ориентировъчни суми за уеб сайтове, онлайн магазини и поддръжка. За SEO, дигитален маркетинг, AI и мобилни приложения — оферта след консултация."
         meta={[
-          { value: "2-3x", label: "Ръст на конверсиите" },
-          { value: "2-3 мес.", label: "Средно време за ROI" },
           { value: "50/50", label: "Плащане след одобрение" },
-          { value: "0", label: "Скрити такси" },
+          { value: "3", label: "Уеб категории" },
+          { value: "1", label: "Конкретна оферта" },
         ]}
       />
 
-      {/* Editorial plan rows with the scroll-scrubbed spotlight (shared with home) */}
-      <PricingSection />
+      <PricingOverview />
 
-      {/* FAQ — hairline accordion, no cards */}
+      <PricingFactors />
+
+      {/* FAQ — open editorial list on desktop, accordion on mobile for scanability */}
       <section className="relative bg-background py-24 md:py-32">
         <div className="container mx-auto px-6">
-          <SectionHeader index="11" label="FAQ" title="Често задавани въпроси." />
+          <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
+            <div className="lg:sticky lg:top-32 lg:self-start">
+              <Reveal>
+                <SectionEyebrow label="Въпроси" index="04" />
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="font-display mt-6 text-balance text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+                  Често задавани въпроси.
+                </h2>
+              </Reveal>
+              <HandNote className="mt-6 hidden lg:block" rotate={-2}>
+                ако нещо липсва — пишете ни
+              </HandNote>
+            </div>
 
-          <div className="mx-auto max-w-3xl border-t border-border">
-            <Accordion type="single" collapsible>
-              {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="border-b border-border"
-                >
-                  <AccordionTrigger className="py-6 text-left font-display text-base font-semibold hover:text-primary hover:no-underline md:text-lg">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6 text-base leading-relaxed text-muted-foreground">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+            {/* Desktop: always-visible Q&A rows */}
+            <div className="hidden border-t border-border lg:block">
+              {faqs.map((faq, i) => (
+                <Reveal key={faq.question} delay={i * 0.04}>
+                  <div className="grid grid-cols-1 gap-3 border-b border-border py-8 md:grid-cols-[1fr_1.2fr] md:gap-12">
+                    <h3 className="text-base font-semibold tracking-tight text-foreground md:text-lg">
+                      {faq.question}
+                    </h3>
+                    <p className="text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </Reveal>
               ))}
-            </Accordion>
-          </div>
+            </div>
 
-          <div className="mx-auto mt-12 flex max-w-3xl flex-col gap-3 sm:flex-row sm:items-center">
-            <Button variant="ink" size="lg" asChild>
-              <Link to="/contact">
-                Заяви консултация
-                <ArrowRight size={18} />
-              </Link>
-            </Button>
-            <Button variant="line" size="lg" asChild>
-              <Link to="/case-studies">Виж резултати</Link>
-            </Button>
+            {/* Mobile: accordion to avoid a wall of text */}
+            <div className="border-t border-border lg:hidden">
+              <Accordion type="single" collapsible>
+                {faqs.map((faq, index) => (
+                  <AccordionItem
+                    key={index}
+                    value={`item-${index}`}
+                    className="border-b border-border"
+                  >
+                    <AccordionTrigger className="py-5 text-left text-base font-semibold hover:text-primary hover:no-underline">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="pb-5 text-sm leading-relaxed text-muted-foreground">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
           </div>
         </div>
       </section>
 
-      <CTASection />
+      {/* Final CTA — one dramatic dark layer, not another grey box */}
+      <section className="layer-dark relative overflow-hidden py-28 md:py-36">
+        <div className="canvas-grid absolute inset-0 opacity-[0.07]" aria-hidden />
+        <div className="container relative z-10 mx-auto px-6">
+          <div className="max-w-2xl">
+            <Reveal>
+              <SectionEyebrow label="Запитване" index="05" />
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h2 className="font-display mt-6 text-balance text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+                Имате конкретен проект?
+              </h2>
+            </Reveal>
+            <Reveal delay={0.14}>
+              <p className="mt-6 max-w-lg text-pretty text-lg leading-relaxed text-muted-foreground">
+                Разкажете ни какво искате да изградим. Ще съставим обхват и ще ви изпратим
+                конкретна оферта.
+              </p>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center">
+                <Button variant="accent" size="lg" asChild>
+                  <Link to="/project-inquiry">
+                    Изпрати запитване
+                    <ArrowRight size={18} />
+                  </Link>
+                </Button>
+                <Link
+                  to="/case-studies"
+                  className="text-sm font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline"
+                >
+                  Виж нашите проекти
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );

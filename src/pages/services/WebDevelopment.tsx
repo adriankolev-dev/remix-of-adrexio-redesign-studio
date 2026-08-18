@@ -11,7 +11,7 @@ import {
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 import BrowserMascot from "@/components/mascots/BrowserMascot";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
-import PricingSection from "@/components/PricingSection";
+import PricingWebDevLink from "@/components/pricing/PricingWebDevLink";
 
 const WebDevelopment = () => {
   return (
@@ -222,7 +222,7 @@ const WebDevelopment = () => {
         {
           question: "Колко ще ми струва изработката на уебсайт?",
           answer:
-            "Предлагаме индивидуални решения, съобразени с нуждите на бизнеса ви. След безплатна консултация изготвяме конкретна оферта — с ясни условия и без скрити такси.",
+            "Уеб сайтовете започват от €690, онлайн магазините — от €1.900. Крайната цена зависи от обхвата. Вижте ориентировъчните цени на страницата „Цени за уеб проекти“ или се свържете с нас за конкретна оферта.",
         },
         {
           question: "Могат ли услугите ви да бъдат персонализирани за моята индустрия?",
@@ -235,7 +235,7 @@ const WebDevelopment = () => {
       customSectionBeforeCTA={
         <>
           <ProjectsCarousel />
-          <PricingSection />
+          <PricingWebDevLink />
         </>
       }
     />

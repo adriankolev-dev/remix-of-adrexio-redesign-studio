@@ -73,7 +73,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { label: "Услуги", path: "/services" },
-                { label: "Цени", path: "/pricing" },
+                { label: "Цени за уеб проекти", path: "/pricing" },
                 { label: "За нас", path: "/about" },
                 { label: "Case Studies", path: "/case-studies" },
                 { label: "Блог", path: "/blog" },
