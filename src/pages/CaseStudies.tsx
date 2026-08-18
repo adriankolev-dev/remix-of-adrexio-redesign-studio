@@ -35,7 +35,7 @@ const CaseStudies = () => {
     {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      name: "Портфолио — Adrexio",
+      name: "Проекти — Adrexio",
       description:
         "Реални проекти на Adrexio: уебсайтове, мобилни приложения и дигитални решения за бизнеси от различни индустрии.",
       url: "https://www.adrexio.com/case-studies",
@@ -53,14 +53,14 @@ const CaseStudies = () => {
     },
     getBreadcrumbSchema([
       { name: "Начало", url: "https://www.adrexio.com/" },
-      { name: "Портфолио", url: "https://www.adrexio.com/case-studies" },
+      { name: "Проекти", url: "https://www.adrexio.com/case-studies" },
     ]),
   ];
 
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title="Портфолио — реални проекти на Adrexio"
+        title="Проекти — реални резултати на Adrexio"
         description="Разгледайте реални проекти на Adrexio — уебсайтове, мобилни приложения, UI/UX дизайн и дигитални решения, изградени от нулата за бизнеси от различни индустрии."
         keywords="портфолио, проекти, case studies, уеб дизайн, уебсайтове, мобилни приложения, Adrexio, България"
         structuredData={structuredData}
@@ -69,7 +69,7 @@ const CaseStudies = () => {
 
       <PageIntro
         index="01"
-        label="Портфолио"
+        label="Проекти"
         title={
           <>
             Реални проекти, <span className="accent-mark">реални резултати</span>.

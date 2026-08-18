@@ -75,7 +75,7 @@ const CaseStudyDetail = () => {
           },
           getBreadcrumbSchema([
             { name: "Начало", url: baseUrl },
-            { name: "Case Studies", url: `${baseUrl}/case-studies` },
+            { name: "Проекти", url: `${baseUrl}/case-studies` },
             { name: study.title, url: `${baseUrl}/case-studies/${study.id}` },
           ]),
         ],
@@ -108,8 +108,8 @@ const CaseStudyDetail = () => {
       <SEO
         title={
           study.id === "koleff-house"
-            ? `${study.title} - Къща за гости Твърдица, Сливен | Next.js Уебсайт | Adrexio Case Study`
-            : `${study.title} - ${study.subtitle} | Adrexio Case Study`
+            ? `${study.title} - Къща за гости Твърдица, Сливен | Next.js Уебсайт | Adrexio`
+            : `${study.title} - ${study.subtitle} | Adrexio`
         }
         description={truncateDescription(study.overview)}
         keywords={
@@ -134,7 +134,7 @@ const CaseStudyDetail = () => {
               className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
             >
               <ArrowLeft className="h-4 w-4" />
-              Назад към портфолио
+              Назад към проектите
             </Link>
           </Reveal>
 

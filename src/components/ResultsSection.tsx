@@ -48,7 +48,7 @@ const ResultsSection = () => {
         <Reveal delay={0.3} className="mt-12">
           <Button variant="accent" size="lg" asChild>
             <Link to="/case-studies">
-              Виж всички case studies
+              Виж всички проекти
               <ArrowRight size={18} />
             </Link>
           </Button>

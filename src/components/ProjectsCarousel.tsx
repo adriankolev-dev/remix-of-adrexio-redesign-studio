@@ -71,7 +71,7 @@ const ProjectsCarousel = () => {
         >
           <span className="font-mono-meta mb-5 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.2em] text-primary">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            Портфолио
+            Проекти
           </span>
           <h2 className="font-display mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-5xl">
             Реални проекти, <span className="accent-mark">реални резултати</span>

@@ -75,7 +75,7 @@ const Footer = () => {
                 { label: "Услуги", path: "/services" },
                 { label: "Цени за уеб проекти", path: "/pricing" },
                 { label: "За нас", path: "/about" },
-                { label: "Case Studies", path: "/case-studies" },
+                { label: "Проекти", path: "/case-studies" },
                 { label: "Блог", path: "/blog" },
                 { label: "Affiliate програма", path: "/affiliate" },
                 { label: "Контакти", path: "/contact" }
