@@ -14,7 +14,7 @@ import SEO from "@/components/SEO";
 import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import { getCaseStudyById, getPortfolioOrder } from "@/data/caseStudies";
-import { getBreadcrumbSchema } from "@/lib/structuredData";
+import { getBreadcrumbSchema, getPublisherSchema } from "@/lib/structuredData";
 import { scrollToTop } from "@/lib/lenis";
 import { useEffect } from "react";
 
@@ -54,19 +54,9 @@ const CaseStudyDetail = () => {
               : study.image?.startsWith("/")
                 ? `${baseUrl}${study.image}`
                 : `${baseUrl}/${study.image}`,
-            datePublished: new Date().toISOString(),
-            dateModified: new Date().toISOString(),
+            inLanguage: "bg-BG",
             author: { "@type": "Organization", name: "Adrexio", url: baseUrl },
-            publisher: {
-              "@type": "Organization",
-              name: "Adrexio",
-              logo: {
-                "@type": "ImageObject",
-                url: `${baseUrl}/favicon.svg`,
-                width: 512,
-                height: 512,
-              },
-            },
+            publisher: getPublisherSchema(),
             mainEntityOfPage: {
               "@type": "WebPage",
               "@id": `${baseUrl}/case-studies/${study.id}`,

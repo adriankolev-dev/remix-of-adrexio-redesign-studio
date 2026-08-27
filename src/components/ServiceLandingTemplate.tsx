@@ -174,7 +174,7 @@ const ServiceLandingTemplate = ({
   const serviceUrl = `https://www.adrexio.com${location.pathname.replace(/\/$/, "")}`;
 
   const structuredData = [
-    serviceName ? getServiceSchema(serviceName, seoDescription || heroSubtitle) : null,
+    serviceName ? getServiceSchema(serviceName, seoDescription || heroSubtitle, serviceUrl) : null,
     faqs && faqs.length > 0 ? getFAQSchema(faqs) : null,
     getBreadcrumbSchema([
       { name: "Начало", url: "https://www.adrexio.com/" },

@@ -17,6 +17,9 @@ const CONTENT_DIR = join(SRC, "content", "blog");
 const BASE_URL = "https://www.adrexio.com";
 const SITE_NAME = "Adrexio";
 const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
+const ORG_ID = `${BASE_URL}/#organization`;
+const WEBSITE_ID = `${BASE_URL}/#website`;
+const LOGO = { "@type": "ImageObject", url: DEFAULT_IMAGE, width: 1200, height: 630 };
 
 marked.setOptions({ gfm: true, breaks: false });
 
@@ -305,9 +308,11 @@ function orgSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": ORG_ID,
     name: SITE_NAME,
     url: BASE_URL,
-    logo: { "@type": "ImageObject", url: `${BASE_URL}/favicon.svg`, width: 512, height: 512 },
+    logo: LOGO,
+    image: LOGO.url,
     description:
       "Създаваме бързи и оптимизирани уебсайтове, мобилни приложения и дигитални решения, които помагат на бизнеса да расте онлайн.",
     address: { "@type": "PostalAddress", addressLocality: "София", addressCountry: "BG" },
@@ -331,20 +336,24 @@ function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": WEBSITE_ID,
     name: SITE_NAME,
     url: BASE_URL,
-    description: "Модерни уебсайтове и дигитални решения за бизнеса",
+    description: "Уеб студио в София. Сайтове и магазини от нулата.",
     inLanguage: "bg-BG",
+    publisher: { "@id": ORG_ID },
   };
 }
 
-function serviceSchema(name, description) {
+function serviceSchema(name, description, url) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: name,
-    provider: { "@type": "Organization", name: SITE_NAME },
+    name,
     description,
+    ...(url ? { url } : {}),
+    provider: { "@type": "Organization", "@id": ORG_ID, name: SITE_NAME, url: BASE_URL },
     areaServed: { "@type": "Country", name: "България" },
   };
 }
@@ -377,17 +386,23 @@ function breadcrumbSchema(items) {
 function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": BASE_URL,
+    "@type": ["LocalBusiness", "ProfessionalService"],
+    "@id": ORG_ID,
     name: SITE_NAME,
-    image: `${BASE_URL}/favicon.svg`,
-    logo: { "@type": "ImageObject", url: `${BASE_URL}/favicon.svg`, width: 512, height: 512 },
+    url: BASE_URL,
+    image: LOGO.url,
+    logo: LOGO,
     description: "Уеб дизайн и разработка, мобилни приложения, SEO и GEO оптимизация",
     address: { "@type": "PostalAddress", addressLocality: "София", addressCountry: "BG" },
     telephone: "+359-896-173-743",
     email: "hello@adrexio.com",
     priceRange: "$$",
     areaServed: { "@type": "Country", name: "България" },
+    sameAs: [
+      "https://www.linkedin.com/company/adrexio/",
+      "https://www.instagram.com/adrexio_/",
+      "https://www.facebook.com/profile.php?id=61587315031705",
+    ],
   };
 }
 
@@ -540,8 +555,11 @@ function prerenderServicesIndex(template, services) {
       url: `${BASE_URL}/services`,
       keywords:
         "изработка на уебсайтове, мобилни приложения, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг, техническа поддръжка, уеб студио услуги София",
-      jsonLd: [
-        { "@context": "https://schema.org", "@graph": services.map((s) => serviceSchema(s.title, s.description)) },
+        jsonLd: [
+        { "@context": "https://schema.org", "@graph": services.map((s) => {
+          const { "@context": _c, ...rest } = serviceSchema(s.title, s.description, `${BASE_URL}${s.href}`);
+          return rest;
+        }) },
         breadcrumbSchema([
           { name: "Начало", url: `${BASE_URL}/` },
           { name: "Услуги", url: `${BASE_URL}/services` },
@@ -586,7 +604,7 @@ function prerenderServicePages(template) {
       <p><a href="/contact">Свържи се с нас</a></p>
     `;
     const jsonLd = [
-      serviceSchema(page.serviceName || h1, page.seoDescription),
+      serviceSchema(page.serviceName || h1, page.seoDescription, `${BASE_URL}${routePath}`),
       page.faqs.length ? faqSchema(page.faqs) : null,
       breadcrumbSchema([
         { name: "Начало", url: `${BASE_URL}/` },
@@ -769,8 +787,10 @@ function prerenderCaseStudyPages(template, studies) {
               author: { "@type": "Organization", name: SITE_NAME, url: BASE_URL },
               publisher: {
                 "@type": "Organization",
+                "@id": ORG_ID,
                 name: SITE_NAME,
-                logo: { "@type": "ImageObject", url: `${BASE_URL}/favicon.svg`, width: 512, height: 512 },
+                url: BASE_URL,
+                logo: LOGO,
               },
               mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}/case-studies/${study.id}` },
               articleSection: study.category,
@@ -822,8 +842,10 @@ function prerenderBlog(template, posts) {
           author: { "@type": "Organization", name: post.author, url: BASE_URL },
           publisher: {
             "@type": "Organization",
+            "@id": ORG_ID,
             name: SITE_NAME,
-            logo: { "@type": "ImageObject", url: `${BASE_URL}/favicon.svg`, width: 512, height: 512 },
+            url: BASE_URL,
+            logo: LOGO,
           },
           mainEntityOfPage: { "@type": "WebPage", "@id": url },
         },

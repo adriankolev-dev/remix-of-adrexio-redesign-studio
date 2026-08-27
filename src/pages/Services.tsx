@@ -75,7 +75,14 @@ const services = [
 const Services = () => {
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": services.map((service) => getServiceSchema(service.title, service.description)),
+    "@graph": services.map((service) => {
+      const { "@context": _context, ...rest } = getServiceSchema(
+        service.title,
+        service.description,
+        `https://www.adrexio.com${service.href}`,
+      );
+      return rest;
+    }),
   };
 
   return (

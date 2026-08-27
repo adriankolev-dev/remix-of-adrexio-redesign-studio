@@ -103,15 +103,13 @@ const SEO = ({
     updateMetaTag("twitter:description", description);
     updateMetaTag("twitter:image", normalizedImage || image);
 
-    // Structured Data (JSON-LD)
+    // Structured Data (JSON-LD) — replace all tags so prerendered extras do not linger
+    document.querySelectorAll('script[type="application/ld+json"]').forEach((el) => el.remove());
     if (structuredData) {
-      let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
-      if (!script) {
-        script = document.createElement("script");
-        script.type = "application/ld+json";
-        document.head.appendChild(script);
-      }
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
       script.textContent = JSON.stringify(structuredData);
+      document.head.appendChild(script);
     }
   }, [title, description, keywords, image, normalizedImage, type, url, noindex, structuredData]);
 

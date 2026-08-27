@@ -15,7 +15,7 @@ import {
   formatBlogDate,
 } from "@/data/blog";
 import { renderMarkdown } from "@/lib/blog/markdown";
-import { getBreadcrumbSchema } from "@/lib/structuredData";
+import { getBreadcrumbSchema, getPublisherSchema } from "@/lib/structuredData";
 import { scrollToTop } from "@/lib/lenis";
 
 const BlogPost = () => {
@@ -52,16 +52,7 @@ const BlogPost = () => {
       dateModified: post.date,
       inLanguage: "bg-BG",
       author: { "@type": "Organization", name: post.author, url: baseUrl },
-      publisher: {
-        "@type": "Organization",
-        name: "Adrexio",
-        logo: {
-          "@type": "ImageObject",
-          url: `${baseUrl}/favicon.svg`,
-          width: 512,
-          height: 512,
-        },
-      },
+      publisher: getPublisherSchema(),
       mainEntityOfPage: { "@type": "WebPage", "@id": url },
     },
     getBreadcrumbSchema([
