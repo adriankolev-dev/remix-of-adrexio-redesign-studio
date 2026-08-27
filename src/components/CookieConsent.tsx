@@ -138,7 +138,7 @@ const CookieConsent = () => {
                 </Link>
               </p>
               <div className="flex shrink-0 items-center gap-2">
-                <Button variant="hero" size="sm" onClick={handleAcceptAll}>
+                <Button variant="ink" size="sm" onClick={handleAcceptAll}>
                   Приемам всички
                 </Button>
                 <Button variant="outline" size="sm" onClick={() => setShowSettings(true)}>
@@ -240,7 +240,7 @@ const CookieConsent = () => {
               Отказ
             </Button>
             <Button 
-              variant="hero" 
+              variant="ink" 
               onClick={handleSavePreferences}
               className="w-full sm:w-auto"
             >
