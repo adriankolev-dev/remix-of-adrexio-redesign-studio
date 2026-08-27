@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Lock, Star } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
+import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
@@ -12,10 +13,10 @@ import fmlLogo from "@/assets/clients/fml.png";
 import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
 
 const clientLogos = [
-  { name: "AthleticIQ", logo: athleticiqLogo },
   { name: "Body Aesthetics", logo: bodyaestheticsLogo },
   { name: "FML-BD", logo: fmlLogo },
   { name: "Amelia Diva", logo: ameliadivaLogo },
+  { name: "AthleticIQ", logo: athleticiqLogo },
 ];
 
 
@@ -65,30 +66,28 @@ const HeroMessage = () => (
       <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
         <Button variant="ink" size="xl" asChild>
           <Link to="/contact">
-            Започни проект
+            Свържи се с нас
             <ArrowRight size={18} />
           </Link>
         </Button>
         <Button variant="line" size="xl" asChild>
-          <Link to="/case-studies">Виж нашата работа</Link>
+          <Link to="/case-studies">Виж проектите</Link>
         </Button>
       </div>
 
       <p className="font-mono-meta mt-5 text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">
-        30+ проекта · среден <span className="text-primary">+150%</span> растеж · отговор до 24ч
+        {PORTFOLIO_PROJECT_COUNT} проекта · отговор до 24ч
       </p>
 
       <div className="mt-10">
-        <div className="mb-4 flex items-center gap-3">
-          <div className="flex">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star key={i} size={14} className="fill-primary text-primary" />
-            ))}
-          </div>
-          <span className="text-sm text-muted-foreground">
-            <strong className="text-foreground">5/5</strong> от нашите клиенти
-          </span>
-        </div>
+        <p className="mb-4 text-sm text-muted-foreground">
+          Отзиви от{" "}
+          <strong className="text-foreground">Борислав Гоцев, SuperCredit</strong>
+          {", "}
+          <strong className="text-foreground">Камелия Петрова, Body Aesthetics</strong>
+          {" и "}
+          <strong className="text-foreground">Николай Кирилов, FML-BD</strong>
+        </p>
         <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
           {clientLogos.map((client) => (
             <img
@@ -105,7 +104,7 @@ const HeroMessage = () => (
     {/* Layers motif — a stack of pieces the way we compose a build */}
     <div className="relative hidden h-[300px] lg:block">
       {[
-        { label: "Хедър", top: 0, tint: "bg-card" },
+        { label: "Заглавка", top: 0, tint: "bg-card" },
         { label: "Съдържание", top: 64, tint: "bg-card" },
         { label: "Проекти", top: 128, tint: "layer-dark" },
         { label: "CTA", top: 192, tint: "bg-card" },
@@ -148,25 +147,21 @@ const MobileCanvasMessage = () => (
     <div className="mt-6 flex flex-col gap-3">
       <Button variant="ink" size="lg" asChild className="w-full">
         <Link to="/contact">
-          Започни проект
+          Свържи се с нас
           <ArrowRight size={18} />
         </Link>
       </Button>
       <Button variant="line" size="lg" asChild className="w-full">
-        <Link to="/case-studies">Виж нашата работа</Link>
+        <Link to="/case-studies">Виж проектите</Link>
       </Button>
     </div>
 
-    <div className="mt-7 flex items-center gap-3">
-      <div className="flex">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <Star key={i} size={13} className="fill-primary text-primary" />
-        ))}
-      </div>
-      <span className="text-xs text-muted-foreground">
-        <strong className="text-foreground">5/5</strong> от нашите клиенти
-      </span>
-    </div>
+    <p className="mt-7 text-xs leading-relaxed text-muted-foreground">
+      Отзиви от{" "}
+      <strong className="text-foreground">Борислав Гоцев, SuperCredit</strong>
+      {" и "}
+      <strong className="text-foreground">Камелия Петрова, Body Aesthetics</strong>
+    </p>
     <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
       {clientLogos.slice(0, 3).map((client) => (
         <img
@@ -251,7 +246,11 @@ const MobileCanvasHero = () => {
         <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
 
         <motion.div
-          style={{ scale: sceneScale, transformOrigin: "center center" }}
+          style={{
+            scale: sceneScale,
+            transformOrigin: "center center",
+            willChange: "transform",
+          }}
           className="relative flex w-full items-center justify-center"
         >
           <div ref={mockupRef} className="relative mx-auto w-[min(400px,90vw)]">
@@ -301,7 +300,7 @@ const MobileCanvasHero = () => {
           style={{ opacity: cueOpacity }}
           className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
         >
-          <span className="eyebrow">Скролни</span>
+          <span className="eyebrow">Надолу</span>
           <motion.span
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
@@ -406,7 +405,11 @@ const Hero = () => {
 
         {/* The scene that zooms out to reveal it was a canvas all along */}
         <motion.div
-          style={{ scale: sceneScale, transformOrigin: "center center" }}
+          style={{
+            scale: sceneScale,
+            transformOrigin: "center center",
+            willChange: "transform",
+          }}
           className="relative flex w-full items-center justify-center"
         >
           <div ref={mockupRef} className="relative mx-auto w-[min(1180px,92vw)]">
@@ -472,7 +475,7 @@ const Hero = () => {
             >
               <p className="eyebrow mb-2 px-1">Слоеве</p>
               <ul className="space-y-1">
-                {["Хедър", "Съдържание", "Проекти", "CTA"].map((layer, i) => (
+                {["Заглавка", "Съдържание", "Проекти", "CTA"].map((layer, i) => (
                   <li
                     key={layer}
                     className={`font-mono-meta flex items-center gap-2 rounded px-2 py-1 text-[0.7rem] ${
@@ -517,7 +520,7 @@ const Hero = () => {
           style={{ opacity: cueOpacity }}
           className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
         >
-          <span className="eyebrow">Скролни</span>
+          <span className="eyebrow">Надолу</span>
           <motion.span
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}

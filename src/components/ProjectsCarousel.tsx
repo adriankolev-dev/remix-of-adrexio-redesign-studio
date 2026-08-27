@@ -12,7 +12,6 @@ const projects = [
   { id: 5, image: "/images/projects/bitcoinempires.png", title: "Crypto платформа", category: "Финтех" },
   { id: 6, image: "/images/projects/boas.png", title: "Tech стартъп", category: "Технологии" },
   { id: 7, image: "/images/projects/bodyaesthetics.png", title: "Beauty студио", category: "Красота & Здраве" },
-  { id: 8, image: "/images/projects/booom.png", title: "Маркетинг агенция", category: "Digital маркетинг" },
   { id: 9, image: "/images/projects/breezypointvillas.png", title: "Луксозни вили", category: "Недвижими имоти" },
   { id: 10, image: "/images/projects/bulbiochem.png", title: "Biotech компания", category: "Биотехнологии" },
   { id: 11, image: "/images/projects/fml-bd.png", title: "Софтуерна платформа", category: "SaaS" },

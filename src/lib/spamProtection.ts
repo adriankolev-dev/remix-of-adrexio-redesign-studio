@@ -85,7 +85,7 @@ export const checkHoneypot = (honeypotValue: string): { allowed: boolean; messag
     // Honeypot was filled, likely a bot
     return {
       allowed: false,
-      message: "Спам детектиран. Ако сте реална личност, моля свържете се директно.",
+      message: "Не успяхме да изпратим съобщението. Моля, пишете ни директно.",
     };
   }
   
@@ -126,7 +126,7 @@ export const checkSpamPatterns = (message: string, subject?: string): { allowed:
   if (emailMatches && emailMatches.length > 1) {
     return {
       allowed: false,
-      message: "Съобщението съдържа твърде много email адреси.",
+      message: "Съобщението съдържа твърде много имейл адреси.",
     };
   }
 

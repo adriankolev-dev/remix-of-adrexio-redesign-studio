@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Mail, Phone, MapPin, Send, ArrowRight, CheckCircle, Loader2, FileText } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, Loader2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,6 +20,7 @@ import {
   checkSpamPatterns,
   isValidEmail,
 } from "@/lib/spamProtection";
+import { PAYMENT_COPY } from "@/data/pricing";
 
 interface FormData {
   from_name: string;
@@ -33,14 +34,14 @@ interface FormData {
 const contactChannels = [
   { icon: Mail, label: "Email", value: "hello@adrexio.com", href: "mailto:hello@adrexio.com" },
   { icon: Phone, label: "Телефон", value: "+359 896 173 743", href: "tel:+359896173743" },
-  { icon: MapPin, label: "Локация", value: "София, България" },
+  { icon: MapPin, label: "Адрес", value: "София, България" },
 ];
 
 const reasons = [
   "Безплатна първоначална консултация",
-  "Плащате след финално одобрение",
+  PAYMENT_COPY,
   "Гарантирано качество на работа",
-  "Постоянна техническа поддръжка",
+  "Поддръжка след старта, работно време + спешни корекции",
 ];
 
 const socials = [
@@ -113,7 +114,7 @@ const Contact = () => {
     try {
       const honeypotCheck = checkHoneypot(formData[HONEYPOT_FIELD_NAME]);
       if (!honeypotCheck.allowed) {
-        setError(honeypotCheck.message || "Спам детектиран.");
+        setError(honeypotCheck.message || "Съобщението изглежда като спам.");
         setIsLoading(false);
         return;
       }
@@ -133,7 +134,7 @@ const Contact = () => {
       }
 
       if (!isValidEmail(formData.from_email)) {
-        setError("Моля, въведете валиден email адрес.");
+        setError("Моля, въведете валиден имейл адрес.");
         setIsLoading(false);
         return;
       }
@@ -206,7 +207,7 @@ const Contact = () => {
         label="Контакти"
         title={
           <>
-            Нека <span className="accent-mark">започнем</span> заедно
+            Да поговорим за <span className="accent-mark">проекта</span>
           </>
         }
         description="Свържете се с нас за безплатна консултация. Ще ви помогнем да превърнете идеите си в реалност."
@@ -220,7 +221,7 @@ const Contact = () => {
             <div>
               <Reveal>
                 <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
-                  Готови сме да отговорим на вашите въпроси и да обсъдим проекта ви. Изберете каналът,
+                  Готови сме да отговорим на вашите въпроси и да обсъдим проекта ви. Изберете канала,
                   който ви е удобен.
                 </p>
               </Reveal>
@@ -319,23 +320,6 @@ const Contact = () => {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  {/* Project inquiry link */}
-                  <div className="flex items-start gap-4 border-l-2 border-primary bg-secondary/40 p-5">
-                    <FileText className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-foreground">
-                        Имате ясна визия за проекта? Попълнете подробния бриф — така ще разберем
-                        нуждите ви най-точно.
-                      </p>
-                      <Button variant="line" size="sm" asChild className="mt-3">
-                        <Link to="/project-inquiry">
-                          Попълнете подробната форма
-                          <ArrowRight size={14} />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-
                   <form
                     onSubmit={handleSubmit}
                     className="space-y-6 rounded-2xl border border-border p-6 lg:p-8"
@@ -455,6 +439,19 @@ const Contact = () => {
                       Отговаряме до 24 часа · Без обвързващи договори
                     </p>
                   </form>
+
+                  <div className="border-t border-border pt-6">
+                    <p className="text-sm text-muted-foreground">
+                      Имате ясна визия за проекта? Попълнете брифа — така ще разберем нуждите ви
+                      най-точно.
+                    </p>
+                    <Button variant="line" size="lg" asChild className="mt-3">
+                      <Link to="/project-inquiry">
+                        Попълни бриф
+                        <ArrowRight size={16} />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               )}
             </Reveal>

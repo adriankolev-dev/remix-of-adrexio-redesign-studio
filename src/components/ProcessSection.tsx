@@ -39,7 +39,7 @@ const steps = [
 
 const ProcessSection = () => {
   return (
-    <section className="relative overflow-hidden bg-secondary/40 py-24 md:py-32">
+    <section className="relative overflow-hidden bg-secondary/40 py-16 md:py-24">
       <div className="canvas-grid canvas-grid-fade absolute inset-0 opacity-50" aria-hidden />
 
       <div className="container relative z-10 mx-auto px-6">
@@ -85,7 +85,7 @@ const ProcessSection = () => {
         <Reveal delay={0.25} className="mt-12">
           <Button variant="line" size="lg" asChild>
             <Link to="/project-inquiry">
-              Попълнете бриф за проект
+              Попълни бриф
               <ArrowRight size={18} />
             </Link>
           </Button>

@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
-import { categories } from "@/data/caseStudies";
+import { CASE_STUDY_FILTERS, type CaseStudyFilterId } from "@/data/caseStudies";
 
 interface CaseStudyFiltersProps {
-  activeCategory: string;
-  onCategoryChange: (category: string) => void;
+  activeFilter: CaseStudyFilterId;
+  onFilterChange: (filter: CaseStudyFilterId) => void;
 }
 
-const CaseStudyFilters = ({ activeCategory, onCategoryChange }: CaseStudyFiltersProps) => {
+const CaseStudyFilters = ({ activeFilter, onFilterChange }: CaseStudyFiltersProps) => {
   return (
     <div className="border-b border-border pb-5">
       <div className="-mb-px flex gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {categories.map((category) => {
-          const isActive = activeCategory === category;
+        {CASE_STUDY_FILTERS.map((filter) => {
+          const isActive = activeFilter === filter.id;
           return (
             <button
-              key={category}
+              key={filter.id}
               type="button"
-              onClick={() => onCategoryChange(category)}
+              onClick={() => onFilterChange(filter.id)}
               className={`relative shrink-0 whitespace-nowrap px-3 py-2 text-sm font-medium transition-colors ${
                 isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              {category}
+              {filter.label}
               {isActive && (
                 <motion.span
                   layoutId="cs-filter-underline"

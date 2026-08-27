@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo.svg";
 import logoDark from "@/assets/logo-dark.svg";
+import { PAYMENT_COPY } from "@/data/pricing";
 
 const Footer = () => {
   const [mounted, setMounted] = useState(false);
@@ -26,12 +27,11 @@ const Footer = () => {
               <img src={currentLogo} alt="adrexio" className="h-8 w-auto" />
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Създаваме бързи и оптимизирани сайтове, които помагат на бизнеса да расте в дигиталната ера.
+              Създаваме бързи и оптимизирани сайтове, които помагат на бизнеса да расте онлайн.
             </p>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              Оценка 5/5 от нашите клиенти
-            </div>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              {PAYMENT_COPY}
+            </p>
             {/* Social Media */}
             <div className="space-y-2">
               <p className="text-sm font-medium text-foreground">Социални мрежи:</p>
@@ -69,7 +69,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="font-display font-semibold text-foreground">Бързи връзки</h4>
+            <h4 className="font-display font-semibold text-foreground">Навигация</h4>
             <ul className="space-y-3">
               {[
                 { label: "Услуги", path: "/services" },
@@ -77,8 +77,9 @@ const Footer = () => {
                 { label: "За нас", path: "/about" },
                 { label: "Проекти", path: "/case-studies" },
                 { label: "Блог", path: "/blog" },
-                { label: "Affiliate програма", path: "/affiliate" },
-                { label: "Контакти", path: "/contact" }
+                { label: "Партньорска програма", path: "/affiliate" },
+                { label: "Контакти", path: "/contact" },
+                { label: "Попълни бриф", path: "/project-inquiry" }
               ].map((link) => (
                 <li key={link.path}>
                   <Link
@@ -98,12 +99,13 @@ const Footer = () => {
             <h4 className="font-display font-semibold text-foreground">Услуги</h4>
             <ul className="space-y-3">
               {[
-                { label: "Уеб сайт разработка", path: "/services/web-development" },
+                { label: "Уеб разработка", path: "/services/web-development" },
+                { label: "UI/UX дизайн", path: "/services/ui-ux-design" },
+                { label: "Техническа поддръжка", path: "/services/technical-support" },
+                { label: "SEO и GEO", path: "/services/seo" },
+                { label: "AI интеграции", path: "/services/ai-implementation" },
                 { label: "Мобилни приложения", path: "/services/mobile-apps" },
-                { label: "UI/UX Дизайн", path: "/services/ui-ux-design" },
-                { label: "SEO и GEO оптимизация", path: "/services/seo" },
-                { label: "Дигитален маркетинг", path: "/services/digital-marketing" },
-                { label: "Техническа поддръжка", path: "/services/technical-support" }
+                { label: "Дигитален маркетинг", path: "/services/digital-marketing" }
               ].map((service) => (
                 <li key={service.path}>
                   <Link
@@ -151,7 +153,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-sm">
-            © 2024 Adrexio. Всички права запазени.
+            © {new Date().getFullYear()} Adrexio. Всички права запазени.
           </p>
           <div className="flex items-center gap-6 flex-wrap">
             <Link to="/privacy" className="text-muted-foreground hover:text-primary text-sm transition-colors">

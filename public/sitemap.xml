@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.adrexio.com/</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,42 +15,42 @@
   <!-- Main Pages -->
   <url>
     <loc>https://www.adrexio.com/services</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/pricing</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/about</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/case-studies</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/contact</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/affiliate</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -87,49 +87,49 @@
   <!-- Service Pages -->
   <url>
     <loc>https://www.adrexio.com/services/web-development</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/services/ai-implementation</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/services/mobile-apps</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/services/ui-ux-design</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/services/seo</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/services/digital-marketing</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.adrexio.com/services/technical-support</loc>
-    <lastmod>2026-02-01</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -137,7 +137,7 @@
   <!-- Case Study Pages -->
   <url>
     <loc>https://www.adrexio.com/case-studies/firescape-partners</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -149,7 +149,7 @@
   </url>
   <url>
     <loc>https://www.adrexio.com/case-studies/koni-jewellery</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -215,12 +215,6 @@
   </url>
   <url>
     <loc>https://www.adrexio.com/case-studies/body-aesthetics</loc>
-    <lastmod>2026-07-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.adrexio.com/case-studies/booom-bg</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

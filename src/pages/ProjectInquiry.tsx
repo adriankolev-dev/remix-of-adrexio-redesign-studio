@@ -12,6 +12,7 @@ import {
   Smartphone,
   Palette,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -47,6 +48,7 @@ interface ProjectFormData {
   target_audience: string;
   existing_website: string;
   additional_info: string;
+  gdpr: boolean;
   [HONEYPOT_FIELD_NAME]: string; // Honeypot field
 }
 
@@ -90,6 +92,7 @@ const ProjectInquiry = () => {
     target_audience: "",
     existing_website: "",
     additional_info: "",
+    gdpr: false,
     [HONEYPOT_FIELD_NAME]: "", // Honeypot field
   });
 
@@ -122,7 +125,7 @@ const ProjectInquiry = () => {
     try {
       const honeypotCheck = checkHoneypot(formData[HONEYPOT_FIELD_NAME]);
       if (!honeypotCheck.allowed) {
-        setError(honeypotCheck.message || "Спам детектиран.");
+        setError(honeypotCheck.message || "Съобщението изглежда като спам.");
         setIsLoading(false);
         return;
       }
@@ -141,8 +144,20 @@ const ProjectInquiry = () => {
         return;
       }
 
+      if (!formData.gdpr) {
+        setError("Моля, потвърдете съгласието с политиката за поверителност.");
+        setIsLoading(false);
+        return;
+      }
+
+      if (!formData.project_type) {
+        setError("Моля, изберете тип проект.");
+        setIsLoading(false);
+        return;
+      }
+
       if (!isValidEmail(formData.email)) {
-        setError("Моля, въведете валиден email адрес.");
+        setError("Моля, въведете валиден имейл адрес.");
         setIsLoading(false);
         return;
       }
@@ -208,6 +223,7 @@ const ProjectInquiry = () => {
         target_audience: "",
         existing_website: "",
         additional_info: "",
+        gdpr: false,
         [HONEYPOT_FIELD_NAME]: "",
       });
     } catch (err) {
@@ -277,6 +293,10 @@ const ProjectInquiry = () => {
                     {error}
                   </div>
                 )}
+
+                <p className="text-sm text-muted-foreground">
+                  Задължителни: име, имейл, тип проект, описание, бюджет и срок. Останалото е по избор.
+                </p>
 
                 <FieldGroup index="01" title="Лична информация" icon={Users}>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -368,7 +388,8 @@ const ProjectInquiry = () => {
                   </RadioGroup>
                 </FieldGroup>
 
-                <FieldGroup index="03" title="Нужни услуги *" icon={Target}>
+                <FieldGroup index="03" title="Нужни услуги" icon={Target}>
+                  <p className="text-sm text-muted-foreground">По избор — ако вече знаете какво ви трябва.</p>
                   <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                     {services.map((service) => {
                       const Icon = service.icon;
@@ -405,9 +426,21 @@ const ProjectInquiry = () => {
                       required
                     >
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="under-5000" id="under-5000" />
-                        <Label htmlFor="under-5000" className="cursor-pointer">
-                          Под 5,000 €
+                        <RadioGroupItem value="under-1000" id="under-1000" />
+                        <Label htmlFor="under-1000" className="cursor-pointer">
+                          Под 1,000 €
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="1000-3000" id="1000-3000" />
+                        <Label htmlFor="1000-3000" className="cursor-pointer">
+                          1,000 – 3,000 €
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="3000-5000" id="3000-5000" />
+                        <Label htmlFor="3000-5000" className="cursor-pointer">
+                          3,000 – 5,000 €
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -497,7 +530,7 @@ const ProjectInquiry = () => {
                   />
                 </FieldGroup>
 
-                <FieldGroup index="07" title="Детайли">
+                <FieldGroup index="07" title="Детайли (по избор)">
                   <div className="space-y-2">
                     <Label htmlFor="goals">Основни цели на проекта</Label>
                     <Textarea
@@ -570,6 +603,24 @@ const ProjectInquiry = () => {
                   />
                 </div>
 
+                <div className="flex items-start gap-3">
+                  <Checkbox
+                    id="gdpr"
+                    checked={formData.gdpr}
+                    onCheckedChange={(checked) =>
+                      setFormData((prev) => ({ ...prev, gdpr: checked === true }))
+                    }
+                    required
+                  />
+                  <Label htmlFor="gdpr" className="cursor-pointer text-sm leading-relaxed text-muted-foreground">
+                    Съгласен съм личните ми данни да бъдат обработени съгласно{" "}
+                    <Link to="/privacy" className="text-foreground underline-offset-4 hover:text-primary hover:underline">
+                      политиката за поверителност
+                    </Link>
+                    .
+                  </Label>
+                </div>
+
                 <Button
                   variant="ink"
                   size="lg"
@@ -589,6 +640,9 @@ const ProjectInquiry = () => {
                     </>
                   )}
                 </Button>
+                <p className="text-center text-sm text-muted-foreground">
+                  Отговор до 24ч на имейла, без обвързване.
+                </p>
               </form>
             )}
           </div>

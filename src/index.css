@@ -117,7 +117,8 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    /* Native CSS smooth fights Lenis (it interpolates every setScroll). */
+    scroll-behavior: auto;
   }
 
   /* Required for Lenis smooth scroll - ensures correct scroll height */

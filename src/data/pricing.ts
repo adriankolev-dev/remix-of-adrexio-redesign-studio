@@ -2,6 +2,10 @@
  * Single source of truth for pricing across the Adrexio website.
  */
 
+/** Canonical payment wording — use this string everywhere, do not paraphrase. */
+export const PAYMENT_COPY =
+  "50/50: половината при старт, половината след като видите резултата и преди публикуване.";
+
 export const PRICING = {
   website: {
     from: 690,
@@ -31,7 +35,7 @@ export const PRICING_SERVICES = [
     fromLabel: PRICING.website.fromLabel,
     description:
       "Всеки сайт е изграден от нулата — без шаблони. Цената зависи от обхвата, дизайна и функционалността.",
-    note: "Еднократна инвестиция · 50/50 плащане",
+    note: "Еднократна инвестиция · 50/50",
   },
   {
     index: "02",
@@ -39,7 +43,7 @@ export const PRICING_SERVICES = [
     fromLabel: PRICING.ecommerce.fromLabel,
     description:
       "Крайната цена зависи от брой продукти, платежни системи, интеграции и персонализирана функционалност.",
-    note: "Еднократна инвестиция · 50/50 плащане",
+    note: "Еднократна инвестиция · 50/50",
   },
   {
     index: "03",
@@ -62,7 +66,7 @@ export const PRICING_FACTORS = [
   },
   {
     label: "Персонализирана функционалност",
-    detail: "Форми, бронирания, потребителски акаунти, custom логика.",
+    detail: "Форми, бронирания, потребителски акаунти, собствена логика.",
   },
   {
     label: "Онлайн магазин",

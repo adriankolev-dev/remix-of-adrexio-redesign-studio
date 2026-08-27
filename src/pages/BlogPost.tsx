@@ -107,7 +107,7 @@ const BlogPost = () => {
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="h-3 w-3" />
-                  {post.readingTime} мин четене
+                  {post.readingTime} мин.
                 </span>
               </div>
             </Reveal>

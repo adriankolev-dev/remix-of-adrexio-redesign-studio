@@ -139,7 +139,7 @@ const ServiceLandingTemplate = ({
   heroTitle,
   heroHighlight,
   heroSubtitle,
-  heroCTAText = "Започни своя проект",
+  heroCTAText = "Свържи се с нас",
   heroAside,
   stats,
   introTitle,
@@ -275,7 +275,7 @@ const ServiceLandingTemplate = ({
           <Reveal delay={0.16} className="mt-12">
             <Button variant="line" size="lg" asChild>
               <Link to="/case-studies">
-                Разгледай портфолиото ни
+                Виж проектите
                 <ArrowRight size={18} />
               </Link>
             </Button>
@@ -467,7 +467,7 @@ const ServiceLandingTemplate = ({
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button variant="accent" size="xl" asChild>
                 <Link to="/contact">
-                  Започни сега
+                  Свържи се с нас
                   <ArrowRight size={18} />
                 </Link>
               </Button>

@@ -15,6 +15,7 @@ const navLinks = [
   { name: "За нас", href: "/about" },
   { name: "Проекти", href: "/case-studies" },
   { name: "Блог", href: "/blog" },
+  { name: "Цени", href: "/pricing" },
 ];
 
 const Navbar = () => {
@@ -32,7 +33,7 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -43,11 +44,18 @@ const Navbar = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass py-3" : "bg-transparent py-5"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 py-4"
     >
-      <nav className="container mx-auto px-6 flex items-center justify-between">
+      {/* Background is a separate layer so scroll never changes header height. */}
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute inset-0 border-b transition-opacity duration-300 ${
+          isScrolled
+            ? "border-border/50 bg-card/80 opacity-100 backdrop-blur-md"
+            : "border-transparent opacity-0"
+        }`}
+      />
+      <nav className="relative container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link 
           to="/" 
@@ -63,7 +71,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -86,7 +94,7 @@ const Navbar = () => {
         </div>
 
         {/* Theme Toggle & CTA Button */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <ThemeToggle />
           <Button variant="ink" size="lg" asChild>
             <Link to="/contact">Свържи се с нас</Link>
@@ -94,7 +102,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <div className="md:hidden flex items-center gap-2">
+        <div className="lg:hidden flex items-center gap-2">
           <ThemeToggle />
           <button
             className="text-foreground p-2"
@@ -112,7 +120,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-border"
+            className="lg:hidden glass border-t border-border"
           >
             <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
               {navLinks.map((link) => (

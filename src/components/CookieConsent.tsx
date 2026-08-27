@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cookie, X, Settings, CheckCircle } from "lucide-react";
+import { Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
@@ -127,74 +127,26 @@ const CookieConsent = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed bottom-0 left-0 right-0 z-50 p-3 sm:p-4 md:p-6"
+            className="fixed bottom-0 left-0 right-0 z-[60] border-t border-border bg-card"
           >
-            <div className="container mx-auto max-w-6xl">
-              <div className="border-gradient bg-card/95 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl">
-                <div className="flex flex-col gap-4 sm:gap-6">
-                  {/* Header with icon and close button */}
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
-                      <div className="p-2 sm:p-3 rounded-lg sm:rounded-xl bg-primary/10 shrink-0">
-                        <Cookie className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-base sm:text-lg font-display font-semibold mb-1 sm:mb-2">
-                          Използваме бисквитки
-                        </h3>
-                        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                          Използваме бисквитки, за да подобрим вашето изживяване, да анализираме използването на сайта и да персонализираме съдържанието.{" "}
-                          <Link
-                            to="/privacy"
-                            className="text-primary hover:underline font-medium whitespace-nowrap"
-                          >
-                            Научете повече
-                          </Link>
-                        </p>
-                      </div>
-                    </div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="shrink-0 h-8 w-8 sm:h-10 sm:w-10 -mt-1 -mr-1"
-                      onClick={handleRejectAll}
-                    >
-                      <X className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </Button>
-                  </div>
-                  
-                  {/* Action buttons */}
-                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                    <Button
-                      variant="hero"
-                      size="sm"
-                      onClick={handleAcceptAll}
-                      className="flex items-center justify-center gap-2 w-full sm:w-auto"
-                    >
-                      <CheckCircle className="w-4 h-4" />
-                      Приемам всички
-                    </Button>
-                    <div className="flex gap-2 sm:gap-3">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowSettings(true)}
-                        className="flex items-center justify-center gap-2 flex-1 sm:flex-initial"
-                      >
-                        <Settings className="w-4 h-4" />
-                        Настройки
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={handleRejectAll}
-                        className="flex-1 sm:flex-initial"
-                      >
-                        Отхвърлям
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+            <div className="container mx-auto flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6">
+              <p className="min-w-0 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                <span className="font-medium text-foreground">Използваме бисквитки.</span>{" "}
+                За работата на сайта, анализа и съдържанието.{" "}
+                <Link to="/privacy" className="font-medium text-primary hover:underline">
+                  Повече информация
+                </Link>
+              </p>
+              <div className="flex shrink-0 items-center gap-2">
+                <Button variant="hero" size="sm" onClick={handleAcceptAll}>
+                  Приемам всички
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => setShowSettings(true)}>
+                  Настройки
+                </Button>
+                <Button variant="ghost" size="sm" onClick={handleRejectAll}>
+                  Само необходимите
+                </Button>
               </div>
             </div>
           </motion.div>

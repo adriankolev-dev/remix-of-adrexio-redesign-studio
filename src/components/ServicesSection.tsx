@@ -4,6 +4,8 @@ import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import { Button } from "@/components/ui/button";
 
+const PHASE_LABEL = "по проект — следващ етап";
+
 const services = [
   {
     title: "Уеб разработка",
@@ -12,22 +14,16 @@ const services = [
     href: "/services/web-development",
   },
   {
-    title: "AI Implementation",
-    subtitle: "Изкуствен интелект",
-    description: "Автоматизация и AI решения за оптимизация на процесите.",
-    href: "/services/ai-implementation",
-  },
-  {
-    title: "Мобилни приложения",
-    subtitle: "Mobile Apps",
-    description: "iOS и Android приложения с фокус върху UX и производителност.",
-    href: "/services/mobile-apps",
-  },
-  {
     title: "UI/UX дизайн",
     subtitle: "Design & Strategy",
     description: "Интуитивен дизайн, който клиентите помнят и използват.",
     href: "/services/ui-ux-design",
+  },
+  {
+    title: "Техническа поддръжка",
+    subtitle: "от €99 / месец",
+    description: "Поддръжка след старта — работно време и спешни корекции.",
+    href: "/services/technical-support",
   },
   {
     title: "SEO и GEO",
@@ -36,22 +32,28 @@ const services = [
     href: "/services/seo",
   },
   {
-    title: "Дигитален маркетинг",
-    subtitle: "Digital Marketing",
-    description: "Стратегии за растеж и увеличаване на онлайн присъствието.",
-    href: "/services/digital-marketing",
+    title: "AI интеграции",
+    subtitle: PHASE_LABEL,
+    description: "Автоматизация и AI решения за оптимизация на процесите.",
+    href: "/services/ai-implementation",
   },
   {
-    title: "Техническа поддръжка",
-    subtitle: "Support",
-    description: "Актуализации, сигурност и спокойствие след пускането.",
-    href: "/services/technical-support",
+    title: "Мобилни приложения",
+    subtitle: PHASE_LABEL,
+    description: "iOS и Android приложения с фокус върху UX и производителност.",
+    href: "/services/mobile-apps",
+  },
+  {
+    title: "Дигитален маркетинг",
+    subtitle: PHASE_LABEL,
+    description: "Стратегии за растеж и увеличаване на онлайн присъствието.",
+    href: "/services/digital-marketing",
   },
 ];
 
 const ServicesSection = () => {
   return (
-    <section className="relative overflow-hidden bg-background py-24 md:py-32">
+    <section className="relative overflow-hidden bg-background py-16 md:py-24">
       <div className="container mx-auto px-6">
         <SectionHeader
           index="06"

@@ -22,13 +22,13 @@ const shifts = [
     problem: "Шаблон като всеки втори",
     psub: "Няма доверие, няма запомняне, няма заявки.",
     solution: "Дизайн от нулата",
-    ssub: "Структура и визуал, които са само ваши.",
+    ssub: "Структура и визия, които са само ваши.",
   },
 ];
 
 const ProblemSolutionSection = () => {
   return (
-    <section className="relative overflow-hidden bg-background py-24 md:py-32">
+    <section className="relative overflow-hidden bg-background py-16 md:py-24">
       <div className="container mx-auto px-6">
         <SectionHeader
           index="04"
@@ -91,7 +91,7 @@ const ProblemSolutionSection = () => {
         <Reveal delay={0.2} className="mt-14">
           <Button variant="ink" size="lg" asChild>
             <Link to="/contact">
-              Разкажете ни за проекта си
+              Свържи се с нас
               <ArrowRight size={18} />
             </Link>
           </Button>

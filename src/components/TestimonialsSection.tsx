@@ -60,7 +60,7 @@ const TestimonialsSection = () => {
   const t = testimonials[active];
 
   return (
-    <section className="relative overflow-hidden bg-background py-24 md:py-32">
+    <section className="relative overflow-hidden bg-background py-16 md:py-24">
       <div className="container mx-auto px-6">
         <Reveal>
           <SectionEyebrow label="Отзиви" index="08" />

@@ -6,7 +6,7 @@ import HandNote from "@/components/editorial/HandNote";
 import { PRICING } from "@/data/pricing";
 
 const PricingTeaser = () => (
-  <section className="relative overflow-hidden bg-background py-24 md:py-32">
+  <section className="relative overflow-hidden bg-background py-16 md:py-24">
     <div className="container mx-auto px-6">
       <div className="grid gap-10 border-t border-border pt-12 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-16">
         <div className="max-w-2xl">

@@ -1,7 +1,7 @@
 import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import HandNote from "@/components/editorial/HandNote";
-import { PRICING_SERVICES } from "@/data/pricing";
+import { PAYMENT_COPY, PRICING_SERVICES } from "@/data/pricing";
 
 interface PricingOverviewProps {
   showHeader?: boolean;
@@ -82,9 +82,7 @@ const PricingOverview = ({ showHeader = true, eyebrowIndex = "02" }: PricingOver
 
       <Reveal delay={0.12}>
         <p className="mt-14 max-w-2xl border-t border-border pt-8 text-sm leading-relaxed text-muted-foreground">
-          <span className="font-medium text-foreground">50/50 плащане.</span> Половината в
-          началото, останалата половина след като видите резултата — преди официалното
-          издаване.
+          <span className="font-medium text-foreground">{PAYMENT_COPY}</span>
         </p>
       </Reveal>
     </div>

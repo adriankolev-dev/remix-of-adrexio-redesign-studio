@@ -5,24 +5,13 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import { EASE_OUT } from "@/components/editorial/motion";
-import { getCaseStudyById, type CaseStudy } from "@/data/caseStudies";
+import { getFeaturedCaseStudies, type CaseStudy } from "@/data/caseStudies";
 
 // The hero zooms out to reveal a browser on the canvas. Here that same window
-// stays open — and we flip through real projects inside it, like tabs.
-const FEATURED_IDS = [
-  "firescape-partners",
-  "drmariaraykova",
-  "koni-jewellery",
-  "body-aesthetics",
-  "koleff-house",
-];
+// stays open — and we flip through real web projects inside it, like tabs.
+const featured = getFeaturedCaseStudies();
 
-const featured = FEATURED_IDS.map((id) => getCaseStudyById(id)).filter(
-  (s): s is CaseStudy => Boolean(s),
-);
-
-const studyHref = (study: CaseStudy) =>
-  study.isPublic ? `/case-studies/${study.id}` : "/case-studies";
+const studyHref = (study: CaseStudy) => `/case-studies/${study.id}`;
 
 const domainOf = (url: string | null) => {
   if (!url) return "adrexio.com";
@@ -54,7 +43,7 @@ const WorkSection = () => {
   const metric = study.results[0];
 
   return (
-    <section id="work" className="relative overflow-hidden bg-background pb-24 pt-16 md:py-32">
+    <section id="work" className="relative overflow-hidden bg-background pb-16 pt-12 md:py-24">
       <div className="canvas-grid canvas-grid-fade pointer-events-none absolute inset-0 opacity-50" aria-hidden />
 
       <div className="container relative z-10 mx-auto px-6">
@@ -62,17 +51,17 @@ const WorkSection = () => {
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div className="max-w-xl">
             <Reveal>
-              <SectionEyebrow label="Избрана работа" index="02" />
+              <SectionEyebrow label="Избрани проекти" index="02" />
             </Reveal>
             <Reveal delay={0.06}>
               <h2 className="font-display mt-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                Работа, а не шаблони.
+                Проекти, не шаблони.
               </h2>
             </Reveal>
             <Reveal delay={0.12}>
               <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-                Същият прозорец от началото — този път отворен на реални проекти.
-                Превключвай табовете.
+                Същият прозорец от началото — този път с реални проекти.
+                Превключете разделите.
               </p>
             </Reveal>
           </div>
@@ -83,7 +72,7 @@ const WorkSection = () => {
               className="group inline-flex items-center gap-2 text-sm font-semibold text-foreground"
             >
               <span className="border-b border-foreground/25 pb-0.5 transition-colors group-hover:border-primary">
-                Всички проекти
+                Виж проектите
               </span>
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
@@ -205,7 +194,7 @@ const WorkSection = () => {
                 </AnimatePresence>
 
                 <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1.5 text-xs font-semibold text-foreground opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
-                  Виж case study
+                  Виж проекта
                   <ArrowUpRight size={14} />
                 </span>
               </Link>

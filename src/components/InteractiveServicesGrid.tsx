@@ -26,16 +26,16 @@ interface Service {
 const services: Service[] = [
   {
     icon: Globe,
-    title: "Уеб сайт разработка",
+    title: "Изработка на уебсайтове",
     subtitle: "Web Development",
-    description: "Модерни сайтове за вашия бизнес и неговият растеж",
+    description: "Модерни сайтове за вашия бизнес и неговия растеж",
     href: "/services/web-development",
     color: "from-blue-500 to-cyan-500",
     gradient: "from-blue-500/20 to-cyan-500/20"
   },
   {
     icon: Brain,
-    title: "AI Implementation",
+    title: "AI интеграции",
     subtitle: "Изкуствен интелект",
     description: "Автоматизация и AI решения за оптимизация на бизнес процесите",
     href: "/services/ai-implementation",

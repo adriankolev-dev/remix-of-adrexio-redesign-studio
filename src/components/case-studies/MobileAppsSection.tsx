@@ -6,7 +6,10 @@ import { mobileApps } from "@/data/mobileApps";
 
 const MobileAppsSection = () => {
   return (
-    <section className="relative overflow-hidden border-t border-border bg-background py-24 md:py-32">
+    <section
+      id="mobile-apps"
+      className="relative overflow-hidden border-t border-border bg-background py-24 md:py-32"
+    >
       <div className="canvas-grid canvas-grid-fade pointer-events-none absolute inset-0 opacity-50" aria-hidden />
 
       <div className="container relative z-10 mx-auto px-6">
@@ -14,8 +17,8 @@ const MobileAppsSection = () => {
           label="Мобилни приложения"
           title={
             <>
-              Приложения, в които{" "}
-              <span className="accent-mark">участвахме</span>.
+              Приложения, по които{" "}
+              <span className="accent-mark">сме работили</span>.
             </>
           }
           description="Нашият екип е създал или допринесъл за разработката на тези мобилни приложения, достъпни в App Store."

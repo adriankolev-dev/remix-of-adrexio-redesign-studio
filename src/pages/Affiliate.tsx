@@ -56,7 +56,7 @@ const benefits = [
   {
     icon: Award,
     title: "Бонус програми",
-    description: "Специални бонуси за топ партньори и редовни реферали.",
+    description: "Специални бонуси за топ партньори и редовни препоръки.",
   },
 ];
 
@@ -106,10 +106,10 @@ const faqs = [
   {
     question: "Мога ли да препоръчам няколко проекта?",
     answer:
-      "Абсолютно! Няма ограничение за броя проекти, които можете да препоръчате. Колкото повече успешни реферали, толкова повече комисионни получавате.",
+      "Абсолютно! Няма ограничение за броя проекти, които можете да препоръчате. Колкото повече успешни препоръки, толкова повече комисионни получавате.",
   },
   {
-    question: "Как проследявам моите реферали?",
+    question: "Как проследявам препоръчаните клиенти?",
     answer:
       "Можете да се свържете с нас по всяко време, за да разберете статуса на вашите препоръчани клиенти. Ние ще ви информираме за всеки нов проект, свързан с ваше име, и ще ви уведомим кога комисионната е готова за плащане.",
   },
@@ -150,7 +150,7 @@ const Affiliate = () => {
       <Navbar />
 
       <PageIntro
-        label="Affiliate програма"
+        label="Партньорска програма"
         title={
           <>
             Печелете <span className="accent-mark">20% комисионна</span> за всяка препоръка
@@ -160,7 +160,7 @@ const Affiliate = () => {
         actions={
           <Button variant="ink" size="lg" asChild>
             <Link to="/contact?affiliate=true" onClick={goToContact}>
-              Присъединете се сега
+              Станете партньор
               <ArrowRight size={18} />
             </Link>
           </Button>
@@ -297,7 +297,7 @@ const Affiliate = () => {
                       PRICING.affiliate.commissionPct) /
                     100
                   ).toLocaleString("de-DE")}{" "}
-                  месечно пасивен доход
+                  пасивен доход на месец
                 </p>
               </div>
             </Reveal>
@@ -340,7 +340,7 @@ const Affiliate = () => {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-              Присъединете се към нашата affiliate програма днес. Регистрацията е безплатна и отнема
+              Присъединете се към нашата партньорска програма днес. Регистрацията е безплатна и отнема
               само минути.
             </p>
           </Reveal>
@@ -348,7 +348,7 @@ const Affiliate = () => {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button variant="accent" size="xl" asChild>
                 <Link to="/contact?affiliate=true" onClick={goToContact}>
-                  Присъединете се сега
+                  Станете партньор
                   <ArrowRight size={18} />
                 </Link>
               </Button>
@@ -358,7 +358,7 @@ const Affiliate = () => {
                 asChild
                 className="border-foreground/25 text-foreground hover:border-foreground/50"
               >
-                <Link to="/case-studies">Вижте нашите проекти</Link>
+                <Link to="/case-studies">Виж проектите</Link>
               </Button>
             </div>
           </Reveal>

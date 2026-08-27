@@ -17,12 +17,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { PAYMENT_COPY } from "@/data/pricing";
 
 const faqs = [
   {
     question: "Колко време отнема изграждането на уебсайт?",
     answer:
-      "Времето зависи от обхвата. Презентационните сайтове са готови за 2–3 седмици, онлайн магазините — за 4–6 седмици, а по-сложните custom решения — по договаряне.",
+      "Времето зависи от обхвата. Презентационните сайтове са готови за 2–3 седмици, онлайн магазините — за 4–6 седмици, а по-сложните персонализирани решения — по договаряне.",
   },
   {
     question: "Какво включва безплатната поддръжка?",
@@ -51,8 +52,7 @@ const faqs = [
   },
   {
     question: "Как работи 50/50 плащането?",
-    answer:
-      "50% в началото покрива дизайна и разработката. Останалите 50% — след като видите резултата и преди официалното издаване.",
+    answer: PAYMENT_COPY,
   },
   {
     question: "Как определяте крайната цена?",
@@ -84,7 +84,7 @@ const Pricing = () => {
         }
         description="Ориентировъчни суми за уеб сайтове, онлайн магазини и поддръжка. За SEO, дигитален маркетинг, AI и мобилни приложения — оферта след консултация."
         meta={[
-          { value: "50/50", label: "Плащане след одобрение" },
+          { value: "50/50", label: "при старт и преди публикуване" },
           { value: "3", label: "Уеб категории" },
           { value: "1", label: "Конкретна оферта" },
         ]}
@@ -173,16 +173,16 @@ const Pricing = () => {
             <Reveal delay={0.2}>
               <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center">
                 <Button variant="accent" size="lg" asChild>
-                  <Link to="/project-inquiry">
-                    Изпрати запитване
+                  <Link to="/contact">
+                    Свържи се с нас
                     <ArrowRight size={18} />
                   </Link>
                 </Button>
                 <Link
-                  to="/case-studies"
+                  to="/project-inquiry"
                   className="text-sm font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline"
                 >
-                  Виж нашите проекти
+                  Попълни бриф
                 </Link>
               </div>
             </Reveal>

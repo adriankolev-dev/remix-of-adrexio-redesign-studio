@@ -3,7 +3,6 @@ import koleffHouseImg from "@/assets/case-studies/koleff-house.png";
 import oraqorImg from "@/assets/case-studies/oraqor.png";
 import riactImg from "@/assets/case-studies/riact.png";
 import bodyaestheticsImg from "@/assets/case-studies/bodyaesthetics.png";
-import booomImg from "@/assets/case-studies/booom.png";
 import athleticiqImg from "@/assets/case-studies/athleticiq.png";
 import supercreditImg from "@/assets/case-studies/supercredit.png";
 import globalstreetartImg from "@/assets/case-studies/globalstreetart.png";
@@ -37,7 +36,6 @@ export interface CaseStudy {
   category: string;
   url: string | null;
   isPublic: boolean;
-  isFeatured?: boolean;
   image: string;
   overview: string;
   challenge: string;
@@ -49,22 +47,14 @@ export interface CaseStudy {
   internalNote?: string;
 }
 
-export const categories = [
-  "Всички",
-  "Електронна търговия",
-  "Здраве & Красота",
-  "Спортни технологии",
-  "Финанси & FinTech",
-  "Гейминг & Развлечения",
-  "Изкуство & Култура",
-  "Ресторантьорство",
-  "Медицина & Дентална",
-  "Индустрия",
-  "Организации",
-  "Технологии",
-  "Логистика",
-  "Образование",
-  "Туризъм & Хотели",
+export type CaseStudyKind = "web" | "shop" | "app";
+export type CaseStudyFilterId = "all" | "web" | "shop" | "app";
+
+export const CASE_STUDY_FILTERS: { id: CaseStudyFilterId; label: string }[] = [
+  { id: "all", label: "Всички" },
+  { id: "web", label: "Уеб сайтове" },
+  { id: "shop", label: "Магазини" },
+  { id: "app", label: "Приложения" },
 ];
 
 export const caseStudies: CaseStudy[] = [
@@ -76,7 +66,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Индустрия",
     url: "https://firescapepartners.com/",
     isPublic: true,
-    isFeatured: true,
     image: firescapeImg,
     overview: "Файърскейп Партнърс ООД предоставя интегрирани решения по пожарна безопасност — проектиране, документация, надзор и доставка на оборудване. Създадохме корпоративен уебсайт с портфолио от референции и WooCommerce магазин за пожарогасители, с многоезичност BG/EN.",
     challenge: "Клиентът се нуждаеше от професионален онлайн образ, който ясно да представи инженерните услуги по пожарна безопасност, да покаже реални проекти и референции, и същевременно да отвори нов канал за продажби чрез онлайн магазин за пожарно оборудване — в съответствие с изискванията за EU финансиране и GDPR.",
@@ -89,8 +78,8 @@ export const caseStudies: CaseStudy[] = [
       "Оптимизирахме за локално SEO и представяне на експертизата по нормативна пожарна безопасност"
     ],
     results: [
-      { metric: "250+", label: "Успешни проекта" },
-      { metric: "10+", label: "Години опит" },
+      { metric: "WooCommerce", label: "Онлайн магазин" },
+      { metric: "10+", label: "Години опит на клиента" },
       { metric: "BG/EN", label: "Многоезичност" }
     ],
     technologies: ["WordPress", "WooCommerce", "Custom Design", "Multilingual", "SEO", "GDPR"],
@@ -105,7 +94,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Туризъм & Хотели",
     url: "https://koleff-house.com/",
     isPublic: true,
-    isFeatured: true,
     image: koleffHouseImg,
     overview: "Koleff House - къща за гости в Твърдица, Сливен с 11 леглови места. Модерен Next.js уебсайт за резервации. Собственик, управител и разработчик: Стефан Колев.",
     challenge: "Клиентът се нуждаеше от модерен, професионален уебсайт, който да представи къщата за гости с нейните удобства, да улесни онлайн резервации и да привлече гости, търсещи спокойствие и комфорт в региона на Сливен.",
@@ -135,7 +123,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Електронна търговия",
     url: "https://konii.ro/",
     isPublic: true,
-    isFeatured: true,
     image: koniImg,
     overview: "Koni Jewellery е премиум онлайн магазин за ръчно изработени бижута от сребро и злато. След като клиентът купуваше веднъж, той изчезваше. Ние създадохме система, която автоматизира повторните продажби и увеличава приходите от всеки клиент с над 320%.",
     challenge: "Клиентът губеше пари за реклама, която привличаше нови клиенти, но те купуваха само веднъж и никога не се връщаха. Всяка нова продажба струваше повече от предишната, а повторните продажби бяха под 15%. Бизнесът не растеше, въпреки че качеството на продуктите беше отлично.",
@@ -148,8 +135,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     results: [
       { metric: "+320%", label: "Приходи от всеки клиент" },
-      { metric: "42%", label: "Клиенти се връщат редовно" },
-      { metric: "+185%", label: "Повторни продажби" }
+      { metric: "42%", label: "Клиенти се връщат редовно" }
     ],
     technologies: ["Symfony", "PHP", "MySQL", "Dedicated Server", "Custom API"],
     gradient: "from-rose-400/20 to-pink-500/20",
@@ -163,7 +149,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Здраве & Красота",
     url: "https://zdravecbg.com/",
     isPublic: true,
-    isFeatured: false,
     image: zdravecImg,
     overview: "Био Магазин ЗдравеЦ е онлайн магазин за сертифицирани био храни, натурална козметика, билки, тинктури и хранителни добавки. С над 2000 внимателно подбрани продукта и уникална концепция за подаръчни кошници, магазинът прави здравословния избор лесен и достъпен за цяла България.",
     challenge: "Клиентът се нуждаеше от онлайн магазин, който да управлява голям каталог от над 2000 продукта в четири основни категории, да предлага интуитивно пазаруване и същевременно да представи автентичната атмосфера на физическия магазин. Допълнително предизвикателство беше внедряването на двойно ценообразуване в евро и лева заради прехода към еврото.",
@@ -192,7 +177,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Индустрия",
     url: "https://wexelcoatings.com/",
     isPublic: true,
-    isFeatured: false,
     image: wexelImg,
     overview: "Wexel® е производител на индустриални бои и системи за антикорозионна защита на метални повърхности. Портфолиото включва четири продуктови линии — алкидни, епоксидни и акрил-полиуретанови покрития, както и разтворители. Създадохме B2B уебсайт, който представя техническите продукти на индустриални клиенти в България и извън нея.",
     challenge: "Клиентът се нуждаеше от професионален B2B уебсайт, който ясно да представи технически сложните продукти с точните им спецификации, да организира каталога по продуктови линии и да улесни индустриалните запитвания. Изискваше се и многоезичност, за да достигне до международни партньори.",
@@ -221,7 +205,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Технологии",
     url: "https://www.oraqor.com/",
     isPublic: true,
-    isFeatured: false,
     image: oraqorImg,
     overview: "Oraqor е платформа, която балансира ангажираността на служителите и производителността, за да задвижи бизнес растежа. Платформата включва Oraqor Pulse за бърза диагностика на проблеми с хората и Oraqor Navigator за превръщане на ангажираността в производителност.",
     challenge: "Oraqor имаше нужда от убедителен уебсайт, който да демонстрира как платформата решава проблема с недоволството на служителите (което струва 34% от заплатите), да обясни двата модула и да привлече HR и бизнес лидери.",
@@ -249,7 +232,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Технологии",
     url: "https://www.riact.ai/",
     isPublic: true,
-    isFeatured: false,
     image: riactImg,
     overview: "RiACT е skill-based платформа за управление на роботи, която премахва сложността на програмирането на роботи и ускорява настройката, конфигурацията и работата с индустриални роботи. Платформата е hardware agnostic и работи с cobots, индустриални роботи и други устройства.",
     challenge: "RiACT се нуждаеше от технически, но достъпен уебсайт, който да обясни платформата на производители и системни интегратори, да демонстрира готовите application templates и да покаже интеграциите с различни роботи и машини.",
@@ -277,7 +259,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Образование",
     url: "https://signup.mehannagroup.com",
     isPublic: true,
-    isFeatured: false,
     image: mehannaImg,
     overview: "The Mehanna Group е водеща платформа за академични услуги, предлагаща помощ при писане на научни трудове, подготовка за изпити и приемни консултации за студенти по целия свят. Платформата осигурява достъп до над 60 експерти в различни области.",
     challenge: "Компанията се нуждаеше от мащабируема и сигурна платформа за управление на запитвания, регистрация на потребители и координация между студенти и академични експерти, осигуряваща 24/7 поддръжка.",
@@ -304,7 +285,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Финанси & FinTech",
     url: null,
     isPublic: false,
-    isFeatured: false,
     image: supercreditImg,
     overview: "SuperCredit е водеща българска кредитна брокерска компания, помагаща на клиентите да намерят най-добрите оферти за ипотечни, потребителски и инвестиционни кредити. С над 2 600 обслужени клиенти и 900+ млн. € обработени кредити.",
     challenge: "SuperCredit се нуждаеше от вътрешна система за оптимизиране на работните процеси по обработка на заеми, сигурно управление на клиентски данни и проследяване на статуса на заявленията.",
@@ -333,7 +313,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Електронна търговия",
     url: "https://www.kapabay.com/",
     isPublic: true,
-    isFeatured: false,
     image: kapabayImg,
     overview: "Kapabay е иновативна B2B платформа, която свързва бизнеси в Обединеното кралство с проверени производители на облекло в Бангладеш. Тя оптимизира целия процес на доставка – от дизайна до логистиката.",
     challenge: "Клиентът се нуждаеше от мащабируема и сигурна платформа, която да улесни международната търговия, да осигури прозрачност при поръчките и да внедри сложна система за управление на доставките.",
@@ -361,7 +340,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Логистика",
     url: "https://fml-bd.com/",
     isPublic: true,
-    isFeatured: false,
     image: fmlbdImg,
     overview: "Freight Management Ltd. (FML) е глобална логистична компания, осигуряваща прецизност и надеждност във всяко звено на веригата за доставки. От спешни пратки до мащабни глобални карго проекти - те се справят с всичко.",
     challenge: "Компанията се нуждаеше от модерен, професионален уебсайт, който да представи пълния спектър от логистични услуги - въздушен, морски, сухопътен транспорт и складиране - и да улесни връзката с потенциални клиенти 24/7.",
@@ -389,7 +367,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Изкуство & Култура",
     url: "https://www.globalstreetart.com/",
     isPublic: true,
-    isFeatured: false,
     image: globalstreetartImg,
     overview: "Global Street Art е водещата европейска компания за ръчно рисувана реклама с глобален обхват. Те са създали над 3,000 публични арт творби, включително London Mural Festival, работейки с брандове като Gucci, Nike, Burberry, Spotify, Netflix и Marc Jacobs.",
     challenge: "Компанията се нуждаеше от модерна, визуално впечатляваща платформа, която да представи портфолиото им от мащабни мурали, да привлече премиум клиенти и да улесни процеса на заявка за проекти на глобално ниво.",
@@ -416,7 +393,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Гейминг & Развлечения",
     url: "https://webxotic.com/",
     isPublic: true,
-    isFeatured: false,
     image: webxoticImg,
     overview: "Webxotic LLC е студио за разработка на мобилни игри, специализирано в Unity, 3D анимация и AI визуализации. Създават стратегически игри с дълбоки икономически системи и конкурентна прогресия.",
     challenge: "Студиото имаше нужда от впечатляваща презентационна страница, която да демонстрира визуалните им способности, да привлече талантливи разработчици и да насочи потребителите към техните мобилни приложения.",
@@ -443,7 +419,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Гейминг & Развлечения",
     url: "https://bitcoinempires.io/",
     isPublic: true,
-    isFeatured: false,
     image: bitcoinempiresImg,
     overview: "Bitcoin Empires е икономическа стратегическа игра, където икономиката се задвижва от неограничена вътрешноигрова фиат валута и фиксирано предлагане от само 21 милиона монети. Този уникален икономически модел запознава играчите с потенциала на ограничените активи.",
     challenge: "Играта се нуждаеше от уебсайт, който да обясни сложната игрова механика по достъпен начин, да изгради общност около крипто-гейминг концепцията и да улесни изтеглянето на мобилното приложение.",
@@ -471,7 +446,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Здраве & Красота",
     url: "https://bodyaesthetics.bg/",
     isPublic: true,
-    isFeatured: false,
     image: bodyaestheticsImg,
     overview: "Body Aesthetics е водещ медицински козметичен лазерен център в България, предлагащ най-високия клас неинвазивни естетични процедури. От 2018 г. насам изграждат доверие с хиляди клиенти чрез експертни грижи и най-съвременни технологии.",
     challenge: "Клиниката имаше нужда от модерен, вдъхващ доверие уебсайт, който да представи премиум услугите им, да изгради авторитет в конкурентната индустрия за красота и да позволи безпроблемно онлайн резервиране.",
@@ -492,40 +466,12 @@ export const caseStudies: CaseStudy[] = [
     accentColor: "text-amber-500"
   },
   {
-    id: "booom-bg",
-    title: "Booom.bg",
-    subtitle: "E-commerce платформа с бърза доставка",
-    category: "Електронна търговия",
-    url: "https://booom.bg/",
-    isPublic: true,
-    isFeatured: false,
-    image: booomImg,
-    overview: "Booom.bg беше нов e-commerce бизнес, който харчеше хиляди лева за реклама, но клиентите купуваха веднъж и изчезваха. Ние създадохме retention система, която автоматизира повторните продажби и увеличава приходите от всеки клиент с над 250%.",
-    challenge: "Бизнесът привличаше нови клиенти чрез скъпа реклама, но те купуваха само веднъж и никога не се връщаха. Средната стойност на поръчката беше ниска, а повторните продажби под 20%. Всяка нова продажба струваше повече от предишната, което убиваше маржовете.",
-    solution: [
-      "Внедрихме автоматизирана система за retention, която следва поведението на клиентите и изпраща персонализирани оферти в критични моменти",
-      "Създадохме seamless checkout процес, който намалява напусканията в кошницата с 55% и увеличава конверсията",
-      "Разработихме система за препоръки, базирана на покупките на клиента, която увеличава средната стойност на поръчката с 38%",
-      "Интегрирахме автоматизирани email кампании за клиенти, които не са купували от 30, 60 и 90 дни, което възстановява 25% от загубените клиенти",
-      "Създадохме прозрачна система за проследяване на доставки, която изгражда доверие и увеличава повторните поръчки"
-    ],
-    results: [
-      { metric: "+210%", label: "Ръст в продажбите" },
-      { metric: "+250%", label: "Приходи от всеки клиент" },
-      { metric: "35%", label: "Клиенти се връщат редовно" }
-    ],
-    technologies: ["WordPress", "WooCommerce", "Платежен портал", "Куриерски API"],
-    gradient: "from-blue-500/20 to-indigo-500/20",
-    accentColor: "text-blue-500"
-  },
-  {
     id: "athleticiq",
     title: "Athletic IQ",
     subtitle: "Приложение за спортни тренировки за младежи",
     category: "Спортни технологии",
     url: "https://athleticiqapp.com/",
     isPublic: true,
-    isFeatured: false,
     image: athleticiqImg,
     overview: "Athletic IQ е иновативно фитнес приложение, създадено да трансформира начина, по който младите атлети тренират. С над 4 500 активни млади спортисти и 30+ игрови програми за тренировки, то превръща фитнеса в игра.",
     challenge: "Athletic IQ имаше нужда от завладяващ landing page, който да резонира както с родителите, така и с младите атлети, ясно да комуникира уникалния геймифициран подход към фитнеса.",
@@ -553,7 +499,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Технологии",
     url: "https://nfclogo.com/",
     isPublic: true,
-    isFeatured: false,
     image: nfclogoImg,
     overview: "NFC Logo предлага иновативни решения за бизнес идентичност чрез NFC технология. Компанията комбинира традиционното лого дизайн с модерна безконтактна технология за следващо ниво на брандинг.",
     challenge: "Клиентът се нуждаеше от уебсайт, който ясно да обясни NFC технологията на нетехническа аудитория, да демонстрира продуктовата гама и да улесни B2B продажбите.",
@@ -580,7 +525,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Електронна търговия",
     url: "https://ameliadiva.com/",
     isPublic: true,
-    isFeatured: false,
     image: ameliadivaImg,
     overview: "Amelia Diva беше професионален магазин за козметични продукти, който харчеше пари за реклама, но клиентите купуваха веднъж и изчезваха. Ние създадохме система за retention, която автоматизира повторните продажби и увеличава приходите от всеки клиент с над 280%.",
     challenge: "Магазинът привличаше нови клиенти чрез реклама, но те купуваха само веднъж и никога не се връщаха. Продуктите се консумират редовно (всеки 2-3 месеца), но клиентите не се връщаха автоматично. Бизнесът губеше потенциални повторни продажби на стойност над 200,000 лева годишно.",
@@ -607,7 +551,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Ресторантьорство",
     url: "https://tajmahal.bg/",
     isPublic: true,
-    isFeatured: false,
     image: tajmahalImg,
     overview: "Taj Mahal е легендарен индийски ресторант в София, представящ магията на невероятната индийска кухня от 2002 година. Предлагат автентично меню с веган опции, детски менюта и онлайн поръчки.",
     challenge: "Ресторантът се нуждаеше от модерен уебсайт с онлайн меню и система за поръчки, който да запази автентичната атмосфера и да привлече нови клиенти чрез дигитални канали.",
@@ -634,7 +577,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Медицина & Дентална",
     url: "https://amadent.bg/",
     isPublic: true,
-    isFeatured: false,
     image: amadentImg,
     overview: "Медико-дентален център АМА е създаден през 1991г. с философия за изключително добра комуникация между лекар, пациент и лаборатория. Предлагат модерни дентални технологии и дългогодишен опит.",
     challenge: "Денталният център се нуждаеше от модерен, вдъхващ доверие уебсайт, който да представи услугите им, екипа от специалисти и да улесни контакта с потенциални пациенти.",
@@ -661,7 +603,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Медицина & Дентална",
     url: "https://drmariaraykova.com/",
     isPublic: true,
-    isFeatured: true,
     image: drmariaraykovaImg,
     overview: "Премиум уебсайт за д-р Мария Райкова — акушер-гинеколог в София. Информативен сайт с услуги, медицински наръчник, FAQ, многоезичност (BG/EN/ES) и записване на час през Superdoc.",
     challenge: "Клиентът се нуждаеше от спокоен, вдъхващ доверие онлайн образ, който ясно да представи обхвата на грижата, да насочи пациентките към онлайн записване и да работи добре за SEO на български, английски и испански — без да обещава услуги извън реалната практика.",
@@ -689,7 +630,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Организации",
     url: "https://boasbg.org/",
     isPublic: true,
-    isFeatured: false,
     image: boasImg,
     overview: "Българско Ортодонтско Алайнер Общество (БОАО) е сдружение с нестопанска цел, което обединява и насърчава клиничния и научен интерес в сферата на ортодонтското лечение с акцент върху лечението с алайнери.",
     challenge: "Сдружението се нуждаеше от професионална онлайн платформа за привличане на членове, организиране на събития и споделяне на новини и ресурси с ортодонтската общност.",
@@ -716,7 +656,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Индустрия",
     url: "https://bulbiochem.bg/",
     isPublic: true,
-    isFeatured: false,
     image: bulbiochemImg,
     overview: "Bulmat предлага антикорозионна защита на световно ниво с персонализирани решения за индустрията. Специализират в битумни продукти, течни бои за електростатично боядисване и други индустриални решения.",
     challenge: "Компанията се нуждаеше от B2B уебсайт, който ясно да представи техническите продукти, да улесни запитванията от индустриални клиенти и да изгради авторитет в сектора.",
@@ -743,7 +682,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Туризъм & Хотели",
     url: "https://thelegends-villas.bg/",
     isPublic: true,
-    isFeatured: false,
     image: legendsVillasImg,
     overview: "The Legends Villas е уникално място за настаняване в сърцето на природата, предлагащо две къщи за гости (Къща Легенди и Къща Сър Коев), споделено пространство за събития (ПЛЕВНЯТА) и концепция за wellbeing настаняване. Проектът комбинира автентичността на селския живот с модерен дизайн и изкуство.",
     challenge: "Клиентът се нуждаеше от уебсайт, който да предаде уникалната атмосфера на мястото, да представи двете къщи за гости, споделеното пространство за събития и ритрийти, и да свърже гостите с местната общност чрез програмата 'Аз съм местен'.",
@@ -770,7 +708,6 @@ export const caseStudies: CaseStudy[] = [
     category: "Туризъм & Хотели",
     url: "https://breezypointvillas.com/",
     isPublic: true,
-    isFeatured: false,
     image: breezypointvillasImg,
     overview: "Breezy Point Villas предлага три уникални частни вили в сърцето на Нуса Дуа, Бали - Elora, Emerald и Flamboyant. Всяка вила разполага с частен басейн, красиво оформен градина и уединение, създадени за релакс и спокойствие в тропическия рай на Бали.",
     challenge: "Клиентът се нуждаеше от модерен уебсайт, който да представи трите вили с техните уникални характеристики, да улесни онлайн резервации и да привлече международни гости, търсещи спокойствие и уединение в Бали.",
@@ -797,11 +734,101 @@ export const getCaseStudyById = (id: string): CaseStudy | undefined => {
   return caseStudies.find(study => study.id === id);
 };
 
-export const getFeaturedCaseStudies = (): CaseStudy[] => {
-  return caseStudies.filter(study => study.isFeatured);
+/** Counted 1:1 from entries in this file, including the private SuperCredit case study. */
+export const PORTFOLIO_PROJECT_COUNT = caseStudies.length;
+
+/** Unique clients — one company per case study in this file. */
+export const PORTFOLIO_CLIENT_COUNT = new Set(caseStudies.map((s) => s.title)).size;
+
+/**
+ * Single source of truth for portfolio order and grouping.
+ * Homepage „Избрана работа“ tabs and /case-studies both read this list.
+ *
+ * 1. koni-jewellery
+ * 2. firescape-partners
+ * 3. drmariaraykova
+ * 4. global-street-art
+ * 5. fml-bd
+ * 6. bitcoin-empires
+ */
+export const FEATURED_IDS = [
+  "koni-jewellery",
+  "firescape-partners",
+  "drmariaraykova",
+  "global-street-art",
+  "fml-bd",
+  "bitcoin-empires",
+] as const;
+
+const FEATURED_SET = new Set<string>(FEATURED_IDS);
+
+const SHOP_IDS = new Set([
+  "koni-jewellery",
+  "firescape-partners",
+  "zdravec",
+  "amelia-diva",
+  "nfc-logo",
+  "bulbiochem",
+  "kapabay",
+]);
+
+const APP_IDS = new Set(["athleticiq"]);
+
+export const getCaseStudyKind = (id: string): CaseStudyKind => {
+  if (APP_IDS.has(id)) return "app";
+  if (SHOP_IDS.has(id)) return "shop";
+  return "web";
 };
 
-export const getCaseStudiesByCategory = (category: string): CaseStudy[] => {
-  if (category === "Всички") return caseStudies;
-  return caseStudies.filter(study => study.category === category);
+export const sortFeaturedFirst = (studies: CaseStudy[]): CaseStudy[] => {
+  const rank = new Map<string, number>(FEATURED_IDS.map((id, i) => [id, i]));
+  return [...studies].sort((a, b) => {
+    const ar = rank.get(a.id);
+    const br = rank.get(b.id);
+    if (ar === undefined && br === undefined) return 0;
+    if (ar === undefined) return 1;
+    if (br === undefined) return -1;
+    return ar - br;
+  });
+};
+
+export const getFeaturedCaseStudies = (): CaseStudy[] => {
+  return FEATURED_IDS.map((id) => getCaseStudyById(id)).filter(
+    (study): study is CaseStudy => Boolean(study),
+  );
+};
+
+/** Featured six, then other web/shop in source order, apps last. */
+export const getPortfolioOrder = (): CaseStudy[] => {
+  const featured = getFeaturedCaseStudies();
+  const rest = caseStudies.filter(
+    (s) => !FEATURED_SET.has(s.id) && getCaseStudyKind(s.id) !== "app",
+  );
+  const apps = caseStudies.filter((s) => getCaseStudyKind(s.id) === "app");
+  return [...featured, ...rest, ...apps];
+};
+
+export const getCaseStudiesForFilter = (filter: CaseStudyFilterId): CaseStudy[] => {
+  if (filter === "app") {
+    return caseStudies.filter((s) => getCaseStudyKind(s.id) === "app");
+  }
+  if (filter === "shop") {
+    return sortFeaturedFirst(caseStudies.filter((s) => getCaseStudyKind(s.id) === "shop"));
+  }
+  if (filter === "web") {
+    return sortFeaturedFirst(caseStudies.filter((s) => getCaseStudyKind(s.id) === "web"));
+  }
+  const featured = getFeaturedCaseStudies();
+  const rest = caseStudies.filter(
+    (s) => !FEATURED_SET.has(s.id) && getCaseStudyKind(s.id) !== "app",
+  );
+  return [...featured, ...rest];
+};
+
+export const partitionFeatured = (studies: CaseStudy[]) => {
+  const featured = FEATURED_IDS.map((id) => studies.find((s) => s.id === id)).filter(
+    (s): s is CaseStudy => Boolean(s),
+  );
+  const rest = studies.filter((s) => !FEATURED_SET.has(s.id));
+  return { featured, rest };
 };

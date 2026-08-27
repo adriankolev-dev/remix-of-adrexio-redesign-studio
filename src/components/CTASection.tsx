@@ -3,10 +3,11 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
+import { PAYMENT_COPY } from "@/data/pricing";
 
 const CTASection = () => {
   return (
-    <section className="layer-dark relative overflow-hidden py-28 md:py-36">
+    <section className="layer-dark relative overflow-hidden py-20 md:py-28">
       <div className="canvas-grid absolute inset-0 opacity-[0.07]" aria-hidden />
 
       <div className="container relative z-10 mx-auto px-6 text-center">
@@ -32,7 +33,7 @@ const CTASection = () => {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button variant="accent" size="xl" asChild>
               <Link to="/contact">
-                Направи запитване
+                Свържи се с нас
                 <ArrowRight size={18} />
               </Link>
             </Button>
@@ -48,8 +49,8 @@ const CTASection = () => {
         </Reveal>
 
         <Reveal delay={0.3}>
-          <p className="font-mono-meta mx-auto mt-8 text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">
-            Отговор до 24ч · Плащаш след като видиш резултата · Без обвързващи договори
+          <p className="mx-auto mt-8 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Отговор до 24ч · {PAYMENT_COPY} · Без обвързващи договори
           </p>
         </Reveal>
 

@@ -12,7 +12,6 @@ import globalstreetartLogo from "@/assets/clients/globalstreetart.png";
 import webxoticLogo from "@/assets/clients/webxotic.png";
 import tokenizeLogo from "@/assets/clients/tokenize.png";
 import tajmahalLogo from "@/assets/clients/tajmahal.png";
-import booomLogo from "@/assets/clients/booom.webp";
 
 const clients = [
   { name: "Bulbiochem", logo: bulbioLogo },
@@ -26,7 +25,6 @@ const clients = [
   { name: "WebXotic", logo: webxoticLogo },
   { name: "Tokenize The World", logo: tokenizeLogo },
   { name: "Taj Mahal", logo: tajmahalLogo },
-  { name: "BOOOM", logo: booomLogo },
 ];
 
 const ClientLogos = () => {

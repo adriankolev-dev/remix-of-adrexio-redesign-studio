@@ -1,7 +1,13 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,23 +20,101 @@ import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import RobotMascot from "@/components/mascots/RobotMascot";
 import CTASection from "@/components/CTASection";
-import { caseStudies, getCaseStudiesByCategory } from "@/data/caseStudies";
+import {
+  CASE_STUDY_FILTERS,
+  getCaseStudiesForFilter,
+  getPortfolioOrder,
+  partitionFeatured,
+  PORTFOLIO_CLIENT_COUNT,
+  PORTFOLIO_PROJECT_COUNT,
+  type CaseStudy,
+  type CaseStudyFilterId,
+} from "@/data/caseStudies";
 import { getBreadcrumbSchema } from "@/lib/structuredData";
+import { mobileApps } from "@/data/mobileApps";
+import { getLenis } from "@/lib/lenis";
 
 const summaryStats = [
-  { value: "30+", label: "Доволни клиенти" },
-  { value: "50+", label: "Завършени проекта" },
-  { value: "+150%", label: "Среден растеж" },
+  { value: String(PORTFOLIO_CLIENT_COUNT), label: "Доволни клиенти" },
+  { value: String(PORTFOLIO_PROJECT_COUNT), label: "Завършени проекти" },
   { value: "< 2 сек", label: "Време за зареждане" },
 ];
 
+const ProjectGrid = ({ studies }: { studies: CaseStudy[] }) => (
+  <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+    {studies.map((study, index) => (
+      <CaseStudyCard key={study.id} study={study} index={index} />
+    ))}
+  </div>
+);
+
+const AppsScrollCue = () => {
+  const reduceMotion = useReducedMotion();
+  const { scrollY } = useScroll();
+  const [visible, setVisible] = useState(true);
+
+  useMotionValueEvent(scrollY, "change", (value) => {
+    setVisible(value < 80);
+  });
+
+  const scrollToApps = () => {
+    const target = document.getElementById("mobile-apps");
+    if (!target) return;
+    const top =
+      target.getBoundingClientRect().top +
+      (window.scrollY || document.documentElement.scrollTop) -
+      72;
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(top, { force: true });
+      return;
+    }
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          type="button"
+          onClick={scrollToApps}
+          aria-label="Надолу към мобилните приложения"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 8 }}
+          transition={{ duration: 0.3 }}
+          className="fixed bottom-8 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-1 rounded-full border border-border bg-background/95 px-5 py-3 shadow-sm backdrop-blur"
+        >
+          <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.18em] text-primary">
+            Надолу
+          </span>
+          <motion.span
+            animate={
+              reduceMotion
+                ? { opacity: 1 }
+                : { y: [0, 7, 0], opacity: [1, 0.15, 1] }
+            }
+            transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center text-primary"
+          >
+            <span className="h-6 w-0.5 rounded-full bg-primary" />
+            <ChevronDown className="h-5 w-5" strokeWidth={2} />
+          </motion.span>
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+};
+
 const CaseStudies = () => {
-  const [activeCategory, setActiveCategory] = useState("Всички");
+  const [activeFilter, setActiveFilter] = useState<CaseStudyFilterId>("all");
 
-  const filteredStudies = getCaseStudiesByCategory(activeCategory);
-  const isFiltering = activeCategory !== "Всички";
+  const filteredStudies = getCaseStudiesForFilter(activeFilter);
+  const isDefaultView = activeFilter === "all";
+  const isAppsView = activeFilter === "app";
+  const { featured: featuredStudies, rest: restStudies } = partitionFeatured(filteredStudies);
 
-  const publicStudies = caseStudies.filter((s) => s.isPublic);
+  const publicStudies = getPortfolioOrder().filter((s) => s.isPublic);
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -82,51 +166,79 @@ const CaseStudies = () => {
       <section className="relative bg-background pb-12">
         <div className="container mx-auto px-6">
           <CaseStudyFilters
-            activeCategory={activeCategory}
-            onCategoryChange={setActiveCategory}
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
           />
         </div>
       </section>
 
-      {/* All Projects Grid */}
+      {/* Projects */}
       <section className="pb-24">
         <div className="container mx-auto px-6">
-          <div className="mb-10 border-t border-border pt-8">
-            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
-              {isFiltering ? activeCategory : "Всички проекти"}
-            </span>
-            <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              {filteredStudies.length}{" "}
-              {filteredStudies.length === 1 ? "проект" : "проекта"} в портфолиото
-            </h2>
-          </div>
+          {isDefaultView ? (
+            <>
+              <div className="mb-10 border-t border-border pt-8">
+                <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
+                  Избрано
+                </span>
+                <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                  {featuredStudies.length} проекта
+                </h2>
+              </div>
+              <ProjectGrid studies={featuredStudies} />
 
-          {filteredStudies.length > 0 ? (
-            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredStudies.map((study, index) => (
-                <CaseStudyCard key={study.id} study={study} index={index} />
-              ))}
-            </div>
+              {restStudies.length > 0 && (
+                <>
+                  <div className="mb-10 mt-20 border-t border-border pt-8">
+                    <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
+                      Още работа
+                    </span>
+                    <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                      {restStudies.length}{" "}
+                      {restStudies.length === 1 ? "проект" : "проекта"}
+                    </h2>
+                  </div>
+                  <ProjectGrid studies={restStudies} />
+                </>
+              )}
+            </>
           ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex flex-col items-center border-t border-border py-16 text-center"
-            >
-              <RobotMascot variant="lost" className="mb-8 max-w-[220px]" />
-              <p className="mb-4 text-lg text-muted-foreground">
-                Няма проекти в тази категория
-              </p>
-              <Button variant="line" onClick={() => setActiveCategory("Всички")}>
-                Виж всички проекти
-              </Button>
-            </motion.div>
+            <>
+              <div className="mb-10 border-t border-border pt-8">
+                <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
+                  {CASE_STUDY_FILTERS.find((f) => f.id === activeFilter)?.label}
+                </span>
+                <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                  {isAppsView
+                    ? `${filteredStudies.length + mobileApps.length} проекта`
+                    : `${filteredStudies.length} ${filteredStudies.length === 1 ? "проект" : "проекта"}`}
+                </h2>
+              </div>
+
+              {filteredStudies.length > 0 ? (
+                <ProjectGrid studies={filteredStudies} />
+              ) : !isAppsView ? (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="flex flex-col items-center border-t border-border py-16 text-center"
+                >
+                  <RobotMascot variant="lost" className="mb-8 max-w-[220px]" />
+                  <p className="mb-4 text-lg text-muted-foreground">
+                    Няма проекти в тази категория
+                  </p>
+                  <Button variant="line" onClick={() => setActiveFilter("all")}>
+                    Покажи всички
+                  </Button>
+                </motion.div>
+              ) : null}
+            </>
           )}
         </div>
       </section>
 
-      {/* Mobile Apps Section */}
-      {!isFiltering && <MobileAppsSection />}
+      {(isDefaultView || isAppsView) && <MobileAppsSection />}
+      {isAppsView && <AppsScrollCue />}
 
       {/* Stats — editorial dark band, big numbers on hairlines */}
       <section className="layer-dark relative overflow-hidden py-24 md:py-32">
@@ -140,10 +252,10 @@ const CaseStudies = () => {
                 Нашата история на <span className="text-primary">успеха</span>.
               </>
             }
-            description="Числа, които отразяват ангажимента ни да доставяме изключителни резултати за всеки клиент."
+            description="Числа от портфолиото и конкретни проекти — без среден растеж, който обещаваме на всеки."
           />
 
-          <div className="grid grid-cols-2 border-t border-border sm:grid-cols-4">
+          <div className="grid grid-cols-1 border-t border-border sm:grid-cols-3">
             {summaryStats.map((stat, i) => (
               <Reveal key={stat.label} delay={i * 0.06}>
                 <div className="border-b border-border py-8 md:py-10">
@@ -162,7 +274,7 @@ const CaseStudies = () => {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button variant="accent" size="lg" asChild>
                 <Link to="/contact">
-                  Започни проект
+                  Свържи се с нас
                   <ArrowRight size={18} />
                 </Link>
               </Button>

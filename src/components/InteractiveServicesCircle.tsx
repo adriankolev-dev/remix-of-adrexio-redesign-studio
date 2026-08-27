@@ -22,13 +22,13 @@ interface Service {
 const services: Service[] = [
   {
     icon: Globe,
-    title: "Уеб сайт разработка",
+    title: "Изработка на уебсайтове",
     description: "Модерни сайтове за вашия бизнес",
     color: "from-blue-500/20 to-cyan-500/20"
   },
   {
     icon: Brain,
-    title: "AI Implementation",
+    title: "AI интеграции",
     description: "Изкуствен интелект и автоматизация",
     color: "from-purple-500/20 to-pink-500/20"
   },
@@ -97,7 +97,7 @@ const InteractiveServicesCircle = () => {
             Пълен спектър от <span className="text-gradient">дигитални решения</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Интерактивно разгледайте нашите услуги и открийте как можем да помогнем на вашия бизнес
+            Разгледайте услугите и вижте как можем да помогнем на вашия бизнес
           </p>
         </motion.div>
 

@@ -16,7 +16,7 @@ const reasons = [
     description: "Виждате всеки етап. Редовни актуализации, ясна комуникация, без изненади.",
   },
   {
-    title: "UX, който конвертира",
+    title: "UX, който води до действие",
     description: "Дизайн и функционалност, които водят посетителя към действие.",
   },
   {
@@ -31,7 +31,7 @@ const reasons = [
 
 const WhyUsSection = () => {
   return (
-    <section className="relative overflow-hidden bg-secondary/30 py-24 md:py-32">
+    <section className="relative overflow-hidden bg-secondary/30 py-16 md:py-24">
       <div className="container mx-auto px-6">
         <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
           {/* Sticky manifesto heading */}
@@ -47,7 +47,7 @@ const WhyUsSection = () => {
             <Reveal delay={0.16}>
               <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                 Работим с локални бизнеси, които искат сайт с характер — не копие на
-                конкурента. Ето какво носим на масата.
+                конкурента. Ето какво получавате.
               </p>
             </Reveal>
             <Reveal delay={0.24}>

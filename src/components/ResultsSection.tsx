@@ -4,16 +4,18 @@ import { Button } from "@/components/ui/button";
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 
+import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
+
 const metrics = [
   { value: "+320%", label: "Ръст приходи от клиент", source: "Koni Jewellery" },
   { value: "+185%", label: "Онлайн резервации", source: "Body Aesthetics" },
   { value: "12+", label: "Индустрии, в които работим", source: "Adrexio портфолио" },
-  { value: "24+", label: "Реализирани проекта", source: "Adrexio портфолио" },
+  { value: String(PORTFOLIO_PROJECT_COUNT), label: "Реализирани проекти", source: "Adrexio портфолио" },
 ];
 
 const ResultsSection = () => {
   return (
-    <section className="layer-dark relative overflow-hidden py-24 md:py-32">
+    <section className="layer-dark relative overflow-hidden py-16 md:py-24">
       <div className="canvas-grid absolute inset-0 opacity-[0.06]" aria-hidden />
 
       <div className="container relative z-10 mx-auto px-6">
@@ -48,7 +50,7 @@ const ResultsSection = () => {
         <Reveal delay={0.3} className="mt-12">
           <Button variant="accent" size="lg" asChild>
             <Link to="/case-studies">
-              Виж всички проекти
+              Виж проектите
               <ArrowRight size={18} />
             </Link>
           </Button>

@@ -13,7 +13,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
-import { getCaseStudyById, caseStudies } from "@/data/caseStudies";
+import { getCaseStudyById, getPortfolioOrder } from "@/data/caseStudies";
 import { getBreadcrumbSchema } from "@/lib/structuredData";
 import { scrollToTop } from "@/lib/lenis";
 import { useEffect } from "react";
@@ -22,10 +22,11 @@ const CaseStudyDetail = () => {
   const { id } = useParams<{ id: string }>();
   const study = getCaseStudyById(id || "");
 
-  const currentIndex = caseStudies.findIndex((s) => s.id === id);
-  const prevStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
+  const ordered = getPortfolioOrder();
+  const currentIndex = ordered.findIndex((s) => s.id === id);
+  const prevStudy = currentIndex > 0 ? ordered[currentIndex - 1] : null;
   const nextStudy =
-    currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
+    currentIndex >= 0 && currentIndex < ordered.length - 1 ? ordered[currentIndex + 1] : null;
 
   const truncateDescription = (text: string, maxLength: number = 145): string => {
     if (text.length <= maxLength) return text;
@@ -260,14 +261,14 @@ const CaseStudyDetail = () => {
               {study.isPublic && study.url ? (
                 <Button variant="ink" size="lg" asChild>
                   <a href={study.url} target="_blank" rel="noopener noreferrer">
-                    Посетете проекта
+                    Към сайта
                     <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>
               ) : null}
               <Button variant="line" size="lg" asChild>
                 <Link to="/contact">
-                  Започнете подобен проект
+                  Свържи се с нас
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>

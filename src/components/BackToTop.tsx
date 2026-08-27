@@ -37,7 +37,7 @@ const BackToTop = () => {
         <motion.button
           type="button"
           onClick={scrollToTop}
-          aria-label="Върни се нагоре"
+          aria-label="Нагоре"
           initial={{ opacity: 0, y: 14, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 14, scale: 0.9 }}
