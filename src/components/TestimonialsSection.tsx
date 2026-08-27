@@ -6,10 +6,10 @@ import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import { EASE_OUT } from "@/components/editorial/motion";
 
 import supercreditLogo from "@/assets/clients/supercredit.svg";
-import fmlLogo from "@/assets/clients/fml.png";
-import athleticiqLogo from "@/assets/clients/athleticiq.png";
-import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.png";
-import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
+import fmlLogo from "@/assets/clients/fml.webp";
+import athleticiqLogo from "@/assets/clients/athleticiq.webp";
+import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.webp";
+import ameliadivaLogo from "@/assets/clients/ameliadiva.webp";
 
 const testimonials = [
   {

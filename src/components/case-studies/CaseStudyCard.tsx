@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Lock } from "lucide-react";
 import { CaseStudy } from "@/data/caseStudies";
 import Reveal from "@/components/editorial/Reveal";
+import { prefetchCaseStudy } from "@/lib/prefetchRoute";
 
 interface CaseStudyCardProps {
   study: CaseStudy;
@@ -12,14 +13,22 @@ interface CaseStudyCardProps {
 const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
   return (
     <Reveal delay={(index % 3) * 0.06}>
-      <Link to={`/case-studies/${study.id}`} className="group block">
+      <Link
+        to={`/case-studies/${study.id}`}
+        className="group block"
+        onMouseEnter={prefetchCaseStudy}
+        onFocus={prefetchCaseStudy}
+      >
         {/* Framed screenshot */}
         <div className="relative overflow-hidden rounded-xl border border-border bg-secondary">
           <div className="aspect-[4/3] overflow-hidden">
             <img
               src={study.image}
               alt={study.title}
+              width={1600}
+              height={1200}
               loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
           </div>

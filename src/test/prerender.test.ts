@@ -36,6 +36,12 @@ describe("prerender parsers", () => {
     expect(page.faqs[0].question).toMatch(/уебсайт/);
   });
 
+  it("keeps an empty #root so prerender can inject crawler HTML", () => {
+    const html = readFileSync(join(ROOT, "index.html"), "utf8");
+    expect(html).toMatch(/<div id="root">\s*<\/div>/);
+    expect(html).toContain('id="boot-shell"');
+  });
+
   it("truncates meta descriptions without breaking mid-word", () => {
     const long = "А ".repeat(100);
     const cut = truncateDescription(long, 145);

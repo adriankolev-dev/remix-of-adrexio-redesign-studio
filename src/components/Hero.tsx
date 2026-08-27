@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-import athleticiqLogo from "@/assets/clients/athleticiq.png";
-import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.png";
-import fmlLogo from "@/assets/clients/fml.png";
-import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
+import athleticiqLogo from "@/assets/clients/athleticiq.webp";
+import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.webp";
+import fmlLogo from "@/assets/clients/fml.webp";
+import ameliadivaLogo from "@/assets/clients/ameliadiva.webp";
 
 const clientLogos = [
   { name: "Body Aesthetics", logo: bodyaestheticsLogo },
@@ -94,6 +94,9 @@ const HeroMessage = () => (
               key={client.name}
               src={client.logo}
               alt={client.name}
+              width={116}
+              height={36}
+              decoding="async"
               className="h-9 w-auto max-w-[116px] object-contain opacity-90 transition-opacity hover:opacity-100"
             />
           ))}

@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import logo from "@/assets/logo.svg";
 import logoDark from "@/assets/logo-dark.svg";
 import { scrollToTop } from "@/lib/lenis";
+import { prefetchRoute } from "@/lib/prefetchRoute";
 
 const navLinks = [
   { name: "Начало", href: "/" },
@@ -41,11 +42,7 @@ const Navbar = () => {
   const currentLogo = mounted && resolvedTheme === "light" ? logoDark : logo;
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 py-4"
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 py-4">
       {/* Background is a separate layer so scroll never changes header height. */}
       <div
         aria-hidden
@@ -76,6 +73,8 @@ const Navbar = () => {
             <Link
               key={link.name}
               to={link.href}
+              onMouseEnter={() => prefetchRoute(link.href)}
+              onFocus={() => prefetchRoute(link.href)}
               className={`relative text-sm font-medium transition-colors hover:text-primary ${
                 location.pathname === link.href
                   ? "text-primary"
@@ -97,7 +96,9 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center gap-4">
           <ThemeToggle />
           <Button variant="ink" size="lg" asChild>
-            <Link to="/contact">Свържи се с нас</Link>
+            <Link to="/contact" onMouseEnter={() => prefetchRoute("/contact")} onFocus={() => prefetchRoute("/contact")}>
+              Свържи се с нас
+            </Link>
           </Button>
         </div>
 
@@ -105,7 +106,10 @@ const Navbar = () => {
         <div className="lg:hidden flex items-center gap-2">
           <ThemeToggle />
           <button
+            type="button"
             className="text-foreground p-2"
+            aria-label={isMobileMenuOpen ? "Затвори менюто" : "Отвори менюто"}
+            aria-expanded={isMobileMenuOpen}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -128,6 +132,8 @@ const Navbar = () => {
                   key={link.name}
                   to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
+                  onMouseEnter={() => prefetchRoute(link.href)}
+                  onFocus={() => prefetchRoute(link.href)}
                   className={`text-base font-medium py-2 ${
                     location.pathname === link.href
                       ? "text-primary"
@@ -138,13 +144,15 @@ const Navbar = () => {
                 </Link>
               ))}
               <Button variant="ink" size="lg" asChild className="mt-2">
-                <Link to="/contact">Свържи се с нас</Link>
+                <Link to="/contact" onMouseEnter={() => prefetchRoute("/contact")} onFocus={() => prefetchRoute("/contact")}>
+                  Свържи се с нас
+                </Link>
               </Button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 };
 

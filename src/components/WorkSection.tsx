@@ -6,6 +6,7 @@ import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import { EASE_OUT } from "@/components/editorial/motion";
 import { getFeaturedCaseStudies, type CaseStudy } from "@/data/caseStudies";
+import { prefetchCaseStudy } from "@/lib/prefetchRoute";
 
 // The hero zooms out to reveal a browser on the canvas. Here that same window
 // stays open — and we flip through real web projects inside it, like tabs.
@@ -178,6 +179,8 @@ const WorkSection = () => {
               {/* Window body — the live screenshot */}
               <Link
                 to={studyHref(study)}
+                onMouseEnter={prefetchCaseStudy}
+                onFocus={prefetchCaseStudy}
                 className="group relative block aspect-[16/10] overflow-hidden bg-muted"
               >
                 <AnimatePresence mode="wait">
@@ -185,6 +188,10 @@ const WorkSection = () => {
                     key={study.id}
                     src={study.image}
                     alt={study.title}
+                    width={1600}
+                    height={1000}
+                    loading="lazy"
+                    decoding="async"
                     initial={reduceMotion ? false : { opacity: 0, scale: 1.015 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={reduceMotion ? undefined : { opacity: 0 }}

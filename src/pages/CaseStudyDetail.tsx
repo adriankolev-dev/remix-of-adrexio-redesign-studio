@@ -158,7 +158,14 @@ const CaseStudyDetail = () => {
         <div className="container mx-auto px-6">
           <Reveal>
             <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
-              <img src={study.image} alt={`${study.title} уебсайт`} className="h-auto w-full" />
+              <img
+                src={study.image}
+                alt={`${study.title} уебсайт`}
+                width={1600}
+                height={1000}
+                decoding="async"
+                className="h-auto w-full"
+              />
             </div>
           </Reveal>
         </div>

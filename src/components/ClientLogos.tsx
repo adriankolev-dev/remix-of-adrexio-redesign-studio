@@ -2,16 +2,16 @@ import { motion } from "framer-motion";
 
 // Import client logos
 import bulbioLogo from "@/assets/clients/bulbio.webp";
-import athleticiqLogo from "@/assets/clients/athleticiq.png";
-import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.png";
-import ameliadivaLogo from "@/assets/clients/ameliadiva.png";
-import fmlLogo from "@/assets/clients/fml.png";
-import amaLogo from "@/assets/clients/ama.png";
-import boasLogo from "@/assets/clients/boas.png";
-import globalstreetartLogo from "@/assets/clients/globalstreetart.png";
-import webxoticLogo from "@/assets/clients/webxotic.png";
-import tokenizeLogo from "@/assets/clients/tokenize.png";
-import tajmahalLogo from "@/assets/clients/tajmahal.png";
+import athleticiqLogo from "@/assets/clients/athleticiq.webp";
+import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.webp";
+import ameliadivaLogo from "@/assets/clients/ameliadiva.webp";
+import fmlLogo from "@/assets/clients/fml.webp";
+import amaLogo from "@/assets/clients/ama.webp";
+import boasLogo from "@/assets/clients/boas.webp";
+import globalstreetartLogo from "@/assets/clients/globalstreetart.webp";
+import webxoticLogo from "@/assets/clients/webxotic.webp";
+import tokenizeLogo from "@/assets/clients/tokenize.webp";
+import tajmahalLogo from "@/assets/clients/tajmahal.webp";
 
 const clients = [
   { name: "Bulbiochem", logo: bulbioLogo },

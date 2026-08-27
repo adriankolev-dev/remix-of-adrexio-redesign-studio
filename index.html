@@ -60,16 +60,46 @@
         })(window, document, "clarity", "script", "v6m62yfbnw");
     </script>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: body/display first; mono + hand load after so they do not block first paint. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
-    <!-- Hide crawler HTML in #root until React mounts, so refresh does not flash unstyled text. -->
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;700&display=swap" media="print" onload="this.media='all'" />
+    <!-- Hide crawler HTML in #root until React mounts. Paint a matching canvas so FCP is not a blank wait. -->
     <style>
+      html, body { margin: 0; background: hsl(210 22% 97%); }
       #root:not([data-ready]) { visibility: hidden; }
+      #boot-shell {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        background: hsl(210 22% 97%);
+      }
+      #boot-shell .boot-bar {
+        box-sizing: border-box;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        padding: 0 24px;
+        max-width: 1400px;
+        margin: 0 auto;
+        font: 700 18px system-ui, sans-serif;
+        letter-spacing: -0.03em;
+        color: #0f172a;
+      }
+      body:has(#root[data-ready]) #boot-shell { display: none; }
     </style>
+    <noscript>
+      <style>
+        #root:not([data-ready]) { visibility: visible !important; }
+        #boot-shell { display: none !important; }
+      </style>
+    </noscript>
   </head>
   <body>
+    <div id="boot-shell" aria-hidden="true"><div class="boot-bar">Adrexio</div></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

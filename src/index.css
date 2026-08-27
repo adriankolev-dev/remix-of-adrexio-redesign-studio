@@ -1,4 +1,4 @@
-/* Type system: Unbounded (signature display, Cyrillic), Manrope (workhorse grotesque, Cyrillic), JetBrains Mono (meta labels, Cyrillic), Caveat (handwritten accents). Fonts are loaded via <link> in index.html for faster, non-render-blocking delivery. */
+/* Type system: Unbounded (signature display, Cyrillic), Manrope (workhorse grotesque, Cyrillic), JetBrains Mono (meta labels, Cyrillic), Caveat (handwritten accents). Critical faces load in index.html; mono/hand follow after first paint. */
 
 @tailwind base;
 @tailwind components;

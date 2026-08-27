@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import useSmoothScroll from "@/hooks/use-smooth-scroll";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -10,30 +11,30 @@ import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
 import FloatingContact from "@/components/FloatingContact";
 import CookieConsent from "@/components/CookieConsent";
+import RouteFallback from "@/components/RouteFallback";
 import Index from "./pages/Index";
-import Services from "./pages/Services";
-import ServicesDemo from "./pages/ServicesDemo";
-import Pricing from "./pages/Pricing";
-import About from "./pages/About";
-import CaseStudies from "./pages/CaseStudies";
-import CaseStudyDetail from "./pages/CaseStudyDetail";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import Contact from "./pages/Contact";
-import ProjectInquiry from "./pages/ProjectInquiry";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Affiliate from "./pages/Affiliate";
-import NotFound from "./pages/NotFound";
 
-// Service landing pages
-import WebDevelopment from "./pages/services/WebDevelopment";
-import AIImplementation from "./pages/services/AIImplementation";
-import MobileApps from "./pages/services/MobileApps";
-import UIUXDesign from "./pages/services/UIUXDesign";
-import SEO from "./pages/services/SEO";
-import DigitalMarketing from "./pages/services/DigitalMarketing";
-import TechnicalSupport from "./pages/services/TechnicalSupport";
+const Services = lazy(() => import("./pages/Services"));
+const ServicesDemo = lazy(() => import("./pages/ServicesDemo"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const About = lazy(() => import("./pages/About"));
+const CaseStudies = lazy(() => import("./pages/CaseStudies"));
+const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const Contact = lazy(() => import("./pages/Contact"));
+const ProjectInquiry = lazy(() => import("./pages/ProjectInquiry"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Affiliate = lazy(() => import("./pages/Affiliate"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const WebDevelopment = lazy(() => import("./pages/services/WebDevelopment"));
+const AIImplementation = lazy(() => import("./pages/services/AIImplementation"));
+const MobileApps = lazy(() => import("./pages/services/MobileApps"));
+const UIUXDesign = lazy(() => import("./pages/services/UIUXDesign"));
+const SEO = lazy(() => import("./pages/services/SEO"));
+const DigitalMarketing = lazy(() => import("./pages/services/DigitalMarketing"));
+const TechnicalSupport = lazy(() => import("./pages/services/TechnicalSupport"));
 
 const queryClient = new QueryClient();
 
@@ -51,33 +52,35 @@ const App = () => {
           <ScrollToTop />
           <BackToTop />
           <FloatingContact />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services-demo" element={<ServicesDemo />} />
-            <Route path="/services/web-development" element={<WebDevelopment />} />
-            <Route path="/services/ai-implementation" element={<AIImplementation />} />
-            <Route path="/services/mobile-apps" element={<MobileApps />} />
-            <Route path="/services/ui-ux-design" element={<UIUXDesign />} />
-            <Route path="/services/seo" element={<SEO />} />
-            <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
-            <Route path="/services/technical-support" element={<TechnicalSupport />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/case-studies" element={<CaseStudies />} />
-            <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/contacts" element={<Contact />} />
-            <Route path="/project-inquiry" element={<ProjectInquiry />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/affiliate" element={<Affiliate />} />
-            
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<RouteFallback />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services-demo" element={<ServicesDemo />} />
+              <Route path="/services/web-development" element={<WebDevelopment />} />
+              <Route path="/services/ai-implementation" element={<AIImplementation />} />
+              <Route path="/services/mobile-apps" element={<MobileApps />} />
+              <Route path="/services/ui-ux-design" element={<UIUXDesign />} />
+              <Route path="/services/seo" element={<SEO />} />
+              <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
+              <Route path="/services/technical-support" element={<TechnicalSupport />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/case-studies" element={<CaseStudies />} />
+              <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/contacts" element={<Contact />} />
+              <Route path="/project-inquiry" element={<ProjectInquiry />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/affiliate" element={<Affiliate />} />
+
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
           <CookieConsent />
         </BrowserRouter>
       </TooltipProvider>
