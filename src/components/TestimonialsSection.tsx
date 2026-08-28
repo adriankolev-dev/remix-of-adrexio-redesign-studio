@@ -85,11 +85,11 @@ const TestimonialsSection = () => {
             </Reveal>
           </div>
 
-          <div className="flex flex-col gap-6 lg:gap-[10.5rem]">
+          <div className="flex flex-col gap-[5.5rem] lg:gap-[10.5rem]">
             {testimonials.map((item, index) => (
               <article
                 key={item.author}
-                className="layer-shadow rounded-[1.25rem] border border-border bg-card p-7 md:p-11 lg:sticky lg:top-28"
+                className="layer-shadow sticky top-[25vh] rounded-[1.25rem] border border-border bg-card p-7 md:p-11 lg:top-28"
                 style={{ zIndex: index + 1 }}
               >
                 <BladeName text={item.author} />
