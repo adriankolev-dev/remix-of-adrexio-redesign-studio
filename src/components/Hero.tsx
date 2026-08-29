@@ -5,6 +5,7 @@ import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
+import { EASE_OUT } from "@/components/editorial/motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import athleticiqLogo from "@/assets/clients/athleticiq.webp";
@@ -19,6 +20,12 @@ const clientLogos = [
   { name: "AthleticIQ", logo: athleticiqLogo },
 ];
 
+const BUILD_LAYERS = [
+  { label: "Заглавка", tint: "bg-card" },
+  { label: "Съдържание", tint: "bg-card" },
+  { label: "Проекти", tint: "layer-dark" },
+  { label: "CTA", tint: "bg-card" },
+] as const;
 
 /** Hand-drawn cyan underline — one of the two playful accents. */
 const DoodleUnderline = () => (
@@ -37,10 +44,77 @@ const DoodleUnderline = () => (
       initial={{ pathLength: 0 }}
       whileInView={{ pathLength: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+      transition={{ duration: 0.9, ease: EASE_OUT, delay: 0.5 }}
     />
   </svg>
 );
+
+const LayerStack = ({
+  compact = false,
+  animate = false,
+}: {
+  compact?: boolean;
+  animate?: boolean;
+}) => {
+  const reduceMotion = useReducedMotion();
+  const step = compact ? 48 : 64;
+  const cardH = compact ? "h-[68px]" : "h-[84px]";
+
+  return (
+    <div
+      className={
+        compact
+          ? "relative mx-auto h-[220px] w-full max-w-[22rem]"
+          : "relative h-[300px]"
+      }
+    >
+      {BUILD_LAYERS.map((layer, i) => {
+        const placement = compact
+          ? { top: i * step, left: 0, right: 0 }
+          : { top: i * step, right: i * 10 };
+
+        const card = (
+          <div
+            className={`layer-shadow flex items-center gap-3 rounded-lg border border-border px-4 ${cardH} ${
+              compact ? "w-full" : "w-[86%]"
+            } ${layer.tint}`}
+          >
+            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-muted-foreground">
+              0{i + 1}
+            </span>
+            <span className="text-sm font-semibold text-foreground">{layer.label}</span>
+            <span className="ml-auto h-2 w-14 rounded-full bg-primary/70" />
+          </div>
+        );
+
+        if (!animate || reduceMotion) {
+          return (
+            <div
+              key={layer.label}
+              className={compact ? "absolute" : "absolute right-0"}
+              style={{ ...placement, zIndex: i }}
+            >
+              {card}
+            </div>
+          );
+        }
+
+        return (
+          <motion.div
+            key={layer.label}
+            className={compact ? "absolute" : "absolute right-0"}
+            style={{ ...placement, zIndex: i }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.12 + i * 0.07, ease: EASE_OUT }}
+          >
+            {card}
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+};
 
 /** The message that lives on the canvas. Shared between the animated and reduced-motion paths. */
 const HeroMessage = () => (
@@ -104,225 +178,101 @@ const HeroMessage = () => (
       </div>
     </div>
 
-    {/* Layers motif — a stack of pieces the way we compose a build */}
-    <div className="relative hidden h-[300px] lg:block">
-      {[
-        { label: "Заглавка", top: 0, tint: "bg-card" },
-        { label: "Съдържание", top: 64, tint: "bg-card" },
-        { label: "Проекти", top: 128, tint: "layer-dark" },
-        { label: "CTA", top: 192, tint: "bg-card" },
-      ].map((l, i) => (
-        <div
-          key={l.label}
-          className={`layer-shadow absolute right-0 flex h-[84px] w-[86%] items-center gap-3 rounded-lg border border-border px-4 ${l.tint}`}
-          style={{ top: l.top, right: i * 10, zIndex: i }}
-        >
-          <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-muted-foreground">
-            0{i + 1}
-          </span>
-          <span className="text-sm font-semibold text-foreground">{l.label}</span>
-          <span className="ml-auto h-2 w-14 rounded-full bg-primary/70" />
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-/** Compact hero message that lives inside the mobile phone canvas. */
-const MobileCanvasMessage = () => (
-  <div>
-    <SectionEyebrow label="Уеб студио · София" index="01" />
-
-    <h1 className="font-display mt-5 text-[2rem] font-bold leading-[1.08] text-foreground">
-      Край на сайтовете, които приличат на{" "}
-      <span className="relative inline-block whitespace-nowrap">
-        всеки втори
-        <DoodleUnderline />
-      </span>
-      .
-    </h1>
-
-    <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
-      Проектираме и изграждаме от нулата — дизайн, който клиентите ви помнят, и структура,
-      която носи запитвания.
-    </p>
-
-    <div className="mt-6 flex flex-col gap-3">
-      <Button variant="ink" size="lg" asChild className="w-full">
-        <Link to="/contact">
-          Свържи се с нас
-          <ArrowRight size={18} />
-        </Link>
-      </Button>
-      <Button variant="line" size="lg" asChild className="w-full">
-        <Link to="/case-studies">Виж проектите</Link>
-      </Button>
-    </div>
-
-    <p className="mt-7 text-xs leading-relaxed text-muted-foreground">
-      Отзиви от{" "}
-      <strong className="text-foreground">Борислав Гоцев, SuperCredit</strong>
-      {" и "}
-      <strong className="text-foreground">Камелия Петрова, Body Aesthetics</strong>
-    </p>
-    <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
-      {clientLogos.slice(0, 3).map((client) => (
-        <img
-          key={client.name}
-          src={client.logo}
-          alt={client.name}
-          className="h-6 w-auto max-w-[84px] object-contain opacity-90"
-        />
-      ))}
+    <div className="relative hidden lg:block">
+      <LayerStack />
     </div>
   </div>
 );
 
 /**
- * Mobile hero — the same signature idea as desktop: on scroll the scene zooms
- * out to reveal it was living inside a canvas all along. Here the canvas is a
- * phone mockup (status bar + url + bezel) instead of a browser window.
+ * Phone hero: same thesis as desktop, without the sticky zoom-out.
+ * Scroll starts immediately; the layer stack is the signature, played once.
  */
-const MobileCanvasHero = () => {
-  const ref = useRef<HTMLElement>(null);
-  const mockupRef = useRef<HTMLDivElement>(null);
-  const chromeRef = useRef<HTMLDivElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const restScaleRef = useRef(1);
-  const fitScaleRef = useRef(0.82);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const scaleFor = (v: number) => {
-    const p = Math.min(v / 0.6, 1);
-    const start = restScaleRef.current;
-    const end = fitScaleRef.current;
-    return start - p * (start - end);
-  };
-  const sceneScale = useTransform(scrollYProgress, scaleFor);
-
-  useLayoutEffect(() => {
-    const mockup = mockupRef.current;
-    const chrome = chromeRef.current;
-    const viewport = viewportRef.current;
-    if (!mockup || !chrome || !viewport) return;
-
-    const measure = () => {
-      const GAP = 24;
-      const chromeGap = 36; // -top-9 between chrome and viewport
-      const bottomExtras = 56; // caption below the phone
-      const naturalW = mockup.offsetWidth;
-      const naturalH = chromeGap + chrome.offsetHeight + viewport.offsetHeight + bottomExtras;
-      const availW = window.innerWidth - GAP * 2;
-      const availH = window.innerHeight - GAP * 2;
-
-      const scaleToFit = Math.min(availW / naturalW, availH / naturalH);
-      restScaleRef.current = Math.min(1, scaleToFit);
-      fitScaleRef.current = Math.max(0.5, scaleToFit * 0.9);
-      sceneScale.set(scaleFor(scrollYProgress.get()));
-    };
-
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(mockup);
-    ro.observe(viewport);
-    window.addEventListener("resize", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const frameOpacity = useTransform(scrollYProgress, [0.14, 0.5], [0, 1]);
-  const chromeY = useTransform(scrollYProgress, [0.14, 0.5], [-10, 0]);
-  const captionOpacity = useTransform(scrollYProgress, [0.4, 0.72], [0, 1]);
-  const captionY = useTransform(scrollYProgress, [0.4, 0.72], [12, 0]);
-  const cueOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
+const MobileHero = () => {
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section ref={ref} className="relative" style={{ height: "150vh" }}>
-      <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden bg-background">
-        <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
+    <section className="relative overflow-hidden bg-background">
+      <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
+      <div className="container relative z-10 mx-auto px-6 pb-16 pt-28">
+        <SectionEyebrow label="Уеб студио · София" index="01" />
 
-        <motion.div
-          style={{
-            scale: sceneScale,
-            transformOrigin: "center center",
-            willChange: "transform",
-          }}
-          className="relative flex w-full items-center justify-center"
-        >
-          <div ref={mockupRef} className="relative mx-auto w-[min(400px,90vw)]">
-            {/* phone chrome — status + url bar */}
-            <motion.div
-              ref={chromeRef}
-              style={{ opacity: frameOpacity, y: chromeY }}
-              className="pointer-events-none absolute -top-9 left-0 right-0 flex items-center rounded-t-[2rem] border border-b-0 border-border bg-card px-5 py-2.5"
-            >
-              <span className="font-mono-meta absolute left-5 text-[0.6rem] text-muted-foreground">
-                9:41
-              </span>
-              <span className="font-mono-meta mx-auto inline-flex items-center gap-1.5 rounded-md bg-muted px-3 py-1 text-[0.62rem] font-medium text-foreground/75">
-                <Lock size={10} className="text-muted-foreground" />
-                adrexio.com
-              </span>
-              <span className="absolute right-5 h-1.5 w-6 rounded-full bg-muted-foreground/30" />
-            </motion.div>
+        <h1 className="font-display mt-5 text-[2rem] font-bold leading-[1.08] text-foreground">
+          Край на сайтовете, които приличат на{" "}
+          <span className="relative inline-block whitespace-nowrap">
+            всеки втори
+            <DoodleUnderline />
+          </span>
+          .
+        </h1>
 
-            {/* phone viewport — clips content; bezel fades in separately */}
-            <div className="relative overflow-hidden rounded-[2rem]">
-              <div ref={viewportRef} className="relative px-1 py-2">
-                <MobileCanvasMessage />
-              </div>
-              <motion.div
-                style={{ opacity: frameOpacity }}
-                className="layer-shadow pointer-events-none absolute inset-0 rounded-[2rem] border-[3px] border-border"
-                aria-hidden
-              />
-            </div>
+        <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
+          Проектираме и изграждаме от нулата — дизайн, който клиентите ви помнят, и структура,
+          която носи запитвания.
+        </p>
 
-            {/* caption below the phone — always visible on narrow screens */}
-            <motion.div
-              style={{ opacity: captionOpacity, y: captionY }}
-              className="pointer-events-none absolute inset-x-0 top-full z-10 mx-auto mt-3 max-w-[240px] rotate-[-3deg] text-center"
-            >
-              <p className="font-hand text-lg leading-tight text-foreground">
-                изградено от нулата,
-                <br /> слой по слой
-              </p>
-            </motion.div>
-          </div>
-        </motion.div>
+        <div className="mt-6 flex flex-col gap-3">
+          <Button variant="ink" size="lg" asChild className="w-full">
+            <Link to="/contact">
+              Свържи се с нас
+              <ArrowRight size={18} />
+            </Link>
+          </Button>
+          <Button variant="line" size="lg" asChild className="w-full">
+            <Link to="/case-studies">Виж проектите</Link>
+          </Button>
+        </div>
 
-        {/* scroll cue at rest */}
-        <motion.div
-          style={{ opacity: cueOpacity }}
-          className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
-        >
-          <span className="eyebrow">Надолу</span>
-          <motion.span
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            className="h-7 w-px bg-foreground/25"
-          />
-        </motion.div>
+        <p className="font-mono-meta mt-5 text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">
+          {PORTFOLIO_PROJECT_COUNT} проекта · отговор до 24ч
+        </p>
+
+        <div className="mt-8">
+          <LayerStack compact animate={!reduceMotion} />
+          <p className="font-hand mt-5 text-center text-lg leading-tight text-foreground">
+            изградено от нулата,
+            <br /> слой по слой
+          </p>
+        </div>
+
+        <p className="mt-8 text-xs leading-relaxed text-muted-foreground">
+          Отзиви от{" "}
+          <strong className="text-foreground">Борислав Гоцев, SuperCredit</strong>
+          {" и "}
+          <strong className="text-foreground">Камелия Петрова, Body Aesthetics</strong>
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
+          {clientLogos.slice(0, 3).map((client) => (
+            <img
+              key={client.name}
+              src={client.logo}
+              alt={client.name}
+              width={84}
+              height={24}
+              decoding="async"
+              className="h-6 w-auto max-w-[84px] object-contain opacity-90"
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
-const Hero = () => {
-  const reduceMotion = useReducedMotion();
-  const isMobile = useIsMobile();
+const StaticDesktopHero = () => (
+  <section className="relative overflow-hidden bg-background">
+    <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
+    <div className="container relative z-10 mx-auto px-6 pb-20 pt-28 md:pb-24 md:pt-36">
+      <HeroMessage />
+    </div>
+  </section>
+);
+
+const DesktopCanvasHero = () => {
   const ref = useRef<HTMLElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
   const chromeRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
-  // Start scale keeps the mockup inside the sticky viewport; end scale zooms out further.
   const restScaleRef = useRef(1);
   const fitScaleRef = useRef(0.78);
 
@@ -347,11 +297,10 @@ const Hero = () => {
 
     const measure = () => {
       const GAP = 32;
-      const HEADER = 80; // sticky pt-20 — keeps room for the fixed navbar
+      const HEADER = 80;
 
       const chromeH = chrome.offsetHeight;
-      const chromeGap = 44; // -top-11 between chrome and viewport
-      // Side annotations sit outside the mockup only on ultrawide — laptops use a caption below the frame.
+      const chromeGap = 44;
       const sideExtras = window.innerWidth >= 1600 ? 300 : 0;
       const bottomExtras =
         window.innerWidth >= 1024 && window.innerWidth < 1600 ? 80 : 0;
@@ -384,29 +333,11 @@ const Hero = () => {
   const overlayY = useTransform(scrollYProgress, [0.4, 0.72], [18, 0]);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
 
-  // Reduced motion: a completely still hero, no animation at all.
-  if (reduceMotion) {
-    return (
-      <section className="relative overflow-hidden bg-background">
-        <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
-        <div className="container relative z-10 mx-auto px-6 pb-20 pt-28 md:pb-24 md:pt-36">
-          <HeroMessage />
-        </div>
-      </section>
-    );
-  }
-
-  // Mobile: the same zoom-out reveal as desktop, but the canvas is a phone.
-  if (isMobile) {
-    return <MobileCanvasHero />;
-  }
-
   return (
     <section ref={ref} className="relative" style={{ height: "280vh" }}>
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden bg-background pt-20">
         <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
 
-        {/* The scene that zooms out to reveal it was a canvas all along */}
         <motion.div
           style={{
             scale: sceneScale,
@@ -416,7 +347,6 @@ const Hero = () => {
           className="relative flex w-full items-center justify-center"
         >
           <div ref={mockupRef} className="relative mx-auto w-[min(1180px,92vw)]">
-            {/* browser chrome — fades/slides in as the frame is revealed */}
             <motion.div
               ref={chromeRef}
               style={{ opacity: frameOpacity, y: chromeY }}
@@ -433,7 +363,6 @@ const Hero = () => {
               </span>
             </motion.div>
 
-            {/* browser viewport — clips content; border overlay fades in separately */}
             <div className="relative overflow-hidden rounded-2xl">
               <div ref={viewportRef} className="relative px-2 py-6 md:px-8">
                 <HeroMessage />
@@ -446,7 +375,6 @@ const Hero = () => {
               />
             </div>
 
-            {/* laptop caption — below the frame so it never covers the headline */}
             <motion.div
               style={{ opacity: overlayOpacity, y: overlayY }}
               className="pointer-events-none absolute right-4 top-full z-10 mt-3 hidden max-w-[210px] rotate-[-4deg] text-right lg:block min-[1600px]:hidden"
@@ -471,7 +399,6 @@ const Hero = () => {
               </svg>
             </motion.div>
 
-            {/* side overlays for ultrawide (≥ 1600px) — hug the mockup edges */}
             <motion.div
               style={{ opacity: overlayOpacity, y: overlayY }}
               className="absolute right-full top-[18%] z-10 mr-5 hidden shrink-0 rounded-lg border border-border bg-card/95 p-2 backdrop-blur min-[1600px]:block"
@@ -518,7 +445,6 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* scroll cue at rest */}
         <motion.div
           style={{ opacity: cueOpacity }}
           className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
@@ -533,6 +459,15 @@ const Hero = () => {
       </div>
     </section>
   );
+};
+
+const Hero = () => {
+  const reduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
+
+  if (isMobile) return <MobileHero />;
+  if (reduceMotion) return <StaticDesktopHero />;
+  return <DesktopCanvasHero />;
 };
 
 export default Hero;
