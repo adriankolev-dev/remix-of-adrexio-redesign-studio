@@ -21,7 +21,7 @@ const clientLogos = [
 ];
 
 const BUILD_LAYERS = [
-  { label: "Заглавка", tint: "bg-card" },
+  { label: "Навигация", tint: "bg-card" },
   { label: "Съдържание", tint: "bg-card" },
   { label: "Проекти", tint: "layer-dark" },
   { label: "CTA", tint: "bg-card" },
@@ -405,7 +405,7 @@ const DesktopCanvasHero = () => {
             >
               <p className="eyebrow mb-2 px-1">Слоеве</p>
               <ul className="space-y-1">
-                {["Заглавка", "Съдържание", "Проекти", "CTA"].map((layer, i) => (
+                {["Навигация", "Съдържание", "Проекти", "CTA"].map((layer, i) => (
                   <li
                     key={layer}
                     className={`font-mono-meta flex items-center gap-2 rounded px-2 py-1 text-[0.7rem] ${
