@@ -1,5 +1,11 @@
 // Structured Data (JSON-LD) helpers for SEO
 
+import {
+  GOOGLE_RATING,
+  GOOGLE_REVIEW_COUNT,
+  googleReviews,
+} from "@/data/googleReviews";
+
 export const SITE_URL = "https://www.adrexio.com";
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
@@ -86,6 +92,31 @@ export const getBreadcrumbSchema = (items: Array<{ name: string; url: string }>)
   })),
 });
 
+export const getAggregateRatingSchema = () => ({
+  "@type": "AggregateRating" as const,
+  ratingValue: GOOGLE_RATING.toFixed(1),
+  bestRating: "5",
+  worstRating: "1",
+  ratingCount: GOOGLE_REVIEW_COUNT,
+  reviewCount: GOOGLE_REVIEW_COUNT,
+});
+
+export const getGoogleReviewSchemas = () =>
+  googleReviews.map((review) => ({
+    "@type": "Review" as const,
+    author: {
+      "@type": "Person" as const,
+      name: review.author,
+    },
+    reviewRating: {
+      "@type": "Rating" as const,
+      ratingValue: review.rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    reviewBody: review.text,
+  }));
+
 export const getLocalBusinessSchema = () => ({
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "ProfessionalService"],
@@ -104,6 +135,8 @@ export const getLocalBusinessSchema = () => ({
     name: "България",
   },
   sameAs: SOCIAL,
+  aggregateRating: getAggregateRatingSchema(),
+  review: getGoogleReviewSchemas(),
 });
 
 export const getFAQSchema = (faqs: Array<{ question: string; answer: string }>) => ({

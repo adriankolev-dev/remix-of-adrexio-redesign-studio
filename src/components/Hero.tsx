@@ -5,6 +5,7 @@ import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
+import GoogleReviewsBadge from "@/components/GoogleReviewsBadge";
 import { EASE_OUT } from "@/components/editorial/motion";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -153,7 +154,9 @@ const HeroMessage = () => (
         {PORTFOLIO_PROJECT_COUNT} проекта · отговор до 24ч
       </p>
 
-      <div className="mt-10">
+      <GoogleReviewsBadge className="mt-6" />
+
+      <div className="mt-8">
         <p className="mb-4 text-sm text-muted-foreground">
           Отзиви от{" "}
           <strong className="text-foreground">Борислав Гоцев, SuperCredit</strong>
@@ -226,6 +229,8 @@ const MobileHero = () => {
         <p className="font-mono-meta mt-5 text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">
           {PORTFOLIO_PROJECT_COUNT} проекта · отговор до 24ч
         </p>
+
+        <GoogleReviewsBadge className="mt-5" />
 
         <div className="mt-8">
           <LayerStack compact animate={!reduceMotion} />

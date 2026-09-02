@@ -7,11 +7,16 @@ import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import ProcessSection from "@/components/ProcessSection";
 import WhyUsSection from "@/components/WhyUsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import PricingTeaser from "@/components/pricing/PricingTeaser";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import { getOrganizationSchema, getWebSiteSchema } from "@/lib/structuredData";
+import {
+  getLocalBusinessSchema,
+  getOrganizationSchema,
+  getWebSiteSchema,
+} from "@/lib/structuredData";
 
 const Index = () => {
   const structuredData = {
@@ -19,6 +24,7 @@ const Index = () => {
     "@graph": [
       getOrganizationSchema(),
       getWebSiteSchema(),
+      getLocalBusinessSchema(),
     ],
   };
 
@@ -39,6 +45,7 @@ const Index = () => {
       <ServicesSection />
       <WhyUsSection />
       <TestimonialsSection />
+      <GoogleReviewsSection />
       <PricingTeaser />
       <CTASection />
       <Footer />
