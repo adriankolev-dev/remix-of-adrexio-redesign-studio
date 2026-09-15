@@ -85,7 +85,11 @@ const GoogleReviewsSection = () => {
             </Reveal>
           </div>
 
-          <Reveal delay={0.1}>
+          {/* min-w-0: a grid item defaults to min-width:auto, which sizes it to
+              the carousel's min-content instead of the column. Without it the
+              track pushed this item to ~1190px and, because the document grew
+              with it, every section on the page rendered clipped on a phone. */}
+          <Reveal delay={0.1} className="min-w-0">
             <div className="relative">
               <Carousel
                 opts={{
@@ -94,40 +98,43 @@ const GoogleReviewsSection = () => {
                 }}
                 className="w-full"
               >
-                <div className="flex items-center gap-3">
-                  {googleReviews.length > 1 && (
+                {/* items-start: slides stretch to the tallest by default, and the
+                    longest review runs 811 characters against 22 for the
+                    shortest, so every card inherited the tallest one's height. */}
+                <CarouselContent className="-ml-3 items-start md:-ml-4">
+                  {googleReviews.map((review) => (
+                    <CarouselItem key={review.author} className="basis-full pl-3 md:pl-4">
+                      <article className="layer-shadow flex flex-col rounded-[1.25rem] border border-border bg-card p-6 md:p-8">
+                        <StarRow />
+                        {/* Caps the two longest reviews on narrow screens; at the
+                            desktop card width nothing reaches 14 lines. Full text
+                            stays in the review schema and behind the Google link. */}
+                        <p className="mt-5 line-clamp-[14] text-base leading-relaxed text-foreground/90">
+                          „{review.text}"
+                        </p>
+                        <footer className="mt-6 border-t border-border/60 pt-4">
+                          <p className="text-sm font-medium text-foreground">{review.author}</p>
+                        </footer>
+                      </article>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+
+                {/* Controls sit under the card rather than flanking it: inline
+                    they took 96px of a 342px column on a phone, squeezing the
+                    text into a far taller card. */}
+                {googleReviews.length > 1 && (
+                  <div className="mt-5 flex items-center gap-3">
                     <CarouselPrevious
                       variant="outline"
                       className="static h-9 w-9 shrink-0 translate-y-0 border-border bg-card hover:bg-card/80"
                     />
-                  )}
-                  <div className="min-w-0 flex-1">
-                    <CarouselContent className="-ml-3 md:-ml-4">
-                      {googleReviews.map((review) => (
-                        <CarouselItem
-                          key={review.author}
-                          className="basis-full pl-3 md:pl-4"
-                        >
-                          <article className="layer-shadow flex h-full flex-col rounded-[1.25rem] border border-border bg-card p-6 md:p-8">
-                            <StarRow />
-                            <p className="mt-5 flex-1 text-base leading-relaxed text-foreground/90">
-                              „{review.text}"
-                            </p>
-                            <footer className="mt-6 border-t border-border/60 pt-4">
-                              <p className="text-sm font-medium text-foreground">{review.author}</p>
-                            </footer>
-                          </article>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                  </div>
-                  {googleReviews.length > 1 && (
                     <CarouselNext
                       variant="outline"
                       className="static h-9 w-9 shrink-0 translate-y-0 border-border bg-card hover:bg-card/80"
                     />
-                  )}
-                </div>
+                  </div>
+                )}
               </Carousel>
               <p className="font-mono-meta mt-6 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
                 Нашите 5-звездни Google ревюта
