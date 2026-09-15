@@ -13,29 +13,26 @@ import {
   MousePointer
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import { SERVICE_TRUST_STATS } from "@/data/trustStats";
 import MegaphoneMascot from "@/components/mascots/MegaphoneMascot";
 
 const DigitalMarketing = () => {
   return (
     <ServiceLandingTemplate
-      seoTitle="Дигитален маркетинг - Adrexio | Google Ads, Facebook реклами, София"
-      seoDescription="Професионален дигитален маркетинг в София. Google Ads, Facebook/Instagram реклами, email маркетинг и социални мрежи за растеж на вашия бизнес."
+      seoTitle="Дигитален маркетинг за вашия сайт — Google Ads и Meta реклами | Adrexio"
+      seoDescription="Google Ads и Meta реклами за сайтове и магазини, които сме изградили или поели. Реклама върху страница, построена да конвертира — не трафик към пробита фуния."
       seoKeywords="дигитален маркетинг, Google Ads, Facebook реклами, Instagram реклами, email маркетинг, социални мрежи, дигитален маркетинг София"
-      serviceName="Дигитален маркетинг"
-      heroTitle="Маркетинг, който"
-      heroHighlight="генерира приходи."
-      heroSubtitle="Стратегически дигитален маркетинг, който достига правилните хора в правилния момент. Повече запитвания, повече продажби, повече растеж."
+      serviceName="Дигитален маркетинг за уеб проекти"
+      heroTitle="Реклама, която работи върху сайт,"
+      heroHighlight="построен да конвертира."
+      heroSubtitle="Не сме голяма медийна агенция и не се правим на такава. Движим Google Ads и Meta кампании за проектите, които сме изградили — там, където контролираме и страницата, на която попада кликът."
       heroCTAText="Свържи се с нас"
       heroAside={<MegaphoneMascot />}
       
-      stats={[
-        { value: "3.5x", label: "Средна възвръщаемост" },
-        { value: "+200%", label: "Увеличение на трафика" },
-        { value: "100%", label: "Доверие и качество" }
-      ]}
+      stats={SERVICE_TRUST_STATS}
       
-      introTitle="Защо вашият бизнес се нуждае от професионален дигитален маркетинг?"
-      introDescription="Дигиталният маркетинг не е лукс – това е необходимост за оцеляване в съвременния бизнес свят. Но да харчите бюджет без стратегия е като да хвърляте пари на вятъра. Ние превръщаме всеки похарчен лев в измерими резултати."
+      introTitle="Защо рекламата и сайтът трябва да са в едни ръце"
+      introDescription="Най-честата причина една кампания да не се изплаща не е таргетирането, а страницата след клика. Когато агенцията движи рекламата, а някой друг отговаря за сайта, всяка страна сочи към другата. Ние поемаме и двете, така че когато нещо не конвертира, има кой да го оправи същата седмица."
       
       featuresTitle="Какво включват нашите услуги?"
       featuresSubtitle="Пълен маркетинг микс"

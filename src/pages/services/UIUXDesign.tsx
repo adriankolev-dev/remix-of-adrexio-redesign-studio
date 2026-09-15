@@ -13,26 +13,23 @@ import {
   Sparkles
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import { SERVICE_TRUST_STATS } from "@/data/trustStats";
 import DesignMascot from "@/components/mascots/DesignMascot";
 
 const UIUXDesign = () => {
   return (
     <ServiceLandingTemplate
-      seoTitle="UI/UX Дизайн - Adrexio | Професионален дизайн на интерфейси в София"
-      seoDescription="Професионален UI/UX дизайн в София. Създаваме интуитивни потребителски интерфейси, които продават — базирани на данни и потребителско проучване."
-      seoKeywords="UI дизайн, UX дизайн, дизайн интерфейс, потребителско изживяване, дизайн уебсайт, UI/UX София, дизайн приложение"
-      serviceName="UI/UX Дизайн"
-      heroTitle="Дизайн, който"
-      heroHighlight="продава и впечатлява."
+      seoTitle="UI/UX дизайн услуги — интерфейси, които конвертират | Adrexio София"
+      seoDescription="UI/UX дизайн услуги за уебсайтове и мобилни приложения: UX проучване, wireframes, прототипи и дизайн системи. Вижте процеса и реални проекти."
+      seoKeywords="ux/ui дизайн услуги, UI/UX дизайн, UX дизайн, UI дизайн, дизайн на интерфейс, UX одит, дизайн система, UI/UX София"
+      serviceName="UI/UX дизайн услуги"
+      heroTitle="UI/UX дизайн услуги за уеб и мобилни продукти —"
+      heroHighlight="дизайн, който продава."
       heroSubtitle="Създаваме интуитивни потребителски изживявания, които превръщат посетителите в лоялни клиенти. Дизайн, базиран на данни и психология."
       heroCTAText="Свържи се с нас"
       heroAside={<DesignMascot />}
       
-      stats={[
-        { value: "+45%", label: "Средно увеличение на конверсиите" },
-        { value: "-60%", label: "Намаляване на отпадането" },
-        { value: "98%", label: "Удовлетвореност" }
-      ]}
+      stats={SERVICE_TRUST_STATS}
       
       introTitle="Защо дизайнът е критичен за вашия бизнес?"
       introDescription="Първото впечатление се формира за 0.05 секунди. В този кратък момент потребителите решават дали да останат или да си тръгнат. Добрият UX дизайн не е лукс – той е инвестиция, която се изплаща многократно чрез по-високи конверсии и лоялни клиенти."

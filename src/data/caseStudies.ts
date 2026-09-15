@@ -734,6 +734,43 @@ export const getCaseStudyById = (id: string): CaseStudy | undefined => {
   return caseStudies.find(study => study.id === id);
 };
 
+/**
+ * Service wording per industry, used to build case-study page titles.
+ *
+ * Titles used to lead with the client's brand ("Koni Jewellery - Ръчно
+ * изработени бижута"), so 24 of the site's 45 pages competed for other
+ * companies' names — searches the client's own site always wins, and which in
+ * Search Console produced impressions at position 9 with a 0% click rate.
+ * Leading with the service puts these pages behind Adrexio's own queries while
+ * the client name still identifies the project.
+ *
+ * scripts/prerender.mjs parses this map, so keep it a flat object literal.
+ */
+export const CASE_STUDY_SERVICE_LABEL: Record<string, string> = {
+  "Електронна търговия": "Изработка на онлайн магазин",
+  "Медицина & Дентална": "Изработка на сайт за медицински кабинет",
+  "Здраве & Красота": "Изработка на сайт за здраве и красота",
+  "Туризъм & Хотели": "Изработка на сайт за хотел и къща за гости",
+  "Ресторантьорство": "Изработка на сайт за ресторант",
+  "Индустрия": "Изработка на корпоративен сайт",
+  "Логистика": "Изработка на корпоративен сайт",
+  "Технологии": "Уеб платформа от нулата",
+  "Спортни технологии": "Изработка на дигитална платформа",
+  "Финанси & FinTech": "Изработка на финансова платформа",
+  "Гейминг & Развлечения": "Изработка на сайт за гейминг студио",
+  "Изкуство & Култура": "Изработка на сайт за творческа компания",
+  "Образование": "Изработка на сайт за образователни услуги",
+  "Организации": "Изработка на сайт за организация",
+};
+
+export const CASE_STUDY_SERVICE_LABEL_DEFAULT = "Изработка на сайт";
+
+/** Page title for a case study: service and niche first, client name second. */
+export const getCaseStudyTitle = (study: Pick<CaseStudy, "title" | "category">): string => {
+  const label = CASE_STUDY_SERVICE_LABEL[study.category] ?? CASE_STUDY_SERVICE_LABEL_DEFAULT;
+  return `${label} — казус ${study.title} | Adrexio`;
+};
+
 /** Counted 1:1 from entries in this file, including the private SuperCredit case study. */
 export const PORTFOLIO_PROJECT_COUNT = caseStudies.length;
 

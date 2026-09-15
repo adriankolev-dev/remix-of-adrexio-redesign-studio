@@ -13,6 +13,7 @@ import {
   BarChart3
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import { SERVICE_TRUST_STATS } from "@/data/trustStats";
 import RobotMascot from "@/components/mascots/RobotMascot";
 
 const AIImplementation = () => {
@@ -28,11 +29,7 @@ const AIImplementation = () => {
       heroCTAText="Свържи се с нас"
       heroAside={<RobotMascot />}
       
-      stats={[
-        { value: "60%", label: "Средно намаление на разходите" },
-        { value: "24/7", label: "Автоматизация" },
-        { value: "3x", label: "Повишена ефективност" }
-      ]}
+      stats={SERVICE_TRUST_STATS}
       
       introTitle="Защо вашият бизнес се нуждае от AI?"
       introDescription="Изкуственият интелект не е бъдещето – той е настоящето. Компаниите, които внедряват AI решения, постигат до 60% намаление на оперативните разходи и до 3x увеличение на продуктивността. Ние помагаме на бизнесите да автоматизират рутинни задачи и да се фокусират върху стратегическото развитие."

@@ -29,6 +29,7 @@ const SERVICE_FILES = [
   { path: "/services/mobile-apps", file: "MobileApps.tsx" },
   { path: "/services/ui-ux-design", file: "UIUXDesign.tsx" },
   { path: "/services/seo", file: "SEO.tsx" },
+  { path: "/services/geo-optimizaciya", file: "GEOOptimization.tsx" },
   { path: "/services/digital-marketing", file: "DigitalMarketing.tsx" },
   { path: "/services/technical-support", file: "TechnicalSupport.tsx" },
 ];
@@ -183,13 +184,14 @@ export function parseCaseStudies(raw) {
   return studies;
 }
 
+// `{ name: "React" }` entries, which carry no description to pair up.
+function extractNames(block) {
+  return [...block.matchAll(/name:\s*"((?:\\.|[^"\\])*)"/g)].map((m) => unescapeJs(m[1]));
+}
+
 export function parseServicePage(src) {
-  const featuresBlock = extractJsxArrayBlock(src, "features");
-  const faqsBlock = extractJsxArrayBlock(src, "faqs");
-  const faqPairs = extractTitleDescriptionPairs(faqsBlock).map((p) => ({
-    question: p.title,
-    answer: p.description,
-  }));
+  const pairs = (name) => extractTitleDescriptionPairs(extractJsxArrayBlock(src, name));
+  const faqs = pairs("faqs").map((p) => ({ question: p.title, answer: p.description }));
   return {
     seoTitle: extractJsxStringProp(src, "seoTitle"),
     seoDescription: extractJsxStringProp(src, "seoDescription"),
@@ -200,8 +202,22 @@ export function parseServicePage(src) {
     heroSubtitle: extractJsxStringProp(src, "heroSubtitle"),
     introTitle: extractJsxStringProp(src, "introTitle"),
     introDescription: extractJsxStringProp(src, "introDescription"),
-    features: extractTitleDescriptionPairs(featuresBlock),
-    faqs: faqPairs,
+    features: pairs("features"),
+    faqs,
+    // Everything below is rendered to users by ServiceLandingTemplate but used
+    // to be dropped from the prerendered HTML, so roughly 40% of each service
+    // page — the process, the use cases, the reasons to choose us — was written
+    // but invisible to crawlers.
+    benefitsTitle: extractJsxStringProp(src, "benefitsTitle"),
+    benefits: pairs("benefits"),
+    processTitle: extractJsxStringProp(src, "processTitle"),
+    steps: pairs("steps"),
+    useCasesTitle: extractJsxStringProp(src, "useCasesTitle"),
+    useCases: pairs("useCases"),
+    whyChooseUsTitle: extractJsxStringProp(src, "whyChooseUsTitle"),
+    whyChooseUs: pairs("whyChooseUs"),
+    technologiesTitle: extractJsxStringProp(src, "technologiesTitle"),
+    technologies: extractNames(extractJsxArrayBlock(src, "technologies")),
   };
 }
 
@@ -274,10 +290,38 @@ function applyMeta(html, { title, description, url, image, type = "website", key
   return out;
 }
 
+// Netlify serves every prerendered page from <route>/index.html, so the live
+// URL carries a trailing slash and the bare form 301s to it. Canonicals, schema
+// @ids and internal links must use the slash form, otherwise every one of them
+// points at a redirect. Normalising the finished HTML in one place covers
+// canonical, og:url, twitter:url, hreflang, JSON-LD and every <a href>.
+export function withTrailingSlash(path) {
+  // Split off ?query / #fragment, leaving the path to test and rebuild.
+  const cut = path.search(/[?#]/);
+  const base = cut === -1 ? path : path.slice(0, cut);
+  const suffix = cut === -1 ? "" : path.slice(cut);
+  // Leave the root, already-slashed paths and anything whose last segment looks
+  // like a file (favicon.svg, og-image.png, site.webmanifest) exactly as it is.
+  const lastSegment = base.slice(base.lastIndexOf("/") + 1);
+  if (!base || base.endsWith("/") || lastSegment.includes(".")) return path;
+  return `${base}/${suffix}`;
+}
+
+export function normalizeUrls(html) {
+  return html
+    .replace(/href="(\/[^"]*)"/g, (_m, p) => `href="${withTrailingSlash(p)}"`)
+    .replace(/https:\/\/www\.adrexio\.com(\/[^"'\s<>\\]*)/g, (_m, p) => `${BASE_URL}${withTrailingSlash(p)}`);
+}
+
+// Every route written this run, so _redirects and sitemap.xml stay in sync with
+// what actually got built instead of being maintained by hand.
+const writtenRoutes = [];
+
 function writePage(routePath, html) {
   const outDir = routePath === "/" ? DIST : join(DIST, routePath.replace(/^\//, ""));
   mkdirSync(outDir, { recursive: true });
-  writeFileSync(join(outDir, "index.html"), html, "utf8");
+  writeFileSync(join(outDir, "index.html"), normalizeUrls(html), "utf8");
+  writtenRoutes.push(routePath);
 }
 
 function list(items) {
@@ -457,6 +501,34 @@ function parsePricingAmounts(src) {
   };
 }
 
+// PRICING_FACTORS, PRICING_TIMELINE and PRICING_SCOPE all render to users but
+// none of them used to reach the crawler, which is why /pricing was the thinnest
+// commercial page on the site while targeting its highest-intent query.
+function parsePricingFactors(src) {
+  const block = extractConstArrayBlock(src, "PRICING_FACTORS");
+  return [...block.matchAll(/label:\s*"((?:\\.|[^"\\])*)"[\s\S]*?detail:\s*"((?:\\.|[^"\\])*)"/g)].map((m) => ({
+    title: unescapeJs(m[1]),
+    description: unescapeJs(m[2]),
+  }));
+}
+
+function parsePricingTimeline(src) {
+  const block = extractConstArrayBlock(src, "PRICING_TIMELINE");
+  return [
+    ...block.matchAll(
+      /name:\s*"((?:\\.|[^"\\])*)"[\s\S]*?duration:\s*"((?:\\.|[^"\\])*)"[\s\S]*?detail:\s*"((?:\\.|[^"\\])*)"/g,
+    ),
+  ].map((m) => ({ name: unescapeJs(m[1]), duration: unescapeJs(m[2]), detail: unescapeJs(m[3]) }));
+}
+
+function parsePricingScope(src) {
+  const grab = (key) => {
+    const m = src.match(new RegExp(`${key}:\\s*\\[([\\s\\S]*?)\\]`));
+    return m ? [...m[1].matchAll(/"((?:\\.|[^"\\])*)"/g)].map((x) => unescapeJs(x[1])) : [];
+  };
+  return { included: grab("included"), excluded: grab("excluded") };
+}
+
 function parsePricingFaqs(pricingPageSrc, paymentCopy) {
   const block = extractConstArrayBlock(pricingPageSrc, "faqs");
   return extractTitleDescriptionPairs(block.replaceAll("PAYMENT_COPY", `"${paymentCopy.replace(/"/g, '\\"')}"`)).map(
@@ -498,11 +570,11 @@ function parseServicesIndex(src) {
 // ── Page writers ────────────────────────────────────────────────────────────
 
 function prerenderHome(template, services, posts, studies) {
-  const title = "Уебсайтове от нулата, не от шаблон | Adrexio";
+  const title = "Изработка на сайт и онлайн магазин в София | Adrexio";
   const description =
-    "Уеб студио в София. Изграждаме сайтове и магазини от нулата — без шаблони. Дизайн, който се помни, и структура, която носи запитвания.";
+    "Уеб студио в София. Изработка на сайтове и онлайн магазини от нулата — без шаблони. 24 реализирани проекта. Вижте цени, срокове и реални резултати.";
   const inner = `
-    <h1>Край на сайтовете, които приличат на всеки втори.</h1>
+    <h1>Изработка на сайтове, които не приличат на всеки втори.</h1>
     <p>Повечето агенции продават един и същ шаблон с ново лого. Ние проектираме и изграждаме от нулата — дизайн, който клиентите ви помнят, и структура, която носи запитвания.</p>
     <p><a href="/contact">Свържи се с нас</a> · <a href="/case-studies">Виж проектите</a></p>
     <h2>Услуги</h2>
@@ -524,7 +596,10 @@ function prerenderHome(template, services, posts, studies) {
       url: `${BASE_URL}/`,
       keywords:
         "уеб разработка, уеб дизайн, мобилни приложения, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг, уебсайт София, уеб студио България, разработка на сайтове, мобилни приложения iOS Android",
-      jsonLd: { "@context": "https://schema.org", "@graph": [orgSchema(), websiteSchema()] },
+      // Mirrors src/pages/Index.tsx: LocalBusiness (an Organization subtype
+      // sharing ORG_ID) plus WebSite. The prerendered HTML used to omit the
+      // local identity entirely, so Google never saw the address without JS.
+      jsonLd: { "@context": "https://schema.org", "@graph": [localBusinessSchema(), websiteSchema()] },
       inner,
     }),
   );
@@ -570,6 +645,47 @@ function prerenderServicesIndex(template, services) {
   );
 }
 
+// Cross-links between sibling services. ServiceLandingTemplate renders custom
+// sections (such as the GEO block on the SEO page) that the prerender does not
+// reproduce, so without this the crawled service pages linked only upward to
+// /services and nowhere sideways.
+const RELATED_SERVICES = {
+  "/services/web-development": [
+    ["/services/ui-ux-design", "UI/UX дизайн"],
+    ["/services/seo", "SEO оптимизация"],
+    ["/services/technical-support", "поддръжка след старта"],
+  ],
+  "/services/ui-ux-design": [
+    ["/services/web-development", "изработка на сайт"],
+    ["/services/mobile-apps", "мобилни приложения"],
+  ],
+  "/services/seo": [
+    ["/services/geo-optimizaciya", "GEO оптимизация за AI търсачки"],
+    ["/services/web-development", "изработка на сайт"],
+  ],
+  "/services/geo-optimizaciya": [
+    ["/services/seo", "SEO оптимизация"],
+    ["/services/ai-implementation", "AI интеграции"],
+    ["/services/web-development", "изработка на сайт"],
+  ],
+  "/services/ai-implementation": [
+    ["/services/geo-optimizaciya", "видимост в AI търсачките"],
+    ["/services/web-development", "изработка на сайт"],
+  ],
+  "/services/mobile-apps": [
+    ["/services/ui-ux-design", "UI/UX дизайн"],
+    ["/services/web-development", "изработка на сайт"],
+  ],
+  "/services/digital-marketing": [
+    ["/services/seo", "SEO оптимизация"],
+    ["/services/web-development", "изработка на сайт"],
+  ],
+  "/services/technical-support": [
+    ["/services/web-development", "изработка на сайт"],
+    ["/services/seo", "SEO оптимизация"],
+  ],
+};
+
 function prerenderServicePages(template) {
   for (const { path: routePath, file } of SERVICE_FILES) {
     const src = readFileSync(join(SRC, "pages", "services", file), "utf8");
@@ -578,17 +694,30 @@ function prerenderServicePages(template) {
       throw new Error(`[prerender] missing SEO fields in ${file}`);
     }
     const h1 = [page.heroTitle, page.heroHighlight].filter(Boolean).join(" ");
+    // Each block carries its own heading from the page's own props, so the
+    // crawled outline matches the one users see instead of a generic skeleton.
+    const section = (heading, items) =>
+      items.length
+        ? `<h2>${escapeHtml(heading)}</h2>${list(
+            items.map((i) => `<strong>${escapeHtml(i.title)}</strong> — ${escapeHtml(i.description)}`),
+          )}`
+        : "";
     const inner = `
       <p><a href="/services">← Услуги</a></p>
       <h1>${escapeHtml(h1)}</h1>
       <p>${escapeHtml(page.heroSubtitle)}</p>
       <h2>${escapeHtml(page.introTitle)}</h2>
       <p>${escapeHtml(page.introDescription)}</p>
+      ${section("Какво включва услугата", page.features)}
+      ${section(page.benefitsTitle || "Ползи за вашия бизнес", page.benefits)}
+      ${section(page.processTitle || "Как работим", page.steps)}
+      ${section(page.useCasesTitle || "Приложения", page.useCases)}
+      ${section(page.whyChooseUsTitle || "Защо да изберете нас", page.whyChooseUs)}
       ${
-        page.features.length
-          ? `<h2>Какво включва услугата</h2>${list(
-              page.features.map((f) => `<strong>${escapeHtml(f.title)}</strong> — ${escapeHtml(f.description)}`),
-            )}`
+        page.technologies.length
+          ? `<h2>${escapeHtml(page.technologiesTitle || "Технологии")}</h2><p>${escapeHtml(
+              page.technologies.join(", "),
+            )}</p>`
           : ""
       }
       ${
@@ -601,7 +730,14 @@ function prerenderServicePages(template) {
               .join("")}`
           : ""
       }
-      <p><a href="/contact">Свържи се с нас</a></p>
+      ${
+        (RELATED_SERVICES[routePath] || []).length
+          ? `<h2>Свързани услуги</h2>${list(
+              RELATED_SERVICES[routePath].map(([href, label]) => `<a href="${href}">${escapeHtml(label)}</a>`),
+            )}`
+          : ""
+      }
+      <p><a href="/contact">Свържи се с нас</a> · <a href="/pricing">Цени и срокове</a> · <a href="/case-studies">Реализирани проекти</a></p>
     `;
     const jsonLd = [
       serviceSchema(page.serviceName || h1, page.seoDescription, `${BASE_URL}${routePath}`),
@@ -626,21 +762,41 @@ function prerenderServicePages(template) {
   }
 }
 
-function prerenderPricing(template, amounts, services, faqs) {
-  const title = "Цени за уеб проекти - Adrexio | Уеб сайтове, онлайн магазини и поддръжка";
+function prerenderPricing(template, amounts, services, faqs, factors, timeline, scope) {
+  const title = "Изработка на сайт — цена, срокове и какво влиза | Adrexio";
   const description =
-    "Ориентировъчни цени за уеб сайтове, онлайн магазини и месечна поддръжка. За SEO, маркетинг и AI — оферта след консултация. 50/50 плащане.";
+    "Колко струва изработката на сайт и онлайн магазин: начални цени, срокове по тип проект, какво влиза и какво не, и как се формира крайната оферта.";
   const inner = `
-    <h1>Ясни цени за уеб проекти. Без изненади.</h1>
+    <h1>Изработка на сайт — цена без изненади.</h1>
     <p>Ориентировъчни суми за уеб сайтове, онлайн магазини и поддръжка. За SEO, дигитален маркетинг, AI и мобилни приложения — оферта след консултация.</p>
+    <h2>Колко струва</h2>
     ${services
       .map((s, i) => {
         const from = i === 0 ? amounts.website : i === 1 ? amounts.ecommerce : amounts.maintenance;
-        return `<h2>${escapeHtml(s.name)} — ${escapeHtml(from)}</h2><p>${escapeHtml(s.description)}</p>`;
+        return `<h3>${escapeHtml(s.name)} — ${escapeHtml(from)}</h3><p>${escapeHtml(s.description)}</p>`;
       })
       .join("")}
+    ${
+      timeline.length
+        ? `<h2>За колко време се прави</h2>${list(
+            timeline.map(
+              (t) => `<strong>${escapeHtml(t.name)} — ${escapeHtml(t.duration)}</strong> — ${escapeHtml(t.detail)}`,
+            ),
+          )}`
+        : ""
+    }
+    ${scope.included.length ? `<h2>Какво влиза в цената</h2>${list(scope.included.map(escapeHtml))}` : ""}
+    ${scope.excluded.length ? `<h2>Какво не влиза</h2>${list(scope.excluded.map(escapeHtml))}` : ""}
+    ${
+      factors.length
+        ? `<h2>Какво определя крайната цена</h2>${list(
+            factors.map((f) => `<strong>${escapeHtml(f.title)}</strong> — ${escapeHtml(f.description)}`),
+          )}`
+        : ""
+    }
+    <h2>Често задавани въпроси</h2>
     ${faqs.map((f) => `<h3>${escapeHtml(f.question)}</h3><p>${escapeHtml(f.answer)}</p>`).join("")}
-    <p><a href="/contact">Свържи се с нас</a></p>
+    <p>Вижте какво включва <a href="/services/web-development">изработката на сайт</a>, разгледайте <a href="/case-studies">реализирани проекти</a> или <a href="/contact">заявете оферта</a>.</p>
   `;
   writePage(
     "/pricing",
@@ -649,7 +805,7 @@ function prerenderPricing(template, amounts, services, faqs) {
       description,
       url: `${BASE_URL}/pricing`,
       keywords:
-        "цени уебсайт, цена уеб разработка, цена онлайн магазин, цена поддръжка сайт, цени уеб студио София, уебсайт цена България",
+        "изработка на сайт цена, колко струва сайт, цена на уебсайт, цена онлайн магазин, изработка на онлайн магазин цена, цена поддръжка сайт, уеб студио София цени",
       jsonLd: [faqSchema(faqs), breadcrumbSchema([{ name: "Начало", url: `${BASE_URL}/` }, { name: "Цени", url: `${BASE_URL}/pricing` }])],
       inner,
     }),
@@ -735,16 +891,40 @@ function prerenderCaseStudiesIndex(template, studies) {
   );
 }
 
-function caseStudyTitle(study) {
-  if (study.id === "koleff-house") {
-    return `${study.title} - Къща за гости Твърдица, Сливен | Next.js Уебсайт | Adrexio`;
+// Parsed from CASE_STUDY_SERVICE_LABEL in src/data/caseStudies.ts so the
+// prerendered <title> and the React one cannot drift apart.
+export function parseCaseStudyServiceLabels(raw) {
+  const m = raw.match(/CASE_STUDY_SERVICE_LABEL:\s*Record<string,\s*string>\s*=\s*\{([\s\S]*?)\n\};/);
+  const labels = {};
+  if (m) {
+    for (const entry of m[1].matchAll(/"((?:\\.|[^"\\])*)":\s*"((?:\\.|[^"\\])*)"/g)) {
+      labels[unescapeJs(entry[1])] = unescapeJs(entry[2]);
+    }
   }
-  return `${study.title} - ${study.subtitle} | Adrexio`;
+  const fallback = raw.match(/CASE_STUDY_SERVICE_LABEL_DEFAULT\s*=\s*"((?:\\.|[^"\\])*)"/);
+  return { labels, fallback: fallback ? unescapeJs(fallback[1]) : "Изработка на сайт" };
+}
+
+let caseStudyLabels = { labels: {}, fallback: "Изработка на сайт" };
+
+function caseStudyTitle(study) {
+  const label = caseStudyLabels.labels[study.category] || caseStudyLabels.fallback;
+  return `${label} — казус ${study.title} | Adrexio`;
+}
+
+// Case studies were the largest group of pages on the site and none of them
+// linked to a service page, so 24 pages of proof fed nothing. The anchor reuses
+// the same per-industry wording as the page title, lowercased so it reads as
+// part of a sentence rather than repeating one exact-match phrase 24 times.
+function caseStudyAnchor(study) {
+  const label = caseStudyLabels.labels[study.category] || caseStudyLabels.fallback;
+  return label.charAt(0).toLocaleLowerCase("bg-BG") + label.slice(1);
 }
 
 function prerenderCaseStudyPages(template, studies) {
   for (const study of studies.filter((s) => s.isPublic)) {
     const description = truncateDescription(study.overview);
+    const anchor = caseStudyAnchor(study);
     const inner = `
       <p><a href="/case-studies">← Назад към проектите</a></p>
       <p>${escapeHtml(study.category)}</p>
@@ -763,6 +943,8 @@ function prerenderCaseStudyPages(template, studies) {
       }
       ${study.technologies.length ? `<p>Технологии: ${escapeHtml(study.technologies.join(", "))}</p>` : ""}
       ${study.url ? `<p><a href="${escapeAttr(study.url)}">Към сайта</a></p>` : ""}
+      <h2>Услугата зад този проект</h2>
+      <p><a href="/services/web-development">${escapeHtml(anchor)}</a> — вижте какво включва, <a href="/pricing">колко струва и за колко време се прави</a>, или <a href="/contact">заявете оферта</a>.</p>
     `;
     writePage(
       `/case-studies/${study.id}`,
@@ -984,6 +1166,79 @@ function prerenderLegal(template) {
   );
 }
 
+// Real router pages that are deliberately not prerendered: a form and an
+// internal demo, both disallowed in robots.txt. They still need the app shell.
+const UNPRERENDERED_ROUTES = ["/project-inquiry", "/services-demo"];
+
+// Netlify applies these in order, and a rule without "!" never beats a real
+// file — so the prerendered <route>/index.html files still win.
+function writeRedirects() {
+  const bare = writtenRoutes.filter((r) => r !== "/").sort();
+  const lines = [
+    "# Generated by scripts/prerender.mjs on build — do not edit by hand.",
+    "",
+    "# Legacy duplicate of /contact kept working for old links.",
+    "/contacts  /contact/  301!",
+    "",
+    "# Send the bare path to the trailing-slash URL the canonical declares, so",
+    "# a crawler never sees the same page on two addresses.",
+    ...bare.map((r) => `${r}  ${r}/  301!`),
+    "",
+    "# Router-only pages with no prerendered HTML.",
+    ...UNPRERENDERED_ROUTES.map((r) => `${r}  /index.html  200`),
+    "",
+    "# Anything else is a genuine 404. The old catch-all answered every unknown",
+    "# URL with 200 and the homepage, which put phantom pages in Google's index.",
+    "/*  /404.html  404",
+    "",
+  ];
+  writeFileSync(join(DIST, "_redirects"), lines.join("\n"), "utf8");
+}
+
+// Generated from the routes actually built, so the sitemap can no longer drift
+// from the site. The hand-written public/sitemap.xml listed every URL without a
+// trailing slash, which made all 43 non-home entries redirect.
+// <priority> and <changefreq> are omitted on purpose: Google ignores both.
+function writeSitemap() {
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = ["/", ...writtenRoutes.filter((r) => r !== "/").sort()]
+    .map((r) => withTrailingSlash(`${BASE_URL}${r}`))
+    .map((loc) => `  <url>\n    <loc>${escapeHtml(loc)}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`)
+    .join("\n");
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  writeFileSync(join(DIST, "sitemap.xml"), xml, "utf8");
+}
+
+// Netlify serves this with a real 404 status for any path that is neither a
+// built file nor an explicit rewrite. Without it the SPA catch-all answered
+// every unknown URL with 200 plus the homepage, so Google indexed phantom
+// pages (e.g. /автоматизация-на-логистични-процеси/) that canonicalised to "/".
+function prerender404(template) {
+  const inner = `
+    <h1>Страницата не е намерена</h1>
+    <p>Адресът, който отворихте, не съществува или е преместен.</p>
+    <ul>
+      <li><a href="/">Начало</a></li>
+      <li><a href="/services/">Услуги</a></li>
+      <li><a href="/case-studies/">Проекти</a></li>
+      <li><a href="/contact/">Контакти</a></li>
+    </ul>
+  `;
+  const page = assemble(template, {
+    title: "Страницата не е намерена (404) | Adrexio",
+    description: "Страницата, която търсите, не съществува или е преместена.",
+    url: `${BASE_URL}/404.html`,
+    inner,
+  })
+    .replace(/(<meta name="robots" content=")[^"]*(")/, "$1noindex, follow$2")
+    .replace(/(<meta name="googlebot" content=")[^"]*(")/, "$1noindex, follow$2")
+    // A 404 is not a canonical document — pointing it at itself or at "/" both
+    // mislead Google, so carry no canonical or hreflang at all.
+    .replace(/\s*<link rel="canonical"[^>]*>/, "")
+    .replace(/\s*<link rel="alternate" hreflang="bg"[^>]*>/, "");
+  writeFileSync(join(DIST, "404.html"), normalizeUrls(page), "utf8");
+}
+
 // ── Main ────────────────────────────────────────────────────────────────────
 
 export function prerenderAll() {
@@ -993,7 +1248,12 @@ export function prerenderAll() {
 
   const template = readFileSync(join(DIST, "index.html"), "utf8");
   const posts = loadBlogPosts();
-  const studies = parseCaseStudies(readFileSync(join(SRC, "data", "caseStudies.ts"), "utf8"));
+  const caseStudiesSrc = readFileSync(join(SRC, "data", "caseStudies.ts"), "utf8");
+  const studies = parseCaseStudies(caseStudiesSrc);
+  caseStudyLabels = parseCaseStudyServiceLabels(caseStudiesSrc);
+  if (!Object.keys(caseStudyLabels.labels).length) {
+    throw new Error("[prerender] failed to parse CASE_STUDY_SERVICE_LABEL");
+  }
   const services = parseServicesIndex(readFileSync(join(SRC, "pages", "Services.tsx"), "utf8"));
   const pricingSrc = readFileSync(join(SRC, "data", "pricing.ts"), "utf8");
   const pricingPageSrc = readFileSync(join(SRC, "pages", "Pricing.tsx"), "utf8");
@@ -1003,6 +1263,9 @@ export function prerenderAll() {
   const pricingServices = parsePricingServices(pricingSrc);
   const amounts = parsePricingAmounts(pricingSrc);
   const pricingFaqs = parsePricingFaqs(pricingPageSrc, paymentCopy);
+  const pricingFactors = parsePricingFactors(pricingSrc);
+  const pricingTimeline = parsePricingTimeline(pricingSrc);
+  const pricingScope = parsePricingScope(pricingSrc);
   const about = parseAboutValues(readFileSync(join(SRC, "pages", "About.tsx"), "utf8"));
   const affiliate = parseAffiliate(readFileSync(join(SRC, "pages", "Affiliate.tsx"), "utf8"));
 
@@ -1012,7 +1275,7 @@ export function prerenderAll() {
 
   prerenderServicesIndex(template, services);
   prerenderServicePages(template);
-  prerenderPricing(template, amounts, pricingServices, pricingFaqs);
+  prerenderPricing(template, amounts, pricingServices, pricingFaqs, pricingFactors, pricingTimeline, pricingScope);
   prerenderAbout(template, about);
   prerenderCaseStudiesIndex(template, studies);
   prerenderCaseStudyPages(template, studies);
@@ -1021,6 +1284,9 @@ export function prerenderAll() {
   prerenderAffiliate(template, affiliate);
   prerenderLegal(template);
   prerenderHome(template, services, posts, studies.filter((s) => s.isPublic));
+  prerender404(template);
+  writeRedirects();
+  writeSitemap();
 
   const publicStudies = studies.filter((s) => s.isPublic).length;
   console.log(
