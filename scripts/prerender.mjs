@@ -25,6 +25,7 @@ marked.setOptions({ gfm: true, breaks: false });
 
 const SERVICE_FILES = [
   { path: "/services/web-development", file: "WebDevelopment.tsx" },
+  { path: "/services/onlajn-magazin", file: "OnlineStore.tsx" },
   { path: "/services/ai-implementation", file: "AIImplementation.tsx" },
   { path: "/services/mobile-apps", file: "MobileApps.tsx" },
   { path: "/services/ui-ux-design", file: "UIUXDesign.tsx" },
@@ -651,8 +652,14 @@ function prerenderServicesIndex(template, services) {
 // /services and nowhere sideways.
 const RELATED_SERVICES = {
   "/services/web-development": [
+    ["/services/onlajn-magazin", "изработка на онлайн магазин"],
     ["/services/ui-ux-design", "UI/UX дизайн"],
     ["/services/seo", "SEO оптимизация"],
+    ["/services/technical-support", "поддръжка след старта"],
+  ],
+  "/services/onlajn-magazin": [
+    ["/services/web-development", "изработка на сайт"],
+    ["/services/ui-ux-design", "UI/UX дизайн"],
     ["/services/technical-support", "поддръжка след старта"],
   ],
   "/services/ui-ux-design": [

@@ -22,6 +22,14 @@ const services = [
     features: ["Корпоративни сайтове", "Лендинг страници", "E-commerce", "Уеб приложения"],
   },
   {
+    title: "Онлайн магазини",
+    subtitle: "E-commerce",
+    description:
+      "Магазин, построен за българския пазар — Еконт и Спиди, наложен платеж и склад, заложени в основата, не добавени накрая.",
+    href: "/services/onlajn-magazin",
+    features: ["Еконт и Спиди", "Наложен платеж", "Склад и наличности", "Общи условия"],
+  },
+  {
     title: "UI/UX дизайн",
     subtitle: "Design & Strategy",
     description:
