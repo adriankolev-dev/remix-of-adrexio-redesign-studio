@@ -9,6 +9,7 @@ import {
   HeartHandshake,
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import { SERVICE_TRUST_STATS } from "@/data/trustStats";
 import BrowserMascot from "@/components/mascots/BrowserMascot";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
 import PricingWebDevLink from "@/components/pricing/PricingWebDevLink";
@@ -16,20 +17,16 @@ import PricingWebDevLink from "@/components/pricing/PricingWebDevLink";
 const WebDevelopment = () => {
   return (
     <ServiceLandingTemplate
-      seoTitle="Изработка на уебсайтове - Adrexio | Професионални уебсайтове в София, България"
-      seoDescription="Изработка на уебсайтове в София. Модерни, бързи и SEO-оптимизирани уебсайтове, корпоративни сайтове, лендинг страници и e-commerce магазини."
-      seoKeywords="изработка на уебсайтове, уебсайт София, разработка сайт, корпоративен уебсайт, лендинг страница, e-commerce, уеб студио България, React, Next.js"
-      serviceName="Изработка на уебсайтове"
-      heroTitle="Фокусирайте се върху резултата,"
-      heroHighlight="а не върху процеса."
+      seoTitle="Изработка на сайт в София — фирмени сайтове от нулата | Adrexio"
+      seoDescription="Изработка на сайт в София: фирмени и корпоративни сайтове от нулата, без шаблони. Вижте какво включва, колко струва и за колко време се прави."
+      seoKeywords="изработка на сайт, изработка на сайт софия, изработка на уебсайт, разработка на сайт, фирмен сайт, корпоративен сайт, уеб студио София"
+      serviceName="Изработка на сайт"
+      heroTitle="Изработка на сайт от нулата —"
+      heroHighlight="за бизнеси, на които шаблонът не стига."
       heroSubtitle="Превръщаме вашите посетители в лоялни клиенти с високопроизводителни уебсайтове, които работят за вашия бизнес 24/7."
       heroCTAText="Свържи се с нас"
       heroAside={<BrowserMascot />}
-      stats={[
-        { value: "+120%", label: "Средно увеличение на конверсиите" },
-        { value: "< 2 сек", label: "Време за зареждане" },
-        { value: "24/7", label: "Работи без прекъсване" },
-      ]}
+      stats={SERVICE_TRUST_STATS}
       introTitle="Защо вашият бизнес се нуждае от модерен уебсайт?"
       introDescription="Ние не просто пишем код. Анализираме вашия бизнес модел и създаваме дигитален инструмент, който работи за целите ви денонощно. Вашият уебсайт е първото впечатление за потенциалните клиенти — нека го направим незабравимо."
       showDesignedForSection

@@ -23,18 +23,17 @@ const SEO = ({
   const location = useLocation();
   const baseUrl = "https://www.adrexio.com";
   
-  // Normalize pathname: remove trailing slash (except for root)
-  let normalizedPath = location.pathname;
-  if (normalizedPath !== "/" && normalizedPath.endsWith("/")) {
-    normalizedPath = normalizedPath.slice(0, -1);
-  }
-  
   // Normalize duplicate routes to canonical version
   // /contacts -> /contact (both routes point to the same page)
-  if (normalizedPath === "/contacts") {
-    normalizedPath = "/contact";
+  let normalizedPath = location.pathname === "/contacts" ? "/contact" : location.pathname;
+
+  // Netlify serves each prerendered page from <route>/index.html, so the live
+  // URL ends in a slash and the bare form 301s to it. Canonical must match the
+  // served URL — stripping the slash here pointed every canonical at a redirect.
+  if (!normalizedPath.endsWith("/")) {
+    normalizedPath = `${normalizedPath}/`;
   }
-  
+
   const url = `${baseUrl}${normalizedPath}`;
   
   // Normalize image URL: if it's a relative path, make it absolute

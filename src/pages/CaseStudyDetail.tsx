@@ -13,7 +13,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
-import { getCaseStudyById, getPortfolioOrder } from "@/data/caseStudies";
+import { getCaseStudyById, getCaseStudyTitle, getPortfolioOrder } from "@/data/caseStudies";
 import { getBreadcrumbSchema, getPublisherSchema } from "@/lib/structuredData";
 import { scrollToTop } from "@/lib/lenis";
 import { useEffect } from "react";
@@ -97,11 +97,7 @@ const CaseStudyDetail = () => {
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title={
-          study.id === "koleff-house"
-            ? `${study.title} - Къща за гости Твърдица, Сливен | Next.js Уебсайт | Adrexio`
-            : `${study.title} - ${study.subtitle} | Adrexio`
-        }
+        title={getCaseStudyTitle(study)}
         description={truncateDescription(study.overview)}
         keywords={
           study.id === "koleff-house"

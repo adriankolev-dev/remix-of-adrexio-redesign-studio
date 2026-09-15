@@ -13,26 +13,23 @@ import {
   Fingerprint
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import { SERVICE_TRUST_STATS } from "@/data/trustStats";
 import PhoneMascot from "@/components/mascots/PhoneMascot";
 
 const MobileApps = () => {
   return (
     <ServiceLandingTemplate
-      seoTitle="Мобилни приложения - Adrexio | iOS и Android разработка в София"
+      seoTitle="Изработка на мобилни приложения за iOS и Android | Adrexio София"
       seoDescription="Професионална разработка на мобилни приложения за iOS и Android в София. Native и cross-platform решения с отлично потребителско изживяване."
-      seoKeywords="мобилни приложения, iOS приложение, Android приложение, разработка приложения София, mobile app development, React Native, Flutter"
-      serviceName="Мобилни приложения"
-      heroTitle="Вашият бизнес в джоба"
-      heroHighlight="на всеки клиент."
+      seoKeywords="изработка на мобилни приложения, разработка на мобилно приложение, мобилни приложения София, iOS приложение, Android приложение, React Native, Flutter"
+      serviceName="Изработка на мобилни приложения"
+      heroTitle="Изработка на мобилни приложения —"
+      heroHighlight="вашият бизнес в джоба на всеки клиент."
       heroSubtitle="Създаваме иновативни мобилни приложения за iOS и Android, които дават отлично потребителско изживяване и реални бизнес резултати."
       heroCTAText="Свържи се с нас"
       heroAside={<PhoneMascot />}
       
-      stats={[
-        { value: "4.8★", label: "Средна оценка" },
-        { value: "< 1сек", label: "Време за стартиране" },
-        { value: "99%", label: "Гарантирана стабилност" }
-      ]}
+      stats={SERVICE_TRUST_STATS}
       
       introTitle="Защо да инвестирате в мобилно приложение?"
       introDescription="Мобилните приложения са най-директният начин да достигнете до вашите клиенти. С над 6 милиарда смартфон потребители по света, присъствието в App Store и Google Play е не просто предимство – то е необходимост за модерния бизнес."

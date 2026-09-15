@@ -10,6 +10,7 @@ import Reveal from "@/components/editorial/Reveal";
 import HandNote from "@/components/editorial/HandNote";
 import PricingOverview from "@/components/pricing/PricingOverview";
 import PricingFactors from "@/components/pricing/PricingFactors";
+import PricingTimeline from "@/components/pricing/PricingTimeline";
 import { getFAQSchema } from "@/lib/structuredData";
 import {
   Accordion,
@@ -67,9 +68,9 @@ const Pricing = () => {
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title="Цени за уеб проекти - Adrexio | Уеб сайтове, онлайн магазини и поддръжка"
-        description="Ориентировъчни цени за уеб сайтове, онлайн магазини и месечна поддръжка. За SEO, маркетинг и AI — оферта след консултация. 50/50 плащане."
-        keywords="цени уебсайт, цена уеб разработка, цена онлайн магазин, цена поддръжка сайт, цени уеб студио София, уебсайт цена България"
+        title="Изработка на сайт — цена, срокове и какво влиза | Adrexio"
+        description="Колко струва изработката на сайт и онлайн магазин: начални цени, срокове по тип проект, какво влиза и какво не, и как се формира крайната оферта."
+        keywords="изработка на сайт цена, колко струва сайт, цена на уебсайт, цена онлайн магазин, изработка на онлайн магазин цена, цена поддръжка сайт, уеб студио София цени"
         structuredData={faqSchema}
       />
       <Navbar />
@@ -79,7 +80,7 @@ const Pricing = () => {
         label="Цени за уеб проекти"
         title={
           <>
-            Ясни цени за уеб проекти. <span className="accent-mark">Без изненади.</span>
+            Изработка на сайт — <span className="accent-mark">цена без изненади.</span>
           </>
         }
         description="Ориентировъчни суми за уеб сайтове, онлайн магазини и поддръжка. За SEO, дигитален маркетинг, AI и мобилни приложения — оферта след консултация."
@@ -93,6 +94,8 @@ const Pricing = () => {
       <PricingOverview />
 
       <PricingFactors />
+
+      <PricingTimeline />
 
       {/* FAQ — open editorial list on desktop, accordion on mobile for scanability */}
       <section className="relative bg-background py-24 md:py-32">

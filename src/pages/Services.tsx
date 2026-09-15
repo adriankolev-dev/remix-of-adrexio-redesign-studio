@@ -39,12 +39,20 @@ const services = [
     pricingHref: "/pricing",
   },
   {
-    title: "SEO и GEO",
-    subtitle: "Search & AI Optimization",
+    title: "SEO оптимизация",
+    subtitle: "Search Optimization",
     description:
-      "Подобряване на видимостта в Google и AI търсачките за повече органичен трафик и по-добри позиции.",
+      "Подобряване на видимостта в Google за повече органичен трафик и по-добри позиции по заявките, които носят клиенти.",
     href: "/services/seo",
     features: ["Технически одит", "On-page", "Линк билдинг", "Местно SEO"],
+  },
+  {
+    title: "GEO оптимизация",
+    subtitle: "AI Search Optimization",
+    description:
+      "Видимост в ChatGPT, Perplexity, Gemini и Google AI Overviews — за да ви цитират, когато клиентът пита AI вместо Google.",
+    href: "/services/geo-optimizaciya",
+    features: ["GEO одит", "Достъп за AI ботове", "Структурирани данни", "Измерване на цитирания"],
   },
   {
     title: "AI интеграции",

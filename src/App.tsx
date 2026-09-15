@@ -33,6 +33,7 @@ const AIImplementation = lazy(() => import("./pages/services/AIImplementation"))
 const MobileApps = lazy(() => import("./pages/services/MobileApps"));
 const UIUXDesign = lazy(() => import("./pages/services/UIUXDesign"));
 const SEO = lazy(() => import("./pages/services/SEO"));
+const GEOOptimization = lazy(() => import("./pages/services/GEOOptimization"));
 const DigitalMarketing = lazy(() => import("./pages/services/DigitalMarketing"));
 const TechnicalSupport = lazy(() => import("./pages/services/TechnicalSupport"));
 
@@ -62,6 +63,7 @@ const App = () => {
               <Route path="/services/mobile-apps" element={<MobileApps />} />
               <Route path="/services/ui-ux-design" element={<UIUXDesign />} />
               <Route path="/services/seo" element={<SEO />} />
+              <Route path="/services/geo-optimizaciya" element={<GEOOptimization />} />
               <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
               <Route path="/services/technical-support" element={<TechnicalSupport />} />
               <Route path="/pricing" element={<Pricing />} />

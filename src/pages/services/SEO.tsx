@@ -11,7 +11,9 @@ import {
   MapPin,
   Zap,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
+import { SERVICE_TRUST_STATS } from "@/data/trustStats";
 import SearchMascot from "@/components/mascots/SearchMascot";
 import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
@@ -155,9 +157,16 @@ const SEO = () => {
 
         <Reveal delay={0.1} className="mt-14">
           <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            GEO оптимизацията е следващата стъпка в SEO. Докато традиционният SEO се фокусира върху
-            класиране в резултатите от търсенето, GEO ви помага да бъдете включени в отговорите на AI
-            асистентите като ChatGPT, Perplexity и Google SGE.
+            GEO стъпва върху SEO, но подборът на източници работи по друга логика: там не се борите за
+            позиция, а да бъдете изречението, което моделът цитира. Разгърнахме услугата в отделна
+            страница —{" "}
+            <Link
+              to="/services/geo-optimizaciya"
+              className="font-medium text-foreground underline underline-offset-4"
+            >
+              GEO оптимизация за AI търсачки
+            </Link>
+            .
           </p>
         </Reveal>
       </div>
@@ -166,22 +175,18 @@ const SEO = () => {
 
   return (
     <ServiceLandingTemplate
-      seoTitle="SEO и GEO оптимизация - Adrexio | Google и AI търсене, София"
-      seoDescription="SEO и GEO оптимизация в София. Традиционен SEO за Google + GEO за AI търсачки като ChatGPT и Perplexity. Пълна оптимизация за всички търсачки."
-      seoKeywords="SEO оптимизация, GEO оптимизация, SEO София, AI търсене, ChatGPT оптимизация, позиции Google, органичен трафик, SEO услуги България, технически SEO, on-page SEO, линк билдинг"
-      serviceName="SEO и GEO оптимизация"
-      heroTitle="Бъдете #1 в Google и AI търсачките."
-      heroHighlight="Повече трафик, повече клиенти."
-      heroSubtitle="Традиционен SEO за Google + GEO оптимизация за ChatGPT, Perplexity и Google SGE. Пълна оптимизация за всички търсачки."
+      seoTitle="SEO оптимизация в София — повече органичен трафик от Google | Adrexio"
+      seoDescription="SEO оптимизация в София: технически одит, on-page, съдържание и местно SEO. Позиции по заявките, които носят запитвания, а не по случайни думи."
+      seoKeywords="SEO оптимизация, SEO София, SEO услуги, SEO агенция София, технически SEO, on-page SEO, местно SEO, органичен трафик, позиции в Google"
+      serviceName="SEO оптимизация"
+      heroTitle="SEO оптимизация за заявките,"
+      heroHighlight="които носят клиенти."
+      heroSubtitle="Технически одит, on-page работа и съдържание, насочени към търсенията с реално намерение за покупка. За видимост в AI търсачките вижте GEO оптимизация."
       heroCTAText="Свържи се с нас"
       heroAside={<SearchMascot />}
-      stats={[
-        { value: "+300%", label: "Средно увеличение на трафика" },
-        { value: "Top 3", label: "Позиции за ключови думи" },
-        { value: "95%", label: "Клиенти с ръст" },
-      ]}
-      introTitle="Защо SEO и GEO са най-важната инвестиция за вашия бизнес?"
-      introDescription="75% от потребителите никога не скролват под първата страница в Google. Ако не сте там, просто не съществувате за тях. С нарастването на AI търсачките като ChatGPT и Perplexity, GEO оптимизацията става все по-важна. SEO и GEO не са разход — това е инвестиция с най-висока възвръщаемост в дигиталния маркетинг."
+      stats={SERVICE_TRUST_STATS}
+      introTitle="Защо SEO е инвестицията с най-дълъг живот"
+      introDescription="Рекламата спира в деня, в който спрете да плащате. Позиция, спечелена с добра техническа основа и съдържание по правилните заявки, продължава да носи запитвания месеци след като работата е свършена. Започваме с одит какво пречи на сайта ви да се класира днес, а не с обещания за проценти. Ако търсите и видимост в ChatGPT и Google AI Overviews, това е отделна дисциплина — вижте GEO оптимизация."
       featuresTitle="Какво включва нашата SEO и GEO услуга?"
       featuresSubtitle="Пълен спектър SEO + GEO оптимизация"
       features={[

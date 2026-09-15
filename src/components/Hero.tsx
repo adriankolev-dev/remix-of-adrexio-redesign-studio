@@ -124,7 +124,7 @@ const HeroMessage = () => (
       <SectionEyebrow label="Уеб студио · София" index="01" />
 
       <h1 className="font-display text-display mt-6 font-bold text-foreground">
-        Край на сайтовете, които приличат на{" "}
+        Изработка на сайтове, които не приличат на{" "}
         <span className="relative inline-block whitespace-nowrap">
           всеки втори
           <DoodleUnderline />
@@ -201,7 +201,7 @@ const MobileHero = () => {
         <SectionEyebrow label="Уеб студио · София" index="01" />
 
         <h1 className="font-display mt-5 text-[2rem] font-bold leading-[1.08] text-foreground">
-          Край на сайтовете, които приличат на{" "}
+          Изработка на сайтове, които не приличат на{" "}
           <span className="relative inline-block whitespace-nowrap">
             всеки втори
             <DoodleUnderline />
