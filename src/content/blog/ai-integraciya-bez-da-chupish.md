@@ -4,7 +4,7 @@ slug: "ai-integraciya-bez-da-chupish"
 date: "2026-06-21"
 category: "AI Стратегия"
 author: "Adrexio"
-cover: "/blog-covers/ai-integraciya-bez-da-chupish.png"
+cover: "/blog-covers/ai-integraciya-bez-da-chupish.webp"
 excerpt: "Мислиш да добавиш AI към текущата си система? Възможно е, без да преобръщаш всичко с главата надолу. Разглеждаме стратегическото планиране, техническите изисквания и капаните, които да избегнеш."
 ---
 

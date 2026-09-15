@@ -13,7 +13,10 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
     <Reveal delay={(index % 3) * 0.06}>
       <Link to={`/blog/${post.slug}`} className="group block">
         <div className="relative overflow-hidden rounded-xl border border-border bg-secondary">
-          <div className="aspect-[16/10] overflow-hidden">
+          {/* 16/9 matches both the cover artwork and the hero on the article
+              page. At 16/10 object-cover trimmed the sides of covers that
+              carry text, clipping the first letter of a headline. */}
+          <div className="aspect-[16/9] overflow-hidden">
             <img
               src={post.cover}
               alt={post.title}

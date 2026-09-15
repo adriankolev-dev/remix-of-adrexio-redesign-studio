@@ -4,7 +4,7 @@ slug: "kakvo-da-pitate-ueb-agenciyata"
 date: "2026-09-15"
 category: "Избор на изпълнител"
 author: "Adrexio"
-cover: "/og-image.png"
+cover: "/blog-covers/kakvo-da-pitate-ueb-agenciyata.webp"
 excerpt: "Дванайсет въпроса, които отсяват сериозния изпълнител от този, при когото ще се върнете след година. Включително двата, които рядко се задават и струват най-скъпо."
 ---
 

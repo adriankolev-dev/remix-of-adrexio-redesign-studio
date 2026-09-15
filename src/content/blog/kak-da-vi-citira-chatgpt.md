@@ -4,7 +4,7 @@ slug: "kak-da-vi-citira-chatgpt"
 date: "2026-09-15"
 category: "AI търсене"
 author: "Adrexio"
-cover: "/og-image.png"
+cover: "/blog-covers/kak-da-vi-citira-chatgpt.webp"
 excerpt: "AI системите не класират десет резултата — съставят един отговор и цитират източници. Какво реално определя дали вие сте сред тях, какво е шум и как се измерва."
 ---
 

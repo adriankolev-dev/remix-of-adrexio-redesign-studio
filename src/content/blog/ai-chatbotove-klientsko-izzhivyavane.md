@@ -4,7 +4,7 @@ slug: "ai-chatbotove-klientsko-izzhivyavane"
 date: "2026-06-21"
 category: "Изкуствен интелект"
 author: "Adrexio"
-cover: "/blog-covers/ai-chatbotove-klientsko-izzhivyavane.png"
+cover: "/blog-covers/ai-chatbotove-klientsko-izzhivyavane.webp"
 excerpt: "AI чатботовете отдавна не са само за прости въпроси. Днес те предлагат поддръжка 24/7, мигновени отговори и персонализирано обслужване — и освобождават екипа ти за наистина сложните казуси."
 ---
 

@@ -4,7 +4,7 @@ slug: "izgrazhdane-na-ai-agent"
 date: "2026-06-20"
 category: "AI Разработка"
 author: "Adrexio"
-cover: "/blog-covers/izgrazhdane-na-ai-agent.png"
+cover: "/blog-covers/izgrazhdane-na-ai-agent.webp"
 excerpt: "Изграждането на добър AI агент започва с ясна цел. Това ръководство минава през ключовите стъпки — дефиниране на проблема, избор на архитектура, управление на разработката и пускане в реална среда."
 ---
 
