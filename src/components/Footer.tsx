@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import logo from "@/assets/logo.svg";
 import logoDark from "@/assets/logo-dark.svg";
 import { PAYMENT_COPY } from "@/data/pricing";
+import AdrexchoPeek from "@/components/mascots/AdrexchoPeek";
 
 const Footer = () => {
   const [mounted, setMounted] = useState(false);
@@ -151,7 +152,9 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="relative mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <AdrexchoPeek />
+
           <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} Adrexio. Всички права запазени.
           </p>
