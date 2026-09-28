@@ -187,6 +187,41 @@ const CaseStudyDetail = () => {
         </div>
       </section>
 
+      {/* Proof — screenshots behind the numbers above */}
+      {study.proof && study.proof.length > 0 && (
+        <section className="pb-16">
+          <div className="container mx-auto px-6">
+            <div className="mx-auto max-w-5xl">
+              <Reveal>
+                <SectionEyebrow label="Проверено в PageSpeed Insights" />
+              </Reveal>
+              <div className="mt-6 grid gap-6 md:grid-cols-2">
+                {study.proof.map((item, i) => (
+                  <Reveal key={item.image} delay={i * 0.06}>
+                    <figure>
+                      <div className="overflow-hidden rounded-xl border border-border bg-white">
+                        <img
+                          src={item.image}
+                          alt={item.alt}
+                          width={1200}
+                          height={934}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-auto w-full"
+                        />
+                      </div>
+                      <figcaption className="font-mono-meta mt-3 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
+                        {item.caption}
+                      </figcaption>
+                    </figure>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Content */}
       <section className="pb-16">
         <div className="container mx-auto px-6">

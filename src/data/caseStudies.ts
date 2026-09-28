@@ -25,9 +25,18 @@ import zdravecImg from "@/assets/case-studies/zdravec.webp";
 import wexelImg from "@/assets/case-studies/wexel.webp";
 import firescapeImg from "@/assets/case-studies/firescape.webp";
 import curlyImg from "@/assets/case-studies/curly.webp";
+import curlyPagespeedMobileImg from "@/assets/case-studies/curly-pagespeed-mobile.webp";
+import curlyPagespeedDesktopImg from "@/assets/case-studies/curly-pagespeed-desktop.webp";
 export interface CaseStudyResult {
   metric: string;
   label: string;
+}
+
+/** A screenshot that backs up a claim on the page, e.g. a PageSpeed report. */
+export interface CaseStudyProof {
+  image: string;
+  alt: string;
+  caption: string;
 }
 
 export interface CaseStudy {
@@ -46,6 +55,7 @@ export interface CaseStudy {
   gradient: string;
   accentColor: string;
   internalNote?: string;
+  proof?: CaseStudyProof[];
 }
 
 export type CaseStudyKind = "web" | "shop" | "app";
@@ -85,7 +95,19 @@ export const caseStudies: CaseStudy[] = [
     ],
     technologies: ["WordPress", "WooCommerce", "Собствена тема", "Stripe", "Резервации", "SEO"],
     gradient: "from-emerald-700/20 to-lime-600/20",
-    accentColor: "text-emerald-600"
+    accentColor: "text-emerald-600",
+    proof: [
+      {
+        image: curlyPagespeedMobileImg,
+        alt: "PageSpeed Insights за eat-curly.com на телефон: производителност 98, достъпност 100, добри практики 100, SEO 100",
+        caption: "Телефон: 98 · 100 · 100 · 100",
+      },
+      {
+        image: curlyPagespeedDesktopImg,
+        alt: "PageSpeed Insights за eat-curly.com на компютър: производителност 97, достъпност 100, добри практики 100, SEO 100",
+        caption: "Компютър: 97 · 100 · 100 · 100",
+      },
+    ],
   },
   // FIRESCAPE PARTNERS
   {
