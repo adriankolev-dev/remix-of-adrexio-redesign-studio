@@ -11,7 +11,7 @@ const projects = [
   { id: 4, image: "/images/projects/athleticiq.png", title: "Спортен център", category: "Спорт & Фитнес" },
   { id: 5, image: "/images/projects/bitcoinempires.png", title: "Crypto платформа", category: "Финтех" },
   { id: 6, image: "/images/projects/boas.png", title: "Tech стартъп", category: "Технологии" },
-  { id: 7, image: "/images/projects/bodyaesthetics.png", title: "Beauty студио", category: "Красота & Здраве" },
+  { id: 7, image: "/images/projects/bodyaesthetics.png", title: "Лазерен център", category: "Красота & Здраве" },
   { id: 9, image: "/images/projects/breezypointvillas.png", title: "Луксозни вили", category: "Недвижими имоти" },
   { id: 10, image: "/images/projects/bulbiochem.png", title: "Biotech компания", category: "Биотехнологии" },
   { id: 11, image: "/images/projects/fml-bd.png", title: "Софтуерна платформа", category: "SaaS" },
@@ -27,6 +27,7 @@ const projects = [
   { id: 21, image: "/images/projects/supercredit.png", title: "Финансова платформа", category: "Финанси" },
   { id: 22, image: "/images/projects/tajmahal.png", title: "Етнически ресторант", category: "Гастрономия" },
   { id: 23, image: "/images/projects/webxotic.png", title: "Дигитална агенция", category: "Creative Studio" },
+  { id: 24, image: "/images/projects/curly.png", title: "Ресторант с онлайн поръчки", category: "Ресторантьорство" },
 ];
 
 const AUTOPLAY_MS = 4200;

@@ -24,6 +24,7 @@ import breezypointvillasImg from "@/assets/case-studies/breezypointvillas.webp";
 import zdravecImg from "@/assets/case-studies/zdravec.webp";
 import wexelImg from "@/assets/case-studies/wexel.webp";
 import firescapeImg from "@/assets/case-studies/firescape.webp";
+import curlyImg from "@/assets/case-studies/curly.webp";
 export interface CaseStudyResult {
   metric: string;
   label: string;
@@ -58,6 +59,34 @@ export const CASE_STUDY_FILTERS: { id: CaseStudyFilterId; label: string }[] = [
 ];
 
 export const caseStudies: CaseStudy[] = [
+  // CURLY
+  {
+    id: "curly",
+    title: "CURly",
+    subtitle: "Ресторант в Габрово с онлайн поръчки и резервации",
+    category: "Ресторантьорство",
+    url: "https://eat-curly.com/",
+    isPublic: true,
+    image: curlyImg,
+    overview: "CURly е ресторант в Scientia House на ул. „Дунав“ 5 в Габрово — суши, бургери, паста и коктейли. Изградихме сайта от нулата върху WordPress и WooCommerce: цялото меню онлайн, поръчки с доставка или вземане, плащане с карта и резервации на маса с автоматично разпределение по места.",
+    challenge: "Ресторантът имаше само прототип без реални снимки и две PDF менюта с около 190 позиции. Трябваше сайт, който гостите отварят от телефона, намират ястието за секунди, поръчват или запазват маса, а екипът сам обновява менюто, обедите и събитията.",
+    solution: [
+      "Прехвърлихме двете PDF менюта ръчно в структурирани данни: кухня, суши и бар с грамажи, цени и 14-те алергена по EU",
+      "Изградихме онлайн поръчки с доставка и вземане, минимална поръчка, отстъпка при вземане и плащане с карта през Stripe",
+      "Разработихме резервации на маса с автоматично разпределение по вътрешна зала, сепарета и тераса, 2-часови слотове и статус за неявили се",
+      "Добавихме дневно обедно меню, събития със сет меню и форма за поводи, които екипът управлява сам от админ панела",
+      "Направихме собствена тема с шрифт Sofia Sans с български кирилски форми, без jQuery и без тежки page builder-и",
+      "Внедрихме локално SEO с Restaurant и FoodEvent структурирани данни, cookie съгласие и общи условия"
+    ],
+    results: [
+      { metric: "189", label: "Позиции в менюто онлайн" },
+      { metric: "98–100", label: "Lighthouse производителност (мобилно)" },
+      { metric: "100", label: "Lighthouse SEO и достъпност" }
+    ],
+    technologies: ["WordPress", "WooCommerce", "Custom Theme", "Stripe", "Booking System", "SEO"],
+    gradient: "from-emerald-700/20 to-lime-600/20",
+    accentColor: "text-emerald-600"
+  },
   // FIRESCAPE PARTNERS
   {
     id: "firescape-partners",
@@ -442,26 +471,27 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "body-aesthetics",
     title: "Body Aesthetics",
-    subtitle: "Премиум лазерен център за терапии за лице и тяло",
+    subtitle: "Лазерен център за лазерна епилация и терапии за лице и тяло в София",
     category: "Здраве & Красота",
     url: "https://bodyaesthetics.bg/",
     isPublic: true,
     image: bodyaestheticsImg,
-    overview: "Body Aesthetics е водещ медицински козметичен лазерен център в България, предлагащ най-високия клас неинвазивни естетични процедури. От 2018 г. насам изграждат доверие с хиляди клиенти чрез експертни грижи и най-съвременни технологии.",
-    challenge: "Клиниката имаше нужда от модерен, вдъхващ доверие уебсайт, който да представи премиум услугите им, да изгради авторитет в конкурентната индустрия за красота и да позволи безпроблемно онлайн резервиране.",
+    overview: "Body Aesthetics е медицински козметичен лазерен център в София с 9 години опит — перманентна лазерна епилация с GentleLase Pro и GentleMax Pro Plus, Morpheus8, NuEra Tight, EmSculpt Neo, Forma, Hydrafacial и Nd:Yag подмладяване. Обновихме сайта с нов дизайн, онлайн магазин за пакети и промоции и двуезична версия.",
+    challenge: "Центърът предлага седем апаратни процедури, всяка със свои показания, подготовка и цени. Сайтът трябваше да обясни технологиите ясно, да изгради доверие в конкурентен пазар и да превърне интереса в записан час или купен пакет.",
     solution: [
-      "Създадохме елегантен, луксозен уебсайт, отразяващ премиум характера на услугите",
-      "Внедрихме система за онлайн резервации, интегрирана с техния график",
-      "Изградихме подробни страници за услуги с детайлна информация за процедурите",
-      "Разработихме онлайн магазин за ваучери за подарък и продукти",
-      "Оптимизирахме за SEO, за да привлечем локален трафик от търсачките"
+      "Преработихме дизайна в Breakdance с по-ясна навигация по процедури, цени, промоции и наръчник",
+      "Изградихме отделни страници за всяка технология с ползи, показания и информация за гаранцията",
+      "Създадохме WooCommerce магазин за промо пакети и ваучери с купони за отстъпка",
+      "Добавихме двуезична версия BG/EN с TranslatePress",
+      "Интегрирахме Google отзиви, сертификати и постоянни бутони „Запазете час“ и „Купете тук“",
+      "Оптимизирахме скоростта с WP Rocket и SEO за търсения за лазерна епилация в София"
     ],
     results: [
-      { metric: "+185%", label: "Онлайн резервации" },
-      { metric: "4.9★", label: "Google рейтинг" },
-      { metric: "+120%", label: "Органичен трафик" }
+      { metric: "132", label: "Google отзива с оценка „Отлично“" },
+      { metric: "7", label: "Процедури с отделни страници" },
+      { metric: "BG/EN", label: "Двуезичен сайт с магазин" }
     ],
-    technologies: ["WordPress", "WooCommerce", "Booking система", "SEO"],
+    technologies: ["WordPress", "Breakdance", "WooCommerce", "TranslatePress", "WP Rocket", "SEO"],
     gradient: "from-amber-500/20 to-yellow-500/20",
     accentColor: "text-amber-500"
   },
@@ -781,14 +811,18 @@ export const PORTFOLIO_CLIENT_COUNT = new Set(caseStudies.map((s) => s.title)).s
  * Single source of truth for portfolio order and grouping.
  * Homepage „Избрана работа“ tabs and /case-studies both read this list.
  *
- * 1. koni-jewellery
- * 2. firescape-partners
- * 3. drmariaraykova
- * 4. global-street-art
- * 5. fml-bd
- * 6. bitcoin-empires
+ * 1. curly
+ * 2. body-aesthetics
+ * 3. koni-jewellery
+ * 4. firescape-partners
+ * 5. drmariaraykova
+ * 6. global-street-art
+ * 7. fml-bd
+ * 8. bitcoin-empires
  */
 export const FEATURED_IDS = [
+  "curly",
+  "body-aesthetics",
   "koni-jewellery",
   "firescape-partners",
   "drmariaraykova",
@@ -800,6 +834,7 @@ export const FEATURED_IDS = [
 const FEATURED_SET = new Set<string>(FEATURED_IDS);
 
 const SHOP_IDS = new Set([
+  "curly",
   "koni-jewellery",
   "firescape-partners",
   "zdravec",
@@ -835,7 +870,7 @@ export const getFeaturedCaseStudies = (): CaseStudy[] => {
   );
 };
 
-/** Featured six, then other web/shop in source order, apps last. */
+/** Featured, then other web/shop in source order, apps last. */
 export const getPortfolioOrder = (): CaseStudy[] => {
   const featured = getFeaturedCaseStudies();
   const rest = caseStudies.filter(
