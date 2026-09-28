@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WorkSection from "@/components/WorkSection";
+import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
 import ServicesSection from "@/components/ServicesSection";
 import ResultsSection from "@/components/ResultsSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
@@ -28,7 +29,7 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <SEO
         title="Изработка на сайт и онлайн магазин в София | Adrexio"
-        description="Уеб студио в София. Изработка на сайтове и онлайн магазини от нулата — без шаблони. 24 реализирани проекта. Вижте цени, срокове и реални резултати."
+        description={`Уеб студио в София. Правим сайтове и онлайн магазини от нулата, без шаблони. ${PORTFOLIO_PROJECT_COUNT} завършени проекта, ясни цени и срокове.`}
         keywords="уеб разработка, уеб дизайн, мобилни приложения, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг, уебсайт София, уеб студио България, разработка на сайтове, мобилни приложения iOS Android"
         structuredData={structuredData}
       />

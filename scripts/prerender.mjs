@@ -570,10 +570,10 @@ function parseServicesIndex(src) {
 
 // ── Page writers ────────────────────────────────────────────────────────────
 
-function prerenderHome(template, services, posts, studies) {
+function prerenderHome(template, services, posts, studies, projectCount) {
   const title = "Изработка на сайт и онлайн магазин в София | Adrexio";
   const description =
-    "Уеб студио в София. Изработка на сайтове и онлайн магазини от нулата — без шаблони. 24 реализирани проекта. Вижте цени, срокове и реални резултати.";
+    `Уеб студио в София. Правим сайтове и онлайн магазини от нулата, без шаблони. ${projectCount} завършени проекта, ясни цени и срокове.`;
   const inner = `
     <h1>Изработка на сайтове, които не приличат на всеки втори.</h1>
     <p>Повечето агенции продават един и същ шаблон с ново лого. Ние проектираме и изграждаме от нулата — дизайн, който клиентите ви помнят, и структура, която носи запитвания.</p>
@@ -1292,7 +1292,7 @@ export function prerenderAll() {
   prerenderContact(template);
   prerenderAffiliate(template, affiliate);
   prerenderLegal(template);
-  prerenderHome(template, services, posts, studies.filter((s) => s.isPublic));
+  prerenderHome(template, services, posts, studies.filter((s) => s.isPublic), studies.length);
   prerender404(template);
   writeRedirects();
   writeSitemap();

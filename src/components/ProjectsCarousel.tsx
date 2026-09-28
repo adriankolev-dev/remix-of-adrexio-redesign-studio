@@ -74,11 +74,11 @@ const ProjectsCarousel = () => {
             Проекти
           </span>
           <h2 className="font-display mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-5xl">
-            Реални проекти, <span className="accent-mark">реални резултати</span>
+            Сайтове, които <span className="accent-mark">сме направили</span>
           </h2>
           <p className="mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Всеки проект е създаден с внимание към детайла, фокус върху потребителското изживяване и
-            цел да донесе измерими резултати за бизнеса.
+            Всеки от тях е правен за конкретен бизнес и конкретни хора — от първата скица
+            до последния бутон.
           </p>
         </motion.div>
 
