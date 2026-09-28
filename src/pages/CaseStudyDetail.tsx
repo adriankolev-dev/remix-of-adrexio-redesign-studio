@@ -80,7 +80,7 @@ const CaseStudyDetail = () => {
         <div className="container mx-auto px-6 py-40 text-center">
           <h1 className="font-display text-4xl font-bold">Проектът не е намерен</h1>
           <p className="mt-4 text-muted-foreground">
-            Този проект не съществува или е бил премахнат.
+            Няма такъв проект или вече е махнат от сайта.
           </p>
           <Button variant="ink" className="mt-8" asChild>
             <Link to="/case-studies">
@@ -193,7 +193,7 @@ const CaseStudyDetail = () => {
           <div className="mx-auto max-w-3xl">
             <Reveal>
               <div className="border-t border-border py-10">
-                <SectionEyebrow label="Преглед" index="01" />
+                <SectionEyebrow label="За клиента" index="01" />
                 <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                   {study.overview}
                 </p>
@@ -202,7 +202,7 @@ const CaseStudyDetail = () => {
 
             <Reveal>
               <div className="border-t border-border py-10">
-                <SectionEyebrow label="Предизвикателството" index="02" />
+                <SectionEyebrow label="Задачата" index="02" />
                 <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                   {study.challenge}
                 </p>
@@ -211,7 +211,7 @@ const CaseStudyDetail = () => {
 
             <Reveal>
               <div className="border-t border-border py-10">
-                <SectionEyebrow label="Нашето решение" index="03" />
+                <SectionEyebrow label="Какво направихме" index="03" />
                 <ul className="mt-6 space-y-4">
                   {study.solution.map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-muted-foreground">
@@ -225,7 +225,7 @@ const CaseStudyDetail = () => {
 
             <Reveal>
               <div className="border-t border-border py-10">
-                <SectionEyebrow label="Използвани технологии" index="04" />
+                <SectionEyebrow label="С какво е направено" index="04" />
                 <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
                   {study.technologies.map((tech) => (
                     <span
@@ -297,7 +297,7 @@ const CaseStudyDetail = () => {
               to="/case-studies"
               className="text-sm text-muted-foreground transition-colors hover:text-primary"
             >
-              Нашите проекти
+              Всички проекти
             </Link>
 
             {nextStudy ? (

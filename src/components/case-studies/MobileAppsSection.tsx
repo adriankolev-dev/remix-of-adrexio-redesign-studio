@@ -21,7 +21,7 @@ const MobileAppsSection = () => {
               <span className="accent-mark">сме работили</span>.
             </>
           }
-          description="Нашият екип е създал или допринесъл за разработката на тези мобилни приложения, достъпни в App Store."
+          description="Някои от тях направихме изцяло, по други работихме по отделни части. Всички са в App Store."
           note="на живо в App Store"
         />
 

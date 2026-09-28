@@ -35,7 +35,7 @@ import { mobileApps } from "@/data/mobileApps";
 import { getLenis } from "@/lib/lenis";
 
 const summaryStats = [
-  { value: String(PORTFOLIO_CLIENT_COUNT), label: "Доволни клиенти" },
+  { value: String(PORTFOLIO_CLIENT_COUNT), label: "Клиенти" },
   { value: String(PORTFOLIO_PROJECT_COUNT), label: "Завършени проекти" },
   { value: "< 2 сек", label: "Време за зареждане" },
 ];
@@ -121,7 +121,7 @@ const CaseStudies = () => {
       "@type": "CollectionPage",
       name: "Проекти — Adrexio",
       description:
-        "Реални проекти на Adrexio: уебсайтове, мобилни приложения и дигитални решения за бизнеси от различни индустрии.",
+        "Сайтове, онлайн магазини и мобилни приложения, които Adrexio е направило за клиенти от различни сфери.",
       url: "https://www.adrexio.com/case-studies",
       inLanguage: "bg-BG",
       mainEntity: {
@@ -144,8 +144,8 @@ const CaseStudies = () => {
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title="Проекти — реални резултати на Adrexio"
-        description="Разгледайте реални проекти на Adrexio — уебсайтове, мобилни приложения, UI/UX дизайн и дигитални решения, изградени от нулата за бизнеси от различни индустрии."
+        title="Проекти на Adrexio — сайтове, магазини и приложения"
+        description="Сайтове, онлайн магазини и мобилни приложения, които сме направили от нулата — за ресторанти, клиники, магазини, производители и технологични компании."
         keywords="портфолио, проекти, case studies, уеб дизайн, уебсайтове, мобилни приложения, Adrexio, България"
         structuredData={structuredData}
       />
@@ -156,10 +156,10 @@ const CaseStudies = () => {
         label="Проекти"
         title={
           <>
-            Реални проекти, <span className="accent-mark">реални резултати</span>.
+            Проекти, които <span className="accent-mark">можете да отворите</span>.
           </>
         }
-        description="Разгледайте как помогнахме на бизнеси от различни индустрии да постигнат дигитален успех — с решения, изградени от нулата, а не от шаблон."
+        description="Ресторанти, клиники, онлайн магазини, производители и технологични компании. Всеки от тези сайтове е правен от нулата, без готов шаблон."
       />
 
       {/* Filters */}
@@ -191,7 +191,7 @@ const CaseStudies = () => {
                 <>
                   <div className="mb-10 mt-20 border-t border-border pt-8">
                     <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
-                      Още работа
+                      Още проекти
                     </span>
                     <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
                       {restStudies.length}{" "}
@@ -249,10 +249,10 @@ const CaseStudies = () => {
             label="Резултати"
             title={
               <>
-                Нашата история на <span className="text-primary">успеха</span>.
+                Портфолиото <span className="text-primary">в числа</span>.
               </>
             }
-            description="Числа от портфолиото и конкретни проекти — без среден растеж, който обещаваме на всеки."
+            description="Броим само проектите от тази страница. Не обещаваме един и същ ръст на всеки клиент."
           />
 
           <div className="grid grid-cols-1 border-t border-border sm:grid-cols-3">

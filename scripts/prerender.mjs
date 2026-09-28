@@ -848,13 +848,13 @@ function prerenderAbout(template, { values, offer }) {
 }
 
 function prerenderCaseStudiesIndex(template, studies) {
-  const title = "Проекти — реални резултати на Adrexio";
+  const title = "Проекти на Adrexio — сайтове, магазини и приложения";
   const description =
-    "Разгледайте реални проекти на Adrexio — уебсайтове, мобилни приложения, UI/UX дизайн и дигитални решения, изградени от нулата за бизнеси от различни индустрии.";
+    "Сайтове, онлайн магазини и мобилни приложения, които сме направили от нулата — за ресторанти, клиники, магазини, производители и технологични компании.";
   const publicStudies = studies.filter((s) => s.isPublic);
   const inner = `
-    <h1>Реални проекти, реални резултати.</h1>
-    <p>Уебсайтове, магазини и приложения, изградени от нулата за бизнеси от различни индустрии.</p>
+    <h1>Проекти, които можете да отворите.</h1>
+    <p>Ресторанти, клиники, онлайн магазини, производители и технологични компании. Всеки от тези сайтове е правен от нулата, без готов шаблон.</p>
     ${list(
       publicStudies.map(
         (s) =>
@@ -937,11 +937,11 @@ function prerenderCaseStudyPages(template, studies) {
       <p>${escapeHtml(study.category)}</p>
       <h1>${escapeHtml(study.title)}</h1>
       <p>${escapeHtml(study.subtitle)}</p>
-      <h2>Преглед</h2>
+      <h2>За клиента</h2>
       <p>${escapeHtml(study.overview)}</p>
-      <h2>Предизвикателство</h2>
+      <h2>Задачата</h2>
       <p>${escapeHtml(study.challenge)}</p>
-      <h2>Решение</h2>
+      <h2>Какво направихме</h2>
       ${list(study.solution.map((item) => escapeHtml(item)))}
       ${
         study.results.length
@@ -950,7 +950,7 @@ function prerenderCaseStudyPages(template, studies) {
       }
       ${study.technologies.length ? `<p>Технологии: ${escapeHtml(study.technologies.join(", "))}</p>` : ""}
       ${study.url ? `<p><a href="${escapeAttr(study.url)}">Към сайта</a></p>` : ""}
-      <h2>Услугата зад този проект</h2>
+      <h2>Искате нещо подобно?</h2>
       <p><a href="/services/web-development">${escapeHtml(anchor)}</a> — вижте какво включва, <a href="/pricing">колко струва и за колко време се прави</a>, или <a href="/contact">заявете оферта</a>.</p>
     `;
     writePage(
