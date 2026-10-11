@@ -6,8 +6,7 @@ import {
   useReducedMotion,
   useScroll,
 } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -16,26 +15,16 @@ import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import CaseStudyFilters from "@/components/case-studies/CaseStudyFilters";
 import MobileAppsSection from "@/components/case-studies/MobileAppsSection";
 import PageIntro from "@/components/editorial/PageIntro";
-import Reveal from "@/components/editorial/Reveal";
-import SectionHeader from "@/components/editorial/SectionHeader";
 import RobotMascot from "@/components/mascots/RobotMascot";
 import CTASection from "@/components/CTASection";
 import {
   getCaseStudiesForFilter,
   getPortfolioOrder,
-  PORTFOLIO_CLIENT_COUNT,
-  PORTFOLIO_PROJECT_COUNT,
   type CaseStudy,
   type CaseStudyFilterId,
 } from "@/data/caseStudies";
 import { getBreadcrumbSchema } from "@/lib/structuredData";
 import { getLenis } from "@/lib/lenis";
-
-const summaryStats = [
-  { value: String(PORTFOLIO_CLIENT_COUNT), label: "Клиенти" },
-  { value: String(PORTFOLIO_PROJECT_COUNT), label: "Завършени проекти" },
-  { value: "< 2 сек", label: "Време за зареждане" },
-];
 
 const ProjectGrid = ({ studies }: { studies: CaseStudy[] }) => (
   <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:gap-x-12">
@@ -193,60 +182,6 @@ const CaseStudies = () => {
 
       {(isDefaultView || isAppsView) && <MobileAppsSection />}
       {isAppsView && <AppsScrollCue />}
-
-      {/* Stats — editorial dark band, big numbers on hairlines */}
-      <section className="layer-dark relative overflow-hidden py-24 md:py-32">
-        <div className="canvas-grid absolute inset-0 opacity-[0.06]" aria-hidden />
-        <div className="container relative z-10 mx-auto px-6">
-          <SectionHeader
-            index="02"
-            label="Резултати"
-            title={
-              <>
-                Портфолиото <span className="text-primary">в числа</span>.
-              </>
-            }
-            description="Броим само проектите от тази страница. Не обещаваме един и същ ръст на всеки клиент."
-          />
-
-          <div className="grid grid-cols-1 border-t border-border sm:grid-cols-3">
-            {summaryStats.map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 0.06}>
-                <div className="border-b border-border py-8 md:py-10">
-                  <div className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                    {stat.value}
-                  </div>
-                  <div className="font-mono-meta mt-3 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.24} className="mt-12">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button variant="accent" size="lg" asChild>
-                <Link to="/contact">
-                  Свържи се с нас
-                  <ArrowRight size={18} />
-                </Link>
-              </Button>
-              <Button
-                variant="line"
-                size="lg"
-                asChild
-                className="border-foreground/25 text-foreground hover:border-foreground/50"
-              >
-                <Link to="/services">
-                  Разгледай услугите
-                  <ArrowUpRight size={18} />
-                </Link>
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       <CTASection />
       <Footer />
