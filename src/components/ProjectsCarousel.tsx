@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const projects = [
   { id: 1, image: "/images/projects/drmariaraykova.png", title: "Акушер-гинеколог", category: "Медицина" },
   { id: 2, image: "/images/projects/amadent.png", title: "Дентална клиника", category: "Медицина" },
-  { id: 3, image: "/images/projects/ameliadiva.png", title: "Модна къща", category: "Мода" },
+  { id: 3, image: "/images/projects/ameliadiva.png", title: "Магазин за мигли и козметика", category: "Онлайн търговия" },
   { id: 4, image: "/images/projects/athleticiq.png", title: "Спортен център", category: "Спорт & Фитнес" },
   { id: 5, image: "/images/projects/bitcoinempires.png", title: "Crypto платформа", category: "Финтех" },
   { id: 6, image: "/images/projects/boas.png", title: "Tech стартъп", category: "Технологии" },
