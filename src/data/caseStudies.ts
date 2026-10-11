@@ -5,6 +5,7 @@ import riactImg from "@/assets/case-studies/riact.webp";
 import bodyaestheticsImg from "@/assets/case-studies/bodyaesthetics.webp";
 import athleticiqImg from "@/assets/case-studies/athleticiq.webp";
 import supercreditImg from "@/assets/case-studies/supercredit.webp";
+import scaleherImg from "@/assets/case-studies/scaleher.webp";
 import globalstreetartImg from "@/assets/case-studies/globalstreetart.webp";
 import webxoticImg from "@/assets/case-studies/webxotic.webp";
 import bitcoinempiresImg from "@/assets/case-studies/bitcoinempires.webp";
@@ -247,6 +248,35 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["WordPress", "WooCommerce", "Breakdance", "Собствени плъгини", "Microinvest", "Еконт"],
     gradient: "from-rose-400/20 to-amber-400/20",
     accentColor: "text-rose-400"
+  },
+  // SCALE'HER
+  {
+    id: "scaleher",
+    title: "SCALE'HER",
+    subtitle: "Затворена платформа за европейска акселераторска програма за жени основателки",
+    category: "Технологии",
+    url: null,
+    isPublic: false,
+    image: scaleherImg,
+    overview: "SCALE'HER е проект, финансиран от Европейския съюз, който помага на стартъпи, водени от жени, да растат в дигиталните и deep tech сектори в Европа. Програмата трае 6 месеца обучение и още 3 месеца менторство. Направихме затворената платформа, в която основателките, менторите и екипът на проекта работят заедно през цялата програма.",
+    challenge: "Участниците са от различни държави, а програмата има много части: модули с материали, задания със срокове, уебинари, срещи с ментори и финално състезание пред жури. Всичко това трябваше да е на едно място. Всеки трябваше да вижда само своето — основателката своята програма, менторът своите срещи, а екипът цялата картина.",
+    solution: [
+      "Има три роли: администратор, ментор и основателка. Всяка вижда собствено табло и собствено меню.",
+      "Екипът създава кохорти и програми, пише съдържанието на модулите в редактор със снимки и видео и задава задания със срокове. Платформата сама праща напомняния и дневен бюлетин по имейл.",
+      "В календара са уебинарите, панелите, уъркшопите и менторските и общностните срещи, всички с часовата зона на участника.",
+      "За финала направихме Blind Pitch: журито вижда 12-те финалистки анонимно, а гласовете им се променят. В Confession Room основателките имат 24 часа, за да запишат видео отговори.",
+      "Основателките пишат на менторите и на екипа в чата, а съобщенията се пазят криптирани. Има и общи файлове, анкети и отчети за напредъка.",
+      "В Founder Toolbox са работната тетрадка на програмата, обученията и полезните връзки."
+    ],
+    results: [
+      { metric: "3", label: "Роли: администратор, ментор, основателка" },
+      { metric: "6 + 3 мес.", label: "Програма и менторство на едно място" },
+      { metric: "ЕС", label: "Проект по програма на EISMEA, 2025–2027" }
+    ],
+    technologies: ["React", "TypeScript", "Supabase", "Имейл известия", "Криптиран чат", "Достъп по роли"],
+    gradient: "from-fuchsia-500/20 to-pink-500/20",
+    accentColor: "text-fuchsia-500",
+    internalNote: "Платформата е затворена — достъп имат само участничките в програмата, менторите и екипът. Публичният сайт на проекта е scale-her-project.eu."
   },
   // ORAQOR
   {
@@ -853,6 +883,7 @@ export const FEATURED_IDS = [
 export const PORTFOLIO_ORDER = [
   "body-aesthetics",
   "amelia-diva",
+  "scaleher",
   "zdravec",
   "firescape-partners",
   "drmariaraykova",
