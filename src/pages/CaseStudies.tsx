@@ -21,7 +21,6 @@ import SectionHeader from "@/components/editorial/SectionHeader";
 import RobotMascot from "@/components/mascots/RobotMascot";
 import CTASection from "@/components/CTASection";
 import {
-  CASE_STUDY_FILTERS,
   getCaseStudiesForFilter,
   getPortfolioOrder,
   PORTFOLIO_CLIENT_COUNT,
@@ -30,7 +29,6 @@ import {
   type CaseStudyFilterId,
 } from "@/data/caseStudies";
 import { getBreadcrumbSchema } from "@/lib/structuredData";
-import { mobileApps } from "@/data/mobileApps";
 import { getLenis } from "@/lib/lenis";
 
 const summaryStats = [
@@ -173,17 +171,6 @@ const CaseStudies = () => {
       {/* Projects */}
       <section className="pb-24">
         <div className="container mx-auto px-6">
-          <div className="mb-10 border-t border-border pt-8">
-            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
-              {CASE_STUDY_FILTERS.find((f) => f.id === activeFilter)?.label}
-            </span>
-            <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              {isAppsView
-                ? `${filteredStudies.length + mobileApps.length} проекта`
-                : `${filteredStudies.length} ${filteredStudies.length === 1 ? "проект" : "проекта"}`}
-            </h2>
-          </div>
-
           {filteredStudies.length > 0 ? (
             <ProjectGrid studies={filteredStudies} />
           ) : !isAppsView ? (
