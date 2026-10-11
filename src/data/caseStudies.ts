@@ -824,8 +824,7 @@ export const PORTFOLIO_PROJECT_COUNT = caseStudies.length;
 export const PORTFOLIO_CLIENT_COUNT = new Set(caseStudies.map((s) => s.title)).size;
 
 /**
- * Single source of truth for portfolio order and grouping.
- * Homepage „Избрана работа“ tabs and /case-studies both read this list.
+ * Projects shown in the homepage „Избрана работа“ tabs.
  *
  * 1. curly
  * 2. body-aesthetics
@@ -847,7 +846,37 @@ export const FEATURED_IDS = [
   "bitcoin-empires",
 ] as const;
 
-const FEATURED_SET = new Set<string>(FEATURED_IDS);
+/**
+ * Order of the /case-studies grid and the previous/next links on case study
+ * pages. Projects missing from this list follow in source order.
+ */
+export const PORTFOLIO_ORDER = [
+  "body-aesthetics",
+  "amelia-diva",
+  "zdravec",
+  "firescape-partners",
+  "legends-villas",
+  "breezy-point-villas",
+  "curly",
+  "koni-jewellery",
+  "koleff-house",
+  "taj-mahal",
+  "wexel-coatings",
+  "bulbiochem",
+  "bitcoin-empires",
+  "webxotic",
+  "nfc-logo",
+  "amadent",
+  "boas",
+  "super-credit",
+  "fml-bd",
+  "athleticiq",
+  "global-street-art",
+  "kapabay",
+  "riact",
+  "mehanna-group",
+] as const;
+
 
 const SHOP_IDS = new Set([
   "curly",
@@ -868,16 +897,11 @@ export const getCaseStudyKind = (id: string): CaseStudyKind => {
   return "web";
 };
 
-export const sortFeaturedFirst = (studies: CaseStudy[]): CaseStudy[] => {
-  const rank = new Map<string, number>(FEATURED_IDS.map((id, i) => [id, i]));
-  return [...studies].sort((a, b) => {
-    const ar = rank.get(a.id);
-    const br = rank.get(b.id);
-    if (ar === undefined && br === undefined) return 0;
-    if (ar === undefined) return 1;
-    if (br === undefined) return -1;
-    return ar - br;
-  });
+const sortByPortfolioOrder = (studies: CaseStudy[]): CaseStudy[] => {
+  const rank = new Map<string, number>(PORTFOLIO_ORDER.map((id, i) => [id, i]));
+  return [...studies].sort(
+    (a, b) => (rank.get(a.id) ?? Infinity) - (rank.get(b.id) ?? Infinity),
+  );
 };
 
 export const getFeaturedCaseStudies = (): CaseStudy[] => {
@@ -886,37 +910,10 @@ export const getFeaturedCaseStudies = (): CaseStudy[] => {
   );
 };
 
-/** Featured, then other web/shop in source order, apps last. */
-export const getPortfolioOrder = (): CaseStudy[] => {
-  const featured = getFeaturedCaseStudies();
-  const rest = caseStudies.filter(
-    (s) => !FEATURED_SET.has(s.id) && getCaseStudyKind(s.id) !== "app",
-  );
-  const apps = caseStudies.filter((s) => getCaseStudyKind(s.id) === "app");
-  return [...featured, ...rest, ...apps];
-};
+/** Every case study, AthleticIQ included, in PORTFOLIO_ORDER. */
+export const getPortfolioOrder = (): CaseStudy[] => sortByPortfolioOrder(caseStudies);
 
 export const getCaseStudiesForFilter = (filter: CaseStudyFilterId): CaseStudy[] => {
-  if (filter === "app") {
-    return caseStudies.filter((s) => getCaseStudyKind(s.id) === "app");
-  }
-  if (filter === "shop") {
-    return sortFeaturedFirst(caseStudies.filter((s) => getCaseStudyKind(s.id) === "shop"));
-  }
-  if (filter === "web") {
-    return sortFeaturedFirst(caseStudies.filter((s) => getCaseStudyKind(s.id) === "web"));
-  }
-  const featured = getFeaturedCaseStudies();
-  const rest = caseStudies.filter(
-    (s) => !FEATURED_SET.has(s.id) && getCaseStudyKind(s.id) !== "app",
-  );
-  return [...featured, ...rest];
-};
-
-export const partitionFeatured = (studies: CaseStudy[]) => {
-  const featured = FEATURED_IDS.map((id) => studies.find((s) => s.id === id)).filter(
-    (s): s is CaseStudy => Boolean(s),
-  );
-  const rest = studies.filter((s) => !FEATURED_SET.has(s.id));
-  return { featured, rest };
+  if (filter === "all") return getPortfolioOrder();
+  return sortByPortfolioOrder(caseStudies.filter((s) => getCaseStudyKind(s.id) === filter));
 };
