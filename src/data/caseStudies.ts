@@ -870,6 +870,7 @@ export const PORTFOLIO_ORDER = [
   "nfc-logo",
   "taj-mahal",
   "global-street-art",
+  "super-credit",
   "fml-bd",
   "athleticiq",
   "kapabay",
