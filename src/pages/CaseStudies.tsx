@@ -24,7 +24,6 @@ import {
   CASE_STUDY_FILTERS,
   getCaseStudiesForFilter,
   getPortfolioOrder,
-  partitionFeatured,
   PORTFOLIO_CLIENT_COUNT,
   PORTFOLIO_PROJECT_COUNT,
   type CaseStudy,
@@ -41,7 +40,7 @@ const summaryStats = [
 ];
 
 const ProjectGrid = ({ studies }: { studies: CaseStudy[] }) => (
-  <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+  <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:gap-x-12">
     {studies.map((study, index) => (
       <CaseStudyCard key={study.id} study={study} index={index} />
     ))}
@@ -112,7 +111,6 @@ const CaseStudies = () => {
   const filteredStudies = getCaseStudiesForFilter(activeFilter);
   const isDefaultView = activeFilter === "all";
   const isAppsView = activeFilter === "app";
-  const { featured: featuredStudies, rest: restStudies } = partitionFeatured(filteredStudies);
 
   const publicStudies = getPortfolioOrder().filter((s) => s.isPublic);
   const structuredData = [
@@ -175,65 +173,34 @@ const CaseStudies = () => {
       {/* Projects */}
       <section className="pb-24">
         <div className="container mx-auto px-6">
-          {isDefaultView ? (
-            <>
-              <div className="mb-10 border-t border-border pt-8">
-                <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
-                  Избрано
-                </span>
-                <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-                  {featuredStudies.length} проекта
-                </h2>
-              </div>
-              <ProjectGrid studies={featuredStudies} />
+          <div className="mb-10 border-t border-border pt-8">
+            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
+              {CASE_STUDY_FILTERS.find((f) => f.id === activeFilter)?.label}
+            </span>
+            <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+              {isAppsView
+                ? `${filteredStudies.length + mobileApps.length} проекта`
+                : `${filteredStudies.length} ${filteredStudies.length === 1 ? "проект" : "проекта"}`}
+            </h2>
+          </div>
 
-              {restStudies.length > 0 && (
-                <>
-                  <div className="mb-10 mt-20 border-t border-border pt-8">
-                    <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
-                      Още проекти
-                    </span>
-                    <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-                      {restStudies.length}{" "}
-                      {restStudies.length === 1 ? "проект" : "проекта"}
-                    </h2>
-                  </div>
-                  <ProjectGrid studies={restStudies} />
-                </>
-              )}
-            </>
-          ) : (
-            <>
-              <div className="mb-10 border-t border-border pt-8">
-                <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
-                  {CASE_STUDY_FILTERS.find((f) => f.id === activeFilter)?.label}
-                </span>
-                <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-                  {isAppsView
-                    ? `${filteredStudies.length + mobileApps.length} проекта`
-                    : `${filteredStudies.length} ${filteredStudies.length === 1 ? "проект" : "проекта"}`}
-                </h2>
-              </div>
-
-              {filteredStudies.length > 0 ? (
-                <ProjectGrid studies={filteredStudies} />
-              ) : !isAppsView ? (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex flex-col items-center border-t border-border py-16 text-center"
-                >
-                  <RobotMascot variant="lost" className="mb-8 max-w-[220px]" />
-                  <p className="mb-4 text-lg text-muted-foreground">
-                    Няма проекти в тази категория
-                  </p>
-                  <Button variant="line" onClick={() => setActiveFilter("all")}>
-                    Покажи всички
-                  </Button>
-                </motion.div>
-              ) : null}
-            </>
-          )}
+          {filteredStudies.length > 0 ? (
+            <ProjectGrid studies={filteredStudies} />
+          ) : !isAppsView ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col items-center border-t border-border py-16 text-center"
+            >
+              <RobotMascot variant="lost" className="mb-8 max-w-[220px]" />
+              <p className="mb-4 text-lg text-muted-foreground">
+                Няма проекти в тази категория
+              </p>
+              <Button variant="line" onClick={() => setActiveFilter("all")}>
+                Покажи всички
+              </Button>
+            </motion.div>
+          ) : null}
         </div>
       </section>
 

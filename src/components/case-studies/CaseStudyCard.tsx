@@ -12,7 +12,7 @@ interface CaseStudyCardProps {
 
 const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
   return (
-    <Reveal delay={(index % 3) * 0.06}>
+    <Reveal delay={(index % 2) * 0.08}>
       <Link
         to={`/case-studies/${study.id}`}
         className="group block"
@@ -20,16 +20,16 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
         onFocus={prefetchCaseStudy}
       >
         {/* Framed screenshot */}
-        <div className="relative overflow-hidden rounded-xl border border-border bg-secondary">
-          <div className="aspect-[4/3] overflow-hidden">
+        <div className="relative overflow-hidden rounded-2xl border border-border bg-secondary shadow-sm transition-shadow duration-500 group-hover:shadow-lg">
+          <div className="aspect-[16/10] overflow-hidden">
             <img
               src={study.image}
               alt={study.title}
               width={1600}
-              height={1200}
+              height={1000}
               loading="lazy"
               decoding="async"
-              className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
           </div>
           {!study.isPublic && (
@@ -41,15 +41,15 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
         </div>
 
         {/* Caption below — editorial, not overlaid */}
-        <div className="mt-4 flex items-start justify-between gap-4">
+        <div className="mt-5 flex items-start justify-between gap-4">
           <div className="min-w-0">
             <div className="font-mono-meta text-[0.6rem] uppercase tracking-[0.14em] text-primary">
               {study.category}
             </div>
-            <h3 className="font-display mt-1.5 truncate text-lg font-semibold tracking-tight text-foreground">
+            <h3 className="font-display mt-2 text-xl font-semibold md:text-2xl tracking-tight text-foreground">
               {study.title}
             </h3>
-            <p className="mt-1 truncate text-sm text-muted-foreground">{study.subtitle}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">{study.subtitle}</p>
           </div>
           <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
         </div>
