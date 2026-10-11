@@ -865,6 +865,8 @@ export const PORTFOLIO_ORDER = [
   "legends-villas",
   "breezy-point-villas",
   "curly",
+  "bitcoin-empires",
+  "nfc-logo",
   "taj-mahal",
   "global-street-art",
   "fml-bd",
