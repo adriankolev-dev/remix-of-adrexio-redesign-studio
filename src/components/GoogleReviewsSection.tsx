@@ -52,7 +52,7 @@ const GoogleReviewsSection = () => {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-16">
           <div>
             <Reveal>
-              <SectionEyebrow label="Google ревюта" index="09" />
+              <SectionEyebrow label="Google ревюта" index="08" />
             </Reveal>
             <Reveal delay={0.06}>
               <div className="mt-8 flex items-end gap-4">

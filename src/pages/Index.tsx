@@ -7,7 +7,8 @@ import ResultsSection from "@/components/ResultsSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import ProcessSection from "@/components/ProcessSection";
 import WhyUsSection from "@/components/WhyUsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+// Hidden for now, kept for later use.
+// import TestimonialsSection from "@/components/TestimonialsSection";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import PricingTeaser from "@/components/pricing/PricingTeaser";
 import CTASection from "@/components/CTASection";
@@ -41,7 +42,7 @@ const Index = () => {
       <ProcessSection />
       <ServicesSection />
       <WhyUsSection />
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <GoogleReviewsSection />
       <PricingTeaser />
       <CTASection />
