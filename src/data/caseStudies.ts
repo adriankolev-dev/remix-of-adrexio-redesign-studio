@@ -6,6 +6,7 @@ import bodyaestheticsImg from "@/assets/case-studies/bodyaesthetics.webp";
 import athleticiqImg from "@/assets/case-studies/athleticiq.webp";
 import supercreditImg from "@/assets/case-studies/supercredit.webp";
 import scaleherImg from "@/assets/case-studies/scaleher.webp";
+import viajesabulgariaImg from "@/assets/case-studies/viajesabulgaria.webp";
 import globalstreetartImg from "@/assets/case-studies/globalstreetart.webp";
 import webxoticImg from "@/assets/case-studies/webxotic.webp";
 import bitcoinempiresImg from "@/assets/case-studies/bitcoinempires.webp";
@@ -277,6 +278,34 @@ export const caseStudies: CaseStudy[] = [
     gradient: "from-fuchsia-500/20 to-pink-500/20",
     accentColor: "text-fuchsia-500",
     internalNote: "Платформата е затворена — достъп имат само участничките в програмата, менторите и екипът. Публичният сайт на проекта е scale-her-project.eu."
+  },
+  // VIAJES A BULGARIA
+  {
+    id: "viajes-a-bulgaria",
+    title: "Viajes a Bulgaria",
+    subtitle: "Сайт на испански за агенция, която прави авторски пътувания из България и Балканите",
+    category: "Туризъм & Пътувания",
+    url: "https://viajesabulgaria.es/",
+    isPublic: true,
+    image: viajesabulgariaImg,
+    overview: "Viajes a Bulgaria е марката на My Story Travel — агенция, която от над 20 години прави пътувания из България, а вече и из Балканите, за туристи от Испания и Латинска Америка. Сами измислят маршрутите, както за групи, така и по поръчка. Направихме им нов сайт на испански, на WordPress, с тема, писана специално за тях.",
+    challenge: "Агенцията не продава пакети от каталог, а преживявания: срещи с местни хора, работилници, храна, вино. Сайтът трябваше да предаде това усещане още от първия екран. Освен това всяко запитване е различно, затова клиентът трябваше лесно да опише какво пътуване иска или направо да си запише разговор с агенцията.",
+    solution: [
+      "Темата е писана от нулата, без page builder. Началната страница започва с видео от България на цял екран, а заглавията са с елегантния шрифт Antic Didone.",
+      "Пътуванията са подредени в девет вида: културни, в природата, творчески, гастрономически, MICE, mindful, фестивали, археологически и фотографски.",
+      "За пътуванията по поръчка има кратък въпросник: колко души сте, кога, колко дни, какъв тип пътуване и какво си представяте.",
+      "Формите са наши, със защита от спам, която не досажда на посетителя с капча.",
+      "Видеоразговор с агенцията се записва директно от сайта, през календара на Brevo. Пак през Brevo работи и бюлетинът, с потвърждение при абониране и при отписване.",
+      "Сайтът има блог, SEO настройки с Rank Math и правни страници според испанските изисквания."
+    ],
+    results: [
+      { metric: "9", label: "Вида пътувания, всеки със своя страница" },
+      { metric: "20+", label: "Години опит на агенцията" },
+      { metric: "ES", label: "Сайт изцяло на испански" }
+    ],
+    technologies: ["WordPress", "Собствена тема", "Видео фон", "Brevo", "Rank Math SEO", "GDPR"],
+    gradient: "from-sky-600/20 to-emerald-600/20",
+    accentColor: "text-sky-600"
   },
   // ORAQOR
   {
@@ -827,6 +856,7 @@ export const CASE_STUDY_SERVICE_LABEL: Record<string, string> = {
   "Медицина & Дентална": "Изработка на сайт за медицински кабинет",
   "Здраве & Красота": "Изработка на сайт за здраве и красота",
   "Туризъм & Хотели": "Изработка на сайт за хотел и къща за гости",
+  "Туризъм & Пътувания": "Изработка на сайт за туристическа агенция",
   "Ресторантьорство": "Изработка на сайт за ресторант",
   "Индустрия": "Изработка на корпоративен сайт",
   "Логистика": "Изработка на корпоративен сайт",
@@ -884,6 +914,7 @@ export const PORTFOLIO_ORDER = [
   "body-aesthetics",
   "amelia-diva",
   "scaleher",
+  "viajes-a-bulgaria",
   "zdravec",
   "firescape-partners",
   "drmariaraykova",
