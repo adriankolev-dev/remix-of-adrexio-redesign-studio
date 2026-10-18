@@ -7,6 +7,7 @@ import athleticiqImg from "@/assets/case-studies/athleticiq.webp";
 import supercreditImg from "@/assets/case-studies/supercredit.webp";
 import scaleherImg from "@/assets/case-studies/scaleher.webp";
 import viajesabulgariaImg from "@/assets/case-studies/viajesabulgaria.webp";
+import rimskatastenaImg from "@/assets/case-studies/rimskatastena.webp";
 import globalstreetartImg from "@/assets/case-studies/globalstreetart.webp";
 import webxoticImg from "@/assets/case-studies/webxotic.webp";
 import bitcoinempiresImg from "@/assets/case-studies/bitcoinempires.webp";
@@ -306,6 +307,34 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["WordPress", "Собствена тема", "Видео фон", "Brevo", "Rank Math SEO", "GDPR"],
     gradient: "from-sky-600/20 to-emerald-600/20",
     accentColor: "text-sky-600"
+  },
+  // РИМСКАТА СТЕНА
+  {
+    id: "rimskata-stena",
+    title: "МЦ „Римската стена“",
+    subtitle: "Нов сайт за първия специализиран венозен център в България",
+    category: "Медицина & Дентална",
+    url: "https://rimskatastena.bg/",
+    isPublic: true,
+    image: rimskatastenaImg,
+    overview: "Медицински център „Римската стена“ в София лекува разширени вени от 2003 г. и е първият самостоятелен венозен център в България. Тук е направена първата лазерна аблация в София, а лечението води д-р Анастасов. Старият сайт беше на PHP 5.6 и собствена система отпреди години. Направихме нов сайт на WordPress, с тема, писана специално за центъра.",
+    challenge: "Пациентите идват притеснени и с много въпроси: нужно ли е лечение, кой метод, боли ли, колко струва. Сайтът трябваше да отговаря спокойно и точно, с думите на лекаря, и да води към записване на преглед. Старият сайт имаше еднакви заглавия, липсващи описания и никакви структурирани данни, а адресите му вече се намираха в Google и не биваше да се изгубят.",
+    solution: [
+      "Темата е писана от нулата, с над 20 собствени блока: hero, симптоми, методи, цени, въпроси, екип, преди и след, видео мнения. Центърът редактира всяка страница сам, без page builder.",
+      "Всеки метод на лечение има своя страница: лазерна аблация, TEVLA, склеротерапия, мини-флебектомия. Текстовете и редът на въпросите са по указанията на д-р Анастасов.",
+      "На началната страница пациентът отмята симптомите си и те се прилагат към заявката за преглед.",
+      "Ценоразписът, екипът, апаратурата и снимките от центъра са истински, заснети от фотограф, без стокови снимки.",
+      "За Google: структурирани данни за клиниката, лекарите, статиите и въпросите, Rank Math и 301 пренасочване от всеки стар адрес към новия.",
+      "Снимките са в WebP, сайтът е бърз и на телефон, а мобилното меню покрива целия екран."
+    ],
+    results: [
+      { metric: "2003", label: "От тази година центърът лекува вени" },
+      { metric: "20+", label: "Собствени блока за съдържание" },
+      { metric: "5.0", label: "Оценка в Google" }
+    ],
+    technologies: ["WordPress", "Собствена тема", "ACF", "Rank Math SEO", "Schema.org", "Hostinger"],
+    gradient: "from-emerald-600/20 to-teal-500/20",
+    accentColor: "text-emerald-600"
   },
   // ORAQOR
   {
@@ -915,6 +944,7 @@ export const PORTFOLIO_ORDER = [
   "amelia-diva",
   "scaleher",
   "viajes-a-bulgaria",
+  "rimskata-stena",
   "zdravec",
   "firescape-partners",
   "drmariaraykova",
