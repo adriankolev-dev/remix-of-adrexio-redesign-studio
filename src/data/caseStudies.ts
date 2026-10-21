@@ -20,6 +20,7 @@ import boasImg from "@/assets/case-studies/boas.webp";
 import bulbiochemImg from "@/assets/case-studies/bulbiochem.webp";
 import fmlbdImg from "@/assets/case-studies/fml-bd.webp";
 import koniImg from "@/assets/case-studies/koni.webp";
+import koniiHuImg from "@/assets/case-studies/konii-hu.webp";
 import kapabayImg from "@/assets/case-studies/kappabay.webp";
 import mehannaImg from "@/assets/case-studies/mehana.webp";
 import legendsVillasImg from "@/assets/case-studies/legends.webp";
@@ -194,6 +195,35 @@ export const caseStudies: CaseStudy[] = [
     technologies: ["Symfony", "PHP", "MySQL", "Отделен сървър", "Собствено API"],
     gradient: "from-rose-400/20 to-pink-500/20",
     accentColor: "text-rose-400"
+  },
+  // KONI JEWELLERY УНГАРИЯ
+  {
+    id: "koni-jewellery-hu",
+    title: "Koni Jewellery Унгария",
+    subtitle: "Унгарски онлайн магазин за ръчно изработени сребърни бижута",
+    category: "Електронна търговия",
+    url: "https://konii.net/",
+    isPublic: true,
+    image: koniiHuImg,
+    overview: "Koni Jewellery продава бижута от сребро 925 с перли, седеф и естествени камъни, изработени на ръка. Марката вече имаше румънски магазин (konii.ro). За пазара в Унгария направихме отделен магазин на WordPress и WooCommerce, изцяло на унгарски и с цени във форинти.",
+    challenge: "Над 180 модела трябваше да стигнат до унгарски купувачи, които не познават марката. Имената на бижутата са на румънски, отзивите бяха събрани в румънския магазин, а доставката, правните страници и подаръчните поводи (имен ден, бал, ден на жената) трябваше да са местни.",
+    solution: [
+      "Темата е писана специално за магазина, без page builder. Менюто подрежда бижутата по вид, по камък (15 вида: аметист, тюркоаз, лабрадорит и други) и по повод за подарък.",
+      "Търсачка за подарък на началната страница: купувачът избира за кого е и бюджета (под 15 000, 25 000 или 40 000 Ft) и вижда само подходящите бижута.",
+      "Отзивите от румънския магазин са преведени на унгарски и показани с ясна бележка откъде идват: 835 отзива със средна оценка 5.0.",
+      "Любими продукти, клиентски профил, ваучер за подарък и таблица за размер на пръстена.",
+      "Изскачащ прозорец „Mystery discount“ дава случайна отстъпка срещу имейл, а кодът работи само с този имейл. Абонатите за бюлетина получават 10% за първата поръчка.",
+      "Безплатна доставка над 25 000 Ft, 14 дни за връщане, 2 години гаранция, всичко описано на отделни страници.",
+      "За Google: Rank Math и структурирани данни за онлайн магазин."
+    ],
+    results: [
+      { metric: "180+", label: "Модела бижута" },
+      { metric: "835", label: "Отзива, оценка 5.0" },
+      { metric: "15", label: "Вида камъни във филтрите" }
+    ],
+    technologies: ["WordPress", "WooCommerce", "Собствена тема", "Rank Math SEO", "Schema.org"],
+    gradient: "from-stone-500/20 to-zinc-400/20",
+    accentColor: "text-stone-600"
   },
   // БИО МАГАЗИН ЗДРАВЕЦ
   {
@@ -943,6 +973,7 @@ export const PORTFOLIO_ORDER = [
   "body-aesthetics",
   "amelia-diva",
   "scaleher",
+  "koni-jewellery-hu",
   "viajes-a-bulgaria",
   "rimskata-stena",
   "zdravec",
@@ -975,6 +1006,7 @@ export const PORTFOLIO_ORDER = [
 const SHOP_IDS = new Set([
   "curly",
   "koni-jewellery",
+  "koni-jewellery-hu",
   "firescape-partners",
   "zdravec",
   "amelia-diva",
