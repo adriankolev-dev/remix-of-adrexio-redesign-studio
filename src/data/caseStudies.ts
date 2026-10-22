@@ -27,6 +27,7 @@ import legendsVillasImg from "@/assets/case-studies/legends.webp";
 import breezypointvillasImg from "@/assets/case-studies/breezypointvillas.webp";
 import zdravecImg from "@/assets/case-studies/zdravec.webp";
 import wexelImg from "@/assets/case-studies/wexel.webp";
+import nutritionExpertImg from "@/assets/case-studies/nutrition-expert.webp";
 import firescapeImg from "@/assets/case-studies/firescape.webp";
 import curlyImg from "@/assets/case-studies/curly.webp";
 import curlyPagespeedMobileImg from "@/assets/case-studies/curly-pagespeed-mobile.webp";
@@ -143,6 +144,38 @@ export const caseStudies: CaseStudy[] = [
         caption: "Компютър: 97 · 100 · 100 · 100",
       },
     ],
+  },
+  // NUTRITION EXPERT
+  {
+    id: "nutrition-expert",
+    title: "Nutrition Expert",
+    subtitle: "Онлайн магазин на WordPress и WooCommerce за български бранд за хималайски шиладжит",
+    category: "Електронна търговия",
+    url: "https://nutrition-expert.bg/",
+    isPublic: true,
+    image: nutritionExpertImg,
+    overview: "Nutrition Expert е български бранд за хранителни добавки със слоган „Put yourself first“. Първият му продукт е шиладжит: 30 g пречистена смола от Хималаите, 50 порции по 600 mg. Направихме магазина на WordPress и WooCommerce, със собствена тема и плъгин за съдържанието.",
+    challengeTitle: "Задачата",
+    challenge: "Брандът пуска първия си продукт и искаше магазин, който се купува лесно от телефон и който екипът поддържа сам. Сайтът трябваше да е готов за реклами в Meta и Google от първия ден и да може да побере нови продукти по-късно.",
+    solution: [
+      "Състав, хранителни стойности, дозировка и съхранение са отделни полета на продукта. От тях се пълнят началната страница, страницата „Какво има вътре“ и продуктовата страница, така че цифрите навсякъде са едни и същи.",
+      "Текстовете, снимките и видеото на началната страница се сменят от Customizer. Въпросите са отделен тип съдържание: екипът отбелязва кои да излизат на началната страница, а на /faq/ се виждат всички, по групи.",
+      "Количката се отваря отстрани, без презареждане. Целият JavaScript е около 8 KB, без jQuery.",
+      "Контактната форма записва съобщенията в админ панела и ги праща по имейл. Бисквитките и правните страници са с Complianz, а Meta Pixel и GA4 тръгват след съгласие на посетителя.",
+      "До старта посетителите виждат страница „Скоро отваряме“ с обратно броене, а екипът вижда истинския сайт."
+    ],
+    detailTitle: "Продуктовата страница",
+    detail: "Продуктовата страница е писана отделно от стандартната на WooCommerce: галерия, състав, начин на приемане, доставка и връщане. Когато посетителят превърти надолу, бутонът за поръчка остава закачен в долната част на екрана, така че на телефон поръчката е на едно докосване.",
+    results: [
+      { metric: "0", label: "Грешки за достъпност (axe, WCAG 2 AA) на 9-те основни страници", kind: "measured" },
+      { metric: "12", label: "Заявки и около 310 KB при първо зареждане на началната страница", kind: "measured" },
+      { metric: "50", label: "Порции по 600 mg в една опаковка", kind: "client" }
+    ],
+    technologies: ["WordPress", "WooCommerce", "Собствена тема", "Complianz", "PixelYourSite", "SEO"],
+    cta: "Пускате собствен продукт? Правим магазина, който екипът ви поддържа сам и който е готов за реклами от първия ден.",
+    servicePath: "/services/onlajn-magazin",
+    gradient: "from-orange-500/20 to-amber-700/20",
+    accentColor: "text-orange-600"
   },
   // FIRESCAPE PARTNERS
   {
@@ -1063,6 +1096,7 @@ export const PORTFOLIO_ORDER = [
   "viajes-a-bulgaria",
   "rimskata-stena",
   "zdravec",
+  "nutrition-expert",
   "firescape-partners",
   "drmariaraykova",
   "koni-jewellery",
@@ -1090,6 +1124,7 @@ export const PORTFOLIO_ORDER = [
 
 const SHOP_IDS = new Set([
   "curly",
+  "nutrition-expert",
   "koni-jewellery",
   "koni-jewellery-hu",
   "firescape-partners",
