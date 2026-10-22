@@ -15,7 +15,6 @@ import RouteFallback from "@/components/RouteFallback";
 import Index from "./pages/Index";
 
 const Services = lazy(() => import("./pages/Services"));
-const ServicesDemo = lazy(() => import("./pages/ServicesDemo"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const About = lazy(() => import("./pages/About"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies"));
@@ -58,7 +57,6 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/services-demo" element={<ServicesDemo />} />
               <Route path="/services/web-development" element={<WebDevelopment />} />
               <Route path="/services/onlajn-magazin" element={<OnlineStore />} />
               <Route path="/services/ai-implementation" element={<AIImplementation />} />

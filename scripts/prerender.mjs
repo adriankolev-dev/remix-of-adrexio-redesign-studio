@@ -578,14 +578,14 @@ function parseServicesIndex(src) {
 
 // ── Page writers ────────────────────────────────────────────────────────────
 
-function prerenderHome(template, services, posts, studies, projectCount) {
+function prerenderHome(template, services, posts, studies) {
   const title = "Изработка на сайт и онлайн магазин в София | Adrexio";
   const description =
-    `Уеб студио в София. Правим сайтове и онлайн магазини от нулата, без шаблони. ${projectCount} завършени проекта, ясни цени и срокове.`;
+    "Уеб студио в София. Правим сайтове и онлайн магазини от нулата, без шаблони. Ясни цени, срокове и плащане на два етапа.";
   const inner = `
-    <h1>Изработка на сайтове, които не приличат на всеки втори.</h1>
-    <p>Повечето агенции продават един и същ шаблон с ново лого. Ние проектираме и изграждаме от нулата — дизайн, който клиентите ви помнят, и структура, която носи запитвания.</p>
-    <p><a href="/contact">Свържи се с нас</a> · <a href="/case-studies">Виж проектите</a></p>
+    <h1>Сайтове, които не приличат на всеки втори.</h1>
+    <p>Дизайн и разработка от нулата — за бизнеси, които искат да се отличават и да получават повече запитвания.</p>
+    <p><a href="/contact">Обсъди проект</a> · <a href="/case-studies">Виж проектите</a></p>
     <h2>Услуги</h2>
     ${list(services.map((s) => `<a href="${s.href}">${escapeHtml(s.title)}</a> — ${escapeHtml(s.description)}`))}
     <h2>Проекти</h2>
@@ -830,12 +830,12 @@ function prerenderPricing(template, amounts, services, faqs, factors, timeline, 
 function prerenderAbout(template, { values, offer }) {
   const title = "За нас - Adrexio | Професионално уеб студио в София";
   const description =
-    "Уеб студио в София за модерни уебсайтове, мобилни приложения и дигитални решения. Фокус върху качество, скорост и резултати.";
+    "Уеб студио в София: сайтове и онлайн магазини от нулата, поддръжка, SEO и AI автоматизации. Екип с над 10 години опит.";
   const inner = `
     <h1>Ние сме Adrexio — пълна дигитална агенция. Започваме със сайт или онлайн магазин.</h1>
-    <p>Пълна дигитална агенция: започваме със сайт или магазин, после растем заедно с вас — поддръжка, проследяване и базово SEO. Приложения, реклама и по-сложни AI интеграции идват на следващ етап — по проект.</p>
+    <p>Започваме със сайт или онлайн магазин и оставаме след старта: поддръжка, SEO и AI автоматизации, които поемат повтарящата се работа на екипа ви. Мобилни приложения и реклама добавяме, когато бизнесът има нужда от тях.</p>
     <h2>Мисия</h2>
-    <p>Помагаме на бизнеса да расте онлайн — чрез бързи, оптимизирани и незабравими сайтове и магазини. После оставаме за поддръжка, проследяване и SEO. Приложения, реклама и AI — когато бизнесът е готов.</p>
+    <p>Помагаме на бизнеса да расте онлайн с бързи сайтове и магазини, изградени от нулата. После поемаме и процесите зад тях: поддръжка, SEO и AI автоматизации, които спестяват време на екипа.</p>
     <h2>Ценности</h2>
     ${list(values.map((v) => `<strong>${escapeHtml(v.title)}</strong> — ${escapeHtml(v.description)}`))}
     <h2>Какво получавате</h2>
@@ -1207,7 +1207,7 @@ function prerenderLegal(template) {
 
 // Real router pages that are deliberately not prerendered: a form and an
 // internal demo, both disallowed in robots.txt. They still need the app shell.
-const UNPRERENDERED_ROUTES = ["/project-inquiry", "/services-demo"];
+const UNPRERENDERED_ROUTES = ["/project-inquiry"];
 
 // Netlify applies these in order, and a rule without "!" never beats a real
 // file — so the prerendered <route>/index.html files still win.
@@ -1324,7 +1324,7 @@ export function prerenderAll() {
   prerenderContact(template);
   prerenderAffiliate(template, affiliate);
   prerenderLegal(template);
-  prerenderHome(template, services, posts, studies.filter((s) => s.isPublic), studies.length);
+  prerenderHome(template, services, posts, studies.filter((s) => s.isPublic));
   prerender404(template);
   writeRedirects();
   writeSitemap();
