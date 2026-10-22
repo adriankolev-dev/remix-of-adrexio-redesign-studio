@@ -6,6 +6,7 @@ import bodyaestheticsImg from "@/assets/case-studies/bodyaesthetics.webp";
 import athleticiqImg from "@/assets/case-studies/athleticiq.webp";
 import supercreditImg from "@/assets/case-studies/supercredit.webp";
 import scaleherImg from "@/assets/case-studies/scaleher.webp";
+import mystorytravelImg from "@/assets/case-studies/mystorytravel.webp";
 import viajesabulgariaImg from "@/assets/case-studies/viajesabulgaria.webp";
 import rimskatastenaImg from "@/assets/case-studies/rimskatastena.webp";
 import globalstreetartImg from "@/assets/case-studies/globalstreetart.webp";
@@ -309,6 +310,35 @@ export const caseStudies: CaseStudy[] = [
     gradient: "from-fuchsia-500/20 to-pink-500/20",
     accentColor: "text-fuchsia-500",
     internalNote: "Платформата е затворена — достъп имат само участничките в програмата, менторите и екипът. Публичният сайт на проекта е scale-her-project.eu."
+  },
+  // MY STORY TRAVEL
+  {
+    id: "my-story-travel",
+    title: "My Story Travel",
+    subtitle: "Нов сайт на английски за агенция, която прави авторски пътувания из България и Балканите",
+    category: "Туризъм & Пътувания",
+    url: "https://mystory-travel.com/",
+    isPublic: true,
+    image: mystorytravelImg,
+    overview: "My Story Travel е българска агенция, която сама измисля маршрутите си. През 2019 г. спечели наградата Best Creative Travel Agency на Creative Tourism Awards. Сайтът на английски е за туристи от цял свят, а за Испания и Латинска Америка агенцията има марката Viajes a Bulgaria, чийто сайт също е наш. Направихме нов сайт на WordPress, с тема, писана специално за тях, и го качихме на съвременна версия на сървъра.",
+    challenge: "Старият сайт беше на WordPress 4.9 и Divi от 2018 г. и спираше да работи на PHP 8. Пет от единадесетте страници с видове пътувания бяха празни, на началната страница стоеше демо текст от темата, а годината на наградата се разминаваше между две страници. Новият сайт трябваше да запази адресите, които Google вече познава.",
+    solution: [
+      "Темата е писана от нулата, без page builder. Заглавията са със серифен шрифт, а на всяка страница водят снимките от България.",
+      "Пътуванията са подредени в 11 вида, всеки със своя страница. Петте празни страници попълнихме с текстове, които агенцията вече имаше в други части на сайта.",
+      "Три готови маршрута с програма по дни и нова страница Destinations за България и Балканите.",
+      "Формата за запитване пази всяко съобщение в админ панела и го праща на имейла на агенцията, със съгласие по GDPR.",
+      "Банер за бисквитки с Complianz. Видеото от YouTube се зарежда чак след натискане на play.",
+      "Всички стари адреси са запазени, а премахнатите страници пренасочват с 301. За SEO има заглавия и описания, Open Graph, schema.org и sitemap.",
+      "Преместихме сайта на WordPress 6.9 и PHP 8.3, като старият сайт и базата му останаха като резервно копие."
+    ],
+    results: [
+      { metric: "11", label: "Вида пътувания, всеки със своя страница" },
+      { metric: "6.9", label: "WordPress, от версия 4.9" },
+      { metric: "0", label: "Изгубени стари адреси" }
+    ],
+    technologies: ["WordPress", "Собствена тема", "PHP 8.3", "Complianz", "Schema.org", "GDPR"],
+    gradient: "from-red-600/20 to-amber-500/20",
+    accentColor: "text-red-600"
   },
   // VIAJES A BULGARIA
   {
@@ -974,6 +1004,7 @@ export const PORTFOLIO_ORDER = [
   "amelia-diva",
   "scaleher",
   "koni-jewellery-hu",
+  "my-story-travel",
   "viajes-a-bulgaria",
   "rimskata-stena",
   "zdravec",
