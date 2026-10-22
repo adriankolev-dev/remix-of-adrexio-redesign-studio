@@ -125,7 +125,6 @@ const SEO = () => {
             <div key={group.label} className="py-8">
               <Reveal>
                 <p className="eyebrow">
-                  <span className="mr-2 text-foreground">{String(gi + 1).padStart(2, "0")}</span>
                   {group.label}
                 </p>
               </Reveal>

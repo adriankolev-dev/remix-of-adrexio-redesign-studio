@@ -44,10 +44,7 @@ const WhyUsSection = () => (
             delay={(i % 3) * 0.06}
             className="border-t border-border pb-12 pt-6"
           >
-            <span className="text-xs font-semibold tabular-nums text-muted-foreground">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h3 className="mt-6 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+            <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
               {reason.title}
             </h3>
             <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-muted-foreground">

@@ -127,8 +127,6 @@ export interface ServiceLandingProps {
   customSection?: React.ReactNode;
 }
 
-const num = (i: number) => String(i + 1).padStart(2, "0");
-
 const ServiceLandingTemplate = ({
   seoTitle,
   seoDescription,
@@ -244,8 +242,7 @@ const ServiceLandingTemplate = ({
           <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, i) => (
               <Reveal as="li" key={feature.title} delay={(i % 3) * 0.05} className="border-t border-border pb-10 pt-6">
-                <span className="text-xs font-semibold tabular-nums text-muted-foreground">{num(i)}</span>
-                <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground">
+                <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
                   {feature.title}
                 </h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">
@@ -328,8 +325,7 @@ const ServiceLandingTemplate = ({
             <div className="border-t border-border">
               {useCases.map((useCase, i) => (
                 <Reveal key={useCase.title} delay={(i % 3) * 0.05}>
-                  <div className="grid gap-3 border-b border-border py-7 md:grid-cols-[4rem_minmax(0,1fr)_minmax(0,1.2fr)] md:gap-8">
-                    <span className="text-xs font-semibold tabular-nums text-muted-foreground md:pt-2">{num(i)}</span>
+                  <div className="grid gap-3 border-b border-border py-7 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-8">
                     <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
                       {useCase.title}
                     </h3>

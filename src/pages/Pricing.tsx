@@ -4,6 +4,7 @@ import SEO from "@/components/SEO";
 import PageIntro from "@/components/editorial/PageIntro";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import CTASection from "@/components/CTASection";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import PricingOverview from "@/components/pricing/PricingOverview";
 import PricingFactors from "@/components/pricing/PricingFactors";
 import PricingTimeline from "@/components/pricing/PricingTimeline";
@@ -114,6 +115,8 @@ const Pricing = () => {
           </Accordion>
         </div>
       </section>
+
+      <GoogleReviewsSection />
 
       <CTASection
         lead="Имате конкретен проект?"

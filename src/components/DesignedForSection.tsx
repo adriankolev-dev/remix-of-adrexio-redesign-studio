@@ -31,10 +31,7 @@ export default function DesignedForSection() {
         <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
           {AUDIENCES.map((item, i) => (
             <Reveal as="li" key={item.label} delay={i * 0.05} className="border-t border-border pb-10 pt-6">
-              <span className="text-xs font-semibold tabular-nums text-muted-foreground">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+              <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
                 {item.label}
               </h3>
               <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">

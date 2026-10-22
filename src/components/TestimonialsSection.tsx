@@ -71,7 +71,7 @@ const TestimonialsSection = () => {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start lg:gap-16">
           <div className="lg:sticky lg:top-28">
             <Reveal>
-              <SectionEyebrow label="Отзиви" index="08" />
+              <SectionEyebrow label="Отзиви" />
             </Reveal>
             <Reveal delay={0.06}>
               <h2 className="font-display mt-6 max-w-md text-4xl font-bold tracking-tight text-foreground md:text-5xl">

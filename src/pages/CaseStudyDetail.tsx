@@ -20,11 +20,10 @@ import { scrollToTop } from "@/lib/lenis";
 import { useEffect, type ReactNode } from "react";
 
 /** One chapter of the story: label on the left, content on the right, on a hairline. */
-const Chapter = ({ n, label, children }: { n: string; label: string; children: ReactNode }) => (
+const Chapter = ({ label, children }: { label: string; children: ReactNode }) => (
   <Reveal>
     <div className="grid gap-5 border-t border-border py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16 md:py-12">
       <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
-        <span className="mr-3 text-xs font-semibold tabular-nums text-muted-foreground">{n}</span>
         {label}
       </h2>
       <div>{children}</div>
@@ -267,7 +266,7 @@ const CaseStudyDetail = () => {
       {/* The story, chapter by chapter */}
       <section className="pb-16 md:pb-24">
         <div className="container mx-auto px-6">
-          <Chapter n="01" label="За клиента">
+          <Chapter label="За клиента">
             <p className="text-lg leading-relaxed text-muted-foreground">{study.overview}</p>
             {clientResults.length > 0 && (
               <div className="mt-8">
@@ -277,30 +276,27 @@ const CaseStudyDetail = () => {
             )}
           </Chapter>
 
-          <Chapter n="02" label={study.challengeTitle ?? "Задачата"}>
+          <Chapter label={study.challengeTitle ?? "Задачата"}>
             <p className="text-lg leading-relaxed text-muted-foreground">{study.challenge}</p>
           </Chapter>
 
-          <Chapter n="03" label={study.solutionTitle ?? "Какво направихме"}>
+          <Chapter label={study.solutionTitle ?? "Какво направихме"}>
             <ul className="border-t border-border">
               {study.solution.map((item, i) => (
-                <li key={i} className="flex items-start gap-4 border-b border-border py-4 text-muted-foreground">
-                  <span className="pt-0.5 text-xs font-semibold tabular-nums text-foreground">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="leading-relaxed">{item}</span>
+                <li key={i} className="border-b border-border py-4 leading-relaxed text-muted-foreground">
+                  {item}
                 </li>
               ))}
             </ul>
           </Chapter>
 
           {study.detail && (
-            <Chapter n="04" label={study.detailTitle ?? "Най-сложната част"}>
+            <Chapter label={study.detailTitle ?? "Най-сложната част"}>
               <p className="text-lg leading-relaxed text-muted-foreground">{study.detail}</p>
             </Chapter>
           )}
 
-          <Chapter n={study.detail ? "05" : "04"} label="С какво е направено">
+          <Chapter label="С какво е направено">
             <ul className="flex flex-wrap gap-2.5">
               {study.technologies.map((tech) => (
                 <li

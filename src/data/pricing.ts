@@ -30,7 +30,6 @@ export const PRICING = {
 
 export const PRICING_SERVICES = [
   {
-    index: "01",
     name: "Уеб сайтове",
     fromLabel: PRICING.website.fromLabel,
     description:
@@ -38,7 +37,6 @@ export const PRICING_SERVICES = [
     note: "Еднократна инвестиция · 50/50",
   },
   {
-    index: "02",
     name: "Онлайн магазини",
     fromLabel: PRICING.ecommerce.fromLabel,
     description:
@@ -46,7 +44,6 @@ export const PRICING_SERVICES = [
     note: "Еднократна инвестиция · 50/50",
   },
   {
-    index: "03",
     name: "Поддръжка и развитие",
     fromLabel: PRICING.maintenance.fromLabel,
     description:

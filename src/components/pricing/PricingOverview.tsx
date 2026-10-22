@@ -21,11 +21,10 @@ const PricingOverview = ({ showHeader = true }: PricingOverviewProps) => (
 
       <div className="grid gap-4 md:grid-cols-3">
         {PRICING_SERVICES.map((service, i) => (
-          <Reveal key={service.index} delay={i * 0.06} className="h-full">
+          <Reveal key={service.name} delay={i * 0.06} className="h-full">
             <article className="flex h-full flex-col justify-between gap-12 rounded-md bg-secondary p-7 md:p-9">
               <div>
-                <span className="text-xs font-semibold tabular-nums text-muted-foreground">{service.index}</span>
-                <h3 className="mt-5 text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-[1.75rem]">
+                <h3 className="text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-[1.75rem]">
                   {service.name}
                 </h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{service.description}</p>

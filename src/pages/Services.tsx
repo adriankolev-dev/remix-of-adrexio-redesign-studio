@@ -138,10 +138,7 @@ const Services = () => {
                   to={service.href}
                   className="group flex h-full min-h-[19rem] flex-col justify-between gap-10 p-7 transition-colors hover:bg-secondary/60 md:p-9"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="text-xs font-semibold tabular-nums text-muted-foreground">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+                  <div className="flex justify-end">
                     <ArrowUpRight
                       size={20}
                       className="shrink-0 text-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

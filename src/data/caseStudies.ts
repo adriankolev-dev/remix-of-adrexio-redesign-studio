@@ -1075,12 +1075,12 @@ export const PORTFOLIO_CLIENT_COUNT = new Set(caseStudies.map((s) => s.title)).s
 
 /** Projects on the homepage „Част от проектите“ grid, in this order (two per row). */
 export const FEATURED_IDS = [
-  "curly",
-  "firescape-partners",
+  "my-story-travel",
+  "viajes-a-bulgaria",
+  "global-street-art",
   "body-aesthetics",
   "koni-jewellery-hu",
-  "global-street-art",
-  "viajes-a-bulgaria",
+  "firescape-partners",
 ] as const;
 
 /**

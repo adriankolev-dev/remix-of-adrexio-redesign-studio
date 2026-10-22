@@ -84,7 +84,7 @@ const About = () => {
           </>
         }
         meta={[
-          { value: "50/50", label: "при старт и преди публикуване" },
+          { value: "AI First", label: "Компания" },
           { value: "10+", label: "Години опит в екипа" },
           { value: "100%", label: "Гаранция за качество" },
         ]}
@@ -128,10 +128,7 @@ const About = () => {
           <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
               <Reveal as="li" key={value.title} delay={i * 0.05} className="border-t border-border pb-10 pt-6">
-                <span className="text-xs font-semibold tabular-nums text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
                   {value.title}
                 </h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{value.description}</p>
@@ -147,10 +144,7 @@ const About = () => {
           <ul className="grid gap-x-8 md:grid-cols-3">
             {offer.map((item, i) => (
               <Reveal as="li" key={item.title} delay={i * 0.05} className="border-t border-border pb-10 pt-6">
-                <span className="text-xs font-semibold tabular-nums text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
                   {item.title}
                 </h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{item.description}</p>
