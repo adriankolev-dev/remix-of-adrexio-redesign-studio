@@ -1,478 +1,171 @@
-import { useLayoutEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Lock } from "lucide-react";
-import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import SectionEyebrow from "@/components/editorial/SectionEyebrow";
-import GoogleReviewsBadge from "@/components/GoogleReviewsBadge";
+import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT } from "@/components/editorial/motion";
-import { useIsMobile } from "@/hooks/use-mobile";
-
-import athleticiqLogo from "@/assets/clients/athleticiq.webp";
-import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.webp";
-import fmlLogo from "@/assets/clients/fml.webp";
-import ameliadivaLogo from "@/assets/clients/ameliadiva.webp";
-
-const clientLogos = [
-  { name: "Body Aesthetics", logo: bodyaestheticsLogo },
-  { name: "FML-BD", logo: fmlLogo },
-  { name: "Amelia Diva", logo: ameliadivaLogo },
-  { name: "AthleticIQ", logo: athleticiqLogo },
-];
-
-const BUILD_LAYERS = [
-  { label: "Навигация", tint: "bg-card" },
-  { label: "Съдържание", tint: "bg-card" },
-  { label: "Проекти", tint: "layer-dark" },
-  { label: "CTA", tint: "bg-card" },
-] as const;
-
-/** Hand-drawn cyan underline — one of the two playful accents. */
-const DoodleUnderline = () => (
-  <svg
-    className="pointer-events-none absolute -bottom-2 left-0 h-[0.5em] w-full overflow-visible"
-    viewBox="0 0 300 24"
-    fill="none"
-    preserveAspectRatio="none"
-    aria-hidden
-  >
-    <motion.path
-      d="M4 16 C 60 6, 120 22, 180 12 S 280 6, 296 14"
-      stroke="hsl(var(--primary))"
-      strokeWidth="7"
-      strokeLinecap="round"
-      initial={{ pathLength: 0 }}
-      whileInView={{ pathLength: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.9, ease: EASE_OUT, delay: 0.5 }}
-    />
-  </svg>
-);
-
-const LayerStack = ({
-  compact = false,
-  animate = false,
-}: {
-  compact?: boolean;
-  animate?: boolean;
-}) => {
-  const reduceMotion = useReducedMotion();
-  const step = compact ? 48 : 64;
-  const cardH = compact ? "h-[68px]" : "h-[84px]";
-
-  return (
-    <div
-      className={
-        compact
-          ? "relative mx-auto h-[220px] w-full max-w-[22rem]"
-          : "relative h-[300px]"
-      }
-    >
-      {BUILD_LAYERS.map((layer, i) => {
-        const placement = compact
-          ? { top: i * step, left: 0, right: 0 }
-          : { top: i * step, right: i * 10 };
-
-        const card = (
-          <div
-            className={`layer-shadow flex items-center gap-3 rounded-lg border border-border px-4 ${cardH} ${
-              compact ? "w-full" : "w-[86%]"
-            } ${layer.tint}`}
-          >
-            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-muted-foreground">
-              0{i + 1}
-            </span>
-            <span className="text-sm font-semibold text-foreground">{layer.label}</span>
-            <span className="ml-auto h-2 w-14 rounded-full bg-primary/70" />
-          </div>
-        );
-
-        if (!animate || reduceMotion) {
-          return (
-            <div
-              key={layer.label}
-              className={compact ? "absolute" : "absolute right-0"}
-              style={{ ...placement, zIndex: i }}
-            >
-              {card}
-            </div>
-          );
-        }
-
-        return (
-          <motion.div
-            key={layer.label}
-            className={compact ? "absolute" : "absolute right-0"}
-            style={{ ...placement, zIndex: i }}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.12 + i * 0.07, ease: EASE_OUT }}
-          >
-            {card}
-          </motion.div>
-        );
-      })}
-    </div>
-  );
-};
-
-/** The message that lives on the canvas. Shared between the animated and reduced-motion paths. */
-const HeroMessage = () => (
-  <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
-    <div>
-      <SectionEyebrow label="Уеб студио · София" index="01" />
-
-      <h1 className="font-display text-display mt-6 font-bold text-foreground">
-        Изработка на сайтове, които не приличат на{" "}
-        <span className="relative inline-block whitespace-nowrap">
-          всеки втори
-          <DoodleUnderline />
-        </span>
-        .
-      </h1>
-
-      <p className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-        Повечето агенции продават един и същ шаблон с ново лого. Ние проектираме
-        и изграждаме от нулата — дизайн, който клиентите ви помнят, и структура,
-        която носи запитвания.
-      </p>
-
-      <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-        <Button variant="ink" size="xl" asChild>
-          <Link to="/contact">
-            Свържи се с нас
-            <ArrowRight size={18} />
-          </Link>
-        </Button>
-        <Button variant="line" size="xl" asChild>
-          <Link to="/case-studies">Виж проектите</Link>
-        </Button>
-      </div>
-
-      <p className="font-mono-meta mt-5 text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">
-        {PORTFOLIO_PROJECT_COUNT} проекта · отговор до 24ч
-      </p>
-
-      <GoogleReviewsBadge className="mt-6" />
-
-      <div className="mt-8">
-        <p className="mb-4 text-sm text-muted-foreground">
-          Отзиви от{" "}
-          <strong className="text-foreground">Борислав Гоцев, SuperCredit</strong>
-          {", "}
-          <strong className="text-foreground">Камелия Петрова, Body Aesthetics</strong>
-          {" и "}
-          <strong className="text-foreground">Николай Кирилов, FML-BD</strong>
-        </p>
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-          {clientLogos.map((client) => (
-            <img
-              key={client.name}
-              src={client.logo}
-              alt={client.name}
-              width={116}
-              height={36}
-              decoding="async"
-              className="h-9 w-auto max-w-[116px] object-contain opacity-90 transition-opacity hover:opacity-100"
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <div className="relative hidden lg:block">
-      <LayerStack />
-    </div>
-  </div>
-);
+import { prefetchRoute } from "@/lib/prefetchRoute";
+import stone from "@/assets/hero-stone.webp";
+import stoneSmall from "@/assets/hero-stone-800.webp";
 
 /**
- * Phone hero: same thesis as desktop, without the sticky zoom-out.
- * Scroll starts immediately; the layer stack is the signature, played once.
+ * Headline lines with their indent, in em of the headline size. The desktop
+ * composition is an 11.2em-wide box, so every offset scales with the type.
  */
-const MobileHero = () => {
-  const reduceMotion = useReducedMotion();
+const LINES = [
+  { text: "Сайтове,", indent: 0.24 },
+  { text: "които не", indent: 2.06 },
+  { text: "приличат на", indent: 0 },
+  { text: "всеки втори.", indent: 1.25 },
+] as const;
 
-  return (
-    <section className="relative overflow-hidden bg-background">
-      <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
-      <div className="container relative z-10 mx-auto px-6 pb-16 pt-28">
-        <SectionEyebrow label="Уеб студио · София" index="01" />
+const MOBILE_INDENTS = [0, 0.9, 0, 0.45] as const;
 
-        <h1 className="font-display mt-5 text-[2rem] font-bold leading-[1.08] text-foreground">
-          Изработка на сайтове, които не приличат на{" "}
-          <span className="relative inline-block whitespace-nowrap">
-            всеки втори
-            <DoodleUnderline />
-          </span>
-          .
-        </h1>
+// 0.9 line height: the stone sits from 3 × 0.9 − 0.1 = 2.6em, the intro from 4 × 0.9 + 0.15 = 3.75em.
+const LINE_HEIGHT = 0.9;
 
-        <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
-          Проектираме и изграждаме от нулата — дизайн, който клиентите ви помнят, и структура,
-          която носи запитвания.
-        </p>
+const STONE_ALT =
+  "Синя каменна скулптура във формата на буквата А — знакът на Adrexio";
 
-        <div className="mt-6 flex flex-col gap-3">
-          <Button variant="ink" size="lg" asChild className="w-full">
-            <Link to="/contact">
-              Свържи се с нас
-              <ArrowRight size={18} />
-            </Link>
-          </Button>
-          <Button variant="line" size="lg" asChild className="w-full">
-            <Link to="/case-studies">Виж проектите</Link>
-          </Button>
-        </div>
-
-        <p className="font-mono-meta mt-5 text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">
-          {PORTFOLIO_PROJECT_COUNT} проекта · отговор до 24ч
-        </p>
-
-        <GoogleReviewsBadge className="mt-5" />
-
-        <div className="mt-8">
-          <LayerStack compact animate={!reduceMotion} />
-          <p className="font-hand mt-5 text-center text-lg leading-tight text-foreground">
-            изградено от нулата,
-            <br /> слой по слой
-          </p>
-        </div>
-
-        <p className="mt-8 text-xs leading-relaxed text-muted-foreground">
-          Отзиви от{" "}
-          <strong className="text-foreground">Борислав Гоцев, SuperCredit</strong>
-          {" и "}
-          <strong className="text-foreground">Камелия Петрова, Body Aesthetics</strong>
-        </p>
-        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
-          {clientLogos.slice(0, 3).map((client) => (
-            <img
-              key={client.name}
-              src={client.logo}
-              alt={client.name}
-              width={84}
-              height={24}
-              decoding="async"
-              className="h-6 w-auto max-w-[84px] object-contain opacity-90"
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const StaticDesktopHero = () => (
-  <section className="relative overflow-hidden bg-background">
-    <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
-    <div className="container relative z-10 mx-auto px-6 pb-20 pt-28 md:pb-24 md:pt-36">
-      <HeroMessage />
-    </div>
-  </section>
+const Tags = ({ className = "" }: { className?: string }) => (
+  <p className={`text-[0.62rem] font-medium uppercase tracking-[0.24em] text-muted-foreground lg:text-[0.66rem] ${className}`}>
+    Custom design <span className="mx-2 opacity-60 sm:mx-3">/</span> Development{" "}
+    <span className="mx-2 opacity-60 sm:mx-3">/</span> SEO <span className="mx-2 opacity-60 sm:mx-3">/</span> AI
+  </p>
 );
-
-const DesktopCanvasHero = () => {
-  const ref = useRef<HTMLElement>(null);
-  const mockupRef = useRef<HTMLDivElement>(null);
-  const chromeRef = useRef<HTMLDivElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const restScaleRef = useRef(1);
-  const fitScaleRef = useRef(0.78);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const scaleFor = (v: number) => {
-    const p = Math.min(v / 0.6, 1);
-    const start = restScaleRef.current;
-    const end = fitScaleRef.current;
-    return start - p * (start - end);
-  };
-  const sceneScale = useTransform(scrollYProgress, scaleFor);
-
-  useLayoutEffect(() => {
-    const mockup = mockupRef.current;
-    const chrome = chromeRef.current;
-    const viewport = viewportRef.current;
-    if (!mockup || !chrome || !viewport) return;
-
-    const measure = () => {
-      const GAP = 32;
-      const HEADER = 80;
-
-      const chromeH = chrome.offsetHeight;
-      const chromeGap = 44;
-      const sideExtras = window.innerWidth >= 1600 ? 300 : 0;
-      const bottomExtras =
-        window.innerWidth >= 1024 && window.innerWidth < 1600 ? 80 : 0;
-      const naturalW = mockup.offsetWidth + sideExtras;
-      const naturalH = chromeGap + chromeH + viewport.offsetHeight + bottomExtras;
-      const availW = window.innerWidth - GAP * 2;
-      const availH = window.innerHeight - HEADER - GAP * 2;
-
-      const scaleToFit = Math.min(availW / naturalW, availH / naturalH);
-      restScaleRef.current = Math.min(1, scaleToFit);
-      fitScaleRef.current = Math.max(0.45, scaleToFit * 0.88);
-      sceneScale.set(scaleFor(scrollYProgress.get()));
-    };
-
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(mockup);
-    ro.observe(viewport);
-    window.addEventListener("resize", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const frameOpacity = useTransform(scrollYProgress, [0.14, 0.5], [0, 1]);
-  const chromeY = useTransform(scrollYProgress, [0.14, 0.5], [-14, 0]);
-  const overlayOpacity = useTransform(scrollYProgress, [0.4, 0.72], [0, 1]);
-  const overlayY = useTransform(scrollYProgress, [0.4, 0.72], [18, 0]);
-  const cueOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
-
-  return (
-    <section ref={ref} className="relative" style={{ height: "280vh" }}>
-      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden bg-background pt-20">
-        <div className="canvas-grid canvas-grid-fade absolute inset-0" aria-hidden />
-
-        <motion.div
-          style={{
-            scale: sceneScale,
-            transformOrigin: "center center",
-            willChange: "transform",
-          }}
-          className="relative flex w-full items-center justify-center"
-        >
-          <div ref={mockupRef} className="relative mx-auto w-[min(1180px,92vw)]">
-            <motion.div
-              ref={chromeRef}
-              style={{ opacity: frameOpacity, y: chromeY }}
-              className="pointer-events-none absolute -top-11 left-0 right-0 flex items-center rounded-t-2xl border border-b-0 border-border bg-card px-4 py-3"
-            >
-              <div className="absolute left-4 flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
-                <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
-                <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/30" />
-              </div>
-              <span className="font-mono-meta mx-auto inline-flex items-center gap-1.5 rounded-md bg-muted px-3 py-1 text-[0.7rem] font-medium text-foreground/75">
-                <Lock size={11} className="text-muted-foreground" />
-                adrexio.com
-              </span>
-            </motion.div>
-
-            <div className="relative overflow-hidden rounded-2xl">
-              <div ref={viewportRef} className="relative px-2 py-6 md:px-8">
-                <HeroMessage />
-              </div>
-
-              <motion.div
-                style={{ opacity: frameOpacity }}
-                className="layer-shadow pointer-events-none absolute inset-0 rounded-2xl border border-border"
-                aria-hidden
-              />
-            </div>
-
-            <motion.div
-              style={{ opacity: overlayOpacity, y: overlayY }}
-              className="pointer-events-none absolute right-4 top-full z-10 mt-3 hidden max-w-[210px] rotate-[-4deg] text-right lg:block min-[1600px]:hidden"
-            >
-              <p className="font-hand text-xl leading-tight text-foreground">
-                изградено от нулата,
-                <br /> слой по слой — не от шаблон
-              </p>
-              <svg
-                className="mr-auto mt-1 h-6 w-20 rotate-180 overflow-visible"
-                viewBox="0 0 120 40"
-                fill="none"
-                aria-hidden
-              >
-                <path
-                  d="M110 4 C 80 10, 40 12, 12 30 M12 30 L 26 22 M12 30 L 22 36"
-                  stroke="hsl(var(--primary))"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </motion.div>
-
-            <motion.div
-              style={{ opacity: overlayOpacity, y: overlayY }}
-              className="absolute right-full top-[18%] z-10 mr-5 hidden shrink-0 rounded-lg border border-border bg-card/95 p-2 backdrop-blur min-[1600px]:block"
-            >
-              <p className="eyebrow mb-2 px-1">Слоеве</p>
-              <ul className="space-y-1">
-                {["Навигация", "Съдържание", "Проекти", "CTA"].map((layer, i) => (
-                  <li
-                    key={layer}
-                    className={`font-mono-meta flex items-center gap-2 rounded px-2 py-1 text-[0.7rem] ${
-                      i === 2 ? "bg-primary/15 text-foreground" : "text-muted-foreground"
-                    }`}
-                  >
-                    <span className="h-2 w-2 rounded-[3px] border border-current opacity-60" />
-                    {layer}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.div
-              style={{ opacity: overlayOpacity, y: overlayY }}
-              className="absolute left-full bottom-[18%] z-10 ml-5 hidden max-w-[220px] shrink-0 rotate-[-4deg] text-right min-[1600px]:block"
-            >
-              <p className="font-hand text-2xl leading-tight text-foreground">
-                изградено от нулата,
-                <br /> слой по слой — не от шаблон
-              </p>
-              <svg
-                className="ml-auto mt-1 h-8 w-24 overflow-visible"
-                viewBox="0 0 120 40"
-                fill="none"
-                aria-hidden
-              >
-                <path
-                  d="M110 4 C 80 10, 40 12, 12 30 M12 30 L 26 22 M12 30 L 22 36"
-                  stroke="hsl(var(--primary))"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          style={{ opacity: cueOpacity }}
-          className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
-        >
-          <span className="eyebrow">Надолу</span>
-          <motion.span
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            className="h-8 w-px bg-foreground/25"
-          />
-        </motion.div>
-      </div>
-    </section>
-  );
-};
 
 const Hero = () => {
   const reduceMotion = useReducedMotion();
-  const isMobile = useIsMobile();
 
-  if (isMobile) return <MobileHero />;
-  if (reduceMotion) return <StaticDesktopHero />;
-  return <DesktopCanvasHero />;
+  const rise = (delay: number) =>
+    reduceMotion
+      ? {}
+      : {
+          initial: { y: "105%" },
+          animate: { y: "0%" },
+          transition: { duration: 0.9, delay, ease: EASE_OUT },
+        };
+
+  const fade = (delay: number, y = 16) =>
+    reduceMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.9, delay, ease: EASE_OUT },
+        };
+
+  return (
+    <section className="relative overflow-hidden bg-background">
+      {/* Faint column rules */}
+      <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden>
+        {[14, 30, 70, 86].map((x) => (
+          <span
+            key={x}
+            className="absolute inset-y-0 w-px bg-foreground/[0.045]"
+            style={{ left: `${x}%` }}
+          />
+        ))}
+      </div>
+
+      <div className="relative flex flex-col px-5 pb-12 pt-28 sm:px-8 lg:h-[100svh] lg:min-h-[640px] lg:px-0 lg:pb-0 lg:pt-[5.5rem]">
+        <div className="flex flex-1 items-start justify-center lg:pt-[3.6vh]">
+          {/* One composition for every width: below lg it stacks, from lg the
+              stone and intro are placed in em of the headline size. */}
+          <div className="relative w-full text-[12vw] sm:text-[11vw] lg:h-[5em] lg:w-[11.2em] lg:[font-size:min(8.9vw,15svh)]">
+            <h1
+              className="relative z-0 font-black uppercase text-foreground lg:pl-[1.29em]"
+              style={{ fontFamily: "'Inter Tight', system-ui, sans-serif", lineHeight: LINE_HEIGHT, letterSpacing: "-0.06em" }}
+            >
+              {LINES.map((line, i) => (
+                <span
+                  key={line.text}
+                  className="-mt-[0.3em] block overflow-hidden pb-[0.04em] pt-[0.3em] pl-[var(--indent-sm)] lg:pl-[var(--indent)]"
+                  style={
+                    {
+                      "--indent": `${line.indent}em`,
+                      "--indent-sm": `${MOBILE_INDENTS[i]}em`,
+                      marginBottom: "-0.04em",
+                    } as CSSProperties
+                  }
+                >
+                  <motion.span className="block whitespace-nowrap" {...rise(0.15 + i * 0.08)}>
+                    {line.text}
+                  </motion.span>
+                </span>
+              ))}
+            </h1>
+
+            <div className="relative z-10 mx-auto -mt-[0.3em] w-[86%] max-w-[36rem] lg:absolute lg:left-1/2 lg:top-[2.6em] lg:mt-0 lg:w-[4.4em] lg:-translate-x-1/2">
+              <motion.img
+                src={stone}
+                srcSet={`${stoneSmall} 800w, ${stone} 1260w`}
+                sizes="(min-width: 1024px) 40vw, 86vw"
+                alt={STONE_ALT}
+                width={1260}
+                height={659}
+                // React 18 only passes the lowercase attribute through to the DOM.
+                {...{ fetchpriority: "high" }}
+                decoding="async"
+                className="pointer-events-none block h-auto w-full select-none"
+                {...fade(0.45, 28)}
+              />
+            </div>
+
+            <div className="lg:absolute lg:left-[1.12em] lg:top-[3.75em]">
+              <motion.p
+                className="mt-6 max-w-[20rem] text-[1rem] leading-[1.6] text-muted-foreground lg:mt-0 lg:text-[1.1rem]"
+                {...fade(0.7)}
+              >
+                Дизайн и разработка от нулата — за бизнеси, които искат да се отличават и да
+                получават повече запитвания.
+              </motion.p>
+            </div>
+          </div>
+        </div>
+
+        {/* Phone actions */}
+        <motion.div className="mt-7 flex flex-col gap-3 sm:max-w-md lg:hidden" {...fade(0.6)}>
+          <Link
+            to="/contact"
+            className="inline-flex h-12 items-center justify-center gap-3 rounded-full bg-foreground text-[0.8rem] font-bold uppercase tracking-[0.06em] text-background"
+          >
+            Обсъди проект
+            <ArrowUpRight size={17} strokeWidth={2.2} />
+          </Link>
+          <Link
+            to="/case-studies"
+            className="inline-flex h-12 items-center justify-center gap-3 rounded-full border-[1.5px] border-foreground text-[0.8rem] font-bold uppercase tracking-[0.06em] text-foreground"
+          >
+            Виж проектите
+            <ArrowUpRight size={17} strokeWidth={2.2} />
+          </Link>
+        </motion.div>
+
+        <motion.div
+          className="relative z-20 mt-8 flex flex-col gap-2 lg:mt-0 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:px-12 lg:pb-8"
+          {...fade(0.9, 0)}
+        >
+          <p className="text-[0.62rem] font-medium uppercase tracking-[0.24em] text-muted-foreground lg:text-[0.66rem]">
+            Уеб студио · София
+          </p>
+          <Link
+            to="/case-studies"
+            onMouseEnter={() => prefetchRoute("/case-studies")}
+            onFocus={() => prefetchRoute("/case-studies")}
+            className="group hidden items-center gap-3 text-[0.95rem] font-bold uppercase tracking-[0.04em] text-foreground lg:inline-flex"
+          >
+            Виж проектите
+            <ArrowUpRight
+              size={19}
+              strokeWidth={2.2}
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </Link>
+          <Tags className="lg:justify-self-end lg:text-right" />
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default Hero;

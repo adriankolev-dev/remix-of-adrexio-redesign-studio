@@ -4,109 +4,116 @@ import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import { Button } from "@/components/ui/button";
 
-const PHASE_LABEL = "по проект — следващ етап";
-
-const services = [
+const core = [
   {
     title: "Уеб разработка",
-    subtitle: "Web Development",
-    description: "Модерни сайтове, изградени от нулата за вашия бизнес.",
+    description: "Сайтове, изградени от нулата за вашия бизнес: бързи, адаптивни и лесни за поддръжка.",
+    tags: ["Сайтове", "Онлайн магазини"],
     href: "/services/web-development",
   },
   {
-    title: "UI/UX дизайн",
-    subtitle: "Design & Strategy",
-    description: "Интуитивен дизайн, който клиентите помнят и използват.",
-    href: "/services/ui-ux-design",
-  },
-  {
-    title: "Техническа поддръжка",
-    subtitle: "от €99 / месец",
-    description: "Поддръжка след старта — работно време и спешни корекции.",
-    href: "/services/technical-support",
-  },
-  {
-    title: "SEO и GEO",
-    subtitle: "Search Optimization",
-    description: "Видимост в Google и AI търсачките — органичен трафик, който расте.",
-    href: "/services/seo",
-  },
-  {
-    title: "AI интеграции",
-    subtitle: PHASE_LABEL,
-    description: "Автоматизация и AI решения за оптимизация на процесите.",
+    title: "AI автоматизации",
+    description: "Запитвания, имейли, отчети и фактури, които минават без ръчна работа. Настройваме ги и ги поддържаме.",
+    tags: ["Чатбот", "CRM", "Отчети"],
     href: "/services/ai-implementation",
   },
   {
-    title: "Мобилни приложения",
-    subtitle: PHASE_LABEL,
-    description: "iOS и Android приложения с фокус върху UX и производителност.",
-    href: "/services/mobile-apps",
+    title: "SEO и GEO",
+    description: "Видимост в Google и в AI търсачките, с органичен трафик, който се натрупва.",
+    tags: ["Технически SEO", "Google", "AI търсачки"],
+    href: "/services/seo",
   },
   {
-    title: "Дигитален маркетинг",
-    subtitle: PHASE_LABEL,
-    description: "Стратегии за растеж и увеличаване на онлайн присъствието.",
-    href: "/services/digital-marketing",
+    title: "Техническа поддръжка",
+    description: "Поддръжка след старта: актуализации, резервни копия и отстраняване на грешки, от €99 на месец.",
+    tags: ["Актуализации", "Резервни копия", "Мониторинг"],
+    href: "/services/technical-support",
   },
 ];
 
-const ServicesSection = () => {
-  return (
-    <section className="relative overflow-hidden bg-background py-16 md:py-24">
-      <div className="container mx-auto px-6">
-        <SectionHeader
-          index="06"
-          label="Услуги"
-          title="Какво правим за вашия бизнес."
-          description="От първия wireframe до пускането — цялостни решения без готови шаблони."
-          note="всичко на едно място"
-        />
+const more = [
+  { title: "UI/UX дизайн", href: "/services/ui-ux-design" },
+  { title: "Мобилни приложения", href: "/services/mobile-apps" },
+  { title: "Дигитален маркетинг", href: "/services/digital-marketing" },
+];
 
-        {/* Full-width index — big type, hairlines, hover reveals the detail */}
-        <div className="border-t border-border">
-          {services.map((service, i) => (
-            <Reveal key={service.href} delay={i * 0.04}>
-              <Link
-                to={service.href}
-                className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-border py-6 md:gap-8 md:py-8"
-              >
-                <span className="font-mono-meta text-[0.62rem] text-muted-foreground md:text-[0.66rem]">
+const ServicesSection = () => (
+  <section className="bg-background py-16 md:py-24">
+    <div className="container mx-auto px-6">
+      <SectionHeader
+        title="Услуги."
+        description="Четири основни услуги и още три, които добавяме според проекта. Всяка започва от празен лист."
+        action={
+          <Button variant="line" size="default" asChild>
+            <Link to="/services">
+              Всички услуги
+              <ArrowUpRight />
+            </Link>
+          </Button>
+        }
+      />
+
+      <div className="grid border-l border-t border-border md:grid-cols-2">
+        {core.map((service, i) => (
+          <Reveal key={service.href} delay={(i % 2) * 0.06} className="border-b border-r border-border">
+            <Link
+              to={service.href}
+              className="group flex h-full min-h-[17rem] flex-col justify-between gap-10 p-7 transition-colors hover:bg-secondary/60 md:min-h-[20rem] md:p-10"
+            >
+              <div className="flex items-start justify-between">
+                <span className="text-xs font-semibold tabular-nums text-muted-foreground">
                   {String(i + 1).padStart(2, "0")}
                 </span>
+                <ArrowUpRight
+                  size={20}
+                  className="text-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </div>
 
-                <div className="min-w-0">
-                  <h3 className="text-2xl font-bold tracking-tight text-foreground transition-transform duration-300 group-hover:translate-x-2 group-hover:text-primary md:text-4xl">
-                    {service.title}
-                  </h3>
-                  {/* Detail slides open on hover (desktop), always shown on mobile */}
-                  <p className="mt-1 max-w-md text-sm leading-relaxed text-muted-foreground transition-all duration-300 md:max-h-0 md:overflow-hidden md:opacity-0 md:group-hover:mt-2 md:group-hover:max-h-16 md:group-hover:opacity-100">
-                    {service.description}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-4 md:gap-8">
-                  <span className="font-mono-meta hidden text-[0.62rem] uppercase tracking-[0.16em] text-muted-foreground lg:block">
-                    {service.subtitle}
-                  </span>
-                  <ArrowUpRight
-                    size={22}
-                    className="shrink-0 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground"
-                  />
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={0.2} className="mt-12">
-          <Button variant="line" size="lg" asChild>
-            <Link to="/services">Всички услуги</Link>
-          </Button>
-        </Reveal>
+              <div>
+                <h3 className="text-[1.75rem] font-semibold leading-tight tracking-[-0.035em] text-foreground md:text-[2.1rem]">
+                  {service.title}
+                </h3>
+                <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-muted-foreground">
+                  {service.description}
+                </p>
+                <p className="mt-6 text-[0.66rem] font-bold uppercase tracking-[0.1em] text-foreground">
+                  {service.tags.map((tag, t) => (
+                    <span key={tag}>
+                      {t > 0 && <span className="mx-2.5 text-muted-foreground">/</span>}
+                      {tag}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            </Link>
+          </Reveal>
+        ))}
       </div>
-    </section>
-  );
-};
+
+      <Reveal delay={0.1}>
+        <div className="mt-8 flex flex-col gap-4 border-b border-border pb-8 md:flex-row md:items-center md:gap-10">
+          <p className="eyebrow shrink-0">Още услуги</p>
+          <ul className="flex flex-wrap gap-x-8 gap-y-3">
+            {more.map((service) => (
+              <li key={service.href}>
+                <Link
+                  to={service.href}
+                  className="group inline-flex items-center gap-1.5 text-base font-semibold text-foreground"
+                >
+                  {service.title}
+                  <ArrowUpRight
+                    size={15}
+                    className="text-muted-foreground transition-colors group-hover:text-foreground"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+);
 
 export default ServicesSection;

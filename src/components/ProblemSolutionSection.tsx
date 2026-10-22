@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
@@ -10,7 +10,7 @@ const shifts = [
     problem: "Скъпа реклама без ROI",
     psub: "Плащате за трафик, който не се превръща в клиенти.",
     solution: "Сайт, който носи резултат",
-    ssub: "Бърз, оптимизиран и измерим — инвестицията се вижда.",
+    ssub: "Бърз, оптимизиран и измерим. Виждате какво връща инвестицията.",
   },
   {
     problem: "Клиенти, които не се връщат",
@@ -28,24 +28,21 @@ const shifts = [
 
 const ProblemSolutionSection = () => {
   return (
-    <section className="relative overflow-hidden bg-background py-16 md:py-24">
+    <section className="bg-background py-16 md:py-24">
       <div className="container mx-auto px-6">
         <SectionHeader
-          index="04"
-          label="Проблем → Решение"
-          title="Шаблонът ви струва повече, отколкото мислите."
-          description='Повечето бизнеси не се нуждаят от „още един красив сайт". Имат нужда от преход — от шаблон към нещо, което носи запитвания.'
-          note="звучи ли ви познато?"
+          title="Цената на шаблона."
+          description="Шаблонът е евтин в началото. После плащате с реклама, която не носи клиенти, и със сайт, който никой не помни."
         />
 
         {/* Column labels */}
         <Reveal>
           <div className="grid grid-cols-1 gap-4 border-b border-border pb-4 md:grid-cols-[1fr_auto_1fr] md:gap-8">
-            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.2em] text-muted-foreground">
+            <span className="eyebrow">
               От шаблона
             </span>
             <span className="hidden w-8 md:block" aria-hidden />
-            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.2em] text-primary">
+            <span className="eyebrow text-foreground">
               Към Adrexio
             </span>
           </div>
@@ -58,7 +55,7 @@ const ProblemSolutionSection = () => {
               <div className="grid grid-cols-1 items-center gap-4 border-b border-border py-8 md:grid-cols-[1fr_auto_1fr] md:gap-8 md:py-10">
                 {/* Problem side — muted, receding */}
                 <div className="text-muted-foreground">
-                  <h3 className="text-xl font-semibold tracking-tight text-foreground/55 md:text-2xl">
+                  <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground/45 line-through decoration-1 md:text-[1.7rem]">
                     {shift.problem}
                   </h3>
                   <p className="mt-1.5 text-sm leading-relaxed">{shift.psub}</p>
@@ -69,15 +66,13 @@ const ProblemSolutionSection = () => {
                   <span className="font-mono-meta text-[0.6rem] uppercase tracking-[0.16em] md:hidden">
                     води до
                   </span>
-                  <ArrowRight size={22} className="rotate-90 md:rotate-0" />
+                  <ArrowRight size={22} className="rotate-90 text-primary md:rotate-0" />
                 </div>
 
                 {/* Solution side — foreground, cyan accent */}
                 <div>
-                  <h3 className="text-xl font-bold tracking-tight text-foreground md:text-2xl">
-                    <span className="bg-[linear-gradient(transparent_65%,hsl(var(--primary)/0.28)_65%)]">
-                      {shift.solution}
-                    </span>
+                  <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-[1.7rem]">
+                    {shift.solution}
                   </h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                     {shift.ssub}
@@ -88,11 +83,11 @@ const ProblemSolutionSection = () => {
           ))}
         </div>
 
-        <Reveal delay={0.2} className="mt-14">
+        <Reveal delay={0.2} className="mt-12">
           <Button variant="ink" size="lg" asChild>
             <Link to="/contact">
-              Свържи се с нас
-              <ArrowRight size={18} />
+              Обсъди проект
+              <ArrowUpRight />
             </Link>
           </Button>
         </Reveal>

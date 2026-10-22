@@ -1040,27 +1040,14 @@ export const PORTFOLIO_PROJECT_COUNT = caseStudies.length;
 /** Unique clients — one company per case study in this file. */
 export const PORTFOLIO_CLIENT_COUNT = new Set(caseStudies.map((s) => s.title)).size;
 
-/**
- * Projects shown in the homepage „Избрана работа“ tabs.
- *
- * 1. curly
- * 2. body-aesthetics
- * 3. koni-jewellery
- * 4. firescape-partners
- * 5. drmariaraykova
- * 6. global-street-art
- * 7. fml-bd
- * 8. bitcoin-empires
- */
+/** Projects on the homepage „Част от проектите“ grid, in this order (two per row). */
 export const FEATURED_IDS = [
   "curly",
-  "body-aesthetics",
-  "koni-jewellery",
   "firescape-partners",
-  "drmariaraykova",
+  "body-aesthetics",
+  "koni-jewellery-hu",
   "global-street-art",
-  "fml-bd",
-  "bitcoin-empires",
+  "viajes-a-bulgaria",
 ] as const;
 
 /**

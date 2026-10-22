@@ -1,7 +1,20 @@
+import kameliyaPetrova from "@/assets/reviewers/kameliya-petrova.webp";
+import mihailMihaylov from "@/assets/reviewers/mihail-mihaylov.webp";
+import mariyaRaykova from "@/assets/reviewers/mariya-raykova.webp";
+import miroslavVlashev from "@/assets/reviewers/miroslav-vlashev.webp";
+import hristoforDosev from "@/assets/reviewers/hristofor-dosev.webp";
+import valeriMarinov from "@/assets/reviewers/valeri-marinov.webp";
+
 export type GoogleReview = {
   author: string;
   text: string;
   rating: 5;
+  /** Square portrait the reviewer sent us, shown next to their review. */
+  photo?: string;
+  /** Company or role line under the name. Leave out when unknown. */
+  role?: string;
+  /** Case study id, when the review is about a project in the portfolio. */
+  projectId?: string;
 };
 
 /** Google Business profile — update if you get a g.page short link. */
@@ -14,31 +27,41 @@ export const GOOGLE_REVIEW_COUNT = 12;
 export const googleReviews: GoogleReview[] = [
   {
     author: "Камелия Петрова",
+    photo: kameliyaPetrova,
+    role: "Body Aesthetics",
+    projectId: "body-aesthetics",
     text: "Работя с Адриан и екипа му по сайта на Body Aesthetics от няколко години и никога преди не съм срещала толкова високо ниво на професионализъм, съчетано с толкова естествена, интелигентна комуникация. Това, което наистина ги отличава, е умението им да разбират задълбочено нуждите на бизнеса и да предлагат смислени идеи. Не е просто отлична техническа компетентност — Адриан поема инициативата и предлага бизнес решения, съобразени с това, от което конкретна компания реално се нуждае в конкретен момент. Отдадеността и отзивчивостта му са нещо, с което не съм се сблъсквала преди. С Adrexio намерих наистина комплексно решение за нашия сайт, SEO и много от оптимизациите, които прилагаме в бизнеса. Откакто работим заедно, всичко стана по-лесно, бизнесът ни расте, а сайтът ни се представя несравнимо по-добре.",
     rating: 5,
   },
   {
     author: "Михаил Михайлов",
+    photo: mihailMihaylov,
     text: "Много съм доволен от услугата! Екипът изгради целия ни уебсайт и онлайн магазин от начало до край. Професионални, надеждни и с отличен личен подход. Комуникацията беше отлична през целия процес и наистина разбраха нуждите ни. Силно ги препоръчвам за уеб разработка и e-commerce проекти!",
     rating: 5,
   },
   {
     author: "д-р Мария Райкова",
+    photo: mariyaRaykova,
+    role: "drmariaraykova.com",
+    projectId: "drmariaraykova",
     text: "Изключително съм доволна от работата с Adrexio и от крайния резултат на моя сайт drmariaraykova.com. Екипът беше професионален, отзивчив и обърна внимание на всеки детайл. Успяха да възпроизведат точно визията и усещането, което исках да представя на пациентите си. Сайтът е модерен, стилен, функционален и много лесен за използване. Оценявам особено професионалното отношение, бързата комуникация и факта, че през целия процес се чувствах спокойна и уверена, че проектът е в добри ръце. Благодаря на екипа на Adrexio за отличната работа!",
     rating: 5,
   },
   {
     author: "Мирослав Влашев",
+    photo: miroslavVlashev,
     text: "Топ изпълнение, супер много свежи идеи и помощ, когато не знаеш какво искаш.",
     rating: 5,
   },
   {
     author: "Христофор Досев",
+    photo: hristoforDosev,
     text: "Качество и добра цена!",
     rating: 5,
   },
   {
     author: "Валери Маринов",
+    photo: valeriMarinov,
     text: "Имах много положително преживяване при работата с Adrexio. Разработиха нашия сайт и отделиха време да разберат целите на компанията ни и нуждите на клиентите ни. Проведохме няколко продуктивни срещи, на които обсъждахме как да подобрим както сайта, така и клиентското изживяване, вместо да се фокусираме само върху дизайна. Най-много ценя, че ангажиментът им не приключи след пускането на сайта — продължаваме да правим подобрения на базата на обратна връзка и променящите се нужди на клиентите ни.",
     rating: 5,
   },
