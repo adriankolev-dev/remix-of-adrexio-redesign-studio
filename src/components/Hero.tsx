@@ -20,7 +20,7 @@ const LINES = [
 
 const MOBILE_INDENTS = [0, 0.9, 0, 0.45] as const;
 
-// 0.9 line height: the stone sits from 3 × 0.9 − 0.1 = 2.6em, the intro from 4 × 0.9 + 0.15 = 3.75em.
+// 0.9 line height: the stone sits from 3 × 0.9 + 0.42 = 3.12em, so only its peak overlaps the last line; the intro from 4 × 0.9 + 0.15 = 3.75em.
 const LINE_HEIGHT = 0.9;
 
 const STONE_ALT =
@@ -95,7 +95,7 @@ const Hero = () => {
               ))}
             </h1>
 
-            <div className="relative z-10 mx-auto -mt-[0.3em] w-[86%] max-w-[36rem] lg:absolute lg:left-1/2 lg:top-[2.6em] lg:mt-0 lg:w-[4.4em] lg:-translate-x-1/2">
+            <div className="relative z-10 mx-auto -mt-[0.3em] w-[86%] max-w-[36rem] lg:absolute lg:left-1/2 lg:top-[3.12em] lg:mt-0 lg:w-[3.8em] lg:-translate-x-1/2">
               <motion.img
                 src={stone}
                 srcSet={`${stoneSmall} 800w, ${stone} 1260w`}

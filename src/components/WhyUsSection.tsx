@@ -33,7 +33,7 @@ const WhyUsSection = () => (
     <div className="container mx-auto px-6">
       <SectionHeader
         title="Защо Adrexio."
-        description="Работим с локални бизнеси, които искат сайт с характер, а не копие на конкурента. Ето какво получавате."
+        description="Работим с бизнеси, които искат сайт с характер, а не копие на конкурента. Ето какво получавате."
       />
 
       <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">

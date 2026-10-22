@@ -72,7 +72,7 @@ const StudioSection = () => (
           <Reveal delay={0.1}>
             <div className="max-w-md space-y-5 text-base leading-relaxed text-muted-foreground md:text-[1.05rem]">
               <p>
-                Работим с локални бизнеси, които искат сайт с характер. Всеки проект започва
+                Работим с бизнеси, които искат сайт с характер. Всеки проект започва
                 с въпроса какво трябва да постигне сайтът, и чак след това с дизайна.
               </p>
               <p>

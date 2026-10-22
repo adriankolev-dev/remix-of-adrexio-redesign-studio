@@ -1,29 +1,33 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, CodeXml, SearchCheck, ShieldCheck, Workflow } from "lucide-react";
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import { Button } from "@/components/ui/button";
 
 const core = [
   {
+    icon: CodeXml,
     title: "Уеб разработка",
     description: "Сайтове, изградени от нулата за вашия бизнес: бързи, адаптивни и лесни за поддръжка.",
     tags: ["Сайтове", "Онлайн магазини"],
     href: "/services/web-development",
   },
   {
+    icon: Workflow,
     title: "AI автоматизации",
     description: "Запитвания, имейли, отчети и фактури, които минават без ръчна работа. Настройваме ги и ги поддържаме.",
     tags: ["Чатбот", "CRM", "Отчети"],
     href: "/services/ai-implementation",
   },
   {
+    icon: SearchCheck,
     title: "SEO и GEO",
     description: "Видимост в Google и в AI търсачките, с органичен трафик, който се натрупва.",
     tags: ["Технически SEO", "Google", "AI търсачки"],
     href: "/services/seo",
   },
   {
+    icon: ShieldCheck,
     title: "Техническа поддръжка",
     description: "Поддръжка след старта: актуализации, резервни копия и отстраняване на грешки, от €99 на месец.",
     tags: ["Актуализации", "Резервни копия", "Мониторинг"],
@@ -61,9 +65,11 @@ const ServicesSection = () => (
               className="group flex h-full min-h-[17rem] flex-col justify-between gap-10 p-7 transition-colors hover:bg-secondary/60 md:min-h-[20rem] md:p-10"
             >
               <div className="flex items-start justify-between">
-                <span className="text-xs font-semibold tabular-nums text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <service.icon
+                  className="h-7 w-7 text-foreground transition-colors group-hover:text-primary"
+                  strokeWidth={1.5}
+                  aria-hidden
+                />
                 <ArrowUpRight
                   size={20}
                   className="text-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

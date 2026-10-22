@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChartNoAxesCombined,
+  Inbox,
+  MailCheck,
+  MessagesSquare,
+  ReceiptText,
+  Share2,
+} from "lucide-react";
 import { useReducedMotion } from "framer-motion";
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
@@ -16,26 +24,32 @@ const OUTPUTS = [
 
 const AUTOMATIONS = [
   {
+    icon: Inbox,
     title: "Запитвания и CRM",
     text: "Всяко запитване от сайта, имейла или социалните мрежи влиза в CRM с име, тема и следваща стъпка.",
   },
   {
+    icon: MessagesSquare,
     title: "Чатбот на сайта",
     text: "Отговаря на честите въпроси по всяко време и предава разговора на човек, когато трябва.",
   },
   {
+    icon: MailCheck,
     title: "Автоматични имейли",
     text: "Потвърждения, напомняния и последващи писма тръгват сами след всяко действие на клиента.",
   },
   {
+    icon: ChartNoAxesCombined,
     title: "Отчети",
     text: "Запитвания, продажби и трафик в едно обобщение, което получавате всяка седмица.",
   },
   {
+    icon: ReceiptText,
     title: "Фактури",
     text: "Фактурата се издава и изпраща след плащането, без преписване на данни.",
   },
   {
+    icon: Share2,
     title: "Социални мрежи",
     text: "Публикации по график, а коментарите и съобщенията събрани на едно място.",
   },
@@ -195,10 +209,8 @@ const AutomationSection = () => (
       <ul className="mt-4 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
         {AUTOMATIONS.map((item, i) => (
           <Reveal as="li" key={item.title} delay={(i % 3) * 0.05} className="border-t border-border pb-10 pt-6">
-            <span className="text-xs font-semibold tabular-nums text-muted-foreground">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+            <item.icon className="h-7 w-7 text-foreground" strokeWidth={1.5} aria-hidden />
+            <h3 className="mt-6 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
               {item.title}
             </h3>
             <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{item.text}</p>
