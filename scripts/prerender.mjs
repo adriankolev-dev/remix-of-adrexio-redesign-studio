@@ -16,10 +16,10 @@ const SRC = join(ROOT, "src");
 const CONTENT_DIR = join(SRC, "content", "blog");
 const BASE_URL = "https://www.adrexio.com";
 const SITE_NAME = "Adrexio";
-const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
+const DEFAULT_IMAGE = `${BASE_URL}/og-hero.jpg`;
 const ORG_ID = `${BASE_URL}/#organization`;
 const WEBSITE_ID = `${BASE_URL}/#website`;
-const LOGO = { "@type": "ImageObject", url: DEFAULT_IMAGE, width: 1200, height: 630 };
+const LOGO = { "@type": "ImageObject", url: `${BASE_URL}/og-image.png`, width: 1200, height: 630 };
 
 marked.setOptions({ gfm: true, breaks: false });
 
@@ -291,6 +291,7 @@ function applyMeta(html, { title, description, url, image, type = "website", key
   out = replaceMetaProperty(out, "og:description", description);
   out = replaceMetaProperty(out, "og:image", image);
   out = replaceMetaProperty(out, "og:image:secure_url", image);
+  out = replaceMetaProperty(out, "og:image:type", /\.jpe?g$/.test(image) ? "image/jpeg" : "image/png");
   out = replaceMetaProperty(out, "og:image:alt", title);
   out = replaceMetaName(out, "twitter:url", url);
   out = replaceMetaName(out, "twitter:title", title);

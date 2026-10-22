@@ -15,7 +15,7 @@ const SEO = ({
   title = "Adrexio - Модерни уебсайтове и дигитални решения",
   description = "Създаваме бързи и оптимизирани уебсайтове, мобилни приложения и дигитални решения, които помагат на бизнеса да расте онлайн.",
   keywords = "уеб дизайн, уебсайт, мобилни приложения, SEO и GEO оптимизация, дигитален маркетинг, UI/UX дизайн, България, София, уеб разработка",
-  image = "https://www.adrexio.com/og-image.png",
+  image = "https://www.adrexio.com/og-hero.jpg",
   type = "website",
   noindex = false,
   structuredData,
