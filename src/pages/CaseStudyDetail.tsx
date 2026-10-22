@@ -13,7 +13,15 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import Reveal from "@/components/editorial/Reveal";
 import SectionEyebrow from "@/components/editorial/SectionEyebrow";
-import { getCaseStudyById, getCaseStudyTitle, getPortfolioOrder } from "@/data/caseStudies";
+import {
+  CASE_STUDY_SERVICE_LINK,
+  CASE_STUDY_SERVICE_PATH_DEFAULT,
+  RESULT_KIND_LABEL,
+  getCaseStudyById,
+  getCaseStudyTitle,
+  getPortfolioOrder,
+  type CaseStudyResult,
+} from "@/data/caseStudies";
 import { getBreadcrumbSchema, getPublisherSchema } from "@/lib/structuredData";
 import { scrollToTop } from "@/lib/lenis";
 import { useEffect } from "react";
@@ -94,6 +102,27 @@ const CaseStudyDetail = () => {
     );
   }
 
+  const ourResults = study.results.filter((r) => r.kind !== "client");
+  const clientResults = study.results.filter((r) => r.kind === "client");
+  const servicePath = study.servicePath ?? CASE_STUDY_SERVICE_PATH_DEFAULT;
+
+  const renderMetrics = (items: CaseStudyResult[]) => (
+    <div className="mt-4 grid grid-cols-1 gap-x-10 border-t border-border sm:grid-cols-3">
+      {items.map((result, i) => (
+        <Reveal key={result.label} delay={i * 0.06}>
+          <div className="border-b border-border py-8 sm:border-b-0">
+            <div className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+              {result.metric}
+            </div>
+            <div className="font-mono-meta mt-2 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
+              {result.label}
+            </div>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  );
+
   return (
     <main className="min-h-screen bg-background">
       <SEO
@@ -167,25 +196,27 @@ const CaseStudyDetail = () => {
         </div>
       </section>
 
-      {/* Results */}
-      <section className="pb-16">
-        <div className="container mx-auto px-6">
-          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-x-10 border-t border-border sm:grid-cols-3">
-            {study.results.map((result, i) => (
-              <Reveal key={i} delay={i * 0.06}>
-                <div className="border-b border-border py-8 sm:border-b-0">
-                  <div className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                    {result.metric}
+      {/* Results — our numbers only; the client's own figures sit under „За клиента“ */}
+      {ourResults.length > 0 && (
+        <section className="pb-16">
+          <div className="container mx-auto px-6">
+            <div className="mx-auto max-w-4xl space-y-10">
+              {(["measured", "delivered"] as const).map((kind) => {
+                const group = ourResults.filter((r) => r.kind === kind);
+                if (group.length === 0) return null;
+                return (
+                  <div key={kind}>
+                    <Reveal>
+                      <SectionEyebrow label={RESULT_KIND_LABEL[kind]} />
+                    </Reveal>
+                    {renderMetrics(group)}
                   </div>
-                  <div className="font-mono-meta mt-2 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
-                    {result.label}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Proof — screenshots behind the numbers above */}
       {study.proof && study.proof.length > 0 && (
@@ -232,12 +263,20 @@ const CaseStudyDetail = () => {
                 <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                   {study.overview}
                 </p>
+                {clientResults.length > 0 && (
+                  <>
+                    <p className="font-mono-meta mt-8 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
+                      {RESULT_KIND_LABEL.client}
+                    </p>
+                    {renderMetrics(clientResults)}
+                  </>
+                )}
               </div>
             </Reveal>
 
             <Reveal>
               <div className="border-t border-border py-10">
-                <SectionEyebrow label="Задачата" index="02" />
+                <SectionEyebrow label={study.challengeTitle ?? "Задачата"} index="02" />
                 <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                   {study.challenge}
                 </p>
@@ -246,7 +285,7 @@ const CaseStudyDetail = () => {
 
             <Reveal>
               <div className="border-t border-border py-10">
-                <SectionEyebrow label="Какво направихме" index="03" />
+                <SectionEyebrow label={study.solutionTitle ?? "Какво направихме"} index="03" />
                 <ul className="mt-6 space-y-4">
                   {study.solution.map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-muted-foreground">
@@ -258,9 +297,20 @@ const CaseStudyDetail = () => {
               </div>
             </Reveal>
 
+            {study.detail && (
+              <Reveal>
+                <div className="border-t border-border py-10">
+                  <SectionEyebrow label={study.detailTitle ?? "Най-сложната част"} index="04" />
+                  <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+                    {study.detail}
+                  </p>
+                </div>
+              </Reveal>
+            )}
+
             <Reveal>
               <div className="border-t border-border py-10">
-                <SectionEyebrow label="С какво е направено" index="04" />
+                <SectionEyebrow label="С какво е направено" index={study.detail ? "05" : "04"} />
                 <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
                   {study.technologies.map((tech) => (
                     <span
@@ -285,7 +335,18 @@ const CaseStudyDetail = () => {
             )}
 
             {/* CTA */}
-            <div className="mt-12 flex flex-col gap-4 sm:flex-row">
+            {study.cta && (
+              <p className="mt-12 text-lg leading-relaxed text-foreground">
+                {study.cta}{" "}
+                <Link
+                  to={servicePath}
+                  className="border-b border-foreground/25 transition-colors hover:border-primary"
+                >
+                  {CASE_STUDY_SERVICE_LINK[servicePath] ?? CASE_STUDY_SERVICE_LINK[CASE_STUDY_SERVICE_PATH_DEFAULT]}
+                </Link>
+              </p>
+            )}
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               {study.isPublic && study.url ? (
                 <Button variant="ink" size="lg" asChild>
                   <a href={study.url} target="_blank" rel="noopener noreferrer">

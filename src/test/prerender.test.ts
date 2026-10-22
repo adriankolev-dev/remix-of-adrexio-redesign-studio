@@ -28,6 +28,23 @@ describe("prerender parsers", () => {
     expect(internal?.isPublic).toBe(false);
   });
 
+  it("keeps the client's own figures apart from our results", () => {
+    const raw = readFileSync(join(ROOT, "src/data/caseStudies.ts"), "utf8");
+    // Every metric states what it is, so a client's years in business can't
+    // slip in as a result of our work.
+    const metrics = raw.match(/\{\s*metric:\s*"/g) ?? [];
+    const kinds = raw.match(/kind:\s*"(measured|delivered|client)"/g) ?? [];
+    expect(kinds.length).toBe(metrics.length);
+
+    const studies = parseCaseStudies(raw);
+    const curly = studies.find((s) => s.id === "curly");
+    expect(curly?.results[0]).toMatchObject({ metric: "98", kind: "measured" });
+    expect(curly?.detailTitle).toBe("Как работят резервациите");
+
+    const firescape = studies.find((s) => s.id === "firescape-partners");
+    expect(firescape?.results.find((r) => r.metric === "10+")?.kind).toBe("client");
+  });
+
   it("parses a service landing page SEO and FAQs", () => {
     const src = readFileSync(join(ROOT, "src/pages/services/WebDevelopment.tsx"), "utf8");
     const page = parseServicePage(src);

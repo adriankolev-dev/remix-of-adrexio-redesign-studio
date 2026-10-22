@@ -41,7 +41,8 @@ const WorkSection = () => {
 
   if (!study) return null;
 
-  const metric = study.results[0];
+  // The client's own figures (years in business, review counts) aren't our result.
+  const metric = study.results.find((r) => r.kind !== "client");
 
   return (
     <section id="work" className="relative overflow-hidden bg-background pb-16 pt-12 md:py-24">

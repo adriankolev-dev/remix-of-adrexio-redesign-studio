@@ -175,11 +175,19 @@ export function parseCaseStudies(raw) {
       isPublic: extractBoolField(body, "isPublic"),
       overview: extractStringField(body, "overview"),
       challenge: extractStringField(body, "challenge"),
+      challengeTitle: extractStringField(body, "challengeTitle") || "Задачата",
       solution: extractQuotedArray(body, "solution"),
+      solutionTitle: extractStringField(body, "solutionTitle") || "Какво направихме",
+      detail: extractStringField(body, "detail"),
+      detailTitle: extractStringField(body, "detailTitle") || "Най-сложната част",
+      cta: extractStringField(body, "cta"),
+      servicePath: extractStringField(body, "servicePath"),
       technologies: extractQuotedArray(body, "technologies"),
-      results: [...body.matchAll(/\{\s*metric:\s*"((?:\\.|[^"\\])*)"\s*,\s*label:\s*"((?:\\.|[^"\\])*)"/g)].map(
-        (m) => ({ metric: unescapeJs(m[1]), label: unescapeJs(m[2]) }),
-      ),
+      results: [
+        ...body.matchAll(
+          /\{\s*metric:\s*"((?:\\.|[^"\\])*)"\s*,\s*label:\s*"((?:\\.|[^"\\])*)"(?:\s*,\s*kind:\s*"(\w+)")?/g,
+        ),
+      ].map((m) => ({ metric: unescapeJs(m[1]), label: unescapeJs(m[2]), kind: m[3] || "delivered" })),
     });
   }
   return studies;
@@ -909,10 +917,17 @@ export function parseCaseStudyServiceLabels(raw) {
     }
   }
   const fallback = raw.match(/CASE_STUDY_SERVICE_LABEL_DEFAULT\s*=\s*"((?:\\.|[^"\\])*)"/);
-  return { labels, fallback: fallback ? unescapeJs(fallback[1]) : "Изработка на сайт" };
+  const links = {};
+  const l = raw.match(/CASE_STUDY_SERVICE_LINK:\s*Record<string,\s*string>\s*=\s*\{([\s\S]*?)\n\};/);
+  if (l) {
+    for (const entry of l[1].matchAll(/"((?:\\.|[^"\\])*)":\s*"((?:\\.|[^"\\])*)"/g)) {
+      links[unescapeJs(entry[1])] = unescapeJs(entry[2]);
+    }
+  }
+  return { labels, fallback: fallback ? unescapeJs(fallback[1]) : "Изработка на сайт", links };
 }
 
-let caseStudyLabels = { labels: {}, fallback: "Изработка на сайт" };
+let caseStudyLabels = { labels: {}, fallback: "Изработка на сайт", links: {} };
 
 function caseStudyTitle(study) {
   const label = caseStudyLabels.labels[study.category] || caseStudyLabels.fallback;
@@ -928,6 +943,23 @@ function caseStudyAnchor(study) {
   return label.charAt(0).toLocaleLowerCase("bg-BG") + label.slice(1);
 }
 
+// Our numbers and the client's own figures go under separate headings, so a
+// client's years in business never reads as a result of our work.
+function resultList(study, kind, heading, tag) {
+  const items = study.results.filter((r) => r.kind === kind);
+  if (!items.length) return "";
+  return `<${tag}>${heading}</${tag}>${list(items.map((r) => `${escapeHtml(r.metric)} — ${escapeHtml(r.label)}`))}`;
+}
+
+// The generic paragraph below already links to /services/web-development, so
+// only a different service page earns a second link here.
+function serviceLink(study) {
+  const path = study.servicePath;
+  if (!path || path === "/services/web-development") return "";
+  const text = caseStudyLabels.links[path];
+  return text ? ` <a href="${escapeAttr(path)}">${escapeHtml(text)}</a>.` : "";
+}
+
 function prerenderCaseStudyPages(template, studies) {
   for (const study of studies.filter((s) => s.isPublic)) {
     const description = truncateDescription(study.overview);
@@ -939,18 +971,18 @@ function prerenderCaseStudyPages(template, studies) {
       <p>${escapeHtml(study.subtitle)}</p>
       <h2>За клиента</h2>
       <p>${escapeHtml(study.overview)}</p>
-      <h2>Задачата</h2>
+      ${resultList(study, "client", "Данни на клиента", "h3")}
+      <h2>${escapeHtml(study.challengeTitle)}</h2>
       <p>${escapeHtml(study.challenge)}</p>
-      <h2>Какво направихме</h2>
+      <h2>${escapeHtml(study.solutionTitle)}</h2>
       ${list(study.solution.map((item) => escapeHtml(item)))}
-      ${
-        study.results.length
-          ? `<h2>Резултати</h2>${list(study.results.map((r) => `${escapeHtml(r.metric)} — ${escapeHtml(r.label)}`))}`
-          : ""
-      }
+      ${study.detail ? `<h2>${escapeHtml(study.detailTitle)}</h2><p>${escapeHtml(study.detail)}</p>` : ""}
+      ${resultList(study, "measured", "Измерено", "h2")}
+      ${resultList(study, "delivered", "Какво реализирахме", "h2")}
       ${study.technologies.length ? `<p>Технологии: ${escapeHtml(study.technologies.join(", "))}</p>` : ""}
       ${study.url ? `<p><a href="${escapeAttr(study.url)}">Към сайта</a></p>` : ""}
       <h2>Искате нещо подобно?</h2>
+      ${study.cta ? `<p>${escapeHtml(study.cta)}${serviceLink(study)}</p>` : ""}
       <p><a href="/services/web-development">${escapeHtml(anchor)}</a> — вижте какво включва, <a href="/pricing">колко струва и за колко време се прави</a>, или <a href="/contact">заявете оферта</a>.</p>
     `;
     writePage(
