@@ -13,9 +13,8 @@ interface SectionEyebrowProps {
 const SectionEyebrow = ({ label, index, className }: SectionEyebrowProps) => {
   return (
     <div className={`flex items-center gap-3 ${className ?? ""}`}>
-      <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
       {index && (
-        <span className="eyebrow text-foreground/70">{index}</span>
+        <span className="eyebrow text-foreground">{index}</span>
       )}
       <span className="eyebrow">{label}</span>
     </div>

@@ -1,61 +1,56 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { useTheme } from "next-themes";
 import logo from "@/assets/logo.svg";
 import logoDark from "@/assets/logo-dark.svg";
 import { scrollToTop } from "@/lib/lenis";
 import { prefetchRoute } from "@/lib/prefetchRoute";
 
 const navLinks = [
-  { name: "Начало", href: "/" },
   { name: "Услуги", href: "/services" },
-  { name: "За нас", href: "/about" },
   { name: "Проекти", href: "/case-studies" },
-  { name: "Блог", href: "/blog" },
+  { name: "За нас", href: "/about" },
   { name: "Цени", href: "/pricing" },
+  { name: "Блог", href: "/blog" },
+  { name: "Контакти", href: "/contact" },
 ];
+
+const isActive = (pathname: string, href: string) =>
+  pathname === href || pathname.startsWith(`${href}/`);
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const location = useLocation();
-  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Use dark logo for light theme, white logo for dark theme
-  const currentLogo = mounted && resolvedTheme === "light" ? logoDark : logo;
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 py-4">
+    <header className="fixed left-0 right-0 top-0 z-50">
       {/* Background is a separate layer so scroll never changes header height. */}
       <div
         aria-hidden
         className={`pointer-events-none absolute inset-0 border-b transition-opacity duration-300 ${
-          isScrolled
-            ? "border-border/50 bg-card/80 opacity-100 backdrop-blur-md"
+          isScrolled || isMobileMenuOpen
+            ? "border-border bg-background/90 opacity-100 backdrop-blur-md"
             : "border-transparent opacity-0"
         }`}
       />
-      <nav className="relative container mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <Link 
-          to="/" 
+      <nav className="relative flex h-[4.5rem] items-center justify-between px-5 sm:px-8 lg:h-[5.5rem] lg:px-12">
+        <Link
+          to="/"
+          aria-label="Adrexio — начало"
           className="flex items-center"
           onClick={(e) => {
             if (location.pathname === "/") {
@@ -64,50 +59,52 @@ const Navbar = () => {
             }
           }}
         >
-          <img src={currentLogo} alt="adrexio" className="h-8 w-auto" />
+          <img src={logoDark} alt="adrexio" className="h-7 w-auto dark:hidden lg:h-9" />
+          <img src={logo} alt="" aria-hidden className="hidden h-7 w-auto dark:block lg:h-9" />
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.href}
-              onMouseEnter={() => prefetchRoute(link.href)}
-              onFocus={() => prefetchRoute(link.href)}
-              className={`relative text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname === link.href
-                  ? "text-primary"
-                  : "text-muted-foreground"
-              }`}
-            >
-              {link.name}
-              {location.pathname === link.href && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
-                />
-              )}
-            </Link>
-          ))}
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 lg:flex xl:gap-12">
+          {navLinks.map((link) => {
+            const active = isActive(location.pathname, link.href);
+            return (
+              <Link
+                key={link.href}
+                to={link.href}
+                onMouseEnter={() => prefetchRoute(link.href)}
+                onFocus={() => prefetchRoute(link.href)}
+                aria-current={active ? "page" : undefined}
+                className="relative text-[0.8rem] font-medium uppercase tracking-[0.1em] text-foreground transition-opacity hover:opacity-60"
+              >
+                {link.name}
+                {active && (
+                  <motion.span
+                    layoutId="activeNav"
+                    className="absolute -bottom-1.5 left-0 right-0 h-px bg-foreground"
+                  />
+                )}
+              </Link>
+            );
+          })}
         </div>
 
-        {/* Theme Toggle & CTA Button */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden items-center gap-2 lg:flex">
           <ThemeToggle />
-          <Button variant="ink" size="lg" asChild>
-            <Link to="/contact" onMouseEnter={() => prefetchRoute("/contact")} onFocus={() => prefetchRoute("/contact")}>
-              Свържи се с нас
-            </Link>
-          </Button>
+          <Link
+            to="/contact"
+            onMouseEnter={() => prefetchRoute("/contact")}
+            onFocus={() => prefetchRoute("/contact")}
+            className="inline-flex h-[2.9rem] items-center gap-3 rounded-full border-[1.5px] border-foreground px-7 text-[0.78rem] font-bold uppercase tracking-[0.06em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+          >
+            Обсъди проект
+            <ArrowUpRight size={17} strokeWidth={2.2} />
+          </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <div className="lg:hidden flex items-center gap-2">
+        <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle />
           <button
             type="button"
-            className="text-foreground p-2"
+            className="p-2 text-foreground"
             aria-label={isMobileMenuOpen ? "Затвори менюто" : "Отвори менюто"}
             aria-expanded={isMobileMenuOpen}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -117,37 +114,39 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass border-t border-border"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="relative h-[calc(100svh-4.5rem)] overflow-y-auto border-t border-border bg-background lg:hidden"
           >
-            <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+            <div className="flex flex-col px-5 pb-10 pt-4 sm:px-8">
               {navLinks.map((link) => (
                 <Link
-                  key={link.name}
+                  key={link.href}
                   to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   onMouseEnter={() => prefetchRoute(link.href)}
                   onFocus={() => prefetchRoute(link.href)}
-                  className={`text-base font-medium py-2 ${
-                    location.pathname === link.href
-                      ? "text-primary"
-                      : "text-muted-foreground"
-                  }`}
+                  className="flex items-center justify-between border-b border-border py-4 text-[2rem] font-black uppercase leading-none tracking-[-0.05em] text-foreground"
                 >
                   {link.name}
+                  {isActive(location.pathname, link.href) && (
+                    <span className="h-2.5 w-2.5 rounded-full bg-primary" aria-hidden />
+                  )}
                 </Link>
               ))}
-              <Button variant="ink" size="lg" asChild className="mt-2">
-                <Link to="/contact" onMouseEnter={() => prefetchRoute("/contact")} onFocus={() => prefetchRoute("/contact")}>
-                  Свържи се с нас
-                </Link>
-              </Button>
+              <Link
+                to="/contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="mt-8 inline-flex h-12 items-center justify-center gap-3 rounded-full bg-foreground text-[0.8rem] font-bold uppercase tracking-[0.06em] text-background"
+              >
+                Обсъди проект
+                <ArrowUpRight size={17} strokeWidth={2.2} />
+              </Link>
             </div>
           </motion.div>
         )}

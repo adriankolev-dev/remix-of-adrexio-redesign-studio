@@ -5,29 +5,29 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-[0.78rem] font-bold uppercase tracking-[0.06em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-md hover:shadow-lg hover:shadow-primary/25 hover:scale-105",
+          "bg-foreground text-background hover:opacity-85",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-border bg-transparent hover:bg-secondary hover:border-primary/50",
+          "border-[1.5px] border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-secondary hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        ink: "bg-foreground text-background font-semibold hover:opacity-90",
-        accent: "bg-primary text-primary-foreground font-semibold hover:brightness-105",
-        line: "border border-foreground/25 bg-transparent text-foreground hover:border-foreground/60 hover:bg-foreground/[0.03]",
+        ink: "bg-foreground text-background hover:opacity-85",
+        accent: "bg-primary text-primary-foreground hover:brightness-105",
+        line: "border-[1.5px] border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-12 rounded-lg px-8 text-base",
-        xl: "h-14 rounded-xl px-10 text-lg",
+        default: "h-10 px-5",
+        sm: "h-9 px-4 text-[0.72rem]",
+        lg: "h-12 px-7",
+        xl: "h-14 px-9 text-[0.82rem]",
         icon: "h-10 w-10",
       },
     },

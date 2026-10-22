@@ -1,189 +1,164 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone, ArrowUpRight, Cookie, Linkedin, Instagram, Facebook } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { Cookie, Linkedin, Instagram, Facebook } from "lucide-react";
 import logo from "@/assets/logo.svg";
 import logoDark from "@/assets/logo-dark.svg";
+import stone from "@/assets/hero-stone-800.webp";
 import { PAYMENT_COPY } from "@/data/pricing";
 
-const Footer = () => {
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme } = useTheme();
+const navigation = [
+  { label: "Услуги", path: "/services" },
+  { label: "Проекти", path: "/case-studies" },
+  { label: "За нас", path: "/about" },
+  { label: "Цени", path: "/pricing" },
+  { label: "Блог", path: "/blog" },
+  { label: "Партньорска програма", path: "/affiliate" },
+  { label: "Контакти", path: "/contact" },
+  { label: "Попълни бриф", path: "/project-inquiry" },
+];
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+const services = [
+  { label: "Уеб разработка", path: "/services/web-development" },
+  { label: "Онлайн магазин", path: "/services/onlajn-magazin" },
+  { label: "UI/UX дизайн", path: "/services/ui-ux-design" },
+  { label: "SEO и GEO", path: "/services/seo" },
+  { label: "Техническа поддръжка", path: "/services/technical-support" },
+  { label: "AI интеграции", path: "/services/ai-implementation" },
+  { label: "Мобилни приложения", path: "/services/mobile-apps" },
+  { label: "Дигитален маркетинг", path: "/services/digital-marketing" },
+];
 
-  // Use dark logo for light theme, white logo for dark theme
-  const currentLogo = mounted && resolvedTheme === "light" ? logoDark : logo;
+const socials = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/adrexio/", Icon: Linkedin },
+  { label: "Instagram", href: "https://www.instagram.com/adrexio_/", Icon: Instagram },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61587315031705", Icon: Facebook },
+];
 
-  return (
-    <footer className="bg-card border-t border-border">
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="space-y-4">
-            <Link to="/" className="inline-block">
-              <img src={currentLogo} alt="adrexio" className="h-8 w-auto" />
-            </Link>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Създаваме бързи и оптимизирани сайтове, които помагат на бизнеса да расте онлайн.
+const openCookieSettings = () => {
+  const w = window as Window & { openCookieSettings?: () => void };
+  if (typeof w.openCookieSettings === "function") {
+    w.openCookieSettings();
+    return;
+  }
+  // Fallback: clear consent and reload to show the banner again.
+  localStorage.removeItem("adrexio_cookie_consent");
+  localStorage.removeItem("adrexio_cookie_preferences");
+  window.location.reload();
+};
+
+const ColumnTitle = ({ children }: { children: string }) => (
+  <p className="eyebrow mb-5">{children}</p>
+);
+
+const linkClass = "text-sm text-foreground transition-opacity hover:opacity-60";
+
+const Footer = () => (
+  <footer className="overflow-hidden border-t border-border bg-background">
+    <div className="container mx-auto px-6 pt-16 md:pt-20">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
+        <div className="flex flex-col justify-between gap-10">
+          <img
+            src={stone}
+            alt=""
+            aria-hidden
+            width={800}
+            height={418}
+            loading="lazy"
+            decoding="async"
+            className="w-56 md:w-64"
+          />
+          <div className="max-w-xs">
+            <p className="text-base leading-relaxed text-foreground">
+              Уеб студио в София. Сайтове и онлайн магазини, изградени от нулата.
             </p>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              {PAYMENT_COPY}
-            </p>
-            {/* Social Media */}
-            <div className="space-y-2">
-              <p className="text-sm font-medium text-foreground">Социални мрежи:</p>
-              <div className="flex items-center gap-3">
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{PAYMENT_COPY}</p>
+            <div className="mt-6 flex items-center gap-2">
+              {socials.map(({ label, href, Icon }) => (
                 <a
-                  href="https://www.linkedin.com/company/adrexio/"
+                  key={label}
+                  href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-card border border-border hover:border-primary hover:bg-primary/10 flex items-center justify-center transition-all group"
-                  aria-label="Последвайте ни в LinkedIn"
+                  aria-label={`Adrexio в ${label}`}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground transition-colors hover:border-foreground"
                 >
-                  <Linkedin size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                  <Icon size={16} />
                 </a>
-                <a
-                  href="https://www.instagram.com/adrexio_/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-card border border-border hover:border-primary hover:bg-primary/10 flex items-center justify-center transition-all group"
-                  aria-label="Последвайте ни в Instagram"
-                >
-                  <Instagram size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                </a>
-                <a
-                  href="https://www.facebook.com/profile.php?id=61587315031705"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-card border border-border hover:border-primary hover:bg-primary/10 flex items-center justify-center transition-all group"
-                  aria-label="Последвайте ни във Facebook"
-                >
-                  <Facebook size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                </a>
-              </div>
+              ))}
             </div>
           </div>
+        </div>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="font-display font-semibold text-foreground">Навигация</h4>
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+          <div>
+            <ColumnTitle>Навигация</ColumnTitle>
             <ul className="space-y-3">
-              {[
-                { label: "Услуги", path: "/services" },
-                { label: "Цени за уеб проекти", path: "/pricing" },
-                { label: "За нас", path: "/about" },
-                { label: "Проекти", path: "/case-studies" },
-                { label: "Блог", path: "/blog" },
-                { label: "Партньорска програма", path: "/affiliate" },
-                { label: "Контакти", path: "/contact" },
-                { label: "Попълни бриф", path: "/project-inquiry" }
-              ].map((link) => (
+              {navigation.map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-1 group"
-                  >
+                  <Link to={link.path} className={linkClass}>
                     {link.label}
-                    <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Services */}
-          <div className="space-y-4">
-            <h4 className="font-display font-semibold text-foreground">Услуги</h4>
+          <div>
+            <ColumnTitle>Услуги</ColumnTitle>
             <ul className="space-y-3">
-              {[
-                { label: "Уеб разработка", path: "/services/web-development" },
-                { label: "UI/UX дизайн", path: "/services/ui-ux-design" },
-                { label: "Техническа поддръжка", path: "/services/technical-support" },
-                { label: "SEO и GEO", path: "/services/seo" },
-                { label: "AI интеграции", path: "/services/ai-implementation" },
-                { label: "Мобилни приложения", path: "/services/mobile-apps" },
-                { label: "Дигитален маркетинг", path: "/services/digital-marketing" }
-              ].map((service) => (
-                <li key={service.path}>
-                  <Link
-                    to={service.path}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-1 group"
-                  >
-                    {service.label}
-                    <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+              {services.map((link) => (
+                <li key={link.path}>
+                  <Link to={link.path} className={linkClass}>
+                    {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Contact */}
-          <div className="space-y-4">
-            <h4 className="font-display font-semibold text-foreground">Контакти</h4>
+          <div className="col-span-2 sm:col-span-1">
+            <ColumnTitle>Контакти</ColumnTitle>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="mailto:hello@adrexio.com"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors text-sm group"
-                >
-                  <Mail size={16} className="text-primary" />
+                <a href="mailto:hello@adrexio.com" className={linkClass}>
                   hello@adrexio.com
                 </a>
               </li>
               <li>
-                  <a
-                  href="tel:+359896173743"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors text-sm group"
-                >
-                  <Phone size={16} className="text-primary" />
+                <a href="tel:+359896173743" className={linkClass}>
                   +359 896 173 743
                 </a>
               </li>
-              <li className="flex items-start gap-3 text-muted-foreground text-sm">
-                <MapPin size={16} className="text-primary mt-0.5" />
-                София, България
-              </li>
+              <li className="text-sm text-muted-foreground">София, България</li>
             </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Adrexio. Всички права запазени.
-          </p>
-          <div className="flex items-center gap-6 flex-wrap">
-            <Link to="/privacy" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-              Политика за поверителност
-            </Link>
-            <Link to="/terms" className="text-muted-foreground hover:text-primary text-sm transition-colors">
-              Общи условия
-            </Link>
-            <button
-              onClick={() => {
-                // Try to open cookie settings dialog
-                if (typeof (window as any).openCookieSettings === 'function') {
-                  (window as any).openCookieSettings();
-                } else {
-                  // Fallback: clear consent and reload to show banner
-                  localStorage.removeItem("adrexio_cookie_consent");
-                  localStorage.removeItem("adrexio_cookie_preferences");
-                  window.location.reload();
-                }
-              }}
-              className="text-muted-foreground hover:text-primary text-sm transition-colors flex items-center gap-1"
-            >
-              <Cookie size={14} />
-              Управление на бисквитки
-            </button>
-          </div>
+      <div className="mt-16 flex flex-col gap-4 border-t border-border py-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
+        <p>© {new Date().getFullYear()} Adrexio. Всички права запазени.</p>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <Link to="/privacy" className="transition-colors hover:text-foreground">
+            Политика за поверителност
+          </Link>
+          <Link to="/terms" className="transition-colors hover:text-foreground">
+            Общи условия
+          </Link>
+          <button
+            type="button"
+            onClick={openCookieSettings}
+            className="inline-flex items-center gap-1 transition-colors hover:text-foreground"
+          >
+            <Cookie size={13} />
+            Бисквитки
+          </button>
         </div>
       </div>
-    </footer>
-  );
-};
+    </div>
+
+    {/* The wordmark, edge to edge and cropped at the bottom like a signature. */}
+    <div className="-mb-[2.2vw] px-3 md:px-6" aria-hidden>
+      <img src={logoDark} alt="" className="w-full dark:hidden" />
+      <img src={logo} alt="" className="hidden w-full dark:block" />
+    </div>
+  </footer>
+);
 
 export default Footer;

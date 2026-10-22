@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Reveal from "./Reveal";
-import SectionEyebrow from "./SectionEyebrow";
+import Dotted, { textOf } from "./Dotted";
 
 interface PageIntroMeta {
   value: string;
@@ -8,88 +8,79 @@ interface PageIntroMeta {
 }
 
 interface PageIntroProps {
-  /** Two-digit construction marker, e.g. "01". */
+  /** Kept for callers; the studio opener shows no index. */
   index?: string;
   label: string;
   title: ReactNode;
   description?: ReactNode;
-  /** Optional buttons rendered under the lede. */
+  /** Optional buttons rendered beside the lede. */
   actions?: ReactNode;
-  /** Optional stat row rendered on a hairline under the intro. */
+  /** Optional stat row on a hairline grid under the intro. */
   meta?: PageIntroMeta[];
-  /** Optional visual accent shown beside the copy on large screens. */
+  /** Legacy side illustration; the studio opener has none. */
   aside?: ReactNode;
 }
 
+// Past this many characters the h1 steps down from .title-page to .title-page-long.
+const LONG_TITLE = 22;
+
 /**
- * PageIntro — the shared interior-page opener. Same editorial voice as the
- * homepage: blueprint grid, mono eyebrow, an oversized Unbounded headline, a
- * short lede, and an optional hairline stat row. Keeps every page in the same
- * world instead of the old gradient/card hero.
+ * PageIntro: the shared interior-page opener. A small label, a black uppercase
+ * title with the accent period, then the lede and actions on a hairline, and an
+ * optional stat grid. Same voice as the homepage sections.
  */
-const PageIntro = ({ index, label, title, description, actions, meta, aside }: PageIntroProps) => (
-  <section className="relative overflow-hidden bg-background pt-36 pb-16 md:pt-44 md:pb-20">
-    <div className="canvas-grid canvas-grid-fade absolute inset-0 opacity-60" aria-hidden />
+const PageIntro = ({ label, title, description, actions, meta }: PageIntroProps) => {
+  const size = textOf(title).length > LONG_TITLE ? "title-page-long" : "title-page";
 
-    <div className="container relative z-10 mx-auto px-6">
-      <div
-        className={
-          aside
-            ? "flex flex-col gap-12 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16"
-            : undefined
-        }
-      >
-        <div>
-          <Reveal immediate>
-            <SectionEyebrow label={label} index={index} />
+  return (
+    <section className="bg-background pb-12 pt-32 md:pb-16 md:pt-40">
+      <div className="container mx-auto px-6">
+        <Reveal immediate>
+          <p className="eyebrow">{label}</p>
+        </Reveal>
+
+        <Reveal immediate delay={0.06}>
+          <h1 className={`${size} mt-6 max-w-[15em] text-balance text-foreground`}>
+            <Dotted>{title}</Dotted>
+          </h1>
+        </Reveal>
+
+        {(description || actions) && (
+          <Reveal immediate delay={0.14}>
+            <div className="mt-10 grid gap-8 border-t border-border pt-8 md:mt-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-16">
+              <div className="order-2 lg:order-1">
+                {actions && <div className="flex flex-wrap gap-3">{actions}</div>}
+              </div>
+              {description && (
+                <p className="order-1 max-w-xl text-base leading-relaxed text-muted-foreground md:text-[1.1rem] lg:order-2">
+                  {description}
+                </p>
+              )}
+            </div>
           </Reveal>
+        )}
 
-          <Reveal immediate delay={0.08}>
-            <h1 className="font-display text-display-sm mt-6 max-w-4xl font-bold text-foreground">
-              {title}
-            </h1>
-          </Reveal>
-
-          {description && (
-            <Reveal immediate delay={0.16}>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-                {description}
-              </p>
-            </Reveal>
-          )}
-
-          {actions && (
-            <Reveal immediate delay={0.24}>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">{actions}</div>
-            </Reveal>
-          )}
-        </div>
-
-        {aside && (
-          <Reveal immediate delay={0.2}>
-            {aside}
+        {meta && meta.length > 0 && (
+          <Reveal immediate delay={0.22}>
+            <dl
+              className={`mt-12 grid border-l border-t border-border ${
+                meta.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2 sm:grid-cols-4"
+              }`}
+            >
+              {meta.map((m) => (
+                <div key={m.label} className="border-b border-r border-border p-5 md:p-7">
+                  <dt className="text-[2rem] font-black leading-none tracking-[-0.045em] text-foreground md:text-5xl">
+                    {m.value}
+                  </dt>
+                  <dd className="mt-3 text-sm text-muted-foreground">{m.label}</dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         )}
       </div>
-
-      {meta && meta.length > 0 && (
-        <Reveal immediate delay={0.3}>
-          <dl className="mt-14 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-border pt-10 sm:grid-cols-4">
-            {meta.map((m) => (
-              <div key={m.label}>
-                <dt className="font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                  {m.value}
-                </dt>
-                <dd className="font-mono-meta mt-2 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
-                  {m.label}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
-      )}
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default PageIntro;

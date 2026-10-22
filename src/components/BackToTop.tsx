@@ -42,7 +42,7 @@ const BackToTop = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 14, scale: 0.9 }}
           transition={{ duration: 0.35, ease: EASE_OUT }}
-          className="group layer-shadow fixed bottom-24 right-6 z-50 grid h-14 w-14 place-items-center rounded-full border border-border bg-card/90 backdrop-blur transition-colors duration-300 hover:border-primary/40 lg:bottom-8 lg:right-8"
+          className="group fixed bottom-24 right-6 z-50 grid h-14 w-14 place-items-center rounded-full bg-background/90 backdrop-blur lg:bottom-8 lg:right-8"
         >
           {/* Circular scroll-progress ring */}
           <svg
@@ -63,7 +63,7 @@ const BackToTop = () => {
               cy="28"
               r="25"
               fill="none"
-              stroke="hsl(var(--primary))"
+              stroke="hsl(var(--foreground))"
               strokeWidth="2"
               strokeLinecap="round"
               style={{ pathLength: reduceMotion ? scrollYProgress : pathLength }}
@@ -71,12 +71,12 @@ const BackToTop = () => {
           </svg>
 
           <ArrowUp
-            className="h-5 w-5 text-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:text-primary"
+            className="h-5 w-5 text-foreground transition-all duration-300 group-hover:-translate-y-0.5"
             strokeWidth={1.75}
           />
 
           {/* Mono meta label on hover — editorial touch */}
-          <span className="font-mono-meta pointer-events-none absolute right-full mr-3 whitespace-nowrap text-[0.6rem] uppercase tracking-[0.18em] text-muted-foreground opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <span className="eyebrow pointer-events-none absolute right-full mr-3 whitespace-nowrap opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             нагоре
           </span>
         </motion.button>

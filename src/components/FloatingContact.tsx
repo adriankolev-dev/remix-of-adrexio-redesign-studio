@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   motion,
   AnimatePresence,
   useMotionValueEvent,
   useScroll,
-  useReducedMotion,
 } from "framer-motion";
 import { MessageCircle, Phone, Send, X, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -79,11 +78,22 @@ const ChannelRow = ({ channel }: { channel: Channel }) => {
 
 /** Desktop: a floating chat launcher (bottom-left) that expands a channel card. */
 const DesktopWidget = () => {
-  const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
+  const { pathname } = useLocation();
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (y) => setPastHero(y > window.innerHeight * 0.75));
+
+  // The home hero has its own bottom row in this corner, so the launcher waits below it.
+  const hidden = pathname === "/" && !pastHero && !open;
 
   return (
-    <div className="fixed bottom-8 left-8 z-50 hidden lg:block">
+    <div
+      className={`fixed bottom-8 left-8 z-50 hidden transition-[opacity,transform] duration-300 lg:block ${
+        hidden ? "pointer-events-none translate-y-4 opacity-0" : ""
+      }`}
+    >
       <AnimatePresence>
         {open && (
           <motion.div
@@ -91,10 +101,10 @@ const DesktopWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ duration: 0.28, ease: EASE_OUT }}
-            className="layer-shadow absolute bottom-16 left-0 w-72 origin-bottom-left overflow-hidden rounded-2xl border border-border bg-card/95 backdrop-blur"
+            className="absolute bottom-16 left-0 w-72 origin-bottom-left overflow-hidden rounded-md border border-border bg-background"
           >
             <div className="border-b border-border px-4 py-3">
-              <p className="font-mono-meta text-[0.6rem] uppercase tracking-[0.18em] text-primary">
+              <p className="eyebrow">
                 Пиши ни
               </p>
               <p className="mt-1 text-sm font-semibold text-foreground">
@@ -108,7 +118,7 @@ const DesktopWidget = () => {
             </div>
             <Link
               to="/contact"
-              className="flex items-center justify-between border-t border-border px-4 py-3 text-sm font-medium text-foreground transition-colors hover:text-primary"
+              className="flex items-center justify-between border-t border-border px-4 py-3 text-sm font-semibold text-foreground transition-opacity hover:opacity-60"
             >
               Изпрати запитване
               <ArrowRight size={16} />
@@ -122,10 +132,10 @@ const DesktopWidget = () => {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Затвори" : "Пиши ни"}
         aria-expanded={open}
-        className="group layer-shadow relative grid h-14 w-14 place-items-center rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105"
+        className="group relative grid h-14 w-14 place-items-center rounded-full bg-foreground text-background transition-transform hover:scale-105"
       >
-        {!reduceMotion && !open && (
-          <span className="absolute inset-0 animate-ping rounded-full bg-primary/40" aria-hidden />
+        {!open && (
+          <span className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full border-2 border-background bg-primary" aria-hidden />
         )}
         <AnimatePresence mode="wait" initial={false}>
           <motion.span
@@ -172,12 +182,12 @@ const MobileBar = () => {
             href="tel:+359896173743"
             className="flex flex-1 items-center justify-center gap-2 border-x border-border py-3.5 text-sm font-semibold text-foreground"
           >
-            <Phone className="h-4 w-4 text-primary" strokeWidth={2.25} />
+            <Phone className="h-4 w-4 text-foreground" strokeWidth={2.25} />
             Обади се
           </a>
           <Link
             to="/contact"
-            className="flex flex-[1.3] items-center justify-center gap-2 bg-primary py-3.5 text-sm font-semibold text-primary-foreground"
+            className="flex flex-[1.3] items-center justify-center gap-2 bg-foreground py-3.5 text-sm font-semibold text-background"
           >
             Запитване
             <ArrowRight size={16} />
