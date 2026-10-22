@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Mail, Phone, MapPin, Send, CheckCircle, Loader2, ArrowRight } from "lucide-react";
+import { ArrowUpRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import PageIntro from "@/components/editorial/PageIntro";
 import Reveal from "@/components/editorial/Reveal";
-import PlaneMascot from "@/components/mascots/PlaneMascot";
+import { FormError, FormSuccess, StudioField, StudioInput, StudioTextarea } from "@/components/forms/Studio";
 import { getLocalBusinessSchema } from "@/lib/structuredData";
 import emailjs from "@emailjs/browser";
 import {
@@ -32,9 +30,9 @@ interface FormData {
 }
 
 const contactChannels = [
-  { icon: Mail, label: "Email", value: "hello@adrexio.com", href: "mailto:hello@adrexio.com" },
-  { icon: Phone, label: "Телефон", value: "+359 896 173 743", href: "tel:+359896173743" },
-  { icon: MapPin, label: "Адрес", value: "София, България" },
+  { label: "Имейл", value: "hello@adrexio.com", href: "mailto:hello@adrexio.com" },
+  { label: "Телефон", value: "+359 896 173 743", href: "tel:+359896173743" },
+  { label: "Адрес", value: "София, България" },
 ];
 
 const reasons = [
@@ -205,96 +203,61 @@ const Contact = () => {
 
       <PageIntro
         label="Контакти"
-        title={
-          <>
-            Да поговорим за <span className="accent-mark">проекта</span>
-          </>
-        }
+        title="Да поговорим."
         description="Свържете се с нас за безплатна консултация. Ще ви помогнем да превърнете идеите си в реалност."
-        aside={<PlaneMascot />}
       />
 
-      <section className="relative bg-background pb-24 md:pb-32">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
-            {/* Contact info */}
+      <section className="bg-background pb-16 md:pb-24">
+        <div className="container mx-auto px-6">
+          <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
+            {/* Channels */}
             <div>
-              <Reveal>
-                <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
-                  Готови сме да отговорим на вашите въпроси и да обсъдим проекта ви. Изберете канала,
-                  който ви е удобен.
-                </p>
-              </Reveal>
+              <ul className="border-t border-border">
+                {contactChannels.map((channel, i) => (
+                  <Reveal as="li" key={channel.label} delay={i * 0.05} className="border-b border-border py-6">
+                    <p className="eyebrow">{channel.label}</p>
+                    {channel.href ? (
+                      <a
+                        href={channel.href}
+                        className="group mt-2 inline-flex items-center gap-2 break-all text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-[1.75rem]"
+                      >
+                        {channel.value}
+                        <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      </a>
+                    ) : (
+                      <p className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-[1.75rem]">
+                        {channel.value}
+                      </p>
+                    )}
+                  </Reveal>
+                ))}
+              </ul>
 
-              <div className="mt-10 border-t border-border">
-                {contactChannels.map((channel, i) => {
-                  const Row = (
-                    <div className="flex items-center gap-5 py-5">
-                      <channel.icon className="h-5 w-5 shrink-0 text-primary" strokeWidth={1.75} />
-                      <div className="min-w-0">
-                        <div className="font-mono-meta text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
-                          {channel.label}
-                        </div>
-                        <div className="mt-1 break-words text-lg font-medium text-foreground">
-                          {channel.value}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                  return (
-                    <Reveal key={channel.label} delay={i * 0.05}>
-                      <div className="border-b border-border">
-                        {channel.href ? (
-                          <a
-                            href={channel.href}
-                            className="block transition-colors hover:text-primary"
-                          >
-                            {Row}
-                          </a>
-                        ) : (
-                          Row
-                        )}
-                      </div>
-                    </Reveal>
-                  );
-                })}
-              </div>
-
-              {/* Why us */}
-              <Reveal delay={0.1} className="mt-12">
-                <h3 className="font-mono-meta text-[0.7rem] uppercase tracking-[0.2em] text-primary">
-                  Защо да ни изберете
-                </h3>
-                <ul className="mt-5 space-y-3">
+              <Reveal delay={0.1} className="mt-10">
+                <p className="eyebrow">Защо да ни изберете</p>
+                <ul className="mt-4 border-t border-border">
                   {reasons.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-muted-foreground">
-                      <CheckCircle size={18} className="mt-0.5 shrink-0 text-primary" />
+                    <li key={item} className="flex gap-3 border-b border-border py-3.5 text-[0.95rem] leading-relaxed text-muted-foreground">
+                      <span aria-hidden className="font-bold text-foreground">+</span>
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               </Reveal>
 
-              {/* Socials */}
-              <Reveal delay={0.16} className="mt-12">
-                <h3 className="font-mono-meta text-[0.7rem] uppercase tracking-[0.2em] text-primary">
-                  Последвайте ни
-                </h3>
-                <div className="mt-5 flex items-center gap-3">
+              <Reveal delay={0.16} className="mt-10">
+                <p className="eyebrow">Последвайте ни</p>
+                <div className="mt-4 flex items-center gap-2">
                   {socials.map((social) => (
                     <a
                       key={social.label}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Последвайте ни в ${social.label}`}
-                      className="group flex h-12 w-12 items-center justify-center rounded-xl border border-border transition-colors hover:border-primary hover:bg-primary/5"
+                      aria-label={`Adrexio в ${social.label}`}
+                      className="grid h-11 w-11 place-items-center rounded-full border border-border text-foreground transition-colors hover:border-foreground"
                     >
-                      <svg
-                        className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
+                      <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                         <path d={social.path} />
                       </svg>
                     </a>
@@ -304,155 +267,76 @@ const Contact = () => {
             </div>
 
             {/* Form */}
-            <Reveal delay={0.12} direction="right">
+            <Reveal delay={0.08}>
               {isSubmitted ? (
-                <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-border p-12 text-center">
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                    <CheckCircle className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="font-display text-2xl font-bold">Благодарим ви!</h3>
-                  <p className="mt-4 text-muted-foreground">
-                    Вашето съобщение беше изпратено успешно. Ще се свържем с вас възможно най-скоро.
-                  </p>
-                  <Button variant="line" className="mt-6" onClick={() => setIsSubmitted(false)}>
-                    Изпратете ново съобщение
-                  </Button>
-                </div>
+                <FormSuccess
+                  text="Съобщението е изпратено. Ще ви отговорим до 24 часа."
+                  onReset={() => setIsSubmitted(false)}
+                  resetLabel="Ново съобщение"
+                />
               ) : (
-                <div className="space-y-6">
-                  <form
-                    onSubmit={handleSubmit}
-                    className="space-y-6 rounded-2xl border border-border p-6 lg:p-8"
-                  >
-                    {error && (
-                      <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-4 text-sm text-destructive">
-                        {error}
-                      </div>
-                    )}
+                <form onSubmit={handleSubmit} className="rounded-md bg-secondary p-6 md:p-10">
+                  <p className="text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-[1.75rem]">
+                    Пишете ни
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">Отговаряме до 24 часа, без обвързващи договори.</p>
 
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">Име</label>
-                        <Input
-                          name="from_name"
-                          value={formData.from_name}
-                          onChange={handleChange}
-                          placeholder="Вашето име"
-                          required
-                          className="border-border bg-secondary/50"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">Email</label>
-                        <Input
-                          name="from_email"
-                          type="email"
-                          value={formData.from_email}
-                          onChange={handleChange}
-                          placeholder="email@example.com"
-                          required
-                          className="border-border bg-secondary/50"
-                        />
-                      </div>
-                    </div>
+                  <div className="mt-8 grid gap-8 md:grid-cols-2">
+                    <StudioField id="from_name" label="Име" required>
+                      <StudioInput id="from_name" name="from_name" value={formData.from_name} onChange={handleChange} placeholder="Вашето име" autoComplete="name" required />
+                    </StudioField>
+                    <StudioField id="from_email" label="Имейл" required>
+                      <StudioInput id="from_email" name="from_email" type="email" value={formData.from_email} onChange={handleChange} placeholder="email@example.com" autoComplete="email" required />
+                    </StudioField>
+                    <StudioField id="phone" label="Телефон">
+                      <StudioInput id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="+359 …" autoComplete="tel" />
+                    </StudioField>
+                    <StudioField id="subject" label="Тема" hint="по избор">
+                      <StudioInput id="subject" name="subject" value={formData.subject} onChange={handleChange} placeholder="За какво става дума?" />
+                    </StudioField>
+                    <StudioField id="message" label="Съобщение" required className="md:col-span-2">
+                      <StudioTextarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Разкажете ни повече за проекта" rows={5} required />
+                    </StudioField>
+                  </div>
 
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Телефон</label>
-                      <Input
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+359 896 173 743"
-                        className="border-border bg-secondary/50"
-                      />
-                    </div>
+                  {/* Honeypot field */}
+                  <div style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}>
+                    <label htmlFor={HONEYPOT_FIELD_NAME}>Не попълвайте това поле</label>
+                    <input
+                      id={HONEYPOT_FIELD_NAME}
+                      name={HONEYPOT_FIELD_NAME}
+                      type="text"
+                      value={formData[HONEYPOT_FIELD_NAME]}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
 
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">
-                        Тема <span className="text-muted-foreground">(по избор)</span>
-                      </label>
-                      <Input
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        placeholder="Относно какво е вашето запитване?"
-                        className="border-border bg-secondary/50"
-                      />
-                    </div>
+                  {error && <div className="mt-8"><FormError>{error}</FormError></div>}
 
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">Съобщение</label>
-                      <Textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Разкажете ни повече за вашия проект..."
-                        rows={5}
-                        required
-                        className="resize-none border-border bg-secondary/50"
-                      />
-                    </div>
-
-                    {/* Honeypot field */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        left: "-9999px",
-                        opacity: 0,
-                        pointerEvents: "none",
-                      }}
-                    >
-                      <label htmlFor={HONEYPOT_FIELD_NAME}>Не попълвайте това поле</label>
-                      <Input
-                        id={HONEYPOT_FIELD_NAME}
-                        name={HONEYPOT_FIELD_NAME}
-                        type="text"
-                        value={formData[HONEYPOT_FIELD_NAME]}
-                        onChange={handleChange}
-                        tabIndex={-1}
-                        autoComplete="off"
-                      />
-                    </div>
-
-                    <Button
-                      variant="ink"
-                      size="lg"
-                      type="submit"
-                      className="w-full"
-                      disabled={isLoading}
-                    >
+                  <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+                    <Button variant="ink" size="xl" type="submit" disabled={isLoading}>
                       {isLoading ? (
                         <>
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                          Изпращане...
+                          <Loader2 className="animate-spin" />
+                          Изпращане…
                         </>
                       ) : (
                         <>
-                          Изпратете съобщение
-                          <Send size={18} />
+                          Изпрати
+                          <ArrowUpRight />
                         </>
                       )}
                     </Button>
-
-                    <p className="font-mono-meta text-center text-[0.65rem] uppercase tracking-[0.14em] text-muted-foreground">
-                      Отговаряме до 24 часа · Без обвързващи договори
-                    </p>
-                  </form>
-
-                  <div className="border-t border-border pt-6">
-                    <p className="text-sm text-muted-foreground">
-                      Имате ясна визия за проекта? Попълнете брифа — така ще разберем нуждите ви
-                      най-точно.
-                    </p>
-                    <Button variant="line" size="lg" asChild className="mt-3">
-                      <Link to="/project-inquiry">
-                        Попълни бриф
-                        <ArrowRight size={16} />
-                      </Link>
-                    </Button>
+                    <Link
+                      to="/project-inquiry"
+                      className="text-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
+                    >
+                      Или попълнете подробен бриф
+                    </Link>
                   </div>
-                </div>
+                </form>
               )}
             </Reveal>
           </div>
