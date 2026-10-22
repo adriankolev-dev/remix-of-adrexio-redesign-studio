@@ -14,9 +14,7 @@ import {
 import { Link } from "react-router-dom";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 import { SERVICE_TRUST_STATS } from "@/data/trustStats";
-import SearchMascot from "@/components/mascots/SearchMascot";
 import Reveal from "@/components/editorial/Reveal";
-import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import SectionHeader from "@/components/editorial/SectionHeader";
 
 const geoGroups = [
@@ -115,33 +113,27 @@ const geoGroups = [
 
 const SEO = () => {
   const geoSection = (
-    <section className="relative bg-background py-24 md:py-32">
+    <section className="bg-background py-16 md:py-24">
       <div className="container mx-auto px-6">
         <SectionHeader
-          index="11"
-          label="Generative Engine Optimization"
-          title="Подготовка за AI търсене"
+          title="Подготовка за AI търсене."
+          description="С нарастването на AI търсачките като ChatGPT, Perplexity и Google SGE, оптимизацията за генеративни търсачки става все по-важна. GEO ви помага да бъдете видими в отговорите на AI асистентите."
         />
-
-        <Reveal className="-mt-6 mb-14">
-          <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            С нарастването на AI търсачките като ChatGPT, Perplexity и Google SGE, оптимизацията за
-            генеративни търсачки става все по-важна. GEO ви помага да бъдете видими в отговорите на AI
-            асистентите.
-          </p>
-        </Reveal>
 
         <div className="grid gap-x-16 gap-y-4 md:grid-cols-2">
           {geoGroups.map((group, gi) => (
             <div key={group.label} className="py-8">
               <Reveal>
-                <SectionEyebrow label={group.label} index={String(gi + 1).padStart(2, "0")} />
+                <p className="eyebrow">
+                  <span className="mr-2 text-foreground">{String(gi + 1).padStart(2, "0")}</span>
+                  {group.label}
+                </p>
               </Reveal>
               <div className="mt-6 border-t border-border">
                 {group.items.map((item, i) => (
                   <Reveal key={item.term} delay={i * 0.04}>
                     <div className="border-b border-border py-4">
-                      <h4 className="font-display text-base font-semibold text-foreground">
+                      <h4 className="text-lg font-semibold tracking-[-0.02em] text-foreground">
                         {item.term}
                       </h4>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
@@ -183,7 +175,6 @@ const SEO = () => {
       heroHighlight="които носят клиенти."
       heroSubtitle="Технически одит, on-page работа и съдържание, насочени към търсенията с реално намерение за покупка. За видимост в AI търсачките вижте GEO оптимизация."
       heroCTAText="Свържи се с нас"
-      heroAside={<SearchMascot />}
       stats={SERVICE_TRUST_STATS}
       introTitle="Защо SEO е инвестицията с най-дълъг живот"
       introDescription="Рекламата спира в деня, в който спрете да плащате. Позиция, спечелена с добра техническа основа и съдържание по правилните заявки, продължава да носи запитвания месеци след като работата е свършена. Започваме с одит какво пречи на сайта ви да се класира днес, а не с обещания за проценти. Ако търсите и видимост в ChatGPT и Google AI Overviews, това е отделна дисциплина — вижте GEO оптимизация."

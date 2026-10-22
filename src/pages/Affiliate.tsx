@@ -15,9 +15,8 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { PRICING } from "@/data/pricing";
 import PageIntro from "@/components/editorial/PageIntro";
-import RewardMascot from "@/components/mascots/RewardMascot";
+import CTASection from "@/components/CTASection";
 import Reveal from "@/components/editorial/Reveal";
-import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import {
   Accordion,
@@ -153,7 +152,7 @@ const Affiliate = () => {
         label="Партньорска програма"
         title={
           <>
-            Печелете <span className="accent-mark">20% комисионна</span> за всяка препоръка
+            Печелете 20% комисионна за всяка препоръка
           </>
         }
         description="Препоръчайте нашите услуги и получавайте справедлива комисионна за всеки успешно завършен проект. Плащаме след като клиентът е платил и проектът е завършен."
@@ -170,81 +169,63 @@ const Affiliate = () => {
           { value: "0", label: "Такси за регистрация" },
           { value: "∞", label: "Неограничени препоръки" },
         ]}
-        aside={<RewardMascot />}
       />
 
       {/* Benefits */}
-      <section className="relative bg-secondary/30 py-24 md:py-32">
+      <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
-          <SectionHeader index="02" label="Защо да се присъедините" title="Предимства на програмата" />
-          <div className="grid gap-x-10 border-t border-border sm:grid-cols-2">
+          <SectionHeader title="Предимства на програмата." />
+          <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((benefit, i) => (
-              <Reveal key={benefit.title} delay={(i % 2) * 0.06}>
-                <div className="flex gap-5 border-b border-border py-8">
-                  <benefit.icon className="mt-1 h-6 w-6 shrink-0 text-primary" strokeWidth={1.75} />
-                  <div>
-                    <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                      {benefit.title}
-                    </h3>
-                    <p className="mt-2 max-w-md text-base leading-relaxed text-muted-foreground">
-                      {benefit.description}
-                    </p>
-                  </div>
-                </div>
+              <Reveal as="li" key={benefit.title} delay={(i % 3) * 0.05} className="border-t border-border pb-10 pt-6">
+                <benefit.icon className="h-6 w-6 text-foreground" strokeWidth={1.75} aria-hidden />
+                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">{benefit.title}</h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{benefit.description}</p>
               </Reveal>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="relative bg-background py-24 md:py-32">
+      {/* How it works: the ink band, like the homepage process */}
+      <section className="layer-dark py-20 md:py-28">
         <div className="container mx-auto px-6">
-          <SectionHeader index="03" label="Как работи?" title="Четири прости стъпки" />
-          <div className="border-t border-border">
-            {steps.map((step) => (
-              <Reveal key={step.number}>
-                <div className="grid grid-cols-[auto_1fr] items-start gap-5 border-b border-border py-8 md:gap-10 md:py-10">
-                  <span className="font-display text-4xl font-bold leading-none text-foreground/10 md:text-6xl">
-                    {step.number}
-                  </span>
-                  <div className="pt-1">
-                    <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
+          <SectionHeader bare title="Четири стъпки." />
+          <ol className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, i) => (
+              <Reveal as="li" key={step.number} delay={i * 0.05} className="border-t border-border pb-10 pt-6">
+                <span className="block text-6xl font-black leading-none tracking-[-0.05em] text-foreground/20">
+                  {step.number}
+                </span>
+                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
               </Reveal>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* Important notice + example calculation */}
-      <section className="relative bg-secondary/30 py-24 md:py-32">
-        <div className="container mx-auto px-6">
-          <div className="mx-auto grid max-w-5xl gap-14 lg:grid-cols-2 lg:gap-20">
-            <Reveal>
-              <SectionEyebrow label="Важно за клиентите" index="04" />
-              <h3 className="font-display mt-6 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+      {/* Tracking notice + example calculation, as two grey panels */}
+      <section className="bg-background py-16 md:py-24">
+        <div className="container mx-auto grid gap-4 px-6 lg:grid-cols-2">
+          <Reveal className="h-full">
+            <div className="h-full rounded-md bg-secondary p-7 md:p-10">
+              <p className="eyebrow">Важно за клиентите</p>
+              <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-3xl">
                 Как да проследим вашата препоръка
               </h3>
               <p className="mt-5 text-muted-foreground">
                 Когато препоръчвате наши услуги, инструктирайте клиента да:
               </p>
-              <ul className="mt-5 space-y-3">
-                <li className="flex items-start gap-3 text-muted-foreground">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+              <ul className="mt-4 border-t border-border">
+                <li className="flex items-start gap-3 border-b border-border py-3.5 text-muted-foreground">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-foreground" />
                   <span>Спомене вашето име при контакт с нас, или</span>
                 </li>
-                <li className="flex items-start gap-3 text-muted-foreground">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <li className="flex items-start gap-3 border-b border-border py-3.5 text-muted-foreground">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-foreground" />
                   <span>
-                    Напише{" "}
-                    <strong className="text-foreground">«Партньорска програма»</strong> или{" "}
+                    Напише <strong className="text-foreground">«Партньорска програма»</strong> или{" "}
                     <strong className="text-foreground">«Affiliate програма»</strong> в темата на
                     запитването
                   </span>
@@ -254,116 +235,71 @@ const Affiliate = () => {
                 Това ни помага да проследяваме вашите препоръки и да ви изплатим комисионната
                 правилно.
               </p>
-            </Reveal>
+            </div>
+          </Reveal>
 
-            <Reveal delay={0.1}>
-              <SectionEyebrow label="Пример за изчисление" index="05" />
-              <h3 className="font-display mt-6 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+          <Reveal delay={0.08} className="h-full">
+            <div className="h-full rounded-md bg-secondary p-7 md:p-10">
+              <p className="eyebrow">Пример за изчисление</p>
+              <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-3xl">
                 Колко можете да спечелите
               </h3>
-              <dl className="mt-8 border-t border-border">
+              <dl className="mt-6 border-t border-border">
                 {[
-                  {
-                    label: "Среден уеб проект",
-                    value: `€${PRICING.ecommerce.label}`,
-                  },
-                  {
-                    label: "Вашата комисионна",
-                    value: `${PRICING.affiliate.commissionPct}%`,
-                  },
+                  { label: "Среден уеб проект", value: `€${PRICING.ecommerce.label}` },
+                  { label: "Вашата комисионна", value: `${PRICING.affiliate.commissionPct}%` },
                   {
                     label: "Вашето плащане за проект",
                     value: `€${(PRICING.affiliate.exampleProject * PRICING.affiliate.commissionPct) / 100}`,
                   },
                 ].map((row) => (
-                  <div
-                    key={row.label}
-                    className="flex items-baseline justify-between border-b border-border py-4"
-                  >
+                  <div key={row.label} className="flex items-baseline justify-between border-b border-border py-4">
                     <dt className="text-muted-foreground">{row.label}</dt>
-                    <dd className="font-display text-2xl font-bold text-foreground">{row.value}</dd>
+                    <dd className="text-2xl font-semibold tracking-[-0.03em] text-foreground">{row.value}</dd>
                   </div>
                 ))}
               </dl>
-              <div className="mt-6 border-l-2 border-primary pl-5">
-                <p className="text-sm text-muted-foreground">
-                  При <strong className="text-foreground">5 проекта</strong> на месец:
-                </p>
-                <p className="font-display mt-1 text-2xl font-bold text-primary">
-                  €
-                  {(
-                    (5 *
-                      PRICING.affiliate.exampleProject *
-                      PRICING.affiliate.commissionPct) /
-                    100
-                  ).toLocaleString("de-DE")}{" "}
-                  пасивен доход на месец
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="relative bg-background py-24 md:py-32">
-        <div className="container mx-auto px-6">
-          <SectionHeader index="06" label="FAQ" title="Често задавани въпроси" />
-          <div className="mx-auto max-w-3xl border-t border-border">
-            <Accordion type="single" collapsible>
-              {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-b border-border">
-                  <AccordionTrigger className="py-6 text-left font-display text-base font-semibold hover:text-primary hover:no-underline md:text-lg">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6 text-base leading-relaxed text-muted-foreground">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="layer-dark relative overflow-hidden py-28 md:py-36">
-        <div className="canvas-grid absolute inset-0 opacity-[0.07]" aria-hidden />
-        <div className="container relative z-10 mx-auto px-6 text-center">
-          <Reveal>
-            <SectionEyebrow label="Следваща стъпка" index="07" className="justify-center" />
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="font-display text-display-sm mx-auto mt-8 max-w-3xl font-bold text-foreground">
-              Готови ли сте да започнете да печелите?
-            </h2>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-              Присъединете се към нашата партньорска програма днес. Регистрацията е безплатна и отнема
-              само минути.
-            </p>
-          </Reveal>
-          <Reveal delay={0.24}>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button variant="accent" size="xl" asChild>
-                <Link to="/contact?affiliate=true" onClick={goToContact}>
-                  Станете партньор
-                  <ArrowRight size={18} />
-                </Link>
-              </Button>
-              <Button
-                variant="line"
-                size="xl"
-                asChild
-                className="border-foreground/25 text-foreground hover:border-foreground/50"
-              >
-                <Link to="/case-studies">Виж проектите</Link>
-              </Button>
+              <p className="mt-6 text-sm text-muted-foreground">
+                При <strong className="text-foreground">5 проекта</strong> на месец:
+              </p>
+              <p className="mt-1 text-3xl font-black tracking-[-0.045em] text-foreground md:text-4xl">
+                €
+                {(
+                  (5 * PRICING.affiliate.exampleProject * PRICING.affiliate.commissionPct) /
+                  100
+                ).toLocaleString("de-DE")}{" "}
+                <span className="text-lg font-semibold tracking-[-0.02em]">пасивен доход на месец</span>
+              </p>
             </div>
           </Reveal>
         </div>
       </section>
+
+      {/* FAQ */}
+      <section className="bg-background py-16 md:py-24">
+        <div className="container mx-auto px-6">
+          <SectionHeader title="Въпроси." />
+          <Accordion type="single" collapsible className="border-t border-border">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-b border-border">
+                <AccordionTrigger className="py-6 text-left text-lg font-semibold tracking-[-0.02em] hover:no-underline md:text-xl">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="max-w-3xl pb-6 text-base leading-relaxed text-muted-foreground">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      <CTASection
+        lead="Готови ли сте да започнете да печелите?"
+        text="Присъединете се към партньорската програма. Регистрацията е безплатна и отнема само минути."
+        primary={{ label: "Станете партньор", href: "/contact?affiliate=true", onClick: goToContact }}
+        secondary={{ label: "Виж проектите", href: "/case-studies" }}
+      />
 
       <Footer />
     </main>

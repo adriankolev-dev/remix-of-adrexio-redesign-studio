@@ -10,9 +10,8 @@ import {
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 import { SERVICE_TRUST_STATS } from "@/data/trustStats";
-import BrowserMascot from "@/components/mascots/BrowserMascot";
-import ProjectsCarousel from "@/components/ProjectsCarousel";
-import PricingWebDevLink from "@/components/pricing/PricingWebDevLink";
+import WorkSection from "@/components/WorkSection";
+import PricingTeaser from "@/components/pricing/PricingTeaser";
 
 const WebDevelopment = () => {
   return (
@@ -25,7 +24,6 @@ const WebDevelopment = () => {
       heroHighlight="за бизнеси, на които шаблонът не стига."
       heroSubtitle="Превръщаме вашите посетители в лоялни клиенти с високопроизводителни уебсайтове, които работят за вашия бизнес 24/7."
       heroCTAText="Свържи се с нас"
-      heroAside={<BrowserMascot />}
       stats={SERVICE_TRUST_STATS}
       introTitle="Защо вашият бизнес се нуждае от модерен уебсайт?"
       introDescription="Ние не просто пишем код. Анализираме вашия бизнес модел и създаваме дигитален инструмент, който работи за целите ви денонощно. Вашият уебсайт е първото впечатление за потенциалните клиенти — нека го направим незабравимо."
@@ -146,7 +144,7 @@ const WebDevelopment = () => {
         {
           icon: Award,
           title: "Доказан опит",
-          description: "7+ години опит в индустрията с фокус върху качество и резултати.",
+          description: "Екип с над 10 години опит в уеб дизайна и разработката.",
         },
         {
           icon: Code,
@@ -211,8 +209,8 @@ const WebDevelopment = () => {
       ctaSubtitle="Свържете се с нас днес за безплатна консултация и нека обсъдим вашата идея."
       customSectionBeforeCTA={
         <>
-          <ProjectsCarousel />
-          <PricingWebDevLink />
+          <WorkSection />
+          <PricingTeaser />
         </>
       }
     />

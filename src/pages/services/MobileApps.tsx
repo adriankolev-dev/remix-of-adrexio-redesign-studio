@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 import { SERVICE_TRUST_STATS } from "@/data/trustStats";
-import PhoneMascot from "@/components/mascots/PhoneMascot";
 
 const MobileApps = () => {
   return (
@@ -27,7 +26,6 @@ const MobileApps = () => {
       heroHighlight="вашият бизнес в джоба на всеки клиент."
       heroSubtitle="Създаваме иновативни мобилни приложения за iOS и Android, които дават отлично потребителско изживяване и реални бизнес резултати."
       heroCTAText="Свържи се с нас"
-      heroAside={<PhoneMascot />}
       
       stats={SERVICE_TRUST_STATS}
       
@@ -167,7 +165,7 @@ const MobileApps = () => {
         {
           icon: Award,
           title: "Доказан опит",
-          description: "7+ години опит в мобилна разработка с високи оценки в App Store и Google Play."
+          description: "Екип с над 10 години опит, с приложения с високи оценки в App Store и Google Play."
         },
         {
           icon: Code,

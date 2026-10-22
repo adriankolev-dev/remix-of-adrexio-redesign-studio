@@ -56,13 +56,13 @@ const Blog = () => {
         label="Блог"
         title={
           <>
-            Идеи за <span className="accent-mark">дигиталния</span> бизнес.
+            Идеи за дигиталния бизнес.
           </>
         }
         description="Практични статии за изкуствен интелект, автоматизация и технологии, които помагат на бизнеса да расте — без излишен жаргон."
       />
 
-      <section className="relative bg-background pb-12">
+      <section className="bg-background pb-10">
         <div className="container mx-auto px-6">
           <BlogFilters
             activeCategory={activeCategory}
@@ -74,10 +74,10 @@ const Blog = () => {
       <section className="pb-24">
         <div className="container mx-auto px-6">
           <div className="mb-10 border-t border-border pt-8">
-            <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-primary">
+            <span className="eyebrow text-foreground">
               {isFiltering ? activeCategory : "Всички статии"}
             </span>
-            <h2 className="font-display mt-3 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+            <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-3xl">
               {filteredPosts.length}{" "}
               {filteredPosts.length === 1 ? "статия" : "статии"}
             </h2>

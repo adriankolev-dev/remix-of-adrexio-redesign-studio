@@ -244,7 +244,7 @@ const Terms = () => (
     label="Общи условия"
     title={
       <>
-        Условия за <span className="accent-mark">използване</span>
+        Условия за използване
       </>
     }
     updated={updated}

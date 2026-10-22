@@ -1,10 +1,10 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { ArrowLeft, Home } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Navbar from "@/components/Navbar";
 import Reveal from "@/components/editorial/Reveal";
-import SectionEyebrow from "@/components/editorial/SectionEyebrow";
-import RobotMascot from "@/components/mascots/RobotMascot";
+import stone from "@/assets/hero-stone-800.webp";
 
 const NotFound = () => {
   const location = useLocation();
@@ -14,55 +14,44 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <main className="relative flex min-h-screen items-center overflow-hidden bg-background">
-      <div className="canvas-grid canvas-grid-fade absolute inset-0 opacity-60" aria-hidden />
+    <main className="flex min-h-screen flex-col bg-background">
+      <Navbar />
+      <div className="container mx-auto flex flex-1 flex-col justify-center px-6 pb-16 pt-32">
+        <Reveal immediate>
+          <p className="eyebrow">Грешка 404</p>
+          <p className="title-page mt-6 select-none" aria-hidden>
+            404<span className="text-primary">.</span>
+          </p>
+        </Reveal>
 
-      <div className="container relative z-10 mx-auto px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          <div className="max-w-3xl">
-          <Reveal immediate>
-            <SectionEyebrow label="Грешка" index="404" />
-          </Reveal>
-
-          <Reveal immediate delay={0.08}>
-            <p className="font-display mt-6 select-none text-[26vw] font-bold leading-[0.8] tracking-tighter text-foreground/10 md:text-[16rem]">
-              404
-            </p>
-          </Reveal>
-
-          <Reveal immediate delay={0.16}>
-            <h1 className="font-display mt-2 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-              Тази страница я <span className="accent-mark">няма на картата.</span>
-            </h1>
-          </Reveal>
-
-          <Reveal immediate delay={0.24}>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
-              Страницата, която търсите, не съществува или е била преместена. Да ви върнем на
-              позната територия.
-            </p>
-          </Reveal>
-
-          <Reveal immediate delay={0.32}>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button variant="ink" size="lg" asChild>
-                <Link to="/">
-                  <Home size={18} />
-                  Към началото
-                </Link>
-              </Button>
-              <Button variant="line" size="lg" onClick={() => window.history.back()}>
-                <ArrowLeft size={18} />
-                Назад
-              </Button>
+        <Reveal immediate delay={0.1}>
+          <div className="mt-10 grid gap-8 border-t border-border pt-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-16">
+            <div>
+              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-4xl">
+                Тази страница я няма на картата.
+              </h1>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button variant="ink" size="lg" asChild>
+                  <Link to="/">
+                    Към началото
+                    <ArrowUpRight />
+                  </Link>
+                </Button>
+                <Button variant="line" size="lg" onClick={() => window.history.back()}>
+                  <ArrowLeft />
+                  Назад
+                </Button>
+              </div>
             </div>
-          </Reveal>
+            <div>
+              <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-[1.1rem]">
+                Страницата, която търсите, не съществува или е била преместена. Да ви върнем на
+                позната територия.
+              </p>
+              <img src={stone} alt="" aria-hidden width={800} height={418} className="mt-8 w-48 md:w-56" />
+            </div>
           </div>
-
-          <Reveal immediate delay={0.2} className="hidden lg:block">
-            <RobotMascot variant="lost" />
-          </Reveal>
-        </div>
+        </Reveal>
       </div>
     </main>
   );

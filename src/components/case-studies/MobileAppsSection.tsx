@@ -1,4 +1,4 @@
-import { ExternalLink, Star, Download } from "lucide-react";
+import { ArrowUpRight, Star, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
@@ -8,29 +8,20 @@ const MobileAppsSection = () => {
   return (
     <section
       id="mobile-apps"
-      className="relative overflow-hidden border-t border-border bg-background py-24 md:py-32"
+      className="bg-background py-16 md:py-24"
     >
-      <div className="canvas-grid canvas-grid-fade pointer-events-none absolute inset-0 opacity-50" aria-hidden />
-
-      <div className="container relative z-10 mx-auto px-6">
+      <div className="container mx-auto px-6">
         <SectionHeader
-          label="Мобилни приложения"
-          title={
-            <>
-              Приложения, по които{" "}
-              <span className="accent-mark">сме работили</span>.
-            </>
-          }
+          title="Мобилни приложения."
           description="Някои от тях направихме изцяло, по други работихме по отделни части. Всички са в App Store."
-          note="на живо в App Store"
         />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {mobileApps.map((app, index) => (
             <Reveal key={app.id} delay={(index % 3) * 0.06}>
-              <article className="group">
-                <div className="overflow-hidden rounded-xl border border-border bg-card transition-colors duration-300 hover:border-primary/40">
-                  <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
+              <article className="group h-full">
+                <div className="flex h-full flex-col rounded-md bg-secondary p-3 md:p-4">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-[0.25rem] bg-muted">
                     <img
                       src={app.image}
                       alt={app.name}
@@ -39,20 +30,18 @@ const MobileAppsSection = () => {
                     />
                   </div>
 
-                  <div className="p-6">
+                  <div className="flex flex-1 flex-col px-1 pb-1 pt-5 md:px-2">
                     <div className="mb-3 flex items-center justify-between gap-3">
-                      <span className="font-mono-meta text-[0.6rem] uppercase tracking-[0.14em] text-primary">
-                        {app.category}
-                      </span>
+                      <span className="eyebrow">{app.category}</span>
                       {app.rating && (
-                        <div className="flex items-center gap-1 text-primary">
+                        <div className="flex items-center gap-1 text-foreground">
                           <Star className="h-3.5 w-3.5 fill-current" />
-                          <span className="font-mono-meta text-[0.62rem]">{app.rating}</span>
+                          <span className="text-xs font-semibold">{app.rating}</span>
                         </div>
                       )}
                     </div>
 
-                    <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                    <h3 className="text-2xl font-semibold tracking-[-0.03em] text-foreground">
                       {app.name}
                     </h3>
                     <p className="mt-1 text-sm text-muted-foreground">{app.subtitle}</p>
@@ -60,14 +49,14 @@ const MobileAppsSection = () => {
                       {app.description}
                     </p>
 
-                    <div className="mt-4 flex items-center justify-between gap-3">
-                      <span className="font-mono-meta text-[0.58rem] uppercase tracking-[0.12em] text-muted-foreground">
+                    <div className="mt-auto flex items-center justify-between gap-3 pt-4">
+                      <span className="text-[0.66rem] font-bold uppercase tracking-[0.08em] text-muted-foreground">
                         {app.contribution}
                       </span>
                       {app.downloads && (
                         <div className="flex items-center gap-1 text-muted-foreground">
                           <Download className="h-3 w-3" />
-                          <span className="font-mono-meta text-[0.58rem]">{app.downloads}</span>
+                          <span className="text-xs font-semibold">{app.downloads}</span>
                         </div>
                       )}
                     </div>
@@ -78,8 +67,8 @@ const MobileAppsSection = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <ExternalLink className="mr-2 h-4 w-4" />
                         Вижте в App Store
+                        <ArrowUpRight />
                       </a>
                     </Button>
                   </div>

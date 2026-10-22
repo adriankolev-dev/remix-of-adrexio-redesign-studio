@@ -1,24 +1,20 @@
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import PageIntro from "@/components/editorial/PageIntro";
-import SectionEyebrow from "@/components/editorial/SectionEyebrow";
-import Reveal from "@/components/editorial/Reveal";
-import HandNote from "@/components/editorial/HandNote";
+import SectionHeader from "@/components/editorial/SectionHeader";
+import CTASection from "@/components/CTASection";
 import PricingOverview from "@/components/pricing/PricingOverview";
 import PricingFactors from "@/components/pricing/PricingFactors";
 import PricingTimeline from "@/components/pricing/PricingTimeline";
 import { getFAQSchema } from "@/lib/structuredData";
+import { PAYMENT_COPY } from "@/data/pricing";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PAYMENT_COPY } from "@/data/pricing";
 
 const faqs = [
   {
@@ -80,7 +76,7 @@ const Pricing = () => {
         label="Цени за уеб проекти"
         title={
           <>
-            Изработка на сайт — <span className="accent-mark">цена без изненади.</span>
+            Изработка на сайт — цена без изненади.
           </>
         }
         description="Ориентировъчни суми за уеб сайтове, онлайн магазини и поддръжка. За SEO, дигитален маркетинг, AI и мобилни приложения — оферта след консултация."
@@ -97,102 +93,32 @@ const Pricing = () => {
 
       <PricingTimeline />
 
-      {/* FAQ — open editorial list on desktop, accordion on mobile for scanability */}
-      <section className="relative bg-background py-24 md:py-32">
+      {/* FAQ */}
+      <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
-          <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
-            <div className="lg:sticky lg:top-32 lg:self-start">
-              <Reveal>
-                <SectionEyebrow label="Въпроси" index="04" />
-              </Reveal>
-              <Reveal delay={0.08}>
-                <h2 className="font-display mt-6 text-balance text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-                  Често задавани въпроси.
-                </h2>
-              </Reveal>
-              <HandNote className="mt-6 hidden lg:block" rotate={-2}>
-                ако нещо липсва — пишете ни
-              </HandNote>
-            </div>
-
-            {/* Desktop: always-visible Q&A rows */}
-            <div className="hidden border-t border-border lg:block">
-              {faqs.map((faq, i) => (
-                <Reveal key={faq.question} delay={i * 0.04}>
-                  <div className="grid grid-cols-1 gap-3 border-b border-border py-8 md:grid-cols-[1fr_1.2fr] md:gap-12">
-                    <h3 className="text-base font-semibold tracking-tight text-foreground md:text-lg">
-                      {faq.question}
-                    </h3>
-                    <p className="text-pretty text-sm leading-relaxed text-muted-foreground md:text-base">
-                      {faq.answer}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            {/* Mobile: accordion to avoid a wall of text */}
-            <div className="border-t border-border lg:hidden">
-              <Accordion type="single" collapsible>
-                {faqs.map((faq, index) => (
-                  <AccordionItem
-                    key={index}
-                    value={`item-${index}`}
-                    className="border-b border-border"
-                  >
-                    <AccordionTrigger className="py-5 text-left text-base font-semibold hover:text-primary hover:no-underline">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-5 text-sm leading-relaxed text-muted-foreground">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          </div>
+          <SectionHeader
+            title="Въпроси."
+            description="Кратки отговори на това, което ни питат най-често. Ако нещо липсва, пишете ни."
+          />
+          <Accordion type="single" collapsible className="border-t border-border">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-b border-border">
+                <AccordionTrigger className="py-6 text-left text-lg font-semibold tracking-[-0.02em] hover:no-underline md:text-xl">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="max-w-3xl pb-6 text-base leading-relaxed text-muted-foreground">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
-      {/* Final CTA — one dramatic dark layer, not another grey box */}
-      <section className="layer-dark relative overflow-hidden py-28 md:py-36">
-        <div className="canvas-grid absolute inset-0 opacity-[0.07]" aria-hidden />
-        <div className="container relative z-10 mx-auto px-6">
-          <div className="max-w-2xl">
-            <Reveal>
-              <SectionEyebrow label="Запитване" index="05" />
-            </Reveal>
-            <Reveal delay={0.08}>
-              <h2 className="font-display mt-6 text-balance text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-                Имате конкретен проект?
-              </h2>
-            </Reveal>
-            <Reveal delay={0.14}>
-              <p className="mt-6 max-w-lg text-pretty text-lg leading-relaxed text-muted-foreground">
-                Разкажете ни какво искате да изградим. Ще съставим обхват и ще ви изпратим
-                конкретна оферта.
-              </p>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center">
-                <Button variant="accent" size="lg" asChild>
-                  <Link to="/contact">
-                    Свържи се с нас
-                    <ArrowRight size={18} />
-                  </Link>
-                </Button>
-                <Link
-                  to="/project-inquiry"
-                  className="text-sm font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline"
-                >
-                  Попълни бриф
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
+      <CTASection
+        lead="Имате конкретен проект?"
+        text="Разкажете ни какво искате да изградим. Ще съставим обхват и ще ви изпратим конкретна оферта."
+      />
       <Footer />
     </main>
   );

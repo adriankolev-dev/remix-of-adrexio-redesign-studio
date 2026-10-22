@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 import { SERVICE_TRUST_STATS } from "@/data/trustStats";
-import MegaphoneMascot from "@/components/mascots/MegaphoneMascot";
 
 const DigitalMarketing = () => {
   return (
@@ -27,7 +26,6 @@ const DigitalMarketing = () => {
       heroHighlight="построен да конвертира."
       heroSubtitle="Не сме голяма медийна агенция и не се правим на такава. Движим Google Ads и Meta кампании за проектите, които сме изградили — там, където контролираме и страницата, на която попада кликът."
       heroCTAText="Свържи се с нас"
-      heroAside={<MegaphoneMascot />}
       
       stats={SERVICE_TRUST_STATS}
       

@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 import { SERVICE_TRUST_STATS } from "@/data/trustStats";
-import DesignMascot from "@/components/mascots/DesignMascot";
 
 const UIUXDesign = () => {
   return (
@@ -27,7 +26,6 @@ const UIUXDesign = () => {
       heroHighlight="дизайн, който продава."
       heroSubtitle="Създаваме интуитивни потребителски изживявания, които превръщат посетителите в лоялни клиенти. Дизайн, базиран на данни и психология."
       heroCTAText="Свържи се с нас"
-      heroAside={<DesignMascot />}
       
       stats={SERVICE_TRUST_STATS}
       
@@ -177,7 +175,7 @@ const UIUXDesign = () => {
         {
           icon: Award,
           title: "Богат опит",
-          description: "7+ години опит в UI/UX дизайн с проекти в различни индустрии."
+          description: "Екип с над 10 години опит в UI/UX дизайна, с проекти в различни индустрии."
         },
         {
           icon: Sparkles,

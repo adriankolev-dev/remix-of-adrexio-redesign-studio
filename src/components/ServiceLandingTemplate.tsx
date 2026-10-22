@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LucideIcon, ArrowRight, Phone } from "lucide-react";
+import { LucideIcon, ArrowUpRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -12,8 +12,8 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import DesignedForSection from "@/components/DesignedForSection";
 import PageIntro from "@/components/editorial/PageIntro";
+import CTASection from "@/components/CTASection";
 import Reveal from "@/components/editorial/Reveal";
-import SectionEyebrow from "@/components/editorial/SectionEyebrow";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import { useLocation } from "react-router-dom";
 import { getServiceSchema, getFAQSchema, getBreadcrumbSchema } from "@/lib/structuredData";
@@ -68,8 +68,6 @@ export interface ServiceLandingProps {
   heroHighlight: string;
   heroSubtitle: string;
   heroCTAText?: string;
-  /** Optional visual accent shown beside the hero copy on large screens. */
-  heroAside?: React.ReactNode;
 
   // Stats
   stats: { value: string; label: string }[];
@@ -140,7 +138,6 @@ const ServiceLandingTemplate = ({
   heroHighlight,
   heroSubtitle,
   heroCTAText = "Свържи се с нас",
-  heroAside,
   stats,
   introTitle,
   introDescription,
@@ -193,13 +190,11 @@ const ServiceLandingTemplate = ({
       />
       <Navbar />
 
-      {/* Hero — shared editorial intro */}
       <PageIntro
-        index="01"
         label={serviceName || "Услуга"}
         title={
           <>
-            {heroTitle} <span className="accent-mark">{heroHighlight}</span>
+            {heroTitle} {heroHighlight}
           </>
         }
         description={heroSubtitle}
@@ -208,178 +203,139 @@ const ServiceLandingTemplate = ({
             <Button variant="ink" size="lg" asChild>
               <Link to="/contact">
                 {heroCTAText}
-                <ArrowRight size={18} />
+                <ArrowUpRight />
               </Link>
             </Button>
             <Button variant="line" size="lg" asChild>
               <a href="tel:+359896173743">
-                <Phone size={18} />
+                <Phone />
                 +359 896 173 743
               </a>
             </Button>
           </>
         }
         meta={stats}
-        aside={heroAside}
       />
 
-      {/* Introduction — two-column editorial statement */}
-      <section className="relative bg-background py-24 md:py-32">
+      {/* Introduction */}
+      <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-            <div className="lg:sticky lg:top-32 lg:self-start">
-              <Reveal>
-                <SectionEyebrow label="Какво получавате" index="02" />
-              </Reveal>
-              <Reveal delay={0.08}>
-                <h2 className="font-display mt-6 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                  {introTitle}
-                </h2>
-              </Reveal>
-            </div>
-            <Reveal delay={0.12} className="lg:pt-2">
-              <p className="text-lg leading-relaxed text-muted-foreground md:text-xl md:leading-relaxed">
-                {introDescription}
-              </p>
-            </Reveal>
-          </div>
+          <SectionHeader title={introTitle} description={introDescription} className="mb-0 md:mb-0" />
         </div>
       </section>
 
-      {/* Designed For — only when enabled */}
       {showDesignedForSection && <DesignedForSection />}
 
-      {/* Features — full-width numbered index, hairlines, no cards */}
-      <section className="relative bg-secondary/30 py-24 md:py-32">
+      {/* Features: hairline grid, three across */}
+      <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
-          <SectionHeader index="03" label={featuresSubtitle} title={featuresTitle} />
-
-          <div className="border-t border-border">
+          <SectionHeader
+            title={featuresTitle}
+            description={featuresSubtitle}
+            action={
+              <Button variant="line" size="default" asChild>
+                <Link to="/case-studies">
+                  Виж проектите
+                  <ArrowUpRight />
+                </Link>
+              </Button>
+            }
+          />
+          <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, i) => (
-              <Reveal key={feature.title} delay={(i % 3) * 0.05}>
-                <div className="grid grid-cols-[auto_1fr] gap-5 border-b border-border py-6 md:gap-8 md:py-7">
-                  <span className="font-mono-meta pt-1 text-[0.7rem] text-primary">{num(i)}</span>
-                  <div>
-                    <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
-                      {feature.title}
-                    </h3>
-                    <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
+              <Reveal as="li" key={feature.title} delay={(i % 3) * 0.05} className="border-t border-border pb-10 pt-6">
+                <span className="text-xs font-semibold tabular-nums text-muted-foreground">{num(i)}</span>
+                <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground">
+                  {feature.title}
+                </h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">
+                  {feature.description}
+                </p>
               </Reveal>
             ))}
-          </div>
-
-          <Reveal delay={0.16} className="mt-12">
-            <Button variant="line" size="lg" asChild>
-              <Link to="/case-studies">
-                Виж проектите
-                <ArrowRight size={18} />
-              </Link>
-            </Button>
-          </Reveal>
+          </ul>
         </div>
       </section>
 
-      {/* Benefits — dark layer band with big numbered outcomes */}
-      <section className="layer-dark relative overflow-hidden py-24 md:py-32">
-        <div className="canvas-grid absolute inset-0 opacity-[0.06]" aria-hidden />
-        <div className="container relative z-10 mx-auto px-6">
-          <SectionHeader index="04" label={benefitsSubtitle} title={benefitsTitle} />
-
-          <div className="grid gap-x-10 border-t border-border sm:grid-cols-2">
-            {benefits.map((benefit, i) => (
-              <Reveal key={benefit.title} delay={(i % 2) * 0.06}>
-                <div className="flex gap-5 border-b border-border py-8 md:py-9">
-                  <benefit.icon className="mt-1 h-6 w-6 shrink-0 text-primary" strokeWidth={1.75} />
-                  <div>
-                    <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                      {benefit.title}
-                    </h3>
-                    <p className="mt-2 max-w-md text-base leading-relaxed text-muted-foreground">
-                      {benefit.description}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process — vertical timeline with oversized ghost numbers */}
-      <section className="relative bg-background py-24 md:py-32">
+      {/* Benefits: the ink band */}
+      <section className="layer-dark py-20 md:py-28">
         <div className="container mx-auto px-6">
-          <SectionHeader index="05" label={processSubtitle} title={processTitle} />
-
-          <div className="border-t border-border">
-            {steps.map((step, i) => (
-              <Reveal key={step.title} delay={i * 0.04}>
-                <div className="grid grid-cols-[auto_1fr] items-start gap-5 border-b border-border py-8 md:gap-10 md:py-10">
-                  <span className="font-display text-4xl font-bold leading-none text-foreground/10 md:text-6xl">
-                    {step.number.padStart(2, "0")}
-                  </span>
-                  <div className="pt-1">
-                    <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
+          <SectionHeader bare title={benefitsTitle} description={benefitsSubtitle} />
+          <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+            {benefits.map((benefit, i) => (
+              <Reveal as="li" key={benefit.title} delay={(i % 4) * 0.05} className="border-t border-border pb-10 pt-6">
+                <benefit.icon className="h-6 w-6 text-primary" strokeWidth={1.75} aria-hidden />
+                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">
+                  {benefit.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{benefit.description}</p>
               </Reveal>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* Technologies — mono tag row on a hairline */}
+      {/* Process: big grey numerals in columns, like the homepage */}
+      <section className="bg-background py-16 md:py-24">
+        <div className="container mx-auto px-6">
+          <SectionHeader title={processTitle} description={processSubtitle} />
+          <ol
+            className={`grid gap-x-8 sm:grid-cols-2 ${
+              steps.length === 5 ? "lg:grid-cols-5" : steps.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"
+            }`}
+          >
+            {steps.map((step, i) => (
+              <Reveal as="li" key={step.title} delay={i * 0.05} className="border-t border-border pb-10 pt-6">
+                <span className="block text-6xl font-black leading-none tracking-[-0.05em] text-foreground/15">
+                  {step.number.padStart(2, "0")}
+                </span>
+                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Technologies: outlined pills */}
       {technologies && technologies.length > 0 && (
-        <section className="relative bg-secondary/30 py-24 md:py-32">
+        <section className="bg-background py-16 md:py-24">
           <div className="container mx-auto px-6">
-            <SectionHeader
-              index="06"
-              label="Технологии"
-              title={technologiesTitle || "Технологии, които използваме"}
-            />
-            <div className="flex flex-wrap gap-x-8 gap-y-4 border-t border-border pt-10">
-              {technologies.map((tech, i) => (
-                <Reveal key={tech.name} delay={(i % 6) * 0.04}>
-                  <span className="font-mono-meta text-sm uppercase tracking-[0.14em] text-foreground/80">
-                    <span className="mr-2 text-primary">/</span>
+            <SectionHeader title={technologiesTitle || "Технологии."} />
+            <Reveal>
+              <ul className="flex flex-wrap gap-2.5">
+                {technologies.map((tech) => (
+                  <li
+                    key={tech.name}
+                    className="rounded-full border border-border px-5 py-2.5 text-sm font-medium text-foreground"
+                  >
                     {tech.name}
-                  </span>
-                </Reveal>
-              ))}
-            </div>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
         </section>
       )}
 
-      {/* Optional section after technologies (e.g. 3D separator) */}
       {customSectionAfterTechnologies}
 
-      {/* Use Cases — numbered index (only when provided) */}
+      {/* Use cases: numbered rows */}
       {useCases.length > 0 && (
-        <section className="relative bg-background py-24 md:py-32">
+        <section className="bg-background py-16 md:py-24">
           <div className="container mx-auto px-6">
-            <SectionHeader index="07" label={useCasesSubtitle} title={useCasesTitle} />
+            <SectionHeader title={useCasesTitle} description={useCasesSubtitle} />
             <div className="border-t border-border">
               {useCases.map((useCase, i) => (
                 <Reveal key={useCase.title} delay={(i % 3) * 0.05}>
-                  <div className="grid grid-cols-[auto_1fr] gap-5 border-b border-border py-6 md:gap-8 md:py-7">
-                    <span className="font-mono-meta pt-1 text-[0.7rem] text-primary">{num(i)}</span>
-                    <div>
-                      <h3 className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
-                        {useCase.title}
-                      </h3>
-                      <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
-                        {useCase.description}
-                      </p>
-                    </div>
+                  <div className="grid gap-3 border-b border-border py-7 md:grid-cols-[4rem_minmax(0,1fr)_minmax(0,1.2fr)] md:gap-8">
+                    <span className="text-xs font-semibold tabular-nums text-muted-foreground md:pt-2">{num(i)}</span>
+                    <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                      {useCase.title}
+                    </h3>
+                    <p className="text-[0.95rem] leading-relaxed text-muted-foreground md:pt-1">
+                      {useCase.description}
+                    </p>
                   </div>
                 </Reveal>
               ))}
@@ -388,104 +344,48 @@ const ServiceLandingTemplate = ({
         </section>
       )}
 
-      {/* Why Choose Us — sticky heading + numbered manifest */}
-      <section className="relative bg-secondary/30 py-24 md:py-32">
+      {/* Why choose us: hairline grid */}
+      <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
-          <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
-            <div className="lg:sticky lg:top-32 lg:self-start">
-              <Reveal>
-                <SectionEyebrow label={whyChooseUsSubtitle} index="08" />
+          <SectionHeader title={whyChooseUsTitle} description={whyChooseUsSubtitle} />
+          <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+            {whyChooseUs.map((item, i) => (
+              <Reveal as="li" key={item.title} delay={(i % 3) * 0.05} className="border-t border-border pb-10 pt-6">
+                <item.icon className="h-6 w-6 text-foreground" strokeWidth={1.75} aria-hidden />
+                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">{item.title}</h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{item.description}</p>
               </Reveal>
-              <Reveal delay={0.08}>
-                <h2 className="font-display mt-6 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-                  {whyChooseUsTitle}
-                </h2>
-              </Reveal>
-            </div>
-
-            <div className="border-t border-border">
-              {whyChooseUs.map((item, i) => (
-                <Reveal key={item.title} delay={i * 0.05}>
-                  <div className="flex gap-5 border-b border-border py-7 md:py-8">
-                    <item.icon className="mt-1 h-6 w-6 shrink-0 text-primary" strokeWidth={1.75} />
-                    <div>
-                      <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 max-w-lg text-base leading-relaxed text-muted-foreground">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* FAQ — hairline accordion */}
-      <section className="relative bg-background py-24 md:py-32">
+      {/* FAQ: hairline accordion */}
+      <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
-          <SectionHeader index="09" label="FAQ" title={faqTitle} />
-          <div className="mx-auto max-w-3xl border-t border-border">
-            <Accordion type="single" collapsible>
-              {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`faq-${index}`} className="border-b border-border">
-                  <AccordionTrigger className="py-6 text-left font-display text-base font-semibold hover:text-primary hover:no-underline md:text-lg">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6 text-base leading-relaxed text-muted-foreground">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
+          <SectionHeader title={faqTitle} />
+          <Accordion type="single" collapsible className="border-t border-border">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`faq-${index}`} className="border-b border-border">
+                <AccordionTrigger className="py-6 text-left text-lg font-semibold tracking-[-0.02em] hover:no-underline md:text-xl">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="max-w-3xl pb-6 text-base leading-relaxed text-muted-foreground">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
-      {/* Custom Section Before CTA (optional — e.g. pricing / projects) */}
       {customSectionBeforeCTA}
 
-      {/* CTA — dark layer band */}
-      <section className="layer-dark relative overflow-hidden py-28 md:py-36">
-        <div className="canvas-grid absolute inset-0 opacity-[0.07]" aria-hidden />
-        <div className="container relative z-10 mx-auto px-6 text-center">
-          <Reveal>
-            <SectionEyebrow label="Следваща стъпка" index="10" className="justify-center" />
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="font-display text-display-sm mx-auto mt-8 max-w-3xl font-bold text-foreground">
-              {ctaTitle}
-            </h2>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">{ctaSubtitle}</p>
-          </Reveal>
-          <Reveal delay={0.24}>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button variant="accent" size="xl" asChild>
-                <Link to="/contact">
-                  Свържи се с нас
-                  <ArrowRight size={18} />
-                </Link>
-              </Button>
-              <Button
-                variant="line"
-                size="xl"
-                asChild
-                className="border-foreground/25 text-foreground hover:border-foreground/50"
-              >
-                <a href="tel:+359896173743">
-                  <Phone size={18} />
-                  +359 896 173 743
-                </a>
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <CTASection
+        lead={ctaTitle}
+        text={ctaSubtitle}
+        secondary={{ label: "+359 896 173 743", href: "tel:+359896173743" }}
+      />
 
       {/* Custom Section (optional) */}
       {customSection}

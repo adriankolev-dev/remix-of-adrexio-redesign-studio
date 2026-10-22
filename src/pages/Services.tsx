@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -64,7 +64,7 @@ const services = [
   },
   {
     title: "AI интеграции",
-    subtitle: PHASE_LABEL,
+    subtitle: "AI автоматизации",
     description:
       "Автоматизация и AI решения за оптимизация на бизнес процесите — чатботове, машинно обучение и интелигентни системи.",
     href: "/services/ai-implementation",
@@ -116,82 +116,71 @@ const Services = () => {
         label="Услуги"
         title={
           <>
-            Всичко, от което имате нужда — <span className="accent-mark">изградено от нулата</span>.
+            Всичко, от което имате нужда — изградено от нулата.
           </>
         }
         description="От първия wireframe до пускането. Не предлагаме готови шаблони с ново лого — проектираме всяко решение спрямо вашия бизнес."
         meta={[
-          { value: "7", label: "Направления" },
+          { value: String(services.length), label: "Направления" },
           { value: "0", label: "Готови шаблони" },
           { value: "100%", label: "Собственост върху кода" },
           { value: "от €99", label: "Поддръжка / месец" },
         ]}
       />
 
-      {/* Full-width service index — big type, hairlines, hover reveals detail */}
-      <section className="relative bg-background pb-24 md:pb-32">
+      {/* Service grid: nine services, three across, on hairlines */}
+      <section className="bg-background pb-16 md:pb-24">
         <div className="container mx-auto px-6">
-          <div className="border-t border-border">
+          <div className="grid border-l border-t border-border md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, i) => (
-              <Reveal key={service.href} delay={i * 0.04}>
-                <div className="border-b border-border py-8 md:py-10">
-                  <Link to={service.href} className="group block">
-                    <div className="grid grid-cols-[auto_1fr_auto] items-start gap-4 md:gap-8">
-                      <span className="font-mono-meta pt-2 text-[0.62rem] text-primary md:text-[0.66rem]">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
+              <Reveal key={service.href} delay={(i % 3) * 0.05} className="border-b border-r border-border">
+                <Link
+                  to={service.href}
+                  className="group flex h-full min-h-[19rem] flex-col justify-between gap-10 p-7 transition-colors hover:bg-secondary/60 md:p-9"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="text-xs font-semibold tabular-nums text-muted-foreground">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <ArrowUpRight
+                      size={20}
+                      className="shrink-0 text-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    />
+                  </div>
 
-                      <div className="min-w-0">
-                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                          <h2 className="text-2xl font-bold tracking-tight text-foreground transition-transform duration-300 group-hover:translate-x-2 group-hover:text-primary md:text-4xl">
-                            {service.title}
-                          </h2>
-                          <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.16em] text-muted-foreground">
-                            {service.subtitle}
-                          </span>
-                        </div>
-                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
-                          {service.description}
-                        </p>
-                        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1.5">
-                          {service.features.map((feature) => (
-                            <span
-                              key={feature}
-                              className="font-mono-meta text-[0.6rem] uppercase tracking-[0.12em] text-muted-foreground/80"
-                            >
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <ArrowUpRight
-                        size={24}
-                        className="mt-1 shrink-0 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground"
-                      />
-                    </div>
-                  </Link>
-                  {"pricingHref" in service && service.pricingHref ? (
-                    <p className="mt-3 pl-10 md:pl-14">
-                      <Link
-                        to={service.pricingHref}
-                        className="font-mono-meta text-[0.62rem] uppercase tracking-[0.14em] text-primary underline-offset-4 hover:underline"
-                      >
-                        Цени за поддръжка — {PRICING.maintenance.fromLabel}
-                      </Link>
+                  <div>
+                    <p className="eyebrow">{service.subtitle}</p>
+                    <h2 className="mt-3 text-[1.7rem] font-semibold leading-tight tracking-[-0.035em] text-foreground md:text-[2rem]">
+                      {service.title}
+                    </h2>
+                    <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">
+                      {service.description}
                     </p>
-                  ) : null}
-                </div>
+                    <p className="mt-6 text-[0.66rem] font-bold uppercase tracking-[0.1em] text-foreground">
+                      {service.features.map((feature, f) => (
+                        <span key={feature}>
+                          {f > 0 && <span className="mx-2 text-muted-foreground">/</span>}
+                          {feature}
+                        </span>
+                      ))}
+                    </p>
+                    {"pricingHref" in service && service.pricingHref ? (
+                      <p className="mt-4 text-sm font-semibold text-foreground">
+                        Поддръжка {PRICING.maintenance.fromLabel}
+                      </p>
+                    ) : null}
+                  </div>
+                </Link>
               </Reveal>
             ))}
           </div>
 
-          <Reveal delay={0.16} className="mt-12">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Reveal delay={0.16} className="mt-10">
+            <div className="flex flex-wrap gap-3">
               <Button variant="ink" size="lg" asChild>
                 <Link to="/contact">
-                  Свържи се с нас
-                  <ArrowRight size={18} />
+                  Обсъди проект
+                  <ArrowUpRight />
                 </Link>
               </Button>
               <Button variant="line" size="lg" asChild>

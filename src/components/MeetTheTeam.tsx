@@ -3,7 +3,7 @@ import plamenImage from "@/assets/plamen.png";
 import nikolayImage from "@/assets/nikolay.jpg";
 import stefanImage from "@/assets/stefan.png";
 import Reveal from "@/components/editorial/Reveal";
-import SectionEyebrow from "@/components/editorial/SectionEyebrow";
+import SectionHeader from "@/components/editorial/SectionHeader";
 
 const teamMembers = [
   { name: "Николай Ненов", role: "Head of Marketing", image: nikolayImage },
@@ -11,117 +11,62 @@ const teamMembers = [
   { name: "Стефан Колев", role: "Lead Developer", image: stefanImage },
 ];
 
-const MeetTheTeam = () => {
-  return (
-    <section className="relative overflow-hidden bg-secondary/30 py-24 md:py-32">
-      <div className="canvas-grid canvas-grid-fade absolute inset-0 opacity-50" aria-hidden />
+const MemberCard = ({ name, role, image }: { name: string; role: string; image: string }) => (
+  <figure className="group h-full rounded-md bg-secondary p-3 md:p-4">
+    <div className="overflow-hidden rounded-[0.25rem] bg-muted">
+      <img
+        src={image}
+        alt={name}
+        loading="lazy"
+        decoding="async"
+        className="aspect-[4/5] w-full object-cover object-[center_20%] transition-transform duration-700 group-hover:scale-[1.03]"
+      />
+    </div>
+    <figcaption className="px-1 pb-1 pt-4">
+      <p className="text-[0.8rem] font-bold uppercase tracking-[0.06em] text-foreground">{name}</p>
+      <p className="mt-1 text-sm text-muted-foreground">{role}</p>
+    </figcaption>
+  </figure>
+);
 
-      <div className="container relative z-10 mx-auto px-6">
-        {/* Header */}
+const MeetTheTeam = () => (
+  <section className="bg-background py-16 md:py-24">
+    <div className="container mx-auto px-6">
+      <SectionHeader
+        title="Екипът."
+        description="Визията, която стои зад всеки проект, и хората, които я превръщат в работещ сайт."
+      />
+
+      {/* Founder: photo and the line he stands behind */}
+      <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <Reveal>
-          <SectionEyebrow label="Екип" index="05" />
+          <MemberCard name="Адриан Колев" role="Основател & CEO" image={founderImage} />
         </Reveal>
         <Reveal delay={0.08}>
-          <h2 className="font-display mt-6 max-w-3xl text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-            Хората зад <span className="accent-mark">Adrexio</span>.
-          </h2>
-        </Reveal>
-        <Reveal delay={0.16}>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Визията, която стои зад всеки проект — и екипът, който я превръща в реалност.
-          </p>
-        </Reveal>
-
-        {/* Founder feature */}
-        <div className="mt-16 grid items-center gap-14 md:mt-20 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-          <Reveal direction="left">
-            <div className="relative mx-auto max-w-sm lg:mx-0">
-              {/* Offset accent block — the "sticker/print" pop of colour */}
-              <div
-                className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl bg-primary md:translate-x-4 md:translate-y-4"
-                aria-hidden
-              />
-              <div className="relative overflow-hidden rounded-3xl border-2 border-foreground">
-                <img
-                  src={founderImage}
-                  alt="Адриан Колев — Основател & CEO"
-                  className="aspect-[4/5] w-full object-cover object-[center_20%]"
-                />
-              </div>
-              {/* Tilted label, echoing gurbov's sticker tags */}
-              <span className="font-mono-meta absolute -right-3 top-6 -rotate-3 rounded-full border-2 border-foreground bg-background px-4 py-1.5 text-[0.6rem] uppercase tracking-[0.16em] text-foreground shadow-sm">
-                Основател
-              </span>
-            </div>
-          </Reveal>
-
-          <Reveal direction="right" delay={0.1}>
-            <div>
-              {/* Speech bubble */}
-              <div className="relative rounded-3xl border-2 border-foreground bg-background p-7 md:p-9">
-                {/* Tail: points up on mobile (photo above), left on desktop (photo beside) */}
-                <span
-                  className="absolute -top-[9px] left-10 h-4 w-4 rotate-45 border-l-2 border-t-2 border-foreground bg-background lg:hidden"
-                  aria-hidden
-                />
-                <span
-                  className="absolute -left-[9px] top-12 hidden h-4 w-4 rotate-45 border-b-2 border-l-2 border-foreground bg-background lg:block"
-                  aria-hidden
-                />
-
-                <blockquote className="font-display text-xl font-medium leading-snug tracking-tight text-foreground md:text-2xl md:leading-[1.35]">
-                  Вярваме, че истинският дигитален успех идва от смелите идеи, правилната стратегия и{" "}
-                  <span className="text-primary">безупречното изпълнение</span>.
-                </blockquote>
-              </div>
-
-              <div className="mt-7 flex items-end justify-between gap-4">
-                <div>
-                  <p className="font-hand text-4xl text-primary md:text-5xl">Адриан Колев</p>
-                  <p className="font-mono-meta mt-2 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
-                    Основател &amp; CEO · Adrexio
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* Rest of the team */}
-        <div className="mt-20 border-t border-border pt-14 md:mt-24">
-          <Reveal>
-            <h3 className="font-mono-meta text-[0.7rem] uppercase tracking-[0.2em] text-primary">
-              Останалите от екипа
-            </h3>
-          </Reveal>
-
-          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3 md:gap-10">
-            {teamMembers.map((member, index) => (
-              <Reveal key={member.name} delay={index * 0.08}>
-                <figure className="group">
-                  <div className="overflow-hidden rounded-2xl border-2 border-foreground">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="aspect-[3/4] w-full object-cover object-[center_20%] transition-transform duration-700 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <figcaption className="mt-4">
-                    <div className="font-display text-lg font-semibold tracking-tight text-foreground">
-                      {member.name}
-                    </div>
-                    <div className="font-mono-meta mt-1 text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
-                      {member.role}
-                    </div>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
+          <div className="flex h-full flex-col justify-between gap-10 rounded-md bg-secondary p-7 md:p-12">
+            <span className="text-6xl font-black leading-none text-primary" aria-hidden>
+              “
+            </span>
+            <blockquote className="text-2xl font-semibold leading-snug tracking-[-0.03em] text-foreground md:text-[2.25rem] md:leading-[1.15]">
+              Вярваме, че истинският дигитален успех идва от смелите идеи, правилната стратегия и
+              безупречното изпълнение.
+            </blockquote>
+            <p className="text-[0.75rem] font-bold uppercase tracking-[0.08em] text-muted-foreground">
+              Адриан Колев · Основател &amp; CEO
+            </p>
           </div>
-        </div>
+        </Reveal>
       </div>
-    </section>
-  );
-};
+
+      <ul className="mt-4 grid gap-4 sm:grid-cols-3">
+        {teamMembers.map((member, i) => (
+          <Reveal as="li" key={member.name} delay={i * 0.06}>
+            <MemberCard {...member} />
+          </Reveal>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
 
 export default MeetTheTeam;

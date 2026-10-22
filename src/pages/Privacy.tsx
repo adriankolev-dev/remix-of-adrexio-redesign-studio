@@ -244,7 +244,7 @@ const Privacy = () => (
     label="Политика за поверителност"
     title={
       <>
-        Защита на <span className="accent-mark">личните данни</span>
+        Защита на личните данни
       </>
     }
     updated={updated}

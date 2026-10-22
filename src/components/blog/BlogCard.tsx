@@ -12,7 +12,7 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
   return (
     <Reveal delay={(index % 3) * 0.06}>
       <Link to={`/blog/${post.slug}`} className="group block">
-        <div className="relative overflow-hidden rounded-xl border border-border bg-secondary">
+        <div className="relative overflow-hidden rounded-md border border-border bg-secondary">
           {/* 16/9 matches both the cover artwork and the hero on the article
               page. At 16/10 object-cover trimmed the sides of covers that
               carry text, clipping the first letter of a headline. */}
@@ -24,7 +24,7 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
               className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
           </div>
-          <span className="font-mono-meta absolute left-3 top-3 inline-flex items-center rounded-full border border-border bg-background/80 px-2.5 py-1 text-[0.58rem] uppercase tracking-[0.12em] text-primary backdrop-blur-sm">
+          <span className="font-mono-meta absolute left-3 top-3 inline-flex items-center rounded-full border border-border bg-background/80 px-2.5 py-1 text-[0.58rem] uppercase tracking-[0.12em] text-foreground backdrop-blur-sm">
             {post.category}
           </span>
         </div>
@@ -42,17 +42,17 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
           </div>
 
           <div className="mt-2 flex items-start justify-between gap-4">
-            <h3 className="font-display text-lg font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary">
+            <h3 className="text-lg font-semibold leading-snug tracking-[-0.03em] text-foreground transition-colors group-hover:text-foreground">
               {post.title}
             </h3>
-            <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+            <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
           </div>
 
           <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
             {post.excerpt}
           </p>
 
-          <span className="font-mono-meta mt-3 inline-flex items-center gap-1.5 text-[0.68rem] uppercase tracking-[0.12em] text-primary">
+          <span className="font-mono-meta mt-3 inline-flex items-center gap-1.5 text-[0.68rem] uppercase tracking-[0.12em] text-foreground">
             Прочети статията
             <ArrowUpRight className="h-3.5 w-3.5" />
           </span>

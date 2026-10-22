@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { CASE_STUDY_FILTERS, type CaseStudyFilterId } from "@/data/caseStudies";
 
 interface CaseStudyFiltersProps {
@@ -8,8 +7,8 @@ interface CaseStudyFiltersProps {
 
 const CaseStudyFilters = ({ activeFilter, onFilterChange }: CaseStudyFiltersProps) => {
   return (
-    <div className="border-b border-border pb-5">
-      <div className="-mb-px flex gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div>
+      <div className="flex gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {CASE_STUDY_FILTERS.map((filter) => {
           const isActive = activeFilter === filter.id;
           return (
@@ -17,18 +16,14 @@ const CaseStudyFilters = ({ activeFilter, onFilterChange }: CaseStudyFiltersProp
               key={filter.id}
               type="button"
               onClick={() => onFilterChange(filter.id)}
-              className={`relative shrink-0 whitespace-nowrap px-3 py-2 text-sm font-medium transition-colors ${
-                isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              aria-pressed={isActive}
+              className={`h-10 shrink-0 whitespace-nowrap rounded-full border-[1.5px] px-5 text-[0.72rem] font-bold uppercase tracking-[0.06em] transition-colors ${
+                isActive
+                  ? "border-foreground bg-foreground text-background"
+                  : "border-border text-foreground hover:border-foreground"
               }`}
             >
               {filter.label}
-              {isActive && (
-                <motion.span
-                  layoutId="cs-filter-underline"
-                  className="absolute inset-x-3 bottom-0 h-[2px] bg-primary"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
             </button>
           );
         })}

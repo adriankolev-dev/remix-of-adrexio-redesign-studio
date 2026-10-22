@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,9 +7,9 @@ import MeetTheTeam from "@/components/MeetTheTeam";
 import SEO from "@/components/SEO";
 import PageIntro from "@/components/editorial/PageIntro";
 import Reveal from "@/components/editorial/Reveal";
-import SectionEyebrow from "@/components/editorial/SectionEyebrow";
-import HandNote from "@/components/editorial/HandNote";
+import SectionHeader from "@/components/editorial/SectionHeader";
 import CTASection from "@/components/CTASection";
+import balance from "@/assets/about-balance.webp";
 import { getOrganizationSchema } from "@/lib/structuredData";
 
 const values = [
@@ -55,7 +55,7 @@ const About = () => {
     <main className="min-h-screen bg-background">
       <SEO
         title="За нас - Adrexio | Професионално уеб студио в София"
-        description="Уеб студио в София за модерни уебсайтове, мобилни приложения и дигитални решения. Фокус върху качество, скорост и резултати."
+        description="Уеб студио в София: сайтове и онлайн магазини от нулата, поддръжка, SEO и AI автоматизации. Екип с над 10 години опит."
         keywords="за нас Adrexio, уеб студио София, екип уеб разработка, история Adrexio, опит уеб дизайн"
         structuredData={getOrganizationSchema()}
       />
@@ -66,17 +66,16 @@ const About = () => {
         label="За нас"
         title={
           <>
-            Ние сме Adrexio — пълна дигитална агенция. Започваме със{" "}
-            <span className="accent-mark">сайт или онлайн магазин</span>.
+            Ние сме Adrexio — пълна дигитална агенция. Започваме със сайт или онлайн магазин.
           </>
         }
-        description="Пълна дигитална агенция: започваме със сайт или магазин, после растем заедно с вас — поддръжка, проследяване и базово SEO. Приложения, реклама и по-сложни AI интеграции идват на следващ етап — по проект."
+        description="Започваме със сайт или онлайн магазин и оставаме след старта: поддръжка, SEO и AI автоматизации, които поемат повтарящата се работа на екипа ви. Мобилни приложения и реклама добавяме, когато бизнесът има нужда от тях."
         actions={
           <>
             <Button variant="ink" size="lg" asChild>
               <Link to="/contact">
-                Свържи се с нас
-                <ArrowRight size={18} />
+                Обсъди проект
+                <ArrowUpRight />
               </Link>
             </Button>
             <Button variant="line" size="lg" asChild>
@@ -86,109 +85,78 @@ const About = () => {
         }
         meta={[
           { value: "50/50", label: "при старт и преди публикуване" },
-          { value: "7+", label: "Години опит" },
+          { value: "10+", label: "Години опит в екипа" },
           { value: "100%", label: "Гаранция за качество" },
         ]}
       />
 
-      {/* Mission — a single oversized statement on the dark layer */}
-      <section className="layer-dark relative overflow-hidden py-24 md:py-32">
-        <div className="canvas-grid absolute inset-0 opacity-[0.06]" aria-hidden />
-        <div className="container relative z-10 mx-auto px-6">
-          <Reveal>
-            <SectionEyebrow label="Мисия" index="02" />
+      {/* Mission: the statement beside the balance sculpture, on the ink band */}
+      <section className="layer-dark overflow-hidden py-20 md:py-28">
+        <div className="container mx-auto grid items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
+          <div>
+            <Reveal>
+              <p className="eyebrow">Мисия</p>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <p className="mt-8 text-[1.75rem] font-semibold leading-[1.15] tracking-[-0.035em] text-foreground md:text-[2.75rem] md:leading-[1.08]">
+                Помагаме на бизнеса да расте онлайн с бързи сайтове и магазини, изградени от нулата.
+                После поемаме и процесите зад тях: поддръжка, SEO и AI автоматизации, които спестяват
+                време на екипа.
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={0.14} direction="right">
+            <img
+              src={balance}
+              alt="Синя каменна скулптура: диск, сфера и греда в равновесие върху куб"
+              width={800}
+              height={581}
+              loading="lazy"
+              decoding="async"
+              className="mx-auto w-full max-w-[34rem]"
+            />
           </Reveal>
-          <Reveal delay={0.08}>
-            <p className="font-display mt-8 max-w-4xl text-2xl font-bold leading-[1.25] text-foreground md:text-4xl md:leading-[1.2]">
-              Помагаме на бизнеса да расте онлайн — чрез бързи, оптимизирани и{" "}
-              <span className="text-primary">незабравими</span> сайтове и магазини. После оставаме
-              за поддръжка, проследяване и SEO. Приложения, реклама и AI — когато бизнесът е готов.
-            </p>
-          </Reveal>
-          <HandNote className="mt-8" rotate={-3}>
-            това ни движи всеки ден
-          </HandNote>
         </div>
       </section>
 
-      {/* Values — numbered manifesto, sticky heading, hairlines (no cards) */}
-      <section className="relative overflow-hidden bg-secondary/30 py-24 md:py-32">
+      <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
-          <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
-            <div className="lg:sticky lg:top-32 lg:self-start">
-              <Reveal>
-                <SectionEyebrow label="Ценности" index="03" />
+          <SectionHeader
+            title="Принципите ни."
+            description="Едни и същи във всеки проект и всяко взаимоотношение с клиент."
+          />
+          <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+            {values.map((value, i) => (
+              <Reveal as="li" key={value.title} delay={i * 0.05} className="border-t border-border pb-10 pt-6">
+                <span className="text-xs font-semibold tabular-nums text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                  {value.title}
+                </h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{value.description}</p>
               </Reveal>
-              <Reveal delay={0.08}>
-                <h2 className="font-display mt-6 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-                  Принципите, които ни водят.
-                </h2>
-              </Reveal>
-              <Reveal delay={0.16}>
-                <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-                  Едни и същи във всеки проект и всяко взаимоотношение с клиент.
-                </p>
-              </Reveal>
-            </div>
-
-            <div className="border-t border-border">
-              {values.map((value, i) => (
-                <Reveal key={value.title} delay={i * 0.05}>
-                  <div className="grid grid-cols-[auto_1fr] gap-5 border-b border-border py-7 md:gap-8 md:py-8">
-                    <span className="font-mono-meta pt-1 text-[0.7rem] text-primary">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                        {value.title}
-                      </h3>
-                      <p className="mt-2 max-w-lg text-base leading-relaxed text-muted-foreground">
-                        {value.description}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* What we offer — editorial two-column list */}
-      <section className="relative bg-background py-24 md:py-32">
+      <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
-          <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
-            <div className="lg:sticky lg:top-32 lg:self-start">
-              <Reveal>
-                <SectionEyebrow label="Какво предлагаме" index="04" />
+          <SectionHeader title="Изграждаме, за да работи." />
+          <ul className="grid gap-x-8 md:grid-cols-3">
+            {offer.map((item, i) => (
+              <Reveal as="li" key={item.title} delay={i * 0.05} className="border-t border-border pb-10 pt-6">
+                <span className="text-xs font-semibold tabular-nums text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{item.description}</p>
               </Reveal>
-              <Reveal delay={0.08}>
-                <h2 className="font-display mt-6 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-                  Изграждаме, за да работи.
-                </h2>
-              </Reveal>
-            </div>
-
-            <div className="border-t border-border">
-              {offer.map((item, i) => (
-                <Reveal key={item.title} delay={i * 0.05}>
-                  <div className="grid grid-cols-[auto_1fr] gap-5 border-b border-border py-7 md:gap-8 md:py-8">
-                    <span className="font-mono-meta pt-1 text-[0.7rem] text-primary">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 max-w-lg text-base leading-relaxed text-muted-foreground">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
+            ))}
+          </ul>
         </div>
       </section>
 

@@ -1,4 +1,3 @@
-import { caseStudies } from "@/data/caseStudies";
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from "@/data/googleReviews";
 
 /**
@@ -13,20 +12,18 @@ import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from "@/data/googleReviews";
  *
  * Add a claim here only when it can be pointed at a source.
  */
-const publicProjectCount = caseStudies.filter((s) => s.isPublic).length;
-
 export const TRUST_STATS = {
-  projects: { value: String(publicProjectCount), label: "Реализирани проекта" },
+  response: { value: "24ч", label: "Отговор на запитване" },
   rating: {
     value: GOOGLE_RATING.toFixed(1),
     label: `Среден рейтинг от ${GOOGLE_REVIEW_COUNT} Google ревюта`,
   },
-  freeConsultation: { value: "0 лв.", label: "Първоначална консултация" },
+  freeConsultation: { value: "Безплатна", label: "Първоначална консултация" },
 } as const;
 
-/** The default row for a service page: proof, reputation, no-risk first step. */
+/** The default row for a service page: speed, reputation, no-risk first step. No project counts. */
 export const SERVICE_TRUST_STATS = [
-  TRUST_STATS.projects,
+  TRUST_STATS.response,
   TRUST_STATS.rating,
   TRUST_STATS.freeConsultation,
 ];

@@ -15,7 +15,6 @@ import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import CaseStudyFilters from "@/components/case-studies/CaseStudyFilters";
 import MobileAppsSection from "@/components/case-studies/MobileAppsSection";
 import PageIntro from "@/components/editorial/PageIntro";
-import RobotMascot from "@/components/mascots/RobotMascot";
 import CTASection from "@/components/CTASection";
 import {
   getCaseStudiesForFilter,
@@ -27,7 +26,7 @@ import { getBreadcrumbSchema } from "@/lib/structuredData";
 import { getLenis } from "@/lib/lenis";
 
 const ProjectGrid = ({ studies }: { studies: CaseStudy[] }) => (
-  <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:gap-x-12">
+  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
     {studies.map((study, index) => (
       <CaseStudyCard key={study.id} study={study} index={index} />
     ))}
@@ -69,9 +68,9 @@ const AppsScrollCue = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 8 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-8 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-1 rounded-full border border-border bg-background/95 px-5 py-3 shadow-sm backdrop-blur"
+          className="fixed bottom-8 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-1 rounded-full border border-border bg-background/95 px-5 py-3 backdrop-blur"
         >
-          <span className="font-mono-meta text-[0.62rem] uppercase tracking-[0.18em] text-primary">
+          <span className="eyebrow text-foreground">
             Надолу
           </span>
           <motion.span
@@ -81,9 +80,9 @@ const AppsScrollCue = () => {
                 : { y: [0, 7, 0], opacity: [1, 0.15, 1] }
             }
             transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center text-primary"
+            className="flex flex-col items-center text-foreground"
           >
-            <span className="h-6 w-0.5 rounded-full bg-primary" />
+            <span className="h-6 w-0.5 rounded-full bg-foreground" />
             <ChevronDown className="h-5 w-5" strokeWidth={2} />
           </motion.span>
         </motion.button>
@@ -141,14 +140,14 @@ const CaseStudies = () => {
         label="Проекти"
         title={
           <>
-            Проекти, които <span className="accent-mark">можете да отворите</span>.
+            Проекти, които можете да отворите.
           </>
         }
         description="Ресторанти, клиники, онлайн магазини, производители и технологични компании. Всеки от тези сайтове е правен от нулата, без готов шаблон."
       />
 
       {/* Filters */}
-      <section className="relative bg-background pb-12">
+      <section className="bg-background pb-8">
         <div className="container mx-auto px-6">
           <CaseStudyFilters
             activeFilter={activeFilter}
@@ -168,7 +167,6 @@ const CaseStudies = () => {
               animate={{ opacity: 1 }}
               className="flex flex-col items-center border-t border-border py-16 text-center"
             >
-              <RobotMascot variant="lost" className="mb-8 max-w-[220px]" />
               <p className="mb-4 text-lg text-muted-foreground">
                 Няма проекти в тази категория
               </p>
