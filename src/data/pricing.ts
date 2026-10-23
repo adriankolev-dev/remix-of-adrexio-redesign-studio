@@ -8,14 +8,14 @@ export const PAYMENT_COPY =
 
 export const PRICING = {
   website: {
-    from: 690,
-    label: "690",
-    fromLabel: "от €690",
+    from: 599,
+    label: "599",
+    fromLabel: "от €599",
   },
   ecommerce: {
-    from: 1900,
-    label: "1.900",
-    fromLabel: "от €1.900",
+    from: 1299,
+    label: "1.299",
+    fromLabel: "от €1.299",
   },
   maintenance: {
     from: 99,
@@ -33,22 +33,22 @@ export const PRICING_SERVICES = [
     name: "Уеб сайтове",
     fromLabel: PRICING.website.fromLabel,
     description:
-      "Всеки сайт е изграден от нулата — без шаблони. Цената зависи от обхвата, дизайна и функционалността.",
-    note: "Еднократна инвестиция · 50/50",
+      "Цената зависи от обхвата, дизайна и функционалността. Плащате веднъж и сайтът е ваш.",
+    note: "Еднократно плащане · без абонамент",
   },
   {
     name: "Онлайн магазини",
     fromLabel: PRICING.ecommerce.fromLabel,
     description:
       "Крайната цена зависи от брой продукти, платежни системи, интеграции и персонализирана функционалност.",
-    note: "Еднократна инвестиция · 50/50",
+    note: "Еднократно плащане · без абонамент",
   },
   {
     name: "Поддръжка и развитие",
     fromLabel: PRICING.maintenance.fromLabel,
     description:
       "Хостинг, сигурност, актуализации и дребни промени. За по-сложно развитие — по договаряне.",
-    note: "Месечен абонамент · без дългосрочен договор",
+    note: "По желание · спирате я, когато решите",
   },
 ] as const;
 

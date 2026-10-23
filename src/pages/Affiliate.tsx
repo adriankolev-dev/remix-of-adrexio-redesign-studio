@@ -246,7 +246,7 @@ const Affiliate = () => {
               </h3>
               <dl className="mt-6 border-t border-border">
                 {[
-                  { label: "Среден уеб проект", value: `€${PRICING.ecommerce.label}` },
+                  { label: "Среден уеб проект", value: `€${PRICING.affiliate.exampleProject.toLocaleString("de-DE")}` },
                   { label: "Вашата комисионна", value: `${PRICING.affiliate.commissionPct}%` },
                   {
                     label: "Вашето плащане за проект",

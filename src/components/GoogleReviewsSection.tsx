@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/carousel";
 import {
   GOOGLE_RATING,
-  GOOGLE_REVIEW_COUNT,
   GOOGLE_REVIEWS_URL,
   googleReviews,
   type GoogleReview,
@@ -132,7 +131,7 @@ const GoogleReviewsSection = () => {
       <div className="container mx-auto px-6">
         <SectionHeader
           title="Отзиви."
-          description={`${GOOGLE_RATING.toFixed(1)} от 5 по ${GOOGLE_REVIEW_COUNT} ревюта в Google. Ето какво пишат клиентите ни.`}
+          description={`${GOOGLE_RATING.toFixed(1)} от 5 в Google. Ето какво пишат клиентите ни.`}
           action={
             <Button variant="line" size="default" asChild>
               <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer">

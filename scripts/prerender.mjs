@@ -505,8 +505,8 @@ function parsePricingAmounts(src) {
   const ecommerce = src.match(/ecommerce:\s*\{[\s\S]*?fromLabel:\s*"([^"]+)"/);
   const maintenance = src.match(/maintenance:\s*\{[\s\S]*?fromLabel:\s*"([^"]+)"/);
   return {
-    website: website?.[1] ?? "от €690",
-    ecommerce: ecommerce?.[1] ?? "от €1.900",
+    website: website?.[1] ?? "от €599",
+    ecommerce: ecommerce?.[1] ?? "от €1.299",
     maintenance: maintenance?.[1] ?? "от €99 / месец",
   };
 }

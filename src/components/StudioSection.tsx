@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Reveal from "@/components/editorial/Reveal";
 import Dotted from "@/components/editorial/Dotted";
-import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from "@/data/googleReviews";
+import { GOOGLE_RATING } from "@/data/googleReviews";
 
 import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.webp";
 import fmlLogo from "@/assets/clients/fml.webp";
@@ -26,7 +26,7 @@ const metrics = [
   {
     value: GOOGLE_RATING.toFixed(1),
     label: "Рейтинг в Google",
-    source: `от ${GOOGLE_REVIEW_COUNT} ревюта`,
+    source: "Всяка оценка е 5 звезди",
   },
 ];
 

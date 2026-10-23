@@ -1,4 +1,4 @@
-import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from "@/data/googleReviews";
+import { GOOGLE_RATING } from "@/data/googleReviews";
 
 /**
  * Numbers the service pages are allowed to show.
@@ -16,7 +16,7 @@ export const TRUST_STATS = {
   response: { value: "24ч", label: "Отговор на запитване" },
   rating: {
     value: GOOGLE_RATING.toFixed(1),
-    label: `Среден рейтинг от ${GOOGLE_REVIEW_COUNT} Google ревюта`,
+    label: "Рейтинг в Google",
   },
   freeConsultation: { value: "Безплатна", label: "Първоначална консултация" },
 } as const;

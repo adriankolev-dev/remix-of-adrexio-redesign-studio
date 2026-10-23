@@ -16,7 +16,7 @@ const PricingTeaser = () => (
     <div className="container mx-auto px-6">
       <SectionHeader
         title="Цени."
-        description="Ориентировъчни начални цени. Крайната сума зависи от обхвата: след консултация ви изпращаме точна оферта."
+        description="Плащате сайта веднъж, без обвързващ договор и задължителен абонамент. Крайната сума зависи от обхвата: след консултация ви изпращаме точна оферта."
         action={
           <Button variant="line" size="default" asChild>
             <Link to="/pricing">
