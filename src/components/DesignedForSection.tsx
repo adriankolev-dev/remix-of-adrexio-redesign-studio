@@ -1,22 +1,23 @@
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 
+// The four groups that recur most in the portfolio, each with the question its site must answer.
 const AUDIENCES = [
   {
-    label: "Стартъпи",
-    description: "Бърз старт с продукт, който изглежда сериозно от ден първи.",
+    label: "Клиники и кабинети",
+    description: "Пациентът иска да разбере боли ли, колко струва и как да запише час. Римската стена, АМА Дент, д-р Райкова.",
   },
   {
-    label: "Фрийлансъри",
-    description: "Личен бранд и портфолио, които печелят доверие и клиенти.",
+    label: "Ресторанти и настаняване",
+    description: "Меню, свободни дати и поръчка от телефона, без посредник с комисиона. CURly, Taj Mahal, Koleff House.",
   },
   {
-    label: "Онлайн бизнеси",
-    description: "Магазини и платформи, готови да продават и да растат.",
+    label: "Производители и B2B",
+    description: "Купувачът търси технически данни, преди да поиска оферта. Wexel Coatings, Bulmat, Firescape Partners.",
   },
   {
-    label: "Брандове",
-    description: "Дигитално присъствие, което отговаря на нивото на марката.",
+    label: "Технологични продукти",
+    description: "Сложен продукт, обяснен така, че демото да е следващата логична стъпка. Oraqor, RiACT.",
   },
 ] as const;
 
@@ -25,8 +26,8 @@ export default function DesignedForSection() {
     <section className="bg-background py-16 md:py-24">
       <div className="container mx-auto px-6">
         <SectionHeader
-          title="За кого е."
-          description="И за всеки, който иска да превърне хаоса в работеща система."
+          title="За кого правим сайтове."
+          description="Тези четири групи са най-честите в портфолиото ни. Всяка идва с различен въпрос, на който сайтът трябва да отговори."
         />
         <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
           {AUDIENCES.map((item, i) => (

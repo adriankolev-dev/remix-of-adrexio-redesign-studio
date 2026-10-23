@@ -17,7 +17,7 @@ interface PageIntroProps {
   actions?: ReactNode;
   /** Optional stat row on a hairline grid under the intro. */
   meta?: PageIntroMeta[];
-  /** Legacy side illustration; the studio opener has none. */
+  /** Optional decorative object beside the title, from lg up. */
   aside?: ReactNode;
 }
 
@@ -29,21 +29,30 @@ const LONG_TITLE = 22;
  * title with the accent period, then the lede and actions on a hairline, and an
  * optional stat grid. Same voice as the homepage sections.
  */
-const PageIntro = ({ label, title, description, actions, meta }: PageIntroProps) => {
+const PageIntro = ({ label, title, description, actions, meta, aside }: PageIntroProps) => {
   const size = textOf(title).length > LONG_TITLE ? "title-page-long" : "title-page";
 
   return (
     <section className="bg-background pb-12 pt-32 md:pb-16 md:pt-40">
       <div className="container mx-auto px-6">
-        <Reveal immediate>
-          <p className="eyebrow">{label}</p>
-        </Reveal>
+        <div className={aside ? "grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12" : ""}>
+          <div>
+            <Reveal immediate>
+              <p className="eyebrow">{label}</p>
+            </Reveal>
 
-        <Reveal immediate delay={0.06}>
-          <h1 className={`${size} mt-6 max-w-[15em] text-balance text-foreground`}>
-            <Dotted>{title}</Dotted>
-          </h1>
-        </Reveal>
+            <Reveal immediate delay={0.06}>
+              <h1 className={`${size} mt-6 max-w-[15em] text-balance text-foreground`}>
+                <Dotted>{title}</Dotted>
+              </h1>
+            </Reveal>
+          </div>
+          {aside && (
+            <Reveal immediate delay={0.2} direction="right">
+              {aside}
+            </Reveal>
+          )}
+        </div>
 
         {(description || actions) && (
           <Reveal immediate delay={0.14}>

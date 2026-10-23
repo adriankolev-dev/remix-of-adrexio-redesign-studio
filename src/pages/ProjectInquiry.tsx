@@ -53,9 +53,11 @@ const PROJECT_TYPES = [
 
 const SERVICES = [
   { value: "web-development", label: "Уеб разработка" },
+  { value: "online-store", label: "Онлайн магазин" },
   { value: "ui-ux-design", label: "UI/UX дизайн" },
   { value: "seo", label: "SEO и GEO" },
   { value: "technical-support", label: "Техническа поддръжка" },
+  { value: "ai-automation", label: "AI автоматизации" },
   { value: "mobile-apps", label: "Мобилни приложения" },
   { value: "digital-marketing", label: "Дигитален маркетинг" },
 ];
@@ -258,7 +260,7 @@ const ProjectInquiry = () => {
     <main className="min-h-screen bg-background">
       <SEO
         title="Запитване за проект - Adrexio | Попълнете формата за ваш проект"
-        description="Попълнете формата за ваш проект. Ще се свържем с вас скоро, за да обсъдим уеб разработка, мобилни приложения и дигитални решения."
+        description="Бриф за нов сайт, онлайн магазин или автоматизация. Опишете проекта, бюджета и срока и получете отговор до 24 часа в работни дни."
         keywords="запитване проект, форма за проект, консултация проект, запитване уебсайт"
         noindex={true}
       />
@@ -267,14 +269,14 @@ const ProjectInquiry = () => {
       <PageIntro
         label="Запитване за проект"
         title="Разкажете ни за проекта."
-        description="Попълнете формата по-долу с детайли за вашия проект. Ще се свържем с вас възможно най-скоро, за да обсъдим как можем да ви помогнем."
+        description="Колкото повече знаем предварително, толкова по-точна е първата оферта. Задължителни са само полетата със звездичка. Отговаряме до 24 часа в работни дни."
       />
 
       <section className="bg-background pb-16 md:pb-24">
         <div className="container mx-auto px-6">
           {isSubmitted ? (
             <FormSuccess
-              text="Запитването е изпратено. Ще прегледаме информацията и ще ви отговорим до 24 часа."
+              text="Запитването е изпратено. Ще прегледаме информацията и ще ви отговорим до 24 часа в работни дни."
               onReset={() => setIsSubmitted(false)}
               resetLabel="Ново запитване"
             />
@@ -415,7 +417,7 @@ const ProjectInquiry = () => {
                         </>
                       ) : (
                         <>
-                          Изпрати запитването
+                          Изпратете запитването
                           <ArrowUpRight />
                         </>
                       )}

@@ -184,7 +184,7 @@ const AutomationSection = () => (
           <div className="flex flex-wrap gap-3">
             <Button variant="ink" size="default" asChild>
               <Link to="/contact">
-                Обсъди автоматизация
+                Обсъдете автоматизация
                 <ArrowUpRight />
               </Link>
             </Button>

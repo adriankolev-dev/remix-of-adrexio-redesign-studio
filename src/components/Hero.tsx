@@ -12,13 +12,14 @@ import stoneSmall from "@/assets/hero-stone-800.webp";
  * composition is an 11.2em-wide box, so every offset scales with the type.
  */
 const LINES = [
-  { text: "Сайтове,", indent: 0.24 },
-  { text: "които не", indent: 2.06 },
-  { text: "приличат на", indent: 0 },
-  { text: "всеки втори.", indent: 1.25 },
+  { text: "Правим", indent: 0.24 },
+  { text: "сложното", indent: 2.06 },
+  { text: "да изглежда", indent: 0 },
+  // Starts right of the stone's peak (5.6em): one word has no gap for the peak to sit in.
+  { text: "просто.", indent: 5.3 },
 ] as const;
 
-const MOBILE_INDENTS = [0, 0.9, 0, 0.45] as const;
+const MOBILE_INDENTS = [0, 0.9, 0, 1.6] as const;
 
 // 0.9 line height: the stone sits from 3 × 0.9 + 0.42 = 3.12em, so only its peak overlaps the last line; the intro from 4 × 0.9 + 0.15 = 3.75em.
 const LINE_HEIGHT = 0.9;
@@ -111,13 +112,14 @@ const Hero = () => {
               />
             </div>
 
-            <div className="lg:absolute lg:left-[1.12em] lg:top-[3.75em]">
+            {/* From lg the lede ends at 3.55em, just short of the stone's left edge (3.7em). */}
+            <div className="lg:absolute lg:left-[1.12em] lg:top-[3.75em] lg:w-[2.43em]">
               <motion.p
-                className="mt-6 max-w-[20rem] text-[1rem] leading-[1.6] text-muted-foreground lg:mt-0 lg:text-[1.1rem]"
+                className="mt-6 max-w-[20rem] text-[1rem] leading-[1.6] text-muted-foreground lg:mt-0 lg:max-w-none lg:text-[1.1rem]"
                 {...fade(0.7)}
               >
-                Дизайн и разработка от нулата — за бизнеси, които искат да се отличават и да
-                получават повече запитвания.
+                Ние сме Adrexio, уеб студио в София. Проектираме и пишем сайтове и онлайн
+                магазини, в които клиентът намира нужното, без да се замисля.
               </motion.p>
             </div>
           </div>
@@ -129,14 +131,14 @@ const Hero = () => {
             to="/contact"
             className="inline-flex h-12 items-center justify-center gap-3 rounded-full bg-foreground text-[0.8rem] font-bold uppercase tracking-[0.06em] text-background"
           >
-            Обсъди проект
+            Обсъдете проект
             <ArrowUpRight size={17} strokeWidth={2.2} />
           </Link>
           <Link
             to="/case-studies"
             className="inline-flex h-12 items-center justify-center gap-3 rounded-full border-[1.5px] border-foreground text-[0.8rem] font-bold uppercase tracking-[0.06em] text-foreground"
           >
-            Виж проектите
+            Разгледайте проектите
             <ArrowUpRight size={17} strokeWidth={2.2} />
           </Link>
         </motion.div>
@@ -154,7 +156,7 @@ const Hero = () => {
             onFocus={() => prefetchRoute("/case-studies")}
             className="group hidden items-center gap-3 text-[0.95rem] font-bold uppercase tracking-[0.04em] text-foreground lg:inline-flex"
           >
-            Виж проектите
+            Разгледайте проектите
             <ArrowUpRight
               size={19}
               strokeWidth={2.2}

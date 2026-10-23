@@ -20,7 +20,7 @@ const PricingTeaser = () => (
         action={
           <Button variant="line" size="default" asChild>
             <Link to="/pricing">
-              Виж цените
+              Вижте цените
               <ArrowUpRight />
             </Link>
           </Button>

@@ -4,25 +4,25 @@ import { Button } from "@/components/ui/button";
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 
-// Each row reframes a familiar pain as the shift we deliver — a "from → to".
+// Each row is a place where a visitor gives up, and what we change there.
 const shifts = [
   {
-    problem: "Скъпа реклама без ROI",
-    psub: "Плащате за трафик, който не се превръща в клиенти.",
-    solution: "Сайт, който носи резултат",
-    ssub: "Бърз, оптимизиран и измерим. Виждате какво връща инвестицията.",
+    problem: "Цената е три клика навътре",
+    psub: "Посетителят идва от реклама, търси колко струва и затваря страницата.",
+    solution: "Отговорът е там, където го търсят",
+    ssub: "Подреждаме страниците по въпросите, които клиентите ви задават по телефона: цена, срок, доставка, гаранция.",
   },
   {
-    problem: "Клиенти, които не се връщат",
-    psub: "Идват веднъж и изчезват без следа.",
-    solution: "UX, който води до действие",
-    ssub: "Всяка секция е режисирана към едно ясно действие.",
+    problem: "Формата иска всичко наведнъж",
+    psub: "Осем задължителни полета, за да зададете един въпрос.",
+    solution: "Само полетата, без които не можете",
+    ssub: "Име, контакт и едно изречение. Останалото се изяснява в разговора.",
   },
   {
-    problem: "Шаблон като всеки втори",
-    psub: "Няма доверие, няма запомняне, няма заявки.",
-    solution: "Дизайн от нулата",
-    ssub: "Структура и визия, които са само ваши.",
+    problem: "На телефон сайтът се бави",
+    psub: "Тежки снимки и скриптове, които никой не е проверил от мобилна мрежа.",
+    solution: "Измерваме, преди да пуснем",
+    ssub: "Всеки сайт минава през PageSpeed на телефон. Сайтът на ресторант CURly е с 98 от 100.",
   },
 ];
 
@@ -31,19 +31,19 @@ const ProblemSolutionSection = () => {
     <section className="bg-background py-16 md:py-24">
       <div className="container mx-auto px-6">
         <SectionHeader
-          title="Цената на шаблона."
-          description="Шаблонът е евтин в началото. После плащате с реклама, която не носи клиенти, и със сайт, който никой не помни."
+          title="Къде сайтовете губят хора."
+          description="Рядко е дизайнът. Обикновено са няколко дребни неща, които никой не е проверил от гледната точка на клиента."
         />
 
         {/* Column labels */}
         <Reveal>
           <div className="grid grid-cols-1 gap-4 border-b border-border pb-4 md:grid-cols-[1fr_auto_1fr] md:gap-8">
             <span className="eyebrow">
-              От шаблона
+              Проблемът
             </span>
             <span className="hidden w-8 md:block" aria-hidden />
             <span className="eyebrow text-foreground">
-              Към Adrexio
+              Какво правим
             </span>
           </div>
         </Reveal>
@@ -64,7 +64,7 @@ const ProblemSolutionSection = () => {
                 {/* Connector */}
                 <div className="flex items-center gap-2 text-primary md:justify-center">
                   <span className="font-mono-meta text-[0.6rem] uppercase tracking-[0.16em] md:hidden">
-                    води до
+                    решение
                   </span>
                   <ArrowRight size={22} className="rotate-90 text-primary md:rotate-0" />
                 </div>
@@ -86,7 +86,7 @@ const ProblemSolutionSection = () => {
         <Reveal delay={0.2} className="mt-12">
           <Button variant="ink" size="lg" asChild>
             <Link to="/contact">
-              Обсъди проект
+              Разкажете ни за сайта си
               <ArrowUpRight />
             </Link>
           </Button>

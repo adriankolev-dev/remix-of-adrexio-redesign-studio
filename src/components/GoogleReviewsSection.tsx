@@ -93,7 +93,7 @@ const ReviewCard = ({ review }: { review: GoogleReview }) => {
           onFocus={prefetchCaseStudy}
           className="group mt-auto inline-flex items-center gap-2 pt-6 text-[0.72rem] font-bold uppercase tracking-[0.06em] text-foreground"
         >
-          Виж проекта
+          Разгледайте проекта
           <ArrowUpRight
             size={14}
             className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

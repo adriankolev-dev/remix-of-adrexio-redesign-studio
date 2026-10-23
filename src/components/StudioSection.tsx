@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Reveal from "@/components/editorial/Reveal";
 import Dotted from "@/components/editorial/Dotted";
 import { GOOGLE_RATING } from "@/data/googleReviews";
+import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
 
 import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.webp";
 import fmlLogo from "@/assets/clients/fml.webp";
@@ -20,9 +21,9 @@ import supercreditLogo from "@/assets/clients/supercredit.svg";
 
 // Only claims we can stand behind: no client-attributed growth figures.
 const metrics = [
-  { value: "AI First", label: "Опит, ускорен с AI", source: "Екипът решава, AI скъсява срока" },
+  { value: String(PORTFOLIO_PROJECT_COUNT), label: "Проекта в портфолиото", source: "Всеки с описание какво направихме" },
   { value: "10+", label: "Години опит в екипа", source: "Уеб дизайн и разработка" },
-  { value: "24ч", label: "Отговор на запитване", source: "С план, срок и оферта" },
+  { value: "24ч", label: "Отговор на запитване", source: "В работни дни" },
   {
     value: GOOGLE_RATING.toFixed(1),
     label: "Рейтинг в Google",
@@ -62,8 +63,8 @@ const StudioSection = () => (
           </Reveal>
           <Reveal delay={0.06}>
             <p className="mt-8 max-w-xl text-[1.6rem] font-semibold leading-[1.15] tracking-[-0.035em] text-foreground md:mt-10 md:text-[2.25rem]">
-              Adrexio е уеб студио в София. Проектираме и изграждаме сайтове и онлайн магазини от
-              нулата, без готови шаблони.
+              Простото не е просто. Зад всяка ясна страница стоят десетки решения, които
+              посетителят не трябва да забелязва.
             </p>
           </Reveal>
         </div>
@@ -72,13 +73,13 @@ const StudioSection = () => (
           <Reveal delay={0.1}>
             <div className="max-w-md space-y-5 text-base leading-relaxed text-muted-foreground md:text-[1.05rem]">
               <p>
-                Работим с бизнеси, които искат сайт с характер. Всеки проект започва
-                с въпроса какво трябва да постигне сайтът, и чак след това с дизайна.
+                Кой текст стои най-горе. Кое поле във формата е излишно. Защо снимката се бави на
+                телефон и кой плъгин може да отпадне. Тези решения са нашата работа, за да не са
+                работа на клиентите ви.
               </p>
               <p>
-                Екипът ни събира дизайн, разработка и маркетинг. Работим AI First, но решенията
-                взимат хора с над 10 години опит. AI поема проучването, черновите и рутинния код, а
-                ние проверяваме всеки ред. Така сайтът стига до вас по-бързо, без да губи качество.
+                Дизайнът, кодът и маркетингът са в един екип, затова не се налага да ги
+                съгласувате помежду им.
               </p>
             </div>
           </Reveal>
@@ -87,13 +88,13 @@ const StudioSection = () => (
             <div className="mt-8 flex flex-wrap gap-3">
               <Button variant="ink" size="default" asChild>
                 <Link to="/case-studies">
-                  Виж проектите
+                  Разгледайте проектите
                   <ArrowUpRight />
                 </Link>
               </Button>
               <Button variant="line" size="default" asChild>
                 <Link to="/about">
-                  За нас
+                  Как работим
                   <ArrowUpRight />
                 </Link>
               </Button>

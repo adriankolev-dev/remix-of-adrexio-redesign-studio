@@ -9,82 +9,83 @@ import Reveal from "@/components/editorial/Reveal";
 import CTASection from "@/components/CTASection";
 import { getServiceSchema } from "@/lib/structuredData";
 import { PRICING } from "@/data/pricing";
+import Sculpture from "@/components/editorial/Sculpture";
 
-const PHASE_LABEL = "по проект — следващ етап";
+const PHASE_LABEL = "Добавяме след сайта";
+const QUOTE_LABEL = "Оферта след разговор";
 
 const services = [
   {
     title: "Уеб разработка",
-    subtitle: "Web Development",
+    subtitle: `Сайт ${PRICING.website.fromLabel}`,
     description:
-      "Модерни сайтове за вашия бизнес и неговия растеж — бързи, адаптивни и SEO-оптимизирани, изградени от нулата.",
+      "Фирмени и корпоративни сайтове с дизайн за вашата марка. WordPress, когато екипът ще пише често, Next.js, когато скоростта и собствената логика тежат повече.",
     href: "/services/web-development",
-    features: ["Корпоративни сайтове", "Лендинг страници", "E-commerce", "Уеб приложения"],
+    features: ["Фирмени сайтове", "Корпоративни сайтове", "Лендинг страници", "Уеб приложения"],
   },
   {
     title: "Онлайн магазини",
-    subtitle: "E-commerce",
+    subtitle: `Магазин ${PRICING.ecommerce.fromLabel}`,
     description:
-      "Магазин, построен за българския пазар — Еконт и Спиди, наложен платеж и склад, заложени в основата, не добавени накрая.",
+      "Магазин за българския пазар: Еконт и Спиди, наложен платеж и склад са заложени в основата, а не добавени накрая.",
     href: "/services/onlajn-magazin",
     features: ["Еконт и Спиди", "Наложен платеж", "Склад и наличности", "Общи условия"],
   },
   {
     title: "UI/UX дизайн",
-    subtitle: "Design & Strategy",
+    subtitle: QUOTE_LABEL,
     description:
-      "Интуитивен дизайн за отлично потребителско изживяване, базиран на задълбочен анализ и изследване.",
+      "Структура, потребителски пътища и интерфейс, проверени на прототип, преди да се пише код. За сайтове, магазини и вътрешни системи.",
     href: "/services/ui-ux-design",
-    features: ["Проучване", "Wireframing", "Визуален дизайн", "Design Systems"],
+    features: ["Информационна архитектура", "Wireframes", "Прототипи", "Дизайн системи"],
   },
   {
     title: "Техническа поддръжка",
     subtitle: `По желание · ${PRICING.maintenance.fromLabel}`,
     description:
-      "Хостинг, сигурност, актуализации и дребни промени след старта. Пишете ни какво да се промени и до 24 часа е направено.",
+      "Хостинг, актуализации, резервни копия и дребни промени след старта. Отговаряме на заявка до 24 часа в работни дни.",
     href: "/services/technical-support",
-    features: ["Мониторинг", "Актуализации", "Резервни копия", "Производителност"],
-    pricingHref: "/pricing",
+    features: ["Мониторинг", "Актуализации", "Резервни копия", "Промени по съдържанието"],
   },
   {
     title: "SEO оптимизация",
-    subtitle: "Search Optimization",
+    subtitle: QUOTE_LABEL,
     description:
-      "Подобряване на видимостта в Google за повече органичен трафик и по-добри позиции по заявките, които носят клиенти.",
+      "Технически одит, съдържание по реалните търсения и редовна проверка в Search Console. Не обещаваме позиции, а показваме какво се е променило.",
     href: "/services/seo",
     features: ["Технически одит", "On-page", "Линк билдинг", "Местно SEO"],
   },
   {
     title: "GEO оптимизация",
-    subtitle: "AI Search Optimization",
+    subtitle: "Безплатен първоначален одит",
     description:
-      "Видимост в ChatGPT, Perplexity, Gemini и Google AI Overviews — за да ви цитират, когато клиентът пита AI вместо Google.",
+      "Достъп за AI ботовете, текстове, които могат да бъдат цитирани, и проверка дали ChatGPT, Perplexity и Google AI ви споменават. Цитиране не може да се гарантира, готовността за него може.",
     href: "/services/geo-optimizaciya",
     features: ["GEO одит", "Достъп за AI ботове", "Структурирани данни", "Измерване на цитирания"],
   },
   {
     title: "AI интеграции",
-    subtitle: "AI автоматизации",
+    subtitle: QUOTE_LABEL,
     description:
-      "Автоматизация и AI решения за оптимизация на бизнес процесите — чатботове, машинно обучение и интелигентни системи.",
+      "Автоматизации за повтарящата се работа: запитвания към CRM, отговори на чести въпроси, данни от документи. Където обикновен скрипт върши работа, не слагаме AI.",
     href: "/services/ai-implementation",
-    features: ["Чатботове", "Автоматизация", "Машинно обучение", "AI аналитика"],
+    features: ["Чатботове", "Автоматизации", "Обработка на документи", "Интеграции"],
   },
   {
     title: "Мобилни приложения",
     subtitle: PHASE_LABEL,
     description:
-      "Иновативни приложения за iOS и Android с отлично потребителско изживяване и висока производителност.",
+      "Приложения за iOS и Android, когато мобилният сайт не стига: работа без интернет, известия, камера или GPS.",
     href: "/services/mobile-apps",
-    features: ["Native iOS", "Native Android", "Cross-platform", "PWA"],
+    features: ["iOS", "Android", "React Native", "PWA"],
   },
   {
     title: "Дигитален маркетинг",
     subtitle: PHASE_LABEL,
     description:
-      "Стратегии за растеж и увеличаване на онлайн присъствието чрез ефективни маркетинг кампании.",
+      "Google Ads и Meta кампании за сайтове, които сме направили или поели, с проследяване от клика до изпратената форма.",
     href: "/services/digital-marketing",
-    features: ["Google Ads", "Meta реклами", "Email маркетинг", "Социални мрежи"],
+    features: ["Google Ads", "Meta реклами", "Проследяване на конверсии", "Целеви страници"],
   },
 ];
 
@@ -114,17 +115,20 @@ const Services = () => {
       <PageIntro
         index="01"
         label="Услуги"
-        title={
-          <>
-            Всичко, от което имате нужда — изградено от нулата.
-          </>
+        title={<>Отделни услуги. Един работещ сайт.</>}
+        description="Дизайнът решава какво вижда клиентът. Кодът решава колко бързо го вижда, а SEO дали изобщо стига до сайта. Правим ги в един екип, за да не се налага вие да ги съгласувате. Започнете от това, което ви трябва сега."
+        aside={
+          <Sculpture
+            stone="fragmented"
+            sizes="(min-width: 1024px) 22rem, 0px"
+            className="hidden w-[18rem] xl:w-[22rem] lg:block"
+          />
         }
-        description="От първия wireframe до пускането. Не предлагаме готови шаблони с ново лого — проектираме всяко решение спрямо вашия бизнес."
         meta={[
-          { value: String(services.length), label: "Направления" },
-          { value: "0", label: "Готови шаблони" },
-          { value: "100%", label: "Собственост върху кода" },
-          { value: "от €99", label: "Поддръжка / месец" },
+          { value: String(services.length), label: "Услуги в един екип" },
+          { value: PRICING.website.fromLabel, label: "Фирмен сайт" },
+          { value: PRICING.ecommerce.fromLabel, label: "Онлайн магазин" },
+          { value: PRICING.maintenance.fromLabel.replace(" / месец", ""), label: "Поддръжка на месец" },
         ]}
       />
 
@@ -161,11 +165,6 @@ const Services = () => {
                         </span>
                       ))}
                     </p>
-                    {"pricingHref" in service && service.pricingHref ? (
-                      <p className="mt-4 text-sm font-semibold text-foreground">
-                        Поддръжка {PRICING.maintenance.fromLabel}
-                      </p>
-                    ) : null}
                   </div>
                 </Link>
               </Reveal>
@@ -176,7 +175,7 @@ const Services = () => {
             <div className="flex flex-wrap gap-3">
               <Button variant="ink" size="lg" asChild>
                 <Link to="/contact">
-                  Обсъди проект
+                  Разкажете ни за проекта
                   <ArrowUpRight />
                 </Link>
               </Button>

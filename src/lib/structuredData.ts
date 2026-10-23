@@ -38,7 +38,7 @@ export const getOrganizationSchema = () => ({
   logo: LOGO,
   image: LOGO.url,
   description:
-    "Създаваме бързи и оптимизирани уебсайтове, мобилни приложения и дигитални решения, които помагат на бизнеса да расте онлайн.",
+    "Уеб студио в София: сайтове и онлайн магазини от нулата, техническа поддръжка, SEO и AI автоматизации.",
   address: ADDRESS,
   contactPoint: {
     "@type": "ContactPoint",

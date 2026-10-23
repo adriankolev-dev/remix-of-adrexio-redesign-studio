@@ -187,7 +187,7 @@ const CaseStudyDetail = () => {
                   </Button>
                 ) : null}
                 <Button variant="line" size="lg" asChild>
-                  <Link to="/contact">Обсъди проект</Link>
+                  <Link to="/contact">Обсъдете проект</Link>
                 </Button>
               </div>
               <p className="order-1 max-w-xl text-base leading-relaxed text-muted-foreground md:text-[1.1rem] lg:order-2">

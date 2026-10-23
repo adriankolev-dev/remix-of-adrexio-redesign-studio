@@ -50,10 +50,10 @@ describe("prerender parsers", () => {
     const page = parseServicePage(src);
     expect(page.seoTitle).toMatch(/Изработка на сайт в София/);
     expect(page.serviceName).toBe("Изработка на сайт");
-    expect(page.heroHighlight).toMatch(/шаблонът не стига/);
+    expect(page.heroHighlight).toMatch(/последния ред код/);
     expect(page.features.length).toBeGreaterThan(3);
     expect(page.faqs.length).toBeGreaterThan(3);
-    expect(page.faqs[0].question).toMatch(/уебсайт/);
+    expect(page.faqs[0].question).toMatch(/изработката на сайт/);
   });
 
   it("extracts the service blocks that used to be dropped from crawler HTML", () => {

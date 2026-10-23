@@ -334,7 +334,7 @@ export const caseStudies: CaseStudy[] = [
   {
     id: "amelia-diva",
     title: "Amelia Diva",
-    subtitle: "Нов WooCommerce магазин за консумативи за мигли и вежди, пуснат за една вечер с всички стари поръчки",
+    subtitle: "20 959 поръчки, нито една оставена назад: нов WooCommerce магазин за консумативи за мигли и вежди, сменен за една вечер",
     category: "Електронна търговия",
     url: "https://ameliadiva.com/",
     isPublic: true,

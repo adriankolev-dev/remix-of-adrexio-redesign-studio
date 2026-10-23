@@ -135,7 +135,7 @@ const ServiceLandingTemplate = ({
   heroTitle,
   heroHighlight,
   heroSubtitle,
-  heroCTAText = "Свържи се с нас",
+  heroCTAText = "Разкажете ни за проекта",
   stats,
   introTitle,
   introDescription,
@@ -233,7 +233,7 @@ const ServiceLandingTemplate = ({
             action={
               <Button variant="line" size="default" asChild>
                 <Link to="/case-studies">
-                  Виж проектите
+                  Разгледайте проектите
                   <ArrowUpRight />
                 </Link>
               </Button>

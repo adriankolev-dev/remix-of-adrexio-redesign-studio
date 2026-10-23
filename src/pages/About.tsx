@@ -9,44 +9,49 @@ import PageIntro from "@/components/editorial/PageIntro";
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import CTASection from "@/components/CTASection";
-import balance from "@/assets/about-balance.webp";
+import Sculpture from "@/components/editorial/Sculpture";
+import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
+import { GOOGLE_RATING } from "@/data/googleReviews";
 import { getOrganizationSchema } from "@/lib/structuredData";
 
 const values = [
   {
-    title: "Прецизност",
+    title: "Първо въпросът, после дизайнът",
     description:
-      "Всеки детайл има значение. Изграждаме решения с безкомпромисно внимание към качеството.",
+      "Всеки проект започва с това какво трябва да направи посетителят и какво му пречи днес. Цветовете и шрифтовете идват, когато структурата е ясна.",
   },
   {
-    title: "AI First",
+    title: "Само числа, които можем да покажем",
     description:
-      "AI поема проучването, черновите и рутинния код. Решенията и проверката остават при екипа, затова работим по-бързо без компромис с качеството.",
+      "Не пишем проценти ръст, които не сме измерили. В казусите отделяме това, което направихме, от данните на клиента.",
   },
   {
-    title: "Партньорство",
-    description: "Вярваме в дългосрочните отношения. Вашият успех е нашата мисия.",
+    title: "AI за рутината, хора за решенията",
+    description:
+      "AI поема проучването, черновите и повтарящия се код. Структурата, дизайнът и прегледът на всеки ред остават при екипа.",
   },
   {
-    title: "Отдаденост",
-    description: "Влагаме страст във всеки проект и се ангажираме с вашите бизнес цели.",
+    title: "Код, който друг може да поеме",
+    description:
+      "Пишем така, че друг разработчик да разбере проекта след нас. След финалното плащане кодът и дизайнът са ваши.",
   },
 ];
 
 const offer = [
   {
-    title: "Дизайн, ориентиран към потребителя",
+    title: "Сайтове и онлайн магазини",
     description:
-      "Създаваме интерфейси, толкова лесни за ползване, че клиентите ви се влюбват в тях от първия клик.",
+      "WordPress, WooCommerce, Next.js или Symfony, според това какво трябва да прави проектът и кой ще го поддържа след нас.",
   },
   {
-    title: "Безкомпромисна скорост и сигурност",
-    description: "Разработваме стабилен код, който зарежда мигновено и защитава вашите данни.",
+    title: "Поддръжка след старта",
+    description:
+      "Актуализации, резервни копия и промени по съдържанието, от €99 на месец и без дългосрочен договор.",
   },
   {
-    title: "Технологии, които растат с вас",
+    title: "SEO и AI автоматизации",
     description:
-      "Модерен набор от технологии, за да може вашият сайт или приложение да растат заедно с бизнеса ви.",
+      "SEO по данни от Search Console и автоматизации за повтарящата се работа: запитвания, отчети, данни от документи.",
   },
 ];
 
@@ -54,7 +59,7 @@ const About = () => {
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title="За нас - Adrexio | Професионално уеб студио в София"
+        title="За нас - Adrexio | Уеб студио в София"
         description="Уеб студио в София: сайтове и онлайн магазини от нулата, поддръжка, SEO и AI автоматизации. Екип с над 10 години опит."
         keywords="за нас Adrexio, уеб студио София, екип уеб разработка, история Adrexio, опит уеб дизайн"
         structuredData={getOrganizationSchema()}
@@ -64,74 +69,90 @@ const About = () => {
       <PageIntro
         index="01"
         label="За нас"
-        title={
-          <>
-            Ние сме Adrexio. Правим сложното просто.
-          </>
-        }
-        description="Започваме със сайт или онлайн магазин и оставаме след старта: поддръжка, SEO и AI автоматизации, които поемат повтарящата се работа на екипа ви. Мобилни приложения и реклама добавяме, когато бизнесът има нужда от тях."
+        title={<>Ние сме Adrexio. Простото не е просто.</>}
+        description="Уеб студио в София. Правим сайтове и онлайн магазини и оставаме след старта с поддръжка, SEO и AI автоматизации. Мобилни приложения и реклама добавяме, когато бизнесът има нужда от тях."
         actions={
           <>
             <Button variant="ink" size="lg" asChild>
               <Link to="/contact">
-                Обсъди проект
+                Разкажете ни за проекта
                 <ArrowUpRight />
               </Link>
             </Button>
             <Button variant="line" size="lg" asChild>
-              <Link to="/case-studies">Виж проектите</Link>
+              <Link to="/case-studies">Разгледайте проектите</Link>
             </Button>
           </>
         }
         meta={[
-          { value: "AI First", label: "Опит, ускорен с AI" },
           { value: "10+", label: "Години опит в екипа" },
-          { value: "100%", label: "Гаранция за качество" },
+          {
+            value: String(PORTFOLIO_PROJECT_COUNT),
+            label: "Проекта в портфолиото",
+          },
+          { value: GOOGLE_RATING.toFixed(1), label: "Рейтинг в Google" },
         ]}
       />
 
-      {/* Mission: the statement beside the balance sculpture, on the ink band */}
-      <section className="layer-dark overflow-hidden py-20 md:py-28">
-        <div className="container mx-auto grid items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
-          <div>
-            <Reveal>
-              <p className="eyebrow">Мисия</p>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <p className="mt-8 text-[1.75rem] font-semibold leading-[1.15] tracking-[-0.035em] text-foreground md:text-[2.75rem] md:leading-[1.08]">
-                Помагаме на бизнеса да расте онлайн с бързи сайтове и магазини, изградени от нулата.
-                После поемаме и процесите зад тях: поддръжка, SEO и AI автоматизации, които спестяват
-                време на екипа.
-              </p>
+      {/* Philosophy: the statement beside the raw-to-polished stone */}
+      <section className="overflow-hidden bg-background pb-16 pt-4 md:pb-24 md:pt-8">
+        <div className="container mx-auto px-6">
+          <div className="grid items-center gap-10 border-t border-border pt-12 md:pt-16 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-16">
+            <div>
+              <Reveal>
+                <p className="eyebrow">Как мислим</p>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <p className="mt-8 text-[1.75rem] font-semibold leading-[1.15] tracking-[-0.035em] text-foreground md:text-[2.6rem] md:leading-[1.08]">
+                  Една страница изглежда ясна, когато някой е решил какво да
+                  махне от нея.
+                </p>
+              </Reveal>
+              <Reveal delay={0.12}>
+                <div className="mt-8 max-w-xl space-y-4 text-base leading-relaxed text-muted-foreground md:text-[1.05rem]">
+                  <p>
+                    Кой текст отива най-горе, кое поле във формата е излишно,
+                    защо снимката се бави на телефон. Посетителят не вижда тези
+                    решения. Вижда само, че намира каквото търси.
+                  </p>
+                  <p>
+                    Харесваме чистия дизайн, ясните решения и кода, който
+                    продължава да работи добре дълго след пускането на сайта.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+            <Reveal delay={0.14} direction="right">
+              <Sculpture
+                stone="raw-polished"
+                sizes="(min-width: 1024px) 34rem, 80vw"
+                className="mx-auto w-[78%] max-w-[22rem] lg:w-full lg:max-w-[30rem]"
+              />
             </Reveal>
           </div>
-          <Reveal delay={0.14} direction="right">
-            <img
-              src={balance}
-              alt="Синя каменна скулптура: диск, сфера и греда в равновесие върху куб"
-              width={800}
-              height={581}
-              loading="lazy"
-              decoding="async"
-              className="mx-auto w-full max-w-[34rem]"
-            />
-          </Reveal>
         </div>
       </section>
 
       <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
           <SectionHeader
-            title="Принципите ни."
-            description="Едни и същи във всеки проект и всяко взаимоотношение с клиент."
+            title="Как работим."
+            description="Четири правила, които важат за всеки проект, малък или голям."
           />
           <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value, i) => (
-              <Reveal as="li" key={value.title} delay={i * 0.05} className="border-t border-border pb-10 pt-6">
+              <Reveal
+                as="li"
+                key={value.title}
+                delay={i * 0.05}
+                className="border-t border-border pb-10 pt-6"
+              >
                 <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
                   {value.title}
                 </h3>
-                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{value.description}</p>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">
+                  {value.description}
+                </p>
               </Reveal>
             ))}
           </ul>
@@ -140,14 +161,21 @@ const About = () => {
 
       <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
-          <SectionHeader title="Изграждаме, за да работи." />
+          <SectionHeader title="Какво правим." />
           <ul className="grid gap-x-8 md:grid-cols-3">
             {offer.map((item, i) => (
-              <Reveal as="li" key={item.title} delay={i * 0.05} className="border-t border-border pb-10 pt-6">
+              <Reveal
+                as="li"
+                key={item.title}
+                delay={i * 0.05}
+                className="border-t border-border pb-10 pt-6"
+              >
                 <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{item.description}</p>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
               </Reveal>
             ))}
           </ul>

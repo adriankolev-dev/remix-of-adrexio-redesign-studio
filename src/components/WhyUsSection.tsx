@@ -1,30 +1,28 @@
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 
+// Each reason has to be checkable before the contract: the pricing data, the
+// portfolio or the way we use AI. No adjectives about ourselves.
 const reasons = [
   {
-    title: "Индивидуален подход",
-    description: "Анализираме нуждите ви и тогава проектираме. Не започваме от шаблон.",
+    title: "Обхватът е на хартия",
+    description:
+      "Преди старта получавате списък какво влиза и какво не. Ако по пътя поискате нещо ново, първо го оценяваме и чак тогава го правим.",
   },
   {
-    title: "AI, който поема работа",
-    description: "Чатбот отговаря на честите въпроси денонощно, запитванията от сайта отиват направо в CRM-а ви, а съдържанието е подготвено да бъде цитирано от ChatGPT и Google AI.",
+    title: "Сайтът остава ваш",
+    description:
+      "След финалното плащане кодът и дизайнът са ваша собственост. Можете да смените изпълнителя, без да започвате отначало.",
   },
   {
-    title: "Прозрачност",
-    description: "Виждате всеки етап. Редовни актуализации, ясна комуникация, без изненади.",
+    title: "Работата може да се провери",
+    description:
+      "В портфолиото има адрес към всеки публичен сайт. Отворете го от телефона си и проверете скоростта, преди да ни се обадите.",
   },
   {
-    title: "UX, който води до действие",
-    description: "Всяка страница е подредена около едно ясно действие за посетителя.",
-  },
-  {
-    title: "Поддръжка след старта",
-    description: "След пускането оставаме: актуализации, оптимизация, дългосрочна работа.",
-  },
-  {
-    title: "Отдаденост към успеха ви",
-    description: "Целта е резултатът ви, а не само да предадем сайта.",
+    title: "AI за рутината, хора за решенията",
+    description:
+      "AI поема проучването, черновите и повтарящия се код. Структурата, дизайнът и прегледът на всеки ред остават при екипа.",
   },
 ];
 
@@ -33,15 +31,15 @@ const WhyUsSection = () => (
     <div className="container mx-auto px-6">
       <SectionHeader
         title="Защо Adrexio."
-        description="Работим с бизнеси, които искат сайт с характер, а не копие на конкурента. Ето какво получавате."
+        description="Четири неща, които можете да проверите, преди да подпишете."
       />
 
-      <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
         {reasons.map((reason, i) => (
           <Reveal
             as="li"
             key={reason.title}
-            delay={(i % 3) * 0.06}
+            delay={(i % 4) * 0.06}
             className="border-t border-border pb-12 pt-6"
           >
             <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">

@@ -10,6 +10,8 @@
        Cyan stays as the single accent (the stone, the period after section titles). */
     --background: 0 0% 99%;
     --foreground: 0 0% 4%;
+    /* Floor shadow under the sculptures: ink on paper, a faint accent glow on dark. */
+    --stone-shadow: 0 0% 0%;
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 4%;
@@ -63,6 +65,7 @@
   .dark {
     --background: 0 0% 4%;
     --foreground: 0 0% 97%;
+    --stone-shadow: 192 88% 61%;
 
     --card: 0 0% 7%;
     --card-foreground: 0 0% 97%;
@@ -366,6 +369,7 @@
   .layer-dark {
     --background: var(--ink);
     --foreground: var(--ink-foreground);
+    --stone-shadow: 192 88% 61%;
     --card: 0 0% 8%;
     --card-foreground: 0 0% 97%;
     --secondary: 0 0% 11%;

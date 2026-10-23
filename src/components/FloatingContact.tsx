@@ -31,7 +31,7 @@ const channels: Channel[] = [
   },
   {
     label: "WhatsApp",
-    sub: "Пиши по всяко време",
+    sub: "Пишете по всяко време",
     href: "https://wa.me/359896173743",
     color: "#25D366",
     icon: MessageCircle,
@@ -46,7 +46,7 @@ const channels: Channel[] = [
     external: true,
   },
   {
-    label: "Обади се",
+    label: "Обадете се",
     sub: "+359 896 173 743",
     href: "tel:+359896173743",
     color: "hsl(var(--primary))",
@@ -105,7 +105,7 @@ const DesktopWidget = () => {
           >
             <div className="border-b border-border px-4 py-3">
               <p className="eyebrow">
-                Пиши ни
+                Пишете ни
               </p>
               <p className="mt-1 text-sm font-semibold text-foreground">
                 Обикновено отговаряме до 24ч
@@ -120,7 +120,7 @@ const DesktopWidget = () => {
               to="/contact"
               className="flex items-center justify-between border-t border-border px-4 py-3 text-sm font-semibold text-foreground transition-opacity hover:opacity-60"
             >
-              Изпрати запитване
+              Изпратете запитване
               <ArrowRight size={16} />
             </Link>
           </motion.div>
@@ -130,7 +130,7 @@ const DesktopWidget = () => {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Затвори" : "Пиши ни"}
+        aria-label={open ? "Затвори" : "Пишете ни"}
         aria-expanded={open}
         className="group relative grid h-14 w-14 place-items-center rounded-full bg-foreground text-background transition-transform hover:scale-105"
       >
@@ -183,7 +183,7 @@ const MobileBar = () => {
             className="flex flex-1 items-center justify-center gap-2 border-x border-border py-3.5 text-sm font-semibold text-foreground"
           >
             <Phone className="h-4 w-4 text-foreground" strokeWidth={2.25} />
-            Обади се
+            Обадете се
           </a>
           <Link
             to="/contact"

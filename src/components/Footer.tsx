@@ -13,7 +13,7 @@ const navigation = [
   { label: "Блог", path: "/blog" },
   { label: "Партньорска програма", path: "/affiliate" },
   { label: "Контакти", path: "/contact" },
-  { label: "Попълни бриф", path: "/project-inquiry" },
+  { label: "Попълнете бриф", path: "/project-inquiry" },
 ];
 
 const services = [

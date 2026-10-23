@@ -34,10 +34,10 @@ const MeetTheTeam = () => (
     <div className="container mx-auto px-6">
       <SectionHeader
         title="Екипът."
-        description="Визията, която стои зад всеки проект, и хората, които я превръщат в работещ сайт."
+        description="Дизайн, разработка и маркетинг на една маса."
       />
 
-      {/* Founder: photo and the line he stands behind */}
+      {/* Founder: photo and the line they stand behind */}
       <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <Reveal>
           <MemberCard name="Адриан Колев" role="Основател & CEO" image={founderImage} />
@@ -48,8 +48,8 @@ const MeetTheTeam = () => (
               “
             </span>
             <blockquote className="text-2xl font-semibold leading-snug tracking-[-0.03em] text-foreground md:text-[2.25rem] md:leading-[1.15]">
-              Вярваме, че истинският дигитален успех идва от смелите идеи, правилната стратегия и
-              безупречното изпълнение.
+              Когато клиентът не се замисля къде да кликне, значи някой друг се е замислил вместо
+              него. Това е нашата работа.
             </blockquote>
             <p className="text-[0.75rem] font-bold uppercase tracking-[0.08em] text-muted-foreground">
               Адриан Колев · Основател &amp; CEO

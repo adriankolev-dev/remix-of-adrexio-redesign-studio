@@ -35,11 +35,12 @@ const contactChannels = [
   { label: "Адрес", value: "София, България" },
 ];
 
-const reasons = [
-  "Безплатна първоначална консултация",
+// What happens after the form, in order. Only steps the pricing data backs up.
+const nextSteps = [
+  "Отговаряме до 24 часа в работни дни.",
+  "Кратък разговор за целите, срока и сегашния ви сайт. Консултацията е безплатна.",
+  "Получавате писмена оферта: какво влиза, какво не, срок и цена.",
   PAYMENT_COPY,
-  "Гарантирано качество на работа",
-  "Поддръжка след старта: актуализации, резервни копия и промени по сайта",
 ];
 
 const socials = [
@@ -204,7 +205,7 @@ const Contact = () => {
       <PageIntro
         label="Контакти"
         title="Да поговорим."
-        description="Свържете се с нас за безплатна консултация. Ще ви помогнем да превърнете идеите си в реалност."
+        description="Напишете с две изречения какво правите и какво искате да промените. Не е нужно да знаете технологията или точния обхват: за това е първият разговор."
       />
 
       <section className="bg-background pb-16 md:pb-24">
@@ -234,15 +235,17 @@ const Contact = () => {
               </ul>
 
               <Reveal delay={0.1} className="mt-10">
-                <p className="eyebrow">Защо да ни изберете</p>
-                <ul className="mt-4 border-t border-border">
-                  {reasons.map((item) => (
-                    <li key={item} className="flex gap-3 border-b border-border py-3.5 text-[0.95rem] leading-relaxed text-muted-foreground">
-                      <span aria-hidden className="font-bold text-foreground">+</span>
+                <p className="eyebrow">Какво следва</p>
+                <ol className="mt-4 border-t border-border">
+                  {nextSteps.map((item, i) => (
+                    <li key={item} className="flex gap-4 border-b border-border py-3.5 text-[0.95rem] leading-relaxed text-muted-foreground">
+                      <span aria-hidden className="font-bold tabular-nums text-foreground">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
                       <span>{item}</span>
                     </li>
                   ))}
-                </ul>
+                </ol>
               </Reveal>
 
               <Reveal delay={0.16} className="mt-10">
@@ -270,7 +273,7 @@ const Contact = () => {
             <Reveal delay={0.08}>
               {isSubmitted ? (
                 <FormSuccess
-                  text="Съобщението е изпратено. Ще ви отговорим до 24 часа."
+                  text="Съобщението е изпратено. Ще ви отговорим до 24 часа в работни дни."
                   onReset={() => setIsSubmitted(false)}
                   resetLabel="Ново съобщение"
                 />
@@ -279,7 +282,7 @@ const Contact = () => {
                   <p className="text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-[1.75rem]">
                     Пишете ни
                   </p>
-                  <p className="mt-2 text-sm text-muted-foreground">Отговаряме до 24 часа, без обвързващи договори.</p>
+                  <p className="mt-2 text-sm text-muted-foreground">Задължителни са само името, имейлът и съобщението.</p>
 
                   <div className="mt-8 grid gap-8 md:grid-cols-2">
                     <StudioField id="from_name" label="Име" required>
@@ -295,7 +298,7 @@ const Contact = () => {
                       <StudioInput id="subject" name="subject" value={formData.subject} onChange={handleChange} placeholder="За какво става дума?" />
                     </StudioField>
                     <StudioField id="message" label="Съобщение" required className="md:col-span-2">
-                      <StudioTextarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Разкажете ни повече за проекта" rows={5} required />
+                      <StudioTextarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Например: Имаме магазин за козметика на WooCommerce и искаме да добавим Еконт и нов дизайн." rows={5} required />
                     </StudioField>
                   </div>
 
@@ -324,7 +327,7 @@ const Contact = () => {
                         </>
                       ) : (
                         <>
-                          Изпрати
+                          Изпратете
                           <ArrowUpRight />
                         </>
                       )}

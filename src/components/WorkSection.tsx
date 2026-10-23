@@ -13,7 +13,7 @@ const WorkSection = () => (
     <div className="container mx-auto px-6">
       <SectionHeader
         title="Част от проектите."
-        description="Сайтове и онлайн магазини, изградени от нулата. Всеки има своя страница с решенията и резултатите."
+        description="Всеки проект има своя страница: каква беше задачата, какво направихме и кое беше най-трудно. Повечето сайтове можете да отворите сами."
         action={
           <Button variant="line" size="default" asChild>
             <Link to="/case-studies">
@@ -54,7 +54,7 @@ const WorkSection = () => (
                   <p className="mt-1 text-sm text-muted-foreground">{study.category}</p>
                 </div>
                 <span className="inline-flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-[0.06em] text-foreground">
-                  Виж проекта
+                  Разгледайте проекта
                   <ArrowUpRight
                     size={15}
                     className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

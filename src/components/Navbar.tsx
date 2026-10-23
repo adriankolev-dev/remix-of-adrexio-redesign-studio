@@ -63,7 +63,7 @@ const Navbar = () => {
           <img src={logo} alt="" aria-hidden className="hidden h-7 w-auto dark:block lg:h-9" />
         </Link>
 
-        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-10 lg:flex xl:gap-12">
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-5 lg:flex xl:gap-12">
           {navLinks.map((link) => {
             const active = isActive(location.pathname, link.href);
             return (
@@ -73,7 +73,7 @@ const Navbar = () => {
                 onMouseEnter={() => prefetchRoute(link.href)}
                 onFocus={() => prefetchRoute(link.href)}
                 aria-current={active ? "page" : undefined}
-                className="relative text-[0.8rem] font-medium uppercase tracking-[0.1em] text-foreground transition-opacity hover:opacity-60"
+                className="relative whitespace-nowrap text-[0.8rem] font-medium uppercase tracking-[0.1em] text-foreground transition-opacity hover:opacity-60"
               >
                 {link.name}
                 {active && (
@@ -93,9 +93,9 @@ const Navbar = () => {
             to="/contact"
             onMouseEnter={() => prefetchRoute("/contact")}
             onFocus={() => prefetchRoute("/contact")}
-            className="inline-flex h-[2.9rem] items-center gap-3 rounded-full border-[1.5px] border-foreground px-7 text-[0.78rem] font-bold uppercase tracking-[0.06em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+            className="inline-flex h-[2.9rem] items-center gap-3 whitespace-nowrap rounded-full border-[1.5px] border-foreground px-5 text-[0.78rem] xl:px-7 font-bold uppercase tracking-[0.06em] text-foreground transition-colors hover:bg-foreground hover:text-background"
           >
-            Обсъди проект
+            Обсъдете проект
             <ArrowUpRight size={17} strokeWidth={2.2} />
           </Link>
         </div>
@@ -144,7 +144,7 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="mt-8 inline-flex h-12 items-center justify-center gap-3 rounded-full bg-foreground text-[0.8rem] font-bold uppercase tracking-[0.06em] text-background"
               >
-                Обсъди проект
+                Обсъдете проект
                 <ArrowUpRight size={17} strokeWidth={2.2} />
               </Link>
             </div>

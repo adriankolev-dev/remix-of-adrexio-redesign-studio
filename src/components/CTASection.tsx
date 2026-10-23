@@ -8,7 +8,7 @@ import { PAYMENT_COPY } from "@/data/pricing";
 interface CTASectionProps {
   /** Bold line on the right; defaults to the general question. */
   lead?: string;
-  /** Paragraph under the lead; defaults to the 24-hour promise. */
+  /** Paragraph under the lead; defaults to what happens after the first message. */
   text?: string;
   /** Main button; defaults to the contact page. */
   primary?: { label: string; href: string; onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void };
@@ -17,10 +17,10 @@ interface CTASectionProps {
 }
 
 const CTASection = ({
-  lead = "Имате проект наум?",
-  text = "Разкажете ни какво искате да постигнете. Отговаряме до 24 часа с план, срок и оферта, без ангажимент от ваша страна.",
-  primary = { label: "Обсъди проект", href: "/contact" },
-  secondary = { label: "Попълни бриф", href: "/project-inquiry" },
+  lead = "Разкажете ни за проекта.",
+  text = "Две изречения за бизнеса ви са достатъчни за начало. Отговаряме до 24 часа в работни дни, а след кратък разговор изпращаме обхват, срок и цена.",
+  primary = { label: "Пишете ни", href: "/contact" },
+  secondary = { label: "Попълнете бриф", href: "/project-inquiry" },
 }: CTASectionProps) => (
   <section className="bg-background py-12 md:py-20">
     <div className="container mx-auto px-6">
