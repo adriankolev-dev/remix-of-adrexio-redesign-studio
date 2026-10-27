@@ -210,7 +210,7 @@ const AutomationSection = () => (
         {AUTOMATIONS.map((item, i) => (
           <Reveal as="li" key={item.title} delay={(i % 3) * 0.05} className="border-t border-border pb-10 pt-6">
             <item.icon className="h-7 w-7 text-foreground" strokeWidth={1.5} aria-hidden />
-            <h3 className="mt-6 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+            <h3 className="mt-6 text-xl font-semibold text-foreground md:text-2xl">
               {item.title}
             </h3>
             <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{item.text}</p>

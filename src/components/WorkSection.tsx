@@ -48,7 +48,7 @@ const WorkSection = () => (
 
               <div className="flex min-w-0 flex-1 flex-col justify-between gap-6 px-1 pb-1 sm:py-1">
                 <div>
-                  <h3 className="text-2xl font-semibold leading-tight tracking-[-0.03em] text-foreground md:text-[1.7rem]">
+                  <h3 className="text-2xl font-semibold leading-tight text-foreground md:text-[1.7rem]">
                     {study.title}
                   </h3>
                   <p className="mt-1 text-sm text-muted-foreground">{study.category}</p>

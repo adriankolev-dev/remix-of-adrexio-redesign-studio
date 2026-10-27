@@ -134,7 +134,7 @@ export const FormStep = ({ n, title, note, children }: { n: string; title: strin
   >
     <div>
       <span className="text-xs font-semibold tabular-nums text-muted-foreground">{n}</span>
-      <h2 id={`step-${n}`} className="mt-3 text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+      <h2 id={`step-${n}`} className="mt-3 text-xl font-semibold text-foreground md:text-2xl">
         {title}
       </h2>
       {note && <p className="mt-2 text-sm text-muted-foreground">{note}</p>}

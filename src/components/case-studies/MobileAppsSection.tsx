@@ -41,7 +41,7 @@ const MobileAppsSection = () => {
                       )}
                     </div>
 
-                    <h3 className="text-2xl font-semibold tracking-[-0.03em] text-foreground">
+                    <h3 className="text-2xl font-semibold text-foreground">
                       {app.name}
                     </h3>
                     <p className="mt-1 text-sm text-muted-foreground">{app.subtitle}</p>

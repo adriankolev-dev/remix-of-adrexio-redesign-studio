@@ -104,7 +104,7 @@ const BlogPost = () => {
             </Reveal>
 
             <Reveal immediate delay={0.16}>
-              <h1 className="mt-5 max-w-5xl text-balance text-[2.2rem] font-bold leading-[1.02] tracking-[-0.045em] text-foreground md:text-[4rem]">
+              <h1 className="mt-5 max-w-5xl text-balance text-[2.2rem] font-bold leading-[1.02] text-foreground md:text-[4rem]">
                 {post.title}
               </h1>
             </Reveal>

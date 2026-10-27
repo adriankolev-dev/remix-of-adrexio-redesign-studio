@@ -130,7 +130,7 @@ const SEO = () => {
                 {group.items.map((item, i) => (
                   <Reveal key={item.term} delay={i * 0.04}>
                     <div className="border-b border-border py-4">
-                      <h4 className="text-lg font-semibold tracking-[-0.02em] text-foreground">
+                      <h4 className="text-lg font-semibold text-foreground">
                         {item.term}
                       </h4>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">

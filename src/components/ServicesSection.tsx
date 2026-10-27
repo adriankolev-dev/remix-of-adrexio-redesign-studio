@@ -77,7 +77,7 @@ const ServicesSection = () => (
               </div>
 
               <div>
-                <h3 className="text-[1.75rem] font-semibold leading-tight tracking-[-0.035em] text-foreground md:text-[2.1rem]">
+                <h3 className="text-[1.75rem] font-semibold leading-tight text-foreground md:text-[2.1rem]">
                   {service.title}
                 </h3>
                 <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-muted-foreground">

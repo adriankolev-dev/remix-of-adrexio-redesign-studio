@@ -74,8 +74,8 @@ const Hero = () => {
               stone and intro are placed in em of the headline size. */}
           <div className="relative w-full text-[12vw] sm:text-[11vw] lg:h-[5em] lg:w-[11.2em] lg:[font-size:min(8.9vw,15svh)]">
             <h1
-              className="relative z-0 font-black uppercase text-foreground lg:pl-[1.29em]"
-              style={{ fontFamily: "'Inter Tight', system-ui, sans-serif", lineHeight: LINE_HEIGHT, letterSpacing: "-0.06em" }}
+              className="relative z-0 font-semibold uppercase text-foreground lg:pl-[1.29em]"
+              style={{ lineHeight: LINE_HEIGHT, letterSpacing: "-0.01em" }}
             >
               {LINES.map((line, i) => (
                 <span

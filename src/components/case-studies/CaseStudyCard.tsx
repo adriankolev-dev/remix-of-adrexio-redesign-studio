@@ -40,7 +40,7 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => (
       <div className="flex flex-1 items-start justify-between gap-4 px-1 pb-2 pt-5 md:px-2">
         <div className="min-w-0">
           <p className="eyebrow">{study.category}</p>
-          <h3 className="mt-2 text-2xl font-semibold leading-tight tracking-[-0.03em] text-foreground md:text-[1.7rem]">
+          <h3 className="mt-2 text-2xl font-semibold leading-tight text-foreground md:text-[1.7rem]">
             {study.title}
           </h3>
           <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{study.subtitle}</p>

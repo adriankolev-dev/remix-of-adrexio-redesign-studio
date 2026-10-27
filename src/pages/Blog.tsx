@@ -77,7 +77,7 @@ const Blog = () => {
             <span className="eyebrow text-foreground">
               {isFiltering ? activeCategory : "Всички статии"}
             </span>
-            <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-3xl">
+            <h2 className="mt-3 text-2xl font-semibold text-foreground md:text-3xl">
               {filteredPosts.length}{" "}
               {filteredPosts.length === 1 ? "статия" : "статии"}
             </h2>

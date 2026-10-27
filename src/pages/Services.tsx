@@ -151,7 +151,7 @@ const Services = () => {
 
                   <div>
                     <p className="eyebrow">{service.subtitle}</p>
-                    <h2 className="mt-3 text-[1.7rem] font-semibold leading-tight tracking-[-0.035em] text-foreground md:text-[2rem]">
+                    <h2 className="mt-3 text-[1.7rem] font-semibold leading-tight text-foreground md:text-[2rem]">
                       {service.title}
                     </h2>
                     <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">

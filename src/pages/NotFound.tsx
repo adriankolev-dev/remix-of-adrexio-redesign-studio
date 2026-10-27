@@ -27,7 +27,7 @@ const NotFound = () => {
         <Reveal immediate delay={0.1}>
           <div className="mt-10 grid gap-8 border-t border-border pt-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-16">
             <div>
-              <h1 className="text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-4xl">
+              <h1 className="text-2xl font-semibold text-foreground md:text-4xl">
                 Тази страница я няма на картата.
               </h1>
               <div className="mt-8 flex flex-wrap gap-3">

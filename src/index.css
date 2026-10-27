@@ -1,4 +1,35 @@
-/* Type system: one family, Inter Tight (Cyrillic). Black 900 with tight tracking for display, 400–700 for text. Mono and Caveat still load late for the few places that use them. */
+/* Type system: Tektur (self-hosted, Cyrillic) for h1–h4 and display titles, a square, monoline face that
+   follows the logo's geometry; Inter Tight 400–700 for text. Mono and Caveat still load late for the few places that use them. */
+
+@font-face {
+  font-family: 'Tektur';
+  font-style: normal;
+  font-weight: 400 900;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  src: url('/fonts/tektur-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Tektur';
+  font-style: normal;
+  font-weight: 400 900;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  src: url('/fonts/tektur-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Tektur';
+  font-style: normal;
+  font-weight: 400 900;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  src: url('/fonts/tektur-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @tailwind base;
 @tailwind components;
@@ -6,6 +37,8 @@
 
 @layer base {
     :root {
+    --font-heading: 'Tektur', 'Inter Tight', system-ui, sans-serif;
+
     /* Monochrome studio palette: near-white paper, near-black ink, grey panels, hairlines.
        Cyan stays as the single accent (the stone, the period after section titles). */
     --background: 0 0% 99%;
@@ -151,7 +184,16 @@
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  /* Tektur swaps in Bulgarian-locale lowercase (т as m, д as g) under lang="bg"; keep the standard forms
+     the body text uses so mixed-case card titles read cleanly. */
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-feature-settings: "locl" 0;
+    letter-spacing: 0;
+    overflow-wrap: break-word;
+  }
+
+  h5, h6 {
     font-family: 'Inter Tight', system-ui, sans-serif;
     letter-spacing: -0.03em;
   }
@@ -390,9 +432,9 @@
 @layer utilities {
   /* Signature display face — reserved for hero + big moments only */
   .font-display {
-    font-family: 'Inter Tight', system-ui, sans-serif;
-    font-weight: 900;
-    letter-spacing: -0.05em;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: 0;
   }
 
   /* Meta labels: the studio voice is small uppercase sans, not mono. */
@@ -402,47 +444,40 @@
     letter-spacing: 0.06em;
   }
 
-  /* Section / page title: black, uppercase, tight. */
-  .title-xl {
-    font-family: 'Inter Tight', system-ui, sans-serif;
-    font-weight: 900;
+  /* Heading titles share one face (Tektur 600, uppercase, flat tracking); only size and leading change.
+     Tektur is narrower than the old black grotesk, so sizes step up slightly to keep the same presence. */
+  .title-xl,
+  .title-lg,
+  .title-page,
+  .title-page-long {
+    font-family: var(--font-heading);
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: -0.035em;
-    word-spacing: 0.06em;
+    letter-spacing: 0;
+    word-spacing: 0.04em;
+  }
+
+  /* Section / page title. */
+  .title-xl {
     line-height: 1;
-    font-size: clamp(2.4rem, 5.4vw, 5rem);
+    font-size: clamp(2.1rem, 5.6vw, 5.2rem);
   }
 
   /* Same title, for sentences too long to sit at full size. */
   .title-lg {
-    font-family: 'Inter Tight', system-ui, sans-serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -0.03em;
-    word-spacing: 0.06em;
-    line-height: 1.02;
-    font-size: clamp(1.9rem, 3.6vw, 3.4rem);
+    line-height: 1.04;
+    font-size: clamp(1.9rem, 3.7vw, 3.5rem);
   }
 
   /* Page openers (h1 on interior pages): short and long variants. */
   .title-page {
-    font-family: 'Inter Tight', system-ui, sans-serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -0.04em;
-    word-spacing: 0.06em;
     line-height: 0.98;
     font-size: clamp(3rem, 10vw, 9rem);
   }
 
   .title-page-long {
-    font-family: 'Inter Tight', system-ui, sans-serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -0.035em;
-    word-spacing: 0.06em;
-    line-height: 1;
-    font-size: clamp(2.3rem, 5.6vw, 5.4rem);
+    line-height: 1.02;
+    font-size: clamp(2.3rem, 5.8vw, 5.6rem);
   }
 
   /* Handwritten marker voice — reserved for 1-2 playful doodle accents */

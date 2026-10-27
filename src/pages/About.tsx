@@ -147,7 +147,7 @@ const About = () => {
                 delay={i * 0.05}
                 className="border-t border-border pb-10 pt-6"
               >
-                <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                <h3 className="text-xl font-semibold text-foreground md:text-2xl">
                   {value.title}
                 </h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">
@@ -170,7 +170,7 @@ const About = () => {
                 delay={i * 0.05}
                 className="border-t border-border pb-10 pt-6"
               >
-                <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                <h3 className="text-xl font-semibold text-foreground md:text-2xl">
                   {item.title}
                 </h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">

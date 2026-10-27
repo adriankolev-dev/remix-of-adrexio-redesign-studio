@@ -55,7 +55,7 @@ const ProblemSolutionSection = () => {
               <div className="grid grid-cols-1 items-center gap-4 border-b border-border py-8 md:grid-cols-[1fr_auto_1fr] md:gap-8 md:py-10">
                 {/* Problem side — muted, receding */}
                 <div className="text-muted-foreground">
-                  <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground/45 line-through decoration-1 md:text-[1.7rem]">
+                  <h3 className="text-xl font-semibold text-foreground/45 line-through decoration-1 md:text-[1.7rem]">
                     {shift.problem}
                   </h3>
                   <p className="mt-1.5 text-sm leading-relaxed">{shift.psub}</p>
@@ -71,7 +71,7 @@ const ProblemSolutionSection = () => {
 
                 {/* Solution side — foreground, cyan accent */}
                 <div>
-                  <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-[1.7rem]">
+                  <h3 className="text-xl font-semibold text-foreground md:text-[1.7rem]">
                     {shift.solution}
                   </h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">

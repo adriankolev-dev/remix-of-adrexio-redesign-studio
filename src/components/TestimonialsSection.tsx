@@ -49,7 +49,7 @@ const BladeName = ({ text }: { text: string }) => {
   const words = text.split(" ");
 
   return (
-    <h3 className="font-display text-xl font-bold tracking-tight text-foreground md:text-2xl">
+    <h3 className="font-display text-xl font-bold text-foreground md:text-2xl">
       {words.map((word, i) => (
         <span key={`${word}-${i}`} className="inline-block overflow-hidden align-bottom leading-tight">
           <span
@@ -74,7 +74,7 @@ const TestimonialsSection = () => {
               <SectionEyebrow label="Отзиви" />
             </Reveal>
             <Reveal delay={0.06}>
-              <h2 className="font-display mt-6 max-w-md text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+              <h2 className="font-display mt-6 max-w-md text-4xl font-bold text-foreground md:text-5xl">
                 Какво казват клиентите.
               </h2>
             </Reveal>

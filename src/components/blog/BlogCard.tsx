@@ -42,7 +42,7 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
           </div>
 
           <div className="mt-2 flex items-start justify-between gap-4">
-            <h3 className="text-lg font-semibold leading-snug tracking-[-0.03em] text-foreground transition-colors group-hover:text-foreground">
+            <h3 className="text-lg font-semibold leading-snug text-foreground transition-colors group-hover:text-foreground">
               {post.title}
             </h3>
             <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />

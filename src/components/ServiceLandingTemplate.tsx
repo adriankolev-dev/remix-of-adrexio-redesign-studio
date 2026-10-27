@@ -242,7 +242,7 @@ const ServiceLandingTemplate = ({
           <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, i) => (
               <Reveal as="li" key={feature.title} delay={(i % 3) * 0.05} className="border-t border-border pb-10 pt-6">
-                <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground">
+                <h3 className="text-xl font-semibold text-foreground">
                   {feature.title}
                 </h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">
@@ -262,7 +262,7 @@ const ServiceLandingTemplate = ({
             {benefits.map((benefit, i) => (
               <Reveal as="li" key={benefit.title} delay={(i % 4) * 0.05} className="border-t border-border pb-10 pt-6">
                 <benefit.icon className="h-6 w-6 text-primary" strokeWidth={1.75} aria-hidden />
-                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">
+                <h3 className="mt-8 text-xl font-semibold text-foreground">
                   {benefit.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{benefit.description}</p>
@@ -286,7 +286,7 @@ const ServiceLandingTemplate = ({
                 <span className="block text-6xl font-black leading-none tracking-[-0.05em] text-foreground/15">
                   {step.number.padStart(2, "0")}
                 </span>
-                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">{step.title}</h3>
+                <h3 className="mt-8 text-xl font-semibold text-foreground">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
               </Reveal>
             ))}
@@ -326,7 +326,7 @@ const ServiceLandingTemplate = ({
               {useCases.map((useCase, i) => (
                 <Reveal key={useCase.title} delay={(i % 3) * 0.05}>
                   <div className="grid gap-3 border-b border-border py-7 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-8">
-                    <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                    <h3 className="text-xl font-semibold text-foreground md:text-2xl">
                       {useCase.title}
                     </h3>
                     <p className="text-[0.95rem] leading-relaxed text-muted-foreground md:pt-1">
@@ -348,7 +348,7 @@ const ServiceLandingTemplate = ({
             {whyChooseUs.map((item, i) => (
               <Reveal as="li" key={item.title} delay={(i % 3) * 0.05} className="border-t border-border pb-10 pt-6">
                 <item.icon className="h-6 w-6 text-foreground" strokeWidth={1.75} aria-hidden />
-                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">{item.title}</h3>
+                <h3 className="mt-8 text-xl font-semibold text-foreground">{item.title}</h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{item.description}</p>
               </Reveal>
             ))}

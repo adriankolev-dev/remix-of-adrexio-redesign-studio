@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter Tight', 'system-ui', 'sans-serif'],
-        display: ['Inter Tight', 'system-ui', 'sans-serif'],
+        display: ['Tektur', 'Inter Tight', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
         hand: ['Caveat', 'cursive'],
       },

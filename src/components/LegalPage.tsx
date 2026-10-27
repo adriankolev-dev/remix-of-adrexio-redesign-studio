@@ -44,7 +44,7 @@ const LegalPage = ({ seo, label, title, updated, intro, sections }: LegalPagePro
           {sections.map((section, i) => (
             <Reveal key={section.title} delay={(i % 4) * 0.04}>
               <div className="grid gap-4 border-t border-border py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16">
-                <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                <h2 className="text-xl font-semibold text-foreground md:text-2xl">
                   <span className="mr-3 text-xs font-semibold tabular-nums text-muted-foreground">
                     {String(i + 1).padStart(2, "0")}
                   </span>

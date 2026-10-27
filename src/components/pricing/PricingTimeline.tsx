@@ -18,7 +18,7 @@ const PricingTimeline = () => (
               <p className="text-4xl font-black leading-none tracking-[-0.045em] text-foreground md:text-5xl">
                 {item.duration}
               </p>
-              <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">{item.name}</h3>
+              <h3 className="mt-8 text-xl font-semibold text-foreground">{item.name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
             </Reveal>
           ))}

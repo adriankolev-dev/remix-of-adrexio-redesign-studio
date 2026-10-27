@@ -73,7 +73,7 @@ const ProcessSection = () => {
                 <span className="text-4xl font-black leading-none tracking-[-0.05em] text-foreground/25 md:text-5xl">
                   {step.number}
                 </span>
-                <h3 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+                <h3 className="text-xl font-semibold text-foreground md:text-2xl">
                   {step.title}
                 </h3>
                 <p className="text-sm leading-relaxed text-muted-foreground sm:col-start-2 xl:col-start-auto md:text-[0.95rem]">

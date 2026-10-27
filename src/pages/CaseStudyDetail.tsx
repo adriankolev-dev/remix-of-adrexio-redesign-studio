@@ -23,7 +23,7 @@ import { useEffect, type ReactNode } from "react";
 const Chapter = ({ label, children }: { label: string; children: ReactNode }) => (
   <Reveal>
     <div className="grid gap-5 border-t border-border py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16 md:py-12">
-      <h2 className="text-xl font-semibold tracking-[-0.03em] text-foreground md:text-2xl">
+      <h2 className="text-xl font-semibold text-foreground md:text-2xl">
         {label}
       </h2>
       <div>{children}</div>

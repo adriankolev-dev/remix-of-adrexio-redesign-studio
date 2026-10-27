@@ -179,7 +179,7 @@ const Affiliate = () => {
             {benefits.map((benefit, i) => (
               <Reveal as="li" key={benefit.title} delay={(i % 3) * 0.05} className="border-t border-border pb-10 pt-6">
                 <benefit.icon className="h-6 w-6 text-foreground" strokeWidth={1.75} aria-hidden />
-                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">{benefit.title}</h3>
+                <h3 className="mt-8 text-xl font-semibold text-foreground">{benefit.title}</h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{benefit.description}</p>
               </Reveal>
             ))}
@@ -197,7 +197,7 @@ const Affiliate = () => {
                 <span className="block text-6xl font-black leading-none tracking-[-0.05em] text-foreground/20">
                   {step.number}
                 </span>
-                <h3 className="mt-8 text-xl font-semibold tracking-[-0.03em] text-foreground">{step.title}</h3>
+                <h3 className="mt-8 text-xl font-semibold text-foreground">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
               </Reveal>
             ))}
@@ -211,7 +211,7 @@ const Affiliate = () => {
           <Reveal className="h-full">
             <div className="h-full rounded-md bg-secondary p-7 md:p-10">
               <p className="eyebrow">Важно за клиентите</p>
-              <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-3xl">
+              <h3 className="mt-4 text-2xl font-semibold text-foreground md:text-3xl">
                 Как да проследим вашата препоръка
               </h3>
               <p className="mt-5 text-muted-foreground">
@@ -241,7 +241,7 @@ const Affiliate = () => {
           <Reveal delay={0.08} className="h-full">
             <div className="h-full rounded-md bg-secondary p-7 md:p-10">
               <p className="eyebrow">Пример за изчисление</p>
-              <h3 className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-3xl">
+              <h3 className="mt-4 text-2xl font-semibold text-foreground md:text-3xl">
                 Колко можете да спечелите
               </h3>
               <dl className="mt-6 border-t border-border">
