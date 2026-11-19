@@ -3,7 +3,7 @@ title: "Изграждане на AI агент: от идея до работа
 slug: "izgrazhdane-na-ai-agent"
 date: "2026-06-20"
 category: "AI Разработка"
-author: "Adrexio"
+author: "Адриан Колев"
 cover: "/blog-covers/izgrazhdane-na-ai-agent.webp"
 excerpt: "Агентът действа: праща имейли, чете поръчки, пише в CRM. Затова се строи по-внимателно от чатбот. Пет стъпки от тясната цел до постепенното пускане."
 ---

@@ -3,7 +3,7 @@ title: "AI чатбот на сайта: кога подобрява обслу�
 slug: "ai-chatbotove-klientsko-izzhivyavane"
 date: "2026-06-21"
 category: "Изкуствен интелект"
-author: "Adrexio"
+author: "Адриан Колев"
 cover: "/blog-covers/ai-chatbotove-klientsko-izzhivyavane.webp"
 excerpt: "Чатботът отговаря в 23:40 в събота, но може и да вкара клиента в безкраен цикъл. Какво трябва да знае, кога да предаде на човек и как да разберете дали изобщо помага."
 ---

@@ -4,12 +4,15 @@ import nikolayImage from "@/assets/nikolay.jpg";
 import stefanImage from "@/assets/stefan.png";
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
+import { FOUNDER, TEAM } from "@/data/team";
 
-const teamMembers = [
-  { name: "Николай Ненов", role: "Head of Marketing", image: nikolayImage },
-  { name: "Пламен Петков", role: "CTO", image: plamenImage },
-  { name: "Стефан Колев", role: "Lead Developer", image: stefanImage },
-];
+const photos: Record<string, string> = {
+  "Николай Ненов": nikolayImage,
+  "Пламен Петков": plamenImage,
+  "Стефан Колев": stefanImage,
+};
+
+const teamMembers = TEAM.map((member) => ({ ...member, image: photos[member.name] }));
 
 const MemberCard = ({ name, role, image }: { name: string; role: string; image: string }) => (
   <figure className="group h-full rounded-md bg-secondary p-3 md:p-4">
@@ -40,7 +43,7 @@ const MeetTheTeam = () => (
       {/* Founder: photo and the line they stand behind */}
       <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <Reveal>
-          <MemberCard name="Адриан Колев" role="Основател & CEO" image={founderImage} />
+          <MemberCard name={FOUNDER.name} role={FOUNDER.role} image={founderImage} />
         </Reveal>
         <Reveal delay={0.08}>
           <div className="flex h-full flex-col justify-between gap-10 rounded-md bg-secondary p-7 md:p-12">
@@ -52,7 +55,7 @@ const MeetTheTeam = () => (
               него. Това е нашата работа.
             </blockquote>
             <p className="text-[0.75rem] font-bold uppercase tracking-[0.08em] text-muted-foreground">
-              Адриан Колев · Основател &amp; CEO
+              {FOUNDER.name} · {FOUNDER.role}
             </p>
           </div>
         </Reveal>

@@ -20,6 +20,41 @@ const DEFAULT_IMAGE = `${BASE_URL}/og-hero.jpg`;
 const ORG_ID = `${BASE_URL}/#organization`;
 const WEBSITE_ID = `${BASE_URL}/#website`;
 const LOGO = { "@type": "ImageObject", url: `${BASE_URL}/og-image.png`, width: 1200, height: 630 };
+const GOOGLE_PROFILE_URL = "https://www.google.com/search?kgmid=/g/11nvh68dnt&q=Adrexio";
+const FOUNDER_ID = `${BASE_URL}/about/#founder`;
+
+// People and founding year from src/data/team.ts, shared with MeetTheTeam.
+// Filled in by main() before any page is written.
+let team = { foundingYear: "", founder: null, members: [], authors: {} };
+
+export function parseTeam(src) {
+  const person = (block) => {
+    const name = block.match(/name:\s*"([^"]+)"/)?.[1];
+    const role = block.match(/role:\s*"([^"]+)"/)?.[1];
+    return name && role ? { name, role } : null;
+  };
+  const foundingYear = src.match(/FOUNDING_YEAR\s*=\s*(\d{4})/)?.[1] ?? "";
+  const founder = person(src.match(/FOUNDER\s*=\s*\{([^}]*)\}/)?.[1] ?? "");
+  const teamBlock = src.match(/export const TEAM\s*=\s*\[([\s\S]*?)\];/)?.[1] ?? "";
+  const members = [...teamBlock.matchAll(/\{([^}]*)\}/g)].map((m) => person(m[1])).filter(Boolean);
+  const authors = {};
+  const authorsBlock = src.match(/export const AUTHORS[^=]*=\s*\{([\s\S]*)\};/)?.[1] ?? "";
+  for (const m of authorsBlock.matchAll(/"([^"]+)":\s*\{\s*role:\s*"([^"]+)",\s*bio:\s*"([^"]+)",?\s*\}/g)) {
+    authors[m[1]] = { role: m[2], bio: m[3] };
+  }
+  return { foundingYear, founder, members, authors };
+}
+
+function founderSchema() {
+  return {
+    "@type": "Person",
+    "@id": FOUNDER_ID,
+    name: team.founder.name,
+    jobTitle: "Основател и CEO",
+    url: `${BASE_URL}/about/`,
+    worksFor: { "@id": ORG_ID },
+  };
+}
 
 marked.setOptions({ gfm: true, breaks: false });
 
@@ -369,6 +404,8 @@ function orgSchema() {
     image: LOGO.url,
     description:
       "Уеб студио в София: сайтове и онлайн магазини от нулата, техническа поддръжка, SEO и AI автоматизации.",
+    foundingDate: team.foundingYear,
+    founder: founderSchema(),
     address: { "@type": "PostalAddress", addressLocality: "София", addressCountry: "BG" },
     contactPoint: {
       "@type": "ContactPoint",
@@ -382,6 +419,7 @@ function orgSchema() {
       "https://www.linkedin.com/company/adrexio/",
       "https://www.instagram.com/adrexio_/",
       "https://www.facebook.com/profile.php?id=61587315031705",
+      GOOGLE_PROFILE_URL,
     ],
   };
 }
@@ -447,6 +485,8 @@ function localBusinessSchema() {
     image: LOGO.url,
     logo: LOGO,
     description: "Уеб дизайн и разработка, мобилни приложения, SEO и GEO оптимизация",
+    foundingDate: team.foundingYear,
+    founder: founderSchema(),
     address: { "@type": "PostalAddress", addressLocality: "София", addressCountry: "BG" },
     telephone: "+359-896-173-743",
     email: "hello@adrexio.com",
@@ -456,6 +496,7 @@ function localBusinessSchema() {
       "https://www.linkedin.com/company/adrexio/",
       "https://www.instagram.com/adrexio_/",
       "https://www.facebook.com/profile.php?id=61587315031705",
+      GOOGLE_PROFILE_URL,
     ],
   };
 }
@@ -479,6 +520,7 @@ function loadBlogPosts() {
         excerpt: data.excerpt ?? "",
         category: data.category ?? "Общи",
         date: data.date ?? "",
+        updated: data.updated || data.date || "",
         cover: data.cover ?? "/og-image.png",
         author: data.author ?? SITE_NAME,
         content,
@@ -838,6 +880,9 @@ function prerenderAbout(template, { values, offer }) {
     <h2>Как мислим</h2>
     <p>Една страница изглежда ясна, когато някой е решил какво да махне от нея. Кой текст отива най-горе, кое поле във формата е излишно, защо снимката се бави на телефон. Посетителят не вижда тези решения. Вижда само, че намира каквото търси.</p>
     <p>Харесваме чистия дизайн, ясните решения и кода, който продължава да работи добре дълго след пускането на сайта.</p>
+    <h2>Екипът</h2>
+    <p>Adrexio е основана през ${team.foundingYear} г. от ${escapeHtml(team.founder.name)}.</p>
+    ${list([team.founder, ...team.members].map((m) => `<strong>${escapeHtml(m.name)}</strong> — ${escapeHtml(m.role)}`))}
     <h2>Как работим</h2>
     ${list(values.map((v) => `<strong>${escapeHtml(v.title)}</strong> — ${escapeHtml(v.description)}`))}
     <h2>Какво правим</h2>
@@ -858,9 +903,9 @@ function prerenderAbout(template, { values, offer }) {
 }
 
 function prerenderCaseStudiesIndex(template, studies) {
-  const title = "Проекти на Adrexio — сайтове, магазини и приложения";
+  const title = "Проекти на Adrexio — сайтове, магазини и платформи";
   const description =
-    "Сайтове, онлайн магазини и мобилни приложения, които сме направили от нулата — за ресторанти, клиники, магазини, производители и технологични компании.";
+    "Сайтове, онлайн магазини и уеб платформи, които сме направили от нулата — за ресторанти, клиники, магазини, производители и технологични компании.";
   const publicStudies = studies.filter((s) => s.isPublic);
   const inner = `
     <h1>Проекти, които можете да отворите.</h1>
@@ -878,7 +923,7 @@ function prerenderCaseStudiesIndex(template, studies) {
       title,
       description,
       url: `${BASE_URL}/case-studies`,
-      keywords: "портфолио, проекти, case studies, уеб дизайн, уебсайтове, мобилни приложения, Adrexio, България",
+      keywords: "портфолио, проекти, case studies, уеб дизайн, уебсайтове, онлайн магазини, Adrexio, България",
       jsonLd: [
         {
           "@context": "https://schema.org",
@@ -1038,11 +1083,15 @@ function prerenderBlog(template, posts) {
     const bodyHtml = marked.parse(post.content);
     const inner = `<article>
       <p><a href="/blog">← Обратно към блога</a></p>
-      <p>${escapeHtml(post.category)} · ${escapeHtml(formatDate(post.date))} · ${post.readingTime} мин.</p>
+      <p>${escapeHtml(post.category)} · ${escapeHtml(formatDate(post.date))}${post.updated !== post.date ? ` · Обновена ${escapeHtml(formatDate(post.updated))}` : ""} · ${post.readingTime} мин. · ${escapeHtml(post.author)}</p>
       <h1>${escapeHtml(post.title)}</h1>
       <p>${escapeHtml(post.excerpt)}</p>
       <img src="${escapeAttr(post.cover)}" alt="${escapeAttr(post.title)}" width="1200" height="675" />
       ${bodyHtml}
+      <footer>
+        <p>Автор: <strong>${escapeHtml(post.author)}</strong>${team.authors[post.author] ? `, ${escapeHtml(team.authors[post.author].role)}` : ""}</p>
+        ${team.authors[post.author] ? `<p>${escapeHtml(team.authors[post.author].bio)} <a href="/about">За екипа</a></p>` : ""}
+      </footer>
     </article>`;
     writePage(
       `/blog/${post.slug}`,
@@ -1060,9 +1109,18 @@ function prerenderBlog(template, posts) {
           description: post.excerpt,
           image,
           datePublished: post.date,
-          dateModified: post.date,
+          dateModified: post.updated,
           inLanguage: "bg-BG",
-          author: { "@type": "Organization", name: post.author, url: BASE_URL },
+          author: team.authors[post.author]
+            ? {
+                "@type": "Person",
+                ...(post.author === team.founder.name ? { "@id": FOUNDER_ID } : {}),
+                name: post.author,
+                jobTitle: team.authors[post.author].role,
+                url: `${BASE_URL}/about/`,
+                worksFor: { "@id": ORG_ID },
+              }
+            : { "@type": "Organization", name: post.author, url: BASE_URL },
           publisher: {
             "@type": "Organization",
             "@id": ORG_ID,
@@ -1102,6 +1160,8 @@ function prerenderBlog(template, posts) {
           headline: p.title,
           description: p.excerpt,
           datePublished: p.date,
+          dateModified: p.updated,
+          author: { "@type": "Person", name: p.author },
           url: `${BASE_URL}/blog/${p.slug}`,
           image: `${BASE_URL}${p.cover}`,
         })),
@@ -1248,6 +1308,40 @@ function writeRedirects() {
 // from the site. The hand-written public/sitemap.xml listed every URL without a
 // trailing slash, which made all 43 non-home entries redirect.
 // <priority> and <changefreq> are omitted on purpose: Google ignores both.
+// llms.txt (llmstxt.org): a plain Markdown map of the site for language models.
+// Not a ranking signal for any major provider; the GEO page and blog say we
+// ship it because it is cheap, so it is generated from the same data as the
+// pages and cannot drift.
+function writeLlmsTxt(services, studies, posts) {
+  const link = (path, label, note) => `- [${label}](${withTrailingSlash(`${BASE_URL}${path}`)})${note ? `: ${note}` : ""}`;
+  const people = [team.founder, ...team.members].map((m) => `${m.name} (${m.role})`).join(", ");
+  const text = `# Adrexio
+
+> Уеб студио в София, основано през ${team.foundingYear} г. от ${team.founder.name}. Прави сайтове и онлайн магазини от нулата, поддръжка, SEO, GEO оптимизация и AI интеграции.
+
+Екип: ${people}. Контакт: hello@adrexio.com, +359 896 173 743.
+
+## Услуги
+
+${services.map((s) => link(s.href, s.title, s.description)).join("\n")}
+${link("/pricing", "Цени и срокове", "ориентировъчни суми за сайт, магазин и поддръжка")}
+
+## Проекти
+
+${studies.map((s) => link(`/case-studies/${s.id}`, s.title, s.subtitle)).join("\n")}
+
+## Блог
+
+${posts.map((p) => link(`/blog/${p.slug}`, p.title, p.excerpt)).join("\n")}
+
+## За нас
+
+${link("/about", "За нас", "екипът и как работим")}
+${link("/contact", "Контакти")}
+`;
+  writeFileSync(join(DIST, "llms.txt"), text, "utf8");
+}
+
 function writeSitemap() {
   const today = new Date().toISOString().slice(0, 10);
   const urls = ["/", ...writtenRoutes.filter((r) => r !== "/").sort()]
@@ -1296,6 +1390,8 @@ export function prerenderAll() {
   }
 
   const template = readFileSync(join(DIST, "index.html"), "utf8");
+  team = parseTeam(readFileSync(join(SRC, "data", "team.ts"), "utf8"));
+  if (!team.founder || !team.foundingYear) throw new Error("[prerender] failed to parse src/data/team.ts");
   const posts = loadBlogPosts();
   const caseStudiesSrc = readFileSync(join(SRC, "data", "caseStudies.ts"), "utf8");
   const studies = parseCaseStudies(caseStudiesSrc);
@@ -1336,6 +1432,7 @@ export function prerenderAll() {
   prerender404(template);
   writeRedirects();
   writeSitemap();
+  writeLlmsTxt(services, studies.filter((s) => s.isPublic), posts);
 
   const publicStudies = studies.filter((s) => s.isPublic).length;
   console.log(

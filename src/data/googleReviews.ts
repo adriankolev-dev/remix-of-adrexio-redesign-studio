@@ -17,8 +17,8 @@ export type GoogleReview = {
   projectId?: string;
 };
 
-/** Google Business profile — update if you get a g.page short link. */
-export const GOOGLE_REVIEWS_URL = "https://www.google.com/search?q=adrexio&hl=bg";
+/** Google Business Profile, by its Knowledge Graph id (/g/11nvh68dnt). */
+export const GOOGLE_REVIEWS_URL = "https://www.google.com/search?kgmid=/g/11nvh68dnt&q=Adrexio";
 
 export const GOOGLE_RATING = 5.0;
 export const GOOGLE_REVIEW_COUNT = 12;

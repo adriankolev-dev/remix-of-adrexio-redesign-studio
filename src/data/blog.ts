@@ -9,6 +9,8 @@ export interface BlogPost {
   excerpt: string;
   category: string;
   date: string;
+  /** Last substantive revision; equals `date` when the post was never updated. */
+  updated: string;
   cover: string;
   author: string;
   content: string;
@@ -35,6 +37,7 @@ const posts: BlogPost[] = Object.entries(rawFiles)
       excerpt: data.excerpt ?? "",
       category: data.category ?? "Общи",
       date: data.date ?? "",
+      updated: data.updated || data.date || "",
       cover: data.cover ?? "/og-image.png",
       author: data.author ?? "Adrexio",
       content,

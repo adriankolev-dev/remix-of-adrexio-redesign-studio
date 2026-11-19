@@ -3,7 +3,7 @@ title: "Колко струва изработката на сайт в Бълг
 slug: "kolko-struva-izrabotka-na-sait"
 date: "2026-09-15"
 category: "Цени и бюджет"
-author: "Adrexio"
+author: "Адриан Колев"
 cover: "/blog-covers/kolko-struva-izrabotka-na-sait.webp"
 excerpt: "Реални диапазони, какво ги движи и кои разходи почти никой не показва в офертата. Плюс защо най-евтиното предложение често излиза най-скъпо на втората година."
 ---

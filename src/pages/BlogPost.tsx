@@ -16,7 +16,13 @@ import {
   formatBlogDate,
 } from "@/data/blog";
 import { renderMarkdown } from "@/lib/blog/markdown";
-import { getBreadcrumbSchema, getPublisherSchema } from "@/lib/structuredData";
+import {
+  FOUNDER_ID,
+  getBreadcrumbSchema,
+  getPublisherSchema,
+  ORG_ID,
+} from "@/lib/structuredData";
+import { AUTHORS, FOUNDER } from "@/data/team";
 import { scrollToTop } from "@/lib/lenis";
 
 const BlogPost = () => {
@@ -40,6 +46,8 @@ const BlogPost = () => {
   const url = `${baseUrl}/blog/${post.slug}`;
   const coverAbsolute = `${baseUrl}${post.cover}`;
   const related = getRelatedPosts(post.slug);
+  const author = AUTHORS[post.author];
+  const wasUpdated = post.updated !== post.date;
 
   const structuredData = [
     {
@@ -50,9 +58,18 @@ const BlogPost = () => {
       description: post.excerpt,
       image: coverAbsolute,
       datePublished: post.date,
-      dateModified: post.date,
+      dateModified: post.updated,
       inLanguage: "bg-BG",
-      author: { "@type": "Organization", name: post.author, url: baseUrl },
+      author: author
+        ? {
+            "@type": "Person",
+            ...(post.author === FOUNDER.name ? { "@id": FOUNDER_ID } : {}),
+            name: post.author,
+            jobTitle: author.role,
+            url: `${baseUrl}/about/`,
+            worksFor: { "@id": ORG_ID },
+          }
+        : { "@type": "Organization", name: post.author, url: baseUrl },
       publisher: getPublisherSchema(),
       mainEntityOfPage: { "@type": "WebPage", "@id": url },
     },
@@ -96,6 +113,9 @@ const BlogPost = () => {
                   <Calendar className="h-3 w-3" />
                   {formatBlogDate(post.date)}
                 </span>
+                {wasUpdated && (
+                  <span>Обновена {formatBlogDate(post.updated)}</span>
+                )}
                 <span className="inline-flex items-center gap-1.5">
                   <Clock className="h-3 w-3" />
                   {post.readingTime} мин.
@@ -141,6 +161,22 @@ const BlogPost = () => {
               prose-hr:border-border"
             dangerouslySetInnerHTML={{ __html: html }}
           />
+
+          <footer className="mx-auto mt-14 max-w-3xl border-t border-border pt-8">
+            <p className="eyebrow">Автор</p>
+            <p className="mt-3 text-lg font-semibold text-foreground">{post.author}</p>
+            {author && (
+              <>
+                <p className="mt-1 text-sm text-muted-foreground">{author.role}</p>
+                <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
+                  {author.bio}{" "}
+                  <Link to="/about" className="text-foreground hover:underline">
+                    За екипа
+                  </Link>
+                </p>
+              </>
+            )}
+          </footer>
         </div>
       </article>
 

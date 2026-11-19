@@ -3,7 +3,7 @@ title: "AI интеграция, без да чупите това, което �
 slug: "ai-integraciya-bez-da-chupish"
 date: "2026-06-21"
 category: "AI Стратегия"
-author: "Adrexio"
+author: "Адриан Колев"
 cover: "/blog-covers/ai-integraciya-bez-da-chupish.webp"
 excerpt: "AI рядко изисква да смените системите си. Как се добавя към това, което вече работи: от кой процес да започнете, какво трябва да е готово и кога обикновената автоматизация е по-добрият избор."
 ---

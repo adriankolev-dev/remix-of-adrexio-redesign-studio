@@ -5,6 +5,7 @@ import {
   GOOGLE_REVIEW_COUNT,
   googleReviews,
 } from "@/data/googleReviews";
+import { FOUNDER, FOUNDING_YEAR } from "@/data/team";
 
 export const SITE_URL = "https://www.adrexio.com";
 export const ORG_ID = `${SITE_URL}/#organization`;
@@ -21,7 +22,19 @@ const SOCIAL = [
   "https://www.linkedin.com/company/adrexio/",
   "https://www.instagram.com/adrexio_/",
   "https://www.facebook.com/profile.php?id=61587315031705",
+  "https://www.google.com/search?kgmid=/g/11nvh68dnt&q=Adrexio",
 ];
+
+export const FOUNDER_ID = `${SITE_URL}/about/#founder`;
+
+export const getFounderSchema = () => ({
+  "@type": "Person" as const,
+  "@id": FOUNDER_ID,
+  name: FOUNDER.name,
+  jobTitle: "Основател и CEO",
+  url: `${SITE_URL}/about/`,
+  worksFor: { "@id": ORG_ID },
+});
 
 const ADDRESS = {
   "@type": "PostalAddress" as const,
@@ -39,6 +52,8 @@ export const getOrganizationSchema = () => ({
   image: LOGO.url,
   description:
     "Уеб студио в София: сайтове и онлайн магазини от нулата, техническа поддръжка, SEO и AI автоматизации.",
+  foundingDate: String(FOUNDING_YEAR),
+  founder: getFounderSchema(),
   address: ADDRESS,
   contactPoint: {
     "@type": "ContactPoint",
@@ -126,6 +141,8 @@ export const getLocalBusinessSchema = () => ({
   image: LOGO.url,
   logo: LOGO,
   description: "Уеб дизайн и разработка, мобилни приложения, SEO и GEO оптимизация",
+  foundingDate: String(FOUNDING_YEAR),
+  founder: getFounderSchema(),
   address: ADDRESS,
   telephone: "+359-896-173-743",
   email: "hello@adrexio.com",

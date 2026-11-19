@@ -1,11 +1,29 @@
 User-agent: *
 Allow: /
-
-# Disallow project inquiry form from indexing
+# Project inquiry form and the internal animation demo stay out of search
 Disallow: /project-inquiry
-
-# Disallow internal animation/demo page
 Disallow: /services-demo
 
-# Sitemap
+# AI search and user-requested fetches: open, so answers can cite the site
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /project-inquiry
+Disallow: /services-demo
+
+# AI training: open on purpose, so the models know who Adrexio is.
+# To opt out of training without leaving AI search, switch these to Disallow: /
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+Allow: /
+Disallow: /project-inquiry
+Disallow: /services-demo
+
 Sitemap: https://www.adrexio.com/sitemap.xml
