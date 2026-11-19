@@ -43,6 +43,8 @@ interface Technology {
 interface UseCase {
   title: string;
   description: string;
+  /** Case study or other page that shows this example in full. */
+  href?: string;
 }
 
 interface FAQ {
@@ -329,9 +331,20 @@ const ServiceLandingTemplate = ({
                     <h3 className="text-xl font-semibold text-foreground md:text-2xl">
                       {useCase.title}
                     </h3>
-                    <p className="text-[0.95rem] leading-relaxed text-muted-foreground md:pt-1">
-                      {useCase.description}
-                    </p>
+                    <div className="md:pt-1">
+                      <p className="text-[0.95rem] leading-relaxed text-muted-foreground">
+                        {useCase.description}
+                      </p>
+                      {useCase.href && (
+                        <Link
+                          to={useCase.href}
+                          className="mt-4 inline-flex items-center gap-1.5 text-[0.72rem] font-bold uppercase tracking-[0.06em] text-foreground hover:underline"
+                        >
+                          Целият казус
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 </Reveal>
               ))}
