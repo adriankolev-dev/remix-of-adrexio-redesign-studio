@@ -10,8 +10,8 @@ import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import CTASection from "@/components/CTASection";
 import Sculpture from "@/components/editorial/Sculpture";
-import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
 import { GOOGLE_RATING } from "@/data/googleReviews";
+import { TRUST_STATS } from "@/data/trustStats";
 import { getOrganizationSchema } from "@/lib/structuredData";
 
 const values = [
@@ -86,10 +86,7 @@ const About = () => {
         }
         meta={[
           { value: "10+", label: "Години опит в екипа" },
-          {
-            value: String(PORTFOLIO_PROJECT_COUNT),
-            label: "Проекта в портфолиото",
-          },
+          TRUST_STATS.response,
           { value: GOOGLE_RATING.toFixed(1), label: "Рейтинг в Google" },
         ]}
       />

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import Reveal from "@/components/editorial/Reveal";
 import Dotted from "@/components/editorial/Dotted";
 import { GOOGLE_RATING } from "@/data/googleReviews";
-import { PORTFOLIO_PROJECT_COUNT } from "@/data/caseStudies";
 
 import bodyaestheticsLogo from "@/assets/clients/bodyaesthetics.webp";
 import fmlLogo from "@/assets/clients/fml.webp";
@@ -21,7 +20,6 @@ import supercreditLogo from "@/assets/clients/supercredit.svg";
 
 // Only claims we can stand behind: no client-attributed growth figures.
 const metrics = [
-  { value: String(PORTFOLIO_PROJECT_COUNT), label: "Проекта в портфолиото", source: "Всеки с описание какво направихме" },
   { value: "10+", label: "Години опит в екипа", source: "Уеб дизайн и разработка" },
   { value: "24ч", label: "Отговор на запитване", source: "В работни дни" },
   {
@@ -103,9 +101,9 @@ const StudioSection = () => (
         </div>
       </div>
 
-      {/* The four figures on one full-width row */}
+      {/* The three figures on one full-width row */}
       <Reveal delay={0.1}>
-        <dl className="mt-14 grid grid-cols-2 border-l border-t border-border md:mt-20 lg:grid-cols-4">
+        <dl className="mt-14 grid grid-cols-1 border-l border-t border-border sm:grid-cols-3 md:mt-20">
           {metrics.map((m) => (
             <div key={m.label} className="border-b border-r border-border p-5 md:p-7">
               <dt className="whitespace-nowrap text-[2rem] font-black leading-none tracking-[-0.035em] [word-spacing:0.08em] text-foreground md:text-[3.25rem]">

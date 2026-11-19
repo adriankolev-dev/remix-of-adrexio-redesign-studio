@@ -147,7 +147,7 @@ const WebDevelopment = () => {
           icon: FolderOpen,
           title: "Проекти, които можете да отворите",
           description:
-            "Body Aesthetics, Римската стена, Firescape Partners и още над 20 сайта са в портфолиото, с описание какво точно направихме.",
+            "Body Aesthetics, Римската стена, Firescape Partners и още сайтове са в портфолиото, с описание какво точно направихме.",
         },
         {
           icon: Code,

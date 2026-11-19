@@ -1,19 +1,11 @@
 import { useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-} from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import CaseStudyCard from "@/components/case-studies/CaseStudyCard";
 import CaseStudyFilters from "@/components/case-studies/CaseStudyFilters";
-import MobileAppsSection from "@/components/case-studies/MobileAppsSection";
 import PageIntro from "@/components/editorial/PageIntro";
 import CTASection from "@/components/CTASection";
 import {
@@ -23,7 +15,6 @@ import {
   type CaseStudyFilterId,
 } from "@/data/caseStudies";
 import { getBreadcrumbSchema } from "@/lib/structuredData";
-import { getLenis } from "@/lib/lenis";
 
 const ProjectGrid = ({ studies }: { studies: CaseStudy[] }) => (
   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -33,70 +24,10 @@ const ProjectGrid = ({ studies }: { studies: CaseStudy[] }) => (
   </div>
 );
 
-const AppsScrollCue = () => {
-  const reduceMotion = useReducedMotion();
-  const { scrollY } = useScroll();
-  const [visible, setVisible] = useState(true);
-
-  useMotionValueEvent(scrollY, "change", (value) => {
-    setVisible(value < 80);
-  });
-
-  const scrollToApps = () => {
-    const target = document.getElementById("mobile-apps");
-    if (!target) return;
-    const top =
-      target.getBoundingClientRect().top +
-      (window.scrollY || document.documentElement.scrollTop) -
-      72;
-    const lenis = getLenis();
-    if (lenis) {
-      lenis.scrollTo(top, { force: true });
-      return;
-    }
-    window.scrollTo({ top, behavior: "smooth" });
-  };
-
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.button
-          type="button"
-          onClick={scrollToApps}
-          aria-label="Надолу към мобилните приложения"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 8 }}
-          transition={{ duration: 0.3 }}
-          className="fixed bottom-8 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-1 rounded-full border border-border bg-background/95 px-5 py-3 backdrop-blur"
-        >
-          <span className="eyebrow text-foreground">
-            Надолу
-          </span>
-          <motion.span
-            animate={
-              reduceMotion
-                ? { opacity: 1 }
-                : { y: [0, 7, 0], opacity: [1, 0.15, 1] }
-            }
-            transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center text-foreground"
-          >
-            <span className="h-6 w-0.5 rounded-full bg-foreground" />
-            <ChevronDown className="h-5 w-5" strokeWidth={2} />
-          </motion.span>
-        </motion.button>
-      )}
-    </AnimatePresence>
-  );
-};
-
 const CaseStudies = () => {
   const [activeFilter, setActiveFilter] = useState<CaseStudyFilterId>("all");
 
   const filteredStudies = getCaseStudiesForFilter(activeFilter);
-  const isDefaultView = activeFilter === "all";
-  const isAppsView = activeFilter === "app";
 
   const publicStudies = getPortfolioOrder().filter((s) => s.isPublic);
   const structuredData = [
@@ -105,7 +36,7 @@ const CaseStudies = () => {
       "@type": "CollectionPage",
       name: "Проекти — Adrexio",
       description:
-        "Сайтове, онлайн магазини и мобилни приложения, които Adrexio е направило за клиенти от различни сфери.",
+        "Сайтове, онлайн магазини и уеб платформи, които Adrexio е направило за клиенти от различни сфери.",
       url: "https://www.adrexio.com/case-studies",
       inLanguage: "bg-BG",
       mainEntity: {
@@ -128,9 +59,9 @@ const CaseStudies = () => {
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title="Проекти на Adrexio — сайтове, магазини и приложения"
-        description="Сайтове, онлайн магазини и мобилни приложения, които сме направили от нулата — за ресторанти, клиники, магазини, производители и технологични компании."
-        keywords="портфолио, проекти, case studies, уеб дизайн, уебсайтове, мобилни приложения, Adrexio, България"
+        title="Проекти на Adrexio — сайтове, магазини и платформи"
+        description="Сайтове, онлайн магазини и уеб платформи, които сме направили от нулата — за ресторанти, клиники, магазини, производители и технологични компании."
+        keywords="портфолио, проекти, case studies, уеб дизайн, уебсайтове, онлайн магазини, Adrexio, България"
         structuredData={structuredData}
       />
       <Navbar />
@@ -157,7 +88,7 @@ const CaseStudies = () => {
         <div className="container mx-auto px-6">
           {filteredStudies.length > 0 ? (
             <ProjectGrid studies={filteredStudies} />
-          ) : !isAppsView ? (
+          ) : (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -170,12 +101,9 @@ const CaseStudies = () => {
                 Всички проекти
               </Button>
             </motion.div>
-          ) : null}
+          )}
         </div>
       </section>
-
-      {(isDefaultView || isAppsView) && <MobileAppsSection />}
-      {isAppsView && <AppsScrollCue />}
 
       <CTASection />
       <Footer />

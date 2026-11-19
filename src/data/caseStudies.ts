@@ -1,7 +1,5 @@
 // Case Study Data - Centralized for scalability
 import koleffHouseImg from "@/assets/case-studies/koleff-house.webp";
-import oraqorImg from "@/assets/case-studies/oraqor.webp";
-import riactImg from "@/assets/case-studies/riact.webp";
 import bodyaestheticsImg from "@/assets/case-studies/bodyaesthetics.webp";
 import athleticiqImg from "@/assets/case-studies/athleticiq.webp";
 import supercreditImg from "@/assets/case-studies/supercredit.webp";
@@ -22,7 +20,6 @@ import bulbiochemImg from "@/assets/case-studies/bulbiochem.webp";
 import fmlbdImg from "@/assets/case-studies/fml-bd.webp";
 import koniImg from "@/assets/case-studies/koni.webp";
 import koniiHuImg from "@/assets/case-studies/konii-hu.webp";
-import mehannaImg from "@/assets/case-studies/mehana.webp";
 import legendsVillasImg from "@/assets/case-studies/legends.webp";
 import breezypointvillasImg from "@/assets/case-studies/breezypointvillas.webp";
 import zdravecImg from "@/assets/case-studies/zdravec.webp";
@@ -90,14 +87,13 @@ export interface CaseStudy {
   proof?: CaseStudyProof[];
 }
 
-export type CaseStudyKind = "web" | "shop" | "app";
-export type CaseStudyFilterId = "all" | "web" | "shop" | "app";
+export type CaseStudyKind = "web" | "shop";
+export type CaseStudyFilterId = "all" | "web" | "shop";
 
 export const CASE_STUDY_FILTERS: { id: CaseStudyFilterId; label: string }[] = [
   { id: "all", label: "Всички" },
   { id: "web", label: "Уеб сайтове" },
   { id: "shop", label: "Магазини" },
-  { id: "app", label: "Приложения" },
 ];
 
 export const caseStudies: CaseStudy[] = [
@@ -484,88 +480,6 @@ export const caseStudies: CaseStudy[] = [
     cta: "Медицинска практика сте и пациентите задават едни и същи въпроси по телефона? Сайтът може да им отговаря с думите на лекаря.",
     gradient: "from-emerald-600/20 to-teal-500/20",
     accentColor: "text-emerald-600"
-  },
-  // ORAQOR
-  {
-    id: "oraqor",
-    title: "Oraqor",
-    subtitle: "Маркетингов сайт за HR платформа с два модула, Pulse и Navigator",
-    category: "Технологии",
-    url: "https://www.oraqor.com/",
-    isPublic: true,
-    image: oraqorImg,
-    overview: "Oraqor е платформа, с която компаниите измерват ангажираността на служителите и я свързват с резултатите им. Има два модула: Pulse показва къде в екипа има проблем, а Navigator свързва хората с целите на компанията. Работихме по части от oraqor.com, някои от които са достъпни само за клиентите на платформата.",
-    challenge: "Продуктът се продава на HR директори и ръководители, които първо искат цифри. Сайтът трябваше да обясни двата модула поотделно и да доведе до заявка за демо.",
-    solution: [
-      "Pulse и Navigator имат отделни страници.",
-      "На началната страница са данните, с които Oraqor описва проблема: колко от разходите за заплати отиват напразно и колко губят фирмите, когато целите се разминават.",
-      "Бутонът „Book a Demo“ е в горното меню на всяка страница, до цените.",
-      "Има раздели за блог, подкаст и ресурси и вход към самата платформа."
-    ],
-    results: [
-      { metric: "2", label: "Модула, всеки със своя страница", kind: "delivered" },
-      { metric: "34%", label: "От разходите за заплати отиват напразно (данни на Oraqor)", kind: "client" },
-      { metric: "20–30%", label: "От приходите губят фирмите при разминаване с целите (данни на Oraqor)", kind: "client" }
-    ],
-    technologies: ["React", "TypeScript", "Webflow", "UI/UX дизайн"],
-    cta: "Продавате софтуер на фирми? Сайтът трябва да обясни продукта така, че демото да е следващата логична стъпка.",
-    servicePath: "/services/ui-ux-design",
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    accentColor: "text-blue-500"
-  },
-  // RIACT
-  {
-    id: "riact",
-    title: "RiACT",
-    subtitle: "Технически сайт за датска платформа, с която индустриалните роботи се настройват без програмиране",
-    category: "Технологии",
-    url: "https://www.riact.ai/",
-    isPublic: true,
-    image: riactImg,
-    overview: "RiACT е датска компания, която прави RiFLEX: софтуер за управление на индустриални роботи и коботи чрез готови умения, без всичко да се програмира от нулата. Работи с роботи и машини от различни производители. Работихме по части от riact.ai, някои от които са затворени за външни потребители.",
-    challenge: "Сайтът го четат производители и системни интегратори. Те искат да видят с кои роботи работи RiFLEX, какви готови приложения има и в кои заводи вече се използва.",
-    solution: [
-      "Трите готови приложения (Machine Tending, Pick & Place и Palletizing) имат свои секции.",
-      "Три стъпки, Connect, Configure и Run, обясняват как роботът влиза в работа.",
-      "Партньорите и съвместимите машини са на една схема в раздела Ecosystem.",
-      "Казусите от клиенти и партньори, като LHM, DOBOT и Universal Robots, са в отделен раздел.",
-      "Разработчиците заявяват бета достъп до RiFLEX Developer през отделна форма."
-    ],
-    results: [
-      { metric: "3", label: "Готови приложения със свои секции", kind: "delivered" },
-      { metric: "50%", label: "По-малко инженерно време (по данни на RiACT)", kind: "client" },
-      { metric: "3x", label: "По-бърза пренастройка (по данни на RiACT)", kind: "client" }
-    ],
-    technologies: ["Next.js", "Webflow", "API интеграции", "UI/UX дизайн"],
-    cta: "Продуктът ви е технически и трудно се обяснява? Започваме от въпросите, които задава купувачът, и подреждаме сайта по тях.",
-    servicePath: "/services/ui-ux-design",
-    gradient: "from-slate-600/20 to-gray-600/20",
-    accentColor: "text-slate-500"
-  },
-  // THE MEHANNA GROUP
-  {
-    id: "mehanna-group",
-    title: "The Mehanna Group",
-    subtitle: "Портал за регистрация, поръчки и статуси за компания за академични консултации",
-    category: "Образование",
-    url: "https://signup.mehannagroup.com",
-    isPublic: true,
-    image: mehannaImg,
-    overview: "The Mehanna Group помагат на студенти от различни държави с научни трудове, подготовка за изпити и кандидатстване в университет. Работят с мрежа от над 60 експерти. Направихме портала, през който студентите се регистрират, пускат поръчки и следят докъде е стигнала работата.",
-    challenge: "Всяка поръчка минава през няколко души: студентът описва задачата, екипът я дава на експерт, експертът качва готовите файлове. Порталът трябваше да пази тази връзка, да приема плащания и да показва на студента докъде е стигнала работата, без той да пише имейли.",
-    solution: [
-      "Студентите се регистрират и пускат поръчки от личен профил.",
-      "Плащането е онлайн, а файловете се качват към конкретната поръчка.",
-      "Всяка поръчка има статус, който студентът вижда в профила си.",
-      "Преработихме админ панела, в който екипът обработва запитванията."
-    ],
-    results: [
-      { metric: "60+", label: "Експерти в мрежата", kind: "client" }
-    ],
-    technologies: ["Next.js", "TypeScript", "Интеграции", "Онлайн плащания", "Собствено API"],
-    cta: "Клиентите ви звънят само за да питат докъде сте стигнали? Портал със статуси им отговаря вместо вас.",
-    gradient: "from-indigo-500/20 to-purple-600/20",
-    accentColor: "text-indigo-500"
   },
   // SUPERCREDIT
   {
@@ -1067,12 +981,6 @@ export const getCaseStudyTitle = (study: Pick<CaseStudy, "title" | "category">):
   return `${label} — казус ${study.title} | Adrexio`;
 };
 
-/** Counted 1:1 from entries in this file, including the private SuperCredit case study. */
-export const PORTFOLIO_PROJECT_COUNT = caseStudies.length;
-
-/** Unique clients — one company per case study in this file. */
-export const PORTFOLIO_CLIENT_COUNT = new Set(caseStudies.map((s) => s.title)).size;
-
 /** Projects on the homepage „Част от проектите“ grid, in this order (two per row). */
 export const FEATURED_IDS = [
   "my-story-travel",
@@ -1116,9 +1024,6 @@ export const PORTFOLIO_ORDER = [
   "super-credit",
   "fml-bd",
   "athleticiq",
-  "riact",
-  "mehanna-group",
-  "oraqor",
 ] as const;
 
 
@@ -1133,10 +1038,7 @@ const SHOP_IDS = new Set([
   "bulbiochem",
 ]);
 
-const APP_IDS = new Set(["athleticiq"]);
-
 export const getCaseStudyKind = (id: string): CaseStudyKind => {
-  if (APP_IDS.has(id)) return "app";
   if (SHOP_IDS.has(id)) return "shop";
   return "web";
 };
@@ -1154,7 +1056,7 @@ export const getFeaturedCaseStudies = (): CaseStudy[] => {
   );
 };
 
-/** Every case study, AthleticIQ included, in PORTFOLIO_ORDER. */
+/** Every case study in PORTFOLIO_ORDER. */
 export const getPortfolioOrder = (): CaseStudy[] => sortByPortfolioOrder(caseStudies);
 
 export const getCaseStudiesForFilter = (filter: CaseStudyFilterId): CaseStudy[] => {
