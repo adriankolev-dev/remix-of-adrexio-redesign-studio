@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import logo from "@/assets/logo.svg";
 import logoDark from "@/assets/logo-dark.svg";
@@ -88,6 +88,14 @@ const Navbar = () => {
         </div>
 
         <div className="hidden items-center gap-2 lg:flex">
+          <a
+            href="tel:+359896173743"
+            aria-label="Обадете се: +359 896 173 743"
+            className="inline-flex h-[2.9rem] min-w-[2.9rem] items-center justify-center gap-2 whitespace-nowrap rounded-full px-3 text-[0.85rem] font-semibold text-foreground transition-colors hover:text-primary"
+          >
+            <Phone size={17} strokeWidth={2.2} />
+            <span className="hidden 2xl:inline">+359 896 173 743</span>
+          </a>
           <ThemeToggle />
           <Link
             to="/contact"

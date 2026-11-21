@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE_OUT } from "@/components/editorial/motion";
 import { prefetchRoute } from "@/lib/prefetchRoute";
@@ -112,15 +112,28 @@ const Hero = () => {
               />
             </div>
 
-            {/* From lg the lede ends at 3.55em, just short of the stone's left edge (3.7em). */}
-            <div className="lg:absolute lg:left-[1.12em] lg:top-[3.75em] lg:w-[2.43em]">
-              <motion.p
-                className="mt-6 max-w-[20rem] text-[1rem] leading-[1.6] text-muted-foreground lg:mt-0 lg:max-w-none lg:text-[1.1rem]"
-                {...fade(0.7)}
-              >
-                Ние сме Adrexio, уеб студио в София. Проектираме и пишем сайтове и онлайн
-                магазини, в които клиентът намира нужното, без да се замисля.
-              </motion.p>
+            {/* From lg the lede card runs 0.55em to 3.6em, just short of the stone's left edge (3.7em). */}
+            <div className="lg:absolute lg:left-[0.55em] lg:top-[3.62em] lg:w-[3.05em]">
+              <motion.div {...fade(0.7)}>
+                <div className="mt-6 rounded-2xl border border-foreground/[0.06] bg-background/70 p-5 shadow-[0_20px_50px_-30px_rgba(11,42,58,0.35)] backdrop-blur-md lg:mt-0 lg:px-6 lg:py-5">
+                  <p className="border-l-[3px] border-primary pl-4 text-[1.02rem] leading-[1.55] text-muted-foreground lg:pl-5 lg:text-[1.08rem]">
+                    <strong className="font-semibold text-foreground">Ние сме Adrexio, уеб студио в София.</strong>{" "}
+                    Проектираме и пишем сайтове и онлайн магазини, в които клиентът намира нужното, без да се
+                    замисля.
+                  </p>
+                </div>
+                <Link
+                  to="/case-studies"
+                  onMouseEnter={() => prefetchRoute("/case-studies")}
+                  onFocus={() => prefetchRoute("/case-studies")}
+                  className="group mt-4 hidden w-fit items-center gap-4 pl-6 text-[0.85rem] font-bold uppercase leading-none tracking-[0.05em] text-foreground lg:flex"
+                >
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border-[1.5px] border-primary bg-background/80 text-foreground transition-colors group-hover:bg-primary">
+                    <ArrowRight size={18} strokeWidth={2.2} className="transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                  Разгледайте проектите
+                </Link>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -150,19 +163,7 @@ const Hero = () => {
           <p className="text-[0.62rem] font-medium uppercase tracking-[0.24em] text-muted-foreground lg:text-[0.66rem]">
             Уеб студио · София
           </p>
-          <Link
-            to="/case-studies"
-            onMouseEnter={() => prefetchRoute("/case-studies")}
-            onFocus={() => prefetchRoute("/case-studies")}
-            className="group hidden items-center gap-3 text-[0.95rem] font-bold uppercase tracking-[0.04em] text-foreground lg:inline-flex"
-          >
-            Разгледайте проектите
-            <ArrowUpRight
-              size={19}
-              strokeWidth={2.2}
-              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </Link>
+          <span aria-hidden className="hidden lg:block" />
           <Tags className="lg:justify-self-end lg:text-right" />
         </motion.div>
       </div>

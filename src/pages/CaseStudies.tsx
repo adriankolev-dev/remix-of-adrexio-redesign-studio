@@ -15,8 +15,47 @@ import {
   type CaseStudyFilterId,
 } from "@/data/caseStudies";
 import { getBreadcrumbSchema } from "@/lib/structuredData";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
+import Reveal from "@/components/editorial/Reveal";
+import DeviceMockup, { getMobileShot } from "@/components/case-studies/DeviceMockup";
+import { prefetchCaseStudy } from "@/lib/prefetchRoute";
 
-const ProjectGrid = ({ studies }: { studies: CaseStudy[] }) => (
+/** The project shown full width at the top of the unfiltered list. */
+const FEATURED_ID = "amelia-diva";
+
+const FeaturedCaseStudy = ({ study }: { study: CaseStudy }) => (
+  <Reveal immediate delay={0.2}>
+    <Link
+      to={`/case-studies/${study.id}`}
+      onMouseEnter={prefetchCaseStudy}
+      onFocus={prefetchCaseStudy}
+      className="group grid gap-6 rounded-md bg-secondary p-3 transition-colors hover:bg-secondary/70 md:p-4 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] lg:items-center lg:gap-10"
+    >
+      <DeviceMockup desktop={study.image} mobile={getMobileShot(study.id)} alt={study.title} wide />
+      <div className="flex flex-col gap-6 px-1 pb-2 lg:pr-6">
+        <div>
+          <p className="eyebrow">Акцентен проект · {study.category}</p>
+          <h2 className="mt-3 text-3xl font-semibold leading-tight text-foreground md:text-[2.4rem]">
+            {study.title}
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-[1.05rem]">
+            {study.subtitle}
+          </p>
+        </div>
+        <span className="inline-flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-[0.06em] text-foreground">
+          Разгледайте проекта
+          <ArrowUpRight
+            size={15}
+            className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          />
+        </span>
+      </div>
+    </Link>
+  </Reveal>
+);
+
+const ProjectGrid =({ studies }: { studies: CaseStudy[] }) => (
   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
     {studies.map((study, index) => (
       <CaseStudyCard key={study.id} study={study} index={index} />
@@ -28,6 +67,9 @@ const CaseStudies = () => {
   const [activeFilter, setActiveFilter] = useState<CaseStudyFilterId>("all");
 
   const filteredStudies = getCaseStudiesForFilter(activeFilter);
+  const featured =
+    activeFilter === "all" ? filteredStudies.find((s) => s.id === FEATURED_ID) : undefined;
+  const gridStudies = featured ? filteredStudies.filter((s) => s.id !== featured.id) : filteredStudies;
 
   const publicStudies = getPortfolioOrder().filter((s) => s.isPublic);
   const structuredData = [
@@ -73,6 +115,15 @@ const CaseStudies = () => {
         description="Ресторанти, клиники, онлайн магазини, производители и технологични компании. При всеки проект пише каква беше задачата, какво направихме и кое беше най-трудно. Числата на клиента стоят отделно от нашите."
       />
 
+      {/* Featured project, full width, on the unfiltered view */}
+      {featured && (
+        <section className="bg-background pb-12 md:pb-16">
+          <div className="container mx-auto px-6">
+            <FeaturedCaseStudy study={featured} />
+          </div>
+        </section>
+      )}
+
       {/* Filters */}
       <section className="bg-background pb-8">
         <div className="container mx-auto px-6">
@@ -86,8 +137,8 @@ const CaseStudies = () => {
       {/* Projects */}
       <section className="pb-24">
         <div className="container mx-auto px-6">
-          {filteredStudies.length > 0 ? (
-            <ProjectGrid studies={filteredStudies} />
+          {gridStudies.length > 0 ? (
+            <ProjectGrid studies={gridStudies} />
           ) : (
             <motion.div
               initial={{ opacity: 0 }}

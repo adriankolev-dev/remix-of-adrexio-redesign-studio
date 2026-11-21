@@ -5,6 +5,7 @@ import SectionHeader from "@/components/editorial/SectionHeader";
 import { Button } from "@/components/ui/button";
 import { getFeaturedCaseStudies } from "@/data/caseStudies";
 import { prefetchCaseStudy } from "@/lib/prefetchRoute";
+import DeviceMockup, { getMobileShot } from "@/components/case-studies/DeviceMockup";
 
 const featured = getFeaturedCaseStudies();
 
@@ -33,16 +34,12 @@ const WorkSection = () => (
               onFocus={prefetchCaseStudy}
               className="group flex h-full flex-col gap-5 rounded-md bg-secondary p-3 transition-colors hover:bg-secondary/70 sm:flex-row sm:items-stretch md:p-4"
             >
-              {/* Natural aspect ratio: the screenshots vary (16:10, 16:9, 1.9:1) and none get cropped. */}
-              <div className="relative self-start overflow-hidden rounded-[0.25rem] bg-muted sm:w-[52%] sm:shrink-0">
-                <img
-                  src={study.image}
+              <div className="relative self-start sm:w-[52%] sm:shrink-0">
+                <DeviceMockup
+                  desktop={study.image}
+                  mobile={getMobileShot(study.id)}
                   alt={study.title}
-                  width={1600}
-                  height={1000}
-                  loading="lazy"
-                  decoding="async"
-                  className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+                  variant={i}
                 />
               </div>
 

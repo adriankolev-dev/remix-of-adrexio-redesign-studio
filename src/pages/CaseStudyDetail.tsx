@@ -18,6 +18,7 @@ import {
 import { getBreadcrumbSchema, getPublisherSchema } from "@/lib/structuredData";
 import { scrollToTop } from "@/lib/lenis";
 import { useEffect, type ReactNode } from "react";
+import DeviceMockup, { getMobileShot } from "@/components/case-studies/DeviceMockup";
 
 /** One chapter of the story: label on the left, content on the right, on a hairline. */
 const Chapter = ({ label, children }: { label: string; children: ReactNode }) => (
@@ -203,13 +204,11 @@ const CaseStudyDetail = () => {
         <div className="container mx-auto px-6">
           <Reveal>
             <div className="rounded-md bg-secondary p-3 md:p-5">
-              <img
-                src={study.image}
+              <DeviceMockup
+                desktop={study.image}
+                mobile={getMobileShot(study.id)}
                 alt={`${study.title} уебсайт`}
-                width={1600}
-                height={1000}
-                decoding="async"
-                className="block h-auto w-full rounded-[0.25rem]"
+                wide
               />
             </div>
           </Reveal>

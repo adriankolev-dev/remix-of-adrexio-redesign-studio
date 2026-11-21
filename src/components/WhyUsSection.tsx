@@ -1,28 +1,32 @@
 import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 
-// Each reason has to be checkable before the contract: the pricing data, the
-// portfolio or the way we use AI. No adjectives about ourselves.
+// How Adrexio thinks, one stage of the work per column: a short kicker, a
+// statement, then what it means in practice.
 const reasons = [
   {
-    title: "Обхватът е на хартия",
+    kicker: "Преди дизайна",
+    title: "Не започваме от цветовете.",
     description:
-      "Преди старта получавате списък какво влиза и какво не. Ако по пътя поискате нещо ново, първо го оценяваме и чак тогава го правим.",
+      "Започваме от това какво търси клиентът ви, какво трябва да разбере и кое ще го накара да избере вас.",
   },
   {
-    title: "Сайтът остава ваш",
+    kicker: "След всяко кликване",
+    title: "Всеки елемент има работа.",
     description:
-      "След финалното плащане кодът и дизайнът са ваша собственост. Можете да смените изпълнителя, без да започвате отначало.",
+      "От първия екран до последния бутон всяка секция има причина да е там. Нищо не стои само за украса.",
   },
   {
-    title: "Работата може да се провери",
+    kicker: "Зад кадър",
+    title: "Красивото е само началото.",
     description:
-      "В портфолиото има адрес към всеки публичен сайт. Отворете го от телефона си и проверете скоростта, преди да ни се обадите.",
+      "Мислим за скорост, SEO, мобилна версия, структура и интеграции още докато изграждаме сайта.",
   },
   {
-    title: "AI за рутината, хора за решенията",
+    kicker: "След пускането",
+    title: "Сайтът не е проект с крайна дата.",
     description:
-      "AI поема проучването, черновите и повтарящия се код. Структурата, дизайнът и прегледът на всеки ред остават при екипа.",
+      "Развиваме го с нови функции, автоматизации и AI, когато ви носят повече клиенти или спестено време.",
   },
 ];
 
@@ -31,7 +35,7 @@ const WhyUsSection = () => (
     <div className="container mx-auto px-6">
       <SectionHeader
         title="Защо Adrexio."
-        description="Четири неща, които можете да проверите, преди да подпишете."
+        description="Как мислим и работим, от първия разговор до месеците след пускането."
       />
 
       <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -42,10 +46,15 @@ const WhyUsSection = () => (
             delay={(i % 4) * 0.06}
             className="border-t border-border pb-12 pt-6"
           >
-            <h3 className="text-xl font-semibold text-foreground md:text-2xl">
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+              <span className="text-primary">{String(i + 1).padStart(2, "0")}</span>
+              <span className="mx-2 opacity-50">/</span>
+              {reason.kicker}
+            </p>
+            <h3 className="mt-5 text-balance text-2xl font-semibold leading-[1.15] text-foreground md:text-[1.75rem]">
               {reason.title}
             </h3>
-            <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-muted-foreground">
+            <p className="mt-4 max-w-sm text-[0.95rem] leading-relaxed text-muted-foreground">
               {reason.description}
             </p>
           </Reveal>

@@ -3,6 +3,7 @@ import { ArrowUpRight, Lock } from "lucide-react";
 import { CaseStudy } from "@/data/caseStudies";
 import Reveal from "@/components/editorial/Reveal";
 import { prefetchCaseStudy } from "@/lib/prefetchRoute";
+import DeviceMockup, { getMobileShot } from "@/components/case-studies/DeviceMockup";
 
 interface CaseStudyCardProps {
   study: CaseStudy;
@@ -19,15 +20,12 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => (
       onMouseEnter={prefetchCaseStudy}
       onFocus={prefetchCaseStudy}
     >
-      <div className="relative overflow-hidden rounded-[0.25rem] bg-muted">
-        <img
-          src={study.image}
+      <div className="relative">
+        <DeviceMockup
+          desktop={study.image}
+          mobile={getMobileShot(study.id)}
           alt={study.title}
-          width={1600}
-          height={1000}
-          loading="lazy"
-          decoding="async"
-          className="block h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          variant={index}
         />
         {!study.isPublic && (
           <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-background/90 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.08em] text-foreground backdrop-blur-sm">
