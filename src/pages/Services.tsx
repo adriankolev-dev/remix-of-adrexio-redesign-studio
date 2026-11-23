@@ -14,7 +14,17 @@ import Sculpture from "@/components/editorial/Sculpture";
 const PHASE_LABEL = "Добавяме след сайта";
 const QUOTE_LABEL = "Оферта след разговор";
 
-const services = [
+type ServiceCard = {
+  title: string;
+  subtitle: string;
+  description: string;
+  href: string;
+  features: string[];
+  /** Platform pages under this service, linked from the card's foot. */
+  subLinks?: { label: string; href: string }[];
+};
+
+const services: ServiceCard[] = [
   {
     title: "Уеб разработка",
     subtitle: `Сайт ${PRICING.website.fromLabel}`,
@@ -22,6 +32,7 @@ const services = [
       "Фирмени и корпоративни сайтове с дизайн за вашата марка. WordPress, когато екипът ще пише често, Next.js, когато скоростта и собствената логика тежат повече.",
     href: "/services/web-development",
     features: ["Фирмени сайтове", "Корпоративни сайтове", "Лендинг страници", "Уеб приложения"],
+    subLinks: [{ label: "WordPress сайтове", href: "/services/wordpress" }],
   },
   {
     title: "Онлайн магазини",
@@ -30,22 +41,7 @@ const services = [
       "Магазин за българския пазар: Еконт и Спиди, наложен платеж и склад са заложени в основата, а не добавени накрая.",
     href: "/services/onlajn-magazin",
     features: ["Еконт и Спиди", "Наложен платеж", "Склад и наличности", "Общи условия"],
-  },
-  {
-    title: "WordPress сайтове",
-    subtitle: `Сайт ${PRICING.website.fromLabel}`,
-    description:
-      "WordPress с тема, писана за вашата фирма, и блокове, с които редактирате сами. За екипи, които публикуват често.",
-    href: "/services/wordpress",
-    features: ["Собствена тема", "Блокове за редактиране", "Миграция от стар WordPress", "Няколко езика"],
-  },
-  {
-    title: "WooCommerce магазини",
-    subtitle: `Магазин ${PRICING.ecommerce.fromLabel}`,
-    description:
-      "Нов WooCommerce магазин или миграция от друга платформа, с Еконт, Спиди и наложен платеж и без изгубени поръчки.",
-    href: "/services/woocommerce",
-    features: ["Миграция на поръчки", "Еконт и Спиди", "Цени в евро", "Връзка със склад"],
+    subLinks: [{ label: "WooCommerce магазини", href: "/services/woocommerce" }],
   },
   {
     title: "UI/UX дизайн",
@@ -140,15 +136,19 @@ const Services = () => {
         ]}
       />
 
-      {/* Service grid: nine services, three across, on hairlines */}
+      {/* Service grid: eight services, four across on wide screens, on hairlines */}
       <section className="bg-background pb-16 md:pb-24">
         <div className="container mx-auto px-6">
-          <div className="grid border-l border-t border-border md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid border-l border-t border-border md:grid-cols-2 xl:grid-cols-4">
             {services.map((service, i) => (
-              <Reveal key={service.href} delay={(i % 3) * 0.05} className="border-b border-r border-border">
+              <Reveal
+                key={service.href}
+                delay={(i % 4) * 0.05}
+                className="flex flex-col border-b border-r border-border"
+              >
                 <Link
                   to={service.href}
-                  className="group flex h-full min-h-[19rem] flex-col justify-between gap-10 p-7 transition-colors hover:bg-secondary/60 md:p-9"
+                  className="group flex min-h-[19rem] flex-1 flex-col justify-between gap-10 p-7 transition-colors hover:bg-secondary/60 md:p-9"
                 >
                   <div className="flex justify-end">
                     <ArrowUpRight
@@ -175,6 +175,20 @@ const Services = () => {
                     </p>
                   </div>
                 </Link>
+                {service.subLinks && (
+                  <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-border px-7 py-4 md:px-9">
+                    {service.subLinks.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        to={sub.href}
+                        className="inline-flex items-center gap-1 text-[0.72rem] font-bold uppercase tracking-[0.06em] text-foreground hover:underline"
+                      >
+                        {sub.label}
+                        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </Reveal>
             ))}
           </div>

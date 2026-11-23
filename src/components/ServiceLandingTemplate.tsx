@@ -127,6 +127,8 @@ export interface ServiceLandingProps {
   showRelatedProjects?: boolean;
   /** Pick the related case studies by id instead of by servicePath. */
   relatedStudyIds?: string[];
+  /** Narrower pages under this service (e.g. WordPress under web development). */
+  subServices?: { label: string; href: string; description: string }[];
 }
 
 const ServiceLandingTemplate = ({
@@ -166,6 +168,7 @@ const ServiceLandingTemplate = ({
   customSection,
   showRelatedProjects = true,
   relatedStudyIds,
+  subServices,
 }: ServiceLandingProps) => {
   const location = useLocation();
   const servicePath = location.pathname.replace(/\/$/, "");
@@ -227,6 +230,26 @@ const ServiceLandingTemplate = ({
       <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-6">
           <SectionHeader title={introTitle} description={introDescription} className="mb-0 md:mb-0" />
+          {subServices && subServices.length > 0 && (
+            <div className="mt-10 border-t border-border md:mt-12">
+              {subServices.map((sub) => (
+                <Link
+                  key={sub.href}
+                  to={sub.href}
+                  className="group grid gap-2 border-b border-border py-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-8"
+                >
+                  <span className="text-lg font-semibold text-foreground md:text-xl">{sub.label}</span>
+                  <span className="flex items-start justify-between gap-6 text-[0.95rem] leading-relaxed text-muted-foreground">
+                    {sub.description}
+                    <ArrowUpRight
+                      className="mt-1 h-4 w-4 shrink-0 text-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                      aria-hidden
+                    />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

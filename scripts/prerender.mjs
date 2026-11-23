@@ -181,9 +181,11 @@ function extractJsxArrayBlock(src, name) {
 }
 
 function extractConstArrayBlock(src, name) {
-  const marker = `const ${name} = [`;
-  const start = src.indexOf(marker);
-  if (start === -1) return "";
+  // Allows a type annotation: `const services: ServiceCard[] = [`.
+  const m = new RegExp(`const ${name}(?::[^=]+)?\\s*=\\s*\\[`).exec(src);
+  if (!m) return "";
+  const start = m.index;
+  const marker = m[0];
   let i = start + marker.length;
   let depth = 1;
   while (i < src.length && depth > 0) {
@@ -626,7 +628,11 @@ function parseServicesIndex(src) {
     const description = extractStringField(chunk, "description");
     const href = extractStringField(chunk, "href");
     const features = extractQuotedArray(chunk, "features");
-    if (title && href) items.push({ title, description, href, features });
+    const subLinks = [...chunk.matchAll(/\{\s*label:\s*"((?:\\.|[^"\\])*)",\s*href:\s*"([^"]+)"\s*\}/g)].map((x) => ({
+      label: unescapeJs(x[1]),
+      href: x[2],
+    }));
+    if (title && href) items.push({ title, description, href, features, subLinks });
   }
   return items;
 }
@@ -682,6 +688,7 @@ function prerenderServicesIndex(template, services) {
       <h2><a href="${s.href}">${escapeHtml(s.title)}</a></h2>
       <p>${escapeHtml(s.description)}</p>
       ${s.features?.length ? list(s.features.map((f) => escapeHtml(f))) : ""}
+      ${s.subLinks?.length ? `<p>${s.subLinks.map((l) => `<a href="${l.href}">${escapeHtml(l.label)}</a>`).join(" · ")}</p>` : ""}
     </article>`,
       )
       .join("\n")}

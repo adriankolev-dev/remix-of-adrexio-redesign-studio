@@ -36,8 +36,6 @@ const core = [
 ];
 
 const more = [
-  { title: "WordPress сайтове", href: "/services/wordpress" },
-  { title: "WooCommerce магазини", href: "/services/woocommerce" },
   { title: "UI/UX дизайн", href: "/services/ui-ux-design" },
   { title: "Дигитален маркетинг", href: "/services/digital-marketing" },
 ];

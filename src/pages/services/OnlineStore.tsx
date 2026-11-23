@@ -19,6 +19,13 @@ import { SERVICE_TRUST_STATS } from "@/data/trustStats";
 const OnlineStore = () => {
   return (
     <ServiceLandingTemplate
+      subServices={[
+        {
+          label: "WooCommerce магазин",
+          href: "/services/woocommerce",
+          description: "Когато искате магазина на WooCommerce или вече имате такъв: нов магазин, миграция или подобрение.",
+        },
+      ]}
       seoTitle="Изработка на онлайн магазин: цена от €1.299, с Еконт и Спиди | Adrexio"
       seoDescription="Изработка на онлайн магазин от €1.299, готов за 4–6 седмици. Еконт и Спиди, наложен платеж, картови плащания, склад и Общи условия по ЗЗП."
       seoKeywords="изработка на онлайн магазин, онлайн магазин цена, изработка на електронен магазин, e-commerce сайт, магазин с Еконт и Спиди, наложен платеж онлайн магазин, WooCommerce България"
