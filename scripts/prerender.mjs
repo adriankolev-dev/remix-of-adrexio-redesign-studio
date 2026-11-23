@@ -61,8 +61,9 @@ marked.setOptions({ gfm: true, breaks: false });
 const SERVICE_FILES = [
   { path: "/services/web-development", file: "WebDevelopment.tsx" },
   { path: "/services/onlajn-magazin", file: "OnlineStore.tsx" },
+  { path: "/services/wordpress", file: "WordPress.tsx" },
+  { path: "/services/woocommerce", file: "WooCommerce.tsx" },
   { path: "/services/ai-implementation", file: "AIImplementation.tsx" },
-  { path: "/services/mobile-apps", file: "MobileApps.tsx" },
   { path: "/services/ui-ux-design", file: "UIUXDesign.tsx" },
   { path: "/services/seo", file: "SEO.tsx" },
   { path: "/services/geo-optimizaciya", file: "GEOOptimization.tsx" },
@@ -378,12 +379,13 @@ function list(items) {
 const SERVICE_NAV = [
   ["/services/web-development", "Изработка на сайт"],
   ["/services/onlajn-magazin", "Онлайн магазин"],
+  ["/services/wordpress", "WordPress сайтове"],
+  ["/services/woocommerce", "WooCommerce магазини"],
   ["/services/ui-ux-design", "UI/UX дизайн"],
   ["/services/seo", "SEO оптимизация"],
   ["/services/geo-optimizaciya", "GEO оптимизация"],
   ["/services/technical-support", "Поддръжка на сайт"],
   ["/services/ai-implementation", "AI интеграции"],
-  ["/services/mobile-apps", "Мобилни приложения"],
   ["/services/digital-marketing", "Дигитален маркетинг"],
 ];
 
@@ -549,10 +551,10 @@ function parsePricingServices(src) {
   const block = extractConstArrayBlock(src, "PRICING_SERVICES");
   const items = [];
   const re =
-    /name:\s*"((?:\\.|[^"\\])*)"[\s\S]*?fromLabel:\s*PRICING\.\w+\.fromLabel[\s\S]*?description:\s*"((?:\\.|[^"\\])*)"/g;
+    /name:\s*"((?:\\.|[^"\\])*)"[\s\S]*?fromLabel:\s*PRICING\.(\w+)\.fromLabel[\s\S]*?description:\s*"((?:\\.|[^"\\])*)"/g;
   let m;
   while ((m = re.exec(block))) {
-    items.push({ name: unescapeJs(m[1]), description: unescapeJs(m[2]) });
+    items.push({ name: unescapeJs(m[1]), key: m[2], description: unescapeJs(m[3]) });
   }
   return items;
 }
@@ -561,10 +563,12 @@ function parsePricingAmounts(src) {
   const website = src.match(/website:\s*\{[\s\S]*?fromLabel:\s*"([^"]+)"/);
   const ecommerce = src.match(/ecommerce:\s*\{[\s\S]*?fromLabel:\s*"([^"]+)"/);
   const maintenance = src.match(/maintenance:\s*\{[\s\S]*?fromLabel:\s*"([^"]+)"/);
+  const seo = src.match(/seo:\s*\{[\s\S]*?fromLabel:\s*"([^"]+)"/);
   return {
     website: website?.[1] ?? "от €599",
     ecommerce: ecommerce?.[1] ?? "от €1.299",
     maintenance: maintenance?.[1] ?? "от €99 / месец",
+    seo: seo?.[1] ?? "от €199 / месец",
   };
 }
 
@@ -662,7 +666,7 @@ function prerenderHome(template, services, posts, studies) {
       description,
       url: `${BASE_URL}/`,
       keywords:
-        "уеб разработка, уеб дизайн, мобилни приложения, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг, уебсайт София, уеб студио България, разработка на сайтове, мобилни приложения iOS Android",
+        "уеб разработка, уеб дизайн, онлайн магазини, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг, уебсайт София, уеб студио България, разработка на сайтове",
       // Mirrors src/pages/Index.tsx: LocalBusiness (an Organization subtype
       // sharing ORG_ID) plus WebSite. The prerendered HTML used to omit the
       // local identity entirely, so Google never saw the address without JS.
@@ -675,7 +679,7 @@ function prerenderHome(template, services, posts, studies) {
 function prerenderServicesIndex(template, services) {
   const title = "Услуги: сайтове, онлайн магазини, SEO и AI интеграции | Adrexio";
   const description =
-    "Изработка на уебсайтове, мобилни приложения, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг и техническа поддръжка в София.";
+    "Изработка на сайтове и онлайн магазини, UI/UX дизайн, SEO и GEO оптимизация, AI интеграции, поддръжка и дигитален маркетинг в София. Цени и срокове за всяка услуга.";
   const inner = `
     <h1>Отделни услуги. Един работещ сайт.</h1>
     <p>Дизайнът решава какво вижда клиентът. Кодът решава колко бързо го вижда, а SEO дали изобщо стига до сайта. Правим ги в един екип, за да не се налага вие да ги съгласувате. Започнете от това, което ви трябва сега.</p>
@@ -696,7 +700,7 @@ function prerenderServicesIndex(template, services) {
       description,
       url: `${BASE_URL}/services`,
       keywords:
-        "изработка на уебсайтове, мобилни приложения, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг, техническа поддръжка, уеб студио услуги София",
+        "изработка на уебсайтове, онлайн магазини, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг, техническа поддръжка, уеб студио услуги София",
         jsonLd: [
         { "@context": "https://schema.org", "@graph": services.map((s) => {
           const { "@context": _c, ...rest } = serviceSchema(s.title, s.description, `${BASE_URL}${s.href}`);
@@ -717,20 +721,31 @@ function prerenderServicesIndex(template, services) {
 // reproduce, so without this the crawled service pages linked only upward to
 // /services and nowhere sideways.
 const RELATED_SERVICES = {
+  "/services/wordpress": [
+    ["/services/woocommerce", "WooCommerce магазин"],
+    ["/services/technical-support", "поддръжка на WordPress"],
+    ["/services/seo", "SEO оптимизация"],
+  ],
+  "/services/woocommerce": [
+    ["/services/onlajn-magazin", "изработка на онлайн магазин"],
+    ["/services/wordpress", "WordPress сайтове"],
+    ["/services/technical-support", "поддръжка на магазина"],
+  ],
   "/services/web-development": [
+    ["/services/wordpress", "WordPress сайт със собствена тема"],
     ["/services/onlajn-magazin", "изработка на онлайн магазин"],
     ["/services/ui-ux-design", "UI/UX дизайн"],
     ["/services/seo", "SEO оптимизация"],
     ["/services/technical-support", "поддръжка след старта"],
   ],
   "/services/onlajn-magazin": [
+    ["/services/woocommerce", "WooCommerce магазин"],
     ["/services/web-development", "изработка на сайт"],
     ["/services/ui-ux-design", "UI/UX дизайн"],
     ["/services/technical-support", "поддръжка след старта"],
   ],
   "/services/ui-ux-design": [
     ["/services/web-development", "изработка на сайт"],
-    ["/services/mobile-apps", "мобилни приложения"],
   ],
   "/services/seo": [
     ["/services/geo-optimizaciya", "GEO оптимизация за AI търсачки"],
@@ -745,15 +760,13 @@ const RELATED_SERVICES = {
     ["/services/geo-optimizaciya", "видимост в AI търсачките"],
     ["/services/web-development", "изработка на сайт"],
   ],
-  "/services/mobile-apps": [
-    ["/services/ui-ux-design", "UI/UX дизайн"],
-    ["/services/web-development", "изработка на сайт"],
-  ],
   "/services/digital-marketing": [
     ["/services/seo", "SEO оптимизация"],
     ["/services/web-development", "изработка на сайт"],
   ],
   "/services/technical-support": [
+    ["/services/wordpress", "WordPress сайтове"],
+    ["/services/woocommerce", "WooCommerce магазини"],
     ["/services/web-development", "изработка на сайт"],
     ["/services/seo", "SEO оптимизация"],
   ],
@@ -776,6 +789,12 @@ function prerenderServicePages(template, studies = []) {
       throw new Error(`[prerender] missing SEO fields in ${file}`);
     }
     const h1 = [page.heroTitle, page.heroHighlight].filter(Boolean).join(" ");
+    const idsMatch = src.match(/relatedStudyIds=\{\[([^\]]*)\]\}/);
+    const related = idsMatch
+      ? [...idsMatch[1].matchAll(/"([^"]+)"/g)]
+          .map((m) => studies.find((s) => s.id === m[1] && s.isPublic))
+          .filter(Boolean)
+      : studiesForService(routePath, studies);
     // Each block carries its own heading from the page's own props, so the
     // crawled outline matches the one users see instead of a generic skeleton.
     const section = (heading, items) =>
@@ -813,9 +832,9 @@ function prerenderServicePages(template, studies = []) {
           : ""
       }
       ${
-        studiesForService(routePath, studies).length
+        related.length
           ? `<h2>Проекти от този тип</h2>${list(
-              studiesForService(routePath, studies).map(
+              related.map(
                 (st) => `<a href="/case-studies/${st.id}">${escapeHtml(st.title)}</a> — ${escapeHtml(st.subtitle)}`,
               ),
             )}`
@@ -854,16 +873,16 @@ function prerenderServicePages(template, studies = []) {
 }
 
 function prerenderPricing(template, amounts, services, faqs, factors, timeline, scope) {
-  const title = "Цени: изработка на сайт, онлайн магазин и поддръжка | Adrexio";
+  const title = "Цени: изработка на сайт, онлайн магазин, поддръжка и SEO | Adrexio";
   const description =
     "Колко струва изработката на сайт и онлайн магазин: начални цени, срокове по тип проект, какво влиза и какво не, и как се формира крайната оферта.";
   const inner = `
     <h1>Изработка на сайт — цена без изненади.</h1>
-    <p>Ориентировъчни суми за уеб сайтове, онлайн магазини и поддръжка. За SEO, дигитален маркетинг, AI и мобилни приложения — оферта след консултация.</p>
+    <p>Ориентировъчни суми за уеб сайтове, онлайн магазини, поддръжка и SEO. За дигитален маркетинг и AI интеграции — оферта след консултация.</p>
     <h2>Колко струва</h2>
     ${services
-      .map((s, i) => {
-        const from = i === 0 ? amounts.website : i === 1 ? amounts.ecommerce : amounts.maintenance;
+      .map((s) => {
+        const from = amounts[s.key] ?? "";
         return `<h3>${escapeHtml(s.name)} — ${escapeHtml(from)}</h3><p>${escapeHtml(s.description)}</p>`;
       })
       .join("")}
@@ -909,7 +928,7 @@ function prerenderAbout(template, { values, offer }) {
     "Уеб студио в София: сайтове и онлайн магазини от нулата, поддръжка, SEO и AI автоматизации. Екип с над 10 години опит.";
   const inner = `
     <h1>Ние сме Adrexio. Простото не е просто.</h1>
-    <p>Уеб студио в София. Правим сайтове и онлайн магазини и оставаме след старта с поддръжка, SEO и AI автоматизации. Мобилни приложения и реклама добавяме, когато бизнесът има нужда от тях.</p>
+    <p>Уеб студио в София. Правим сайтове и онлайн магазини и оставаме след старта с поддръжка, SEO и AI автоматизации. Реклама добавяме, когато бизнесът има нужда от нея.</p>
     <h2>Как мислим</h2>
     <p>Една страница изглежда ясна, когато някой е решил какво да махне от нея. Кой текст отива най-горе, кое поле във формата е излишно, защо снимката се бави на телефон. Посетителят не вижда тези решения. Вижда само, че намира каквото търси.</p>
     <p>Харесваме чистия дизайн, ясните решения и кода, който продължава да работи добре дълго след пускането на сайта.</p>
@@ -1321,6 +1340,10 @@ function writeRedirects() {
     "# Legacy duplicate of /contact kept working for old links. Safe to force:",
     "# no file is served at /contacts.",
     "/contacts  /contact/  301!",
+    "",
+    "# Mobile app development is no longer offered; the page had impressions.",
+    "/services/mobile-apps  /services/  301!",
+    "/services/mobile-apps/  /services/  301!",
     "",
     "# Case studies taken out of the portfolio. Google still had them indexed, so",
     "# they go to the portfolio instead of a 404 and keep whatever links they had.",

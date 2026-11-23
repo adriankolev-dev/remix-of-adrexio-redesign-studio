@@ -22,6 +22,11 @@ export const PRICING = {
     label: "99",
     fromLabel: "от €99 / месец",
   },
+  seo: {
+    from: 199,
+    label: "199",
+    fromLabel: "от €199 / месец",
+  },
   affiliate: {
     commissionPct: 20,
     exampleProject: 1900,
@@ -49,6 +54,13 @@ export const PRICING_SERVICES = [
     description:
       "Хостинг, сигурност, актуализации и дребни промени. За по-сложно развитие — по договаряне.",
     note: "По желание · спирате я, когато решите",
+  },
+  {
+    name: "SEO оптимизация",
+    fromLabel: PRICING.seo.fromLabel,
+    description:
+      "Всеки месец: техническа проверка и поправки, оптимизация на 2 страници и отчет от Search Console. Статии и външни връзки се договарят отделно.",
+    note: "Месечно · без дългосрочен договор",
   },
 ] as const;
 

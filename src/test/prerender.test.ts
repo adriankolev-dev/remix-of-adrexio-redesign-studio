@@ -60,13 +60,13 @@ describe("prerender parsers", () => {
     // ServiceLandingTemplate renders process, use cases, benefits, reasons and
     // technologies to users, but the prerender once emitted only hero, intro,
     // features and FAQs — roughly 40% of each page was invisible to crawlers.
-    const src = readFileSync(join(ROOT, "src/pages/services/MobileApps.tsx"), "utf8");
+    const src = readFileSync(join(ROOT, "src/pages/services/OnlineStore.tsx"), "utf8");
     const page = parseServicePage(src);
     expect(page.benefits.length).toBeGreaterThan(2);
     expect(page.steps.length).toBeGreaterThan(2);
     expect(page.useCases.length).toBeGreaterThan(2);
     expect(page.whyChooseUs.length).toBeGreaterThan(2);
-    expect(page.technologies).toContain("Flutter");
+    expect(page.technologies).toContain("WooCommerce");
     expect(page.processTitle).toBeTruthy();
   });
 

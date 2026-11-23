@@ -29,11 +29,12 @@ const Affiliate = lazy(() => import("./pages/Affiliate"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const WebDevelopment = lazy(() => import("./pages/services/WebDevelopment"));
 const AIImplementation = lazy(() => import("./pages/services/AIImplementation"));
-const MobileApps = lazy(() => import("./pages/services/MobileApps"));
 const UIUXDesign = lazy(() => import("./pages/services/UIUXDesign"));
 const SEO = lazy(() => import("./pages/services/SEO"));
 const GEOOptimization = lazy(() => import("./pages/services/GEOOptimization"));
 const OnlineStore = lazy(() => import("./pages/services/OnlineStore"));
+const WordPress = lazy(() => import("./pages/services/WordPress"));
+const WooCommerce = lazy(() => import("./pages/services/WooCommerce"));
 const DigitalMarketing = lazy(() => import("./pages/services/DigitalMarketing"));
 const TechnicalSupport = lazy(() => import("./pages/services/TechnicalSupport"));
 
@@ -59,8 +60,9 @@ const App = () => {
               <Route path="/services" element={<Services />} />
               <Route path="/services/web-development" element={<WebDevelopment />} />
               <Route path="/services/onlajn-magazin" element={<OnlineStore />} />
+              <Route path="/services/wordpress" element={<WordPress />} />
+              <Route path="/services/woocommerce" element={<WooCommerce />} />
               <Route path="/services/ai-implementation" element={<AIImplementation />} />
-              <Route path="/services/mobile-apps" element={<MobileApps />} />
               <Route path="/services/ui-ux-design" element={<UIUXDesign />} />
               <Route path="/services/seo" element={<SEO />} />
               <Route path="/services/geo-optimizaciya" element={<GEOOptimization />} />

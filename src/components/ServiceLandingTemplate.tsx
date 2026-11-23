@@ -17,7 +17,7 @@ import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import { useLocation } from "react-router-dom";
 import { getServiceSchema, getFAQSchema, getBreadcrumbSchema } from "@/lib/structuredData";
-import { studiesForService } from "@/data/caseStudies";
+import { studiesByIds, studiesForService } from "@/data/caseStudies";
 
 interface ServiceFeature {
   title: string;
@@ -132,6 +132,8 @@ export interface ServiceLandingProps {
   // "Проекти от този тип": case studies whose servicePath is this page. Off on
   // pages that already show their projects another way.
   showRelatedProjects?: boolean;
+  /** Pick the related case studies by id instead of by servicePath. */
+  relatedStudyIds?: string[];
 }
 
 const ServiceLandingTemplate = ({
@@ -172,10 +174,15 @@ const ServiceLandingTemplate = ({
   customSectionAfterTechnologies,
   customSection,
   showRelatedProjects = true,
+  relatedStudyIds,
 }: ServiceLandingProps) => {
   const location = useLocation();
   const servicePath = location.pathname.replace(/\/$/, "");
-  const relatedStudies = showRelatedProjects ? studiesForService(servicePath) : [];
+  const relatedStudies = !showRelatedProjects
+    ? []
+    : relatedStudyIds
+      ? studiesByIds(relatedStudyIds)
+      : studiesForService(servicePath);
   const serviceUrl = `https://www.adrexio.com${location.pathname.replace(/\/$/, "")}`;
 
   const structuredData = [

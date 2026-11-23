@@ -19,11 +19,12 @@ const navigation = [
 const services = [
   { label: "Уеб разработка", path: "/services/web-development" },
   { label: "Онлайн магазин", path: "/services/onlajn-magazin" },
+  { label: "WordPress сайтове", path: "/services/wordpress" },
+  { label: "WooCommerce магазини", path: "/services/woocommerce" },
   { label: "UI/UX дизайн", path: "/services/ui-ux-design" },
   { label: "SEO и GEO", path: "/services/seo" },
   { label: "Техническа поддръжка", path: "/services/technical-support" },
   { label: "AI интеграции", path: "/services/ai-implementation" },
-  { label: "Мобилни приложения", path: "/services/mobile-apps" },
   { label: "Дигитален маркетинг", path: "/services/digital-marketing" },
 ];
 

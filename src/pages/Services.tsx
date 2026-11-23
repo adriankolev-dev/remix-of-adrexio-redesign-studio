@@ -32,6 +32,22 @@ const services = [
     features: ["Еконт и Спиди", "Наложен платеж", "Склад и наличности", "Общи условия"],
   },
   {
+    title: "WordPress сайтове",
+    subtitle: `Сайт ${PRICING.website.fromLabel}`,
+    description:
+      "WordPress с тема, писана за вашата фирма, и блокове, с които редактирате сами. За екипи, които публикуват често.",
+    href: "/services/wordpress",
+    features: ["Собствена тема", "Блокове за редактиране", "Миграция от стар WordPress", "Няколко езика"],
+  },
+  {
+    title: "WooCommerce магазини",
+    subtitle: `Магазин ${PRICING.ecommerce.fromLabel}`,
+    description:
+      "Нов WooCommerce магазин или миграция от друга платформа, с Еконт, Спиди и наложен платеж и без изгубени поръчки.",
+    href: "/services/woocommerce",
+    features: ["Миграция на поръчки", "Еконт и Спиди", "Цени в евро", "Връзка със склад"],
+  },
+  {
     title: "UI/UX дизайн",
     subtitle: QUOTE_LABEL,
     description:
@@ -49,7 +65,7 @@ const services = [
   },
   {
     title: "SEO оптимизация",
-    subtitle: QUOTE_LABEL,
+    subtitle: PRICING.seo.fromLabel,
     description:
       "Технически одит, съдържание по реалните търсения и редовна проверка в Search Console. Не обещаваме позиции, а показваме какво се е променило.",
     href: "/services/seo",
@@ -70,14 +86,6 @@ const services = [
       "Автоматизации за повтарящата се работа: запитвания към CRM, отговори на чести въпроси, данни от документи. Където обикновен скрипт върши работа, не слагаме AI.",
     href: "/services/ai-implementation",
     features: ["Чатботове", "Автоматизации", "Обработка на документи", "Интеграции"],
-  },
-  {
-    title: "Мобилни приложения",
-    subtitle: PHASE_LABEL,
-    description:
-      "Приложения за iOS и Android, когато мобилният сайт не стига: работа без интернет, известия, камера или GPS.",
-    href: "/services/mobile-apps",
-    features: ["iOS", "Android", "React Native", "PWA"],
   },
   {
     title: "Дигитален маркетинг",
@@ -106,8 +114,8 @@ const Services = () => {
     <main className="min-h-screen bg-background">
       <SEO
         title="Услуги: сайтове, онлайн магазини, SEO и AI интеграции | Adrexio"
-        description="Изработка на уебсайтове, мобилни приложения, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг и техническа поддръжка в София."
-        keywords="изработка на уебсайтове, мобилни приложения, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг, техническа поддръжка, уеб студио услуги София"
+        description="Изработка на сайтове и онлайн магазини, UI/UX дизайн, SEO и GEO оптимизация, AI интеграции, поддръжка и дигитален маркетинг в София. Цени и срокове за всяка услуга."
+        keywords="изработка на уебсайтове, онлайн магазини, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг, техническа поддръжка, уеб студио услуги София"
         structuredData={structuredData}
       />
       <Navbar />

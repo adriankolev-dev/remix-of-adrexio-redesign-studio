@@ -58,7 +58,6 @@ const SERVICES = [
   { value: "seo", label: "SEO и GEO" },
   { value: "technical-support", label: "Техническа поддръжка" },
   { value: "ai-automation", label: "AI автоматизации" },
-  { value: "mobile-apps", label: "Мобилни приложения" },
   { value: "digital-marketing", label: "Дигитален маркетинг" },
 ];
 

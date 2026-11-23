@@ -1118,3 +1118,7 @@ export const studiesForService = (servicePath: string, limit = 4): CaseStudy[] =
     .filter((s) => s.isPublic)
     .filter((s) => (s.servicePath || "/services/web-development") === servicePath)
     .slice(0, limit);
+
+/** Public case studies by id, in the order given. */
+export const studiesByIds = (ids: string[]): CaseStudy[] =>
+  ids.map((id) => caseStudies.find((s) => s.id === id && s.isPublic)).filter((s): s is CaseStudy => Boolean(s));

@@ -8,7 +8,7 @@ interface PricingOverviewProps {
   eyebrowIndex?: string;
 }
 
-/** The three starting prices as grey panels, price set large at the foot of each. */
+/** The starting prices as grey panels, price set large at the foot of each. */
 const PricingOverview = ({ showHeader = true }: PricingOverviewProps) => (
   <section className="bg-background py-16 md:py-24">
     <div className="container mx-auto px-6">
@@ -19,7 +19,7 @@ const PricingOverview = ({ showHeader = true }: PricingOverviewProps) => (
         />
       )}
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2">
         {PRICING_SERVICES.map((service, i) => (
           <Reveal key={service.name} delay={i * 0.06} className="h-full">
             <article className="flex h-full flex-col justify-between gap-12 rounded-md bg-secondary p-7 md:p-9">
