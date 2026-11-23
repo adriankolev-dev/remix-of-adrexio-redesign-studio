@@ -35,6 +35,8 @@ const GEOOptimization = lazy(() => import("./pages/services/GEOOptimization"));
 const OnlineStore = lazy(() => import("./pages/services/OnlineStore"));
 const WordPress = lazy(() => import("./pages/services/WordPress"));
 const WooCommerce = lazy(() => import("./pages/services/WooCommerce"));
+const MedicalWebsite = lazy(() => import("./pages/industries/MedicalWebsite"));
+const HotelWebsite = lazy(() => import("./pages/industries/HotelWebsite"));
 const DigitalMarketing = lazy(() => import("./pages/services/DigitalMarketing"));
 const TechnicalSupport = lazy(() => import("./pages/services/TechnicalSupport"));
 
@@ -62,6 +64,8 @@ const App = () => {
               <Route path="/services/onlajn-magazin" element={<OnlineStore />} />
               <Route path="/services/wordpress" element={<WordPress />} />
               <Route path="/services/woocommerce" element={<WooCommerce />} />
+              <Route path="/izrabotka-na-sait-za/medicinski-centar" element={<MedicalWebsite />} />
+              <Route path="/izrabotka-na-sait-za/hotel" element={<HotelWebsite />} />
               <Route path="/services/ai-implementation" element={<AIImplementation />} />
               <Route path="/services/ui-ux-design" element={<UIUXDesign />} />
               <Route path="/services/seo" element={<SEO />} />

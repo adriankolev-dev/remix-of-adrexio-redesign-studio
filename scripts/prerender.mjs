@@ -63,6 +63,8 @@ const SERVICE_FILES = [
   { path: "/services/onlajn-magazin", file: "OnlineStore.tsx" },
   { path: "/services/wordpress", file: "WordPress.tsx" },
   { path: "/services/woocommerce", file: "WooCommerce.tsx" },
+  { path: "/izrabotka-na-sait-za/medicinski-centar", file: "MedicalWebsite.tsx", dir: "industries" },
+  { path: "/izrabotka-na-sait-za/hotel", file: "HotelWebsite.tsx", dir: "industries" },
   { path: "/services/ai-implementation", file: "AIImplementation.tsx" },
   { path: "/services/ui-ux-design", file: "UIUXDesign.tsx" },
   { path: "/services/seo", file: "SEO.tsx" },
@@ -721,6 +723,16 @@ function prerenderServicesIndex(template, services) {
 // reproduce, so without this the crawled service pages linked only upward to
 // /services and nowhere sideways.
 const RELATED_SERVICES = {
+  "/izrabotka-na-sait-za/medicinski-centar": [
+    ["/services/web-development", "изработка на сайт"],
+    ["/services/wordpress", "WordPress сайт със собствена тема"],
+    ["/services/seo", "SEO оптимизация"],
+  ],
+  "/izrabotka-na-sait-za/hotel": [
+    ["/services/web-development", "изработка на сайт"],
+    ["/services/seo", "SEO оптимизация"],
+    ["/services/technical-support", "поддръжка след старта"],
+  ],
   "/services/wordpress": [
     ["/services/woocommerce", "WooCommerce магазин"],
     ["/services/technical-support", "поддръжка на WordPress"],
@@ -732,6 +744,8 @@ const RELATED_SERVICES = {
     ["/services/technical-support", "поддръжка на магазина"],
   ],
   "/services/web-development": [
+    ["/izrabotka-na-sait-za/medicinski-centar", "сайт за медицински център"],
+    ["/izrabotka-na-sait-za/hotel", "сайт за хотел и къща за гости"],
     ["/services/wordpress", "WordPress сайт със собствена тема"],
     ["/services/onlajn-magazin", "изработка на онлайн магазин"],
     ["/services/ui-ux-design", "UI/UX дизайн"],
@@ -782,8 +796,8 @@ export function studiesForService(routePath, studies, limit = 4) {
 }
 
 function prerenderServicePages(template, studies = []) {
-  for (const { path: routePath, file } of SERVICE_FILES) {
-    const src = readFileSync(join(SRC, "pages", "services", file), "utf8");
+  for (const { path: routePath, file, dir = "services" } of SERVICE_FILES) {
+    const src = readFileSync(join(SRC, "pages", dir, file), "utf8");
     const page = parseServicePage(src);
     if (!page.seoTitle || !page.seoDescription) {
       throw new Error(`[prerender] missing SEO fields in ${file}`);
@@ -1045,8 +1059,14 @@ function resultList(study, kind, heading, tag) {
 
 // The generic paragraph below already links to /services/web-development, so
 // only a different service page earns a second link here.
+// Same as CASE_STUDY_INDUSTRY_PAGE in src/data/caseStudies.ts.
+const CASE_STUDY_INDUSTRY_PAGE = {
+  "Медицина & Дентална": "/izrabotka-na-sait-za/medicinski-centar",
+  "Туризъм & Хотели": "/izrabotka-na-sait-za/hotel",
+};
+
 function serviceLink(study) {
-  const path = study.servicePath;
+  const path = study.servicePath || CASE_STUDY_INDUSTRY_PAGE[study.category];
   if (!path || path === "/services/web-development") return "";
   const text = caseStudyLabels.links[path];
   return text ? ` <a href="${escapeAttr(path)}">${escapeHtml(text)}</a>.` : "";

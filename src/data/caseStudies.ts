@@ -1013,6 +1013,18 @@ export const CASE_STUDY_SERVICE_LINK: Record<string, string> = {
   "/services/seo": "Как водим SEO",
   "/services/ui-ux-design": "Как работим по UI/UX дизайн",
   "/services/ai-implementation": "Как внедряваме AI в работата на екипа",
+  "/izrabotka-na-sait-za/medicinski-centar": "Как правим сайтове за медицински центрове",
+  "/izrabotka-na-sait-za/hotel": "Как правим сайтове за хотели и къщи за гости",
+};
+
+/**
+ * Industry pages a case study category belongs to. A website case study in one
+ * of these categories links to its industry page instead of the generic web
+ * development page. scripts/prerender.mjs keeps the same map.
+ */
+export const CASE_STUDY_INDUSTRY_PAGE: Record<string, string> = {
+  "Медицина & Дентална": "/izrabotka-na-sait-za/medicinski-centar",
+  "Туризъм & Хотели": "/izrabotka-na-sait-za/hotel",
 };
 
 export const CASE_STUDY_SERVICE_PATH_DEFAULT = "/services/web-development";

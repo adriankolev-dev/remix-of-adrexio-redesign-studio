@@ -7,6 +7,7 @@ import SEO from "@/components/SEO";
 import Reveal from "@/components/editorial/Reveal";
 import CTASection from "@/components/CTASection";
 import {
+  CASE_STUDY_INDUSTRY_PAGE,
   CASE_STUDY_SERVICE_LINK,
   CASE_STUDY_SERVICE_PATH_DEFAULT,
   RESULT_KIND_LABEL,
@@ -110,7 +111,8 @@ const CaseStudyDetail = () => {
 
   const ourResults = study.results.filter((r) => r.kind !== "client");
   const clientResults = study.results.filter((r) => r.kind === "client");
-  const servicePath = study.servicePath ?? CASE_STUDY_SERVICE_PATH_DEFAULT;
+  const servicePath =
+    study.servicePath ?? CASE_STUDY_INDUSTRY_PAGE[study.category] ?? CASE_STUDY_SERVICE_PATH_DEFAULT;
 
   const renderMetrics = (items: CaseStudyResult[]) => (
     <dl
