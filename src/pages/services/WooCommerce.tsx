@@ -10,7 +10,7 @@ const WooCommerce = () => {
     <ServiceLandingTemplate
       relatedStudyIds={["amelia-diva", "zdravec", "nutrition-expert", "koni-jewellery-hu"]}
       seoTitle="Изработка на WooCommerce магазин — от €1.299 | Adrexio"
-      seoDescription="WooCommerce магазин с Еконт, Спиди и наложен платеж, нова тема и миграция от стара платформа. От €1.299, за 4–6 седмици. 12 наши проекта са на WooCommerce."
+      seoDescription="WooCommerce магазин с Еконт, Спиди и наложен платеж, нова тема и миграция от стара платформа. От €1.299, за 4–6 седмици."
       seoKeywords="WooCommerce магазин, изработка на WooCommerce магазин, WooCommerce разработка, WooCommerce България, миграция към WooCommerce, WooCommerce поддръжка"
       serviceName="Изработка на WooCommerce магазин"
       heroTitle="WooCommerce магазин,"
@@ -21,7 +21,7 @@ const WooCommerce = () => {
       stats={SERVICE_TRUST_STATS}
 
       introTitle="Кога WooCommerce е правилната платформа"
-      introDescription="WooCommerce е магазин върху WordPress. Подходящ е, когато искате пълен контрол върху магазина, без месечна такса за платформата и без комисионна върху продажбите, и когато продавате с наложен платеж и Еконт или Спиди. Не е подходящ, когато каталогът е с десетки хиляди артикула и сложна складова логика: там строим магазин от нулата. 12 от проектите в портфолиото ни са на WooCommerce, включително магазини с над 2000 продукта."
+      introDescription="WooCommerce е магазин върху WordPress. Подходящ е, когато искате пълен контрол върху магазина, без месечна такса за платформата и без комисионна върху продажбите, и когато продавате с наложен платеж и Еконт или Спиди. Не е подходящ, когато каталогът е с десетки хиляди артикула и сложна складова логика: там строим магазин от нулата."
 
       featuresTitle="Какво правим с WooCommerce"
       featuresSubtitle="Нов магазин, миграция или подобрение на съществуващ"
@@ -140,7 +140,7 @@ const WooCommerce = () => {
       ]}
 
       whyChooseUsTitle="Защо при нас"
-      whyChooseUsSubtitle="12 проекта на WooCommerce в портфолиото"
+      whyChooseUsSubtitle="Какво ни отличава"
       whyChooseUs={[
         {
           icon: ArrowRightLeft,
