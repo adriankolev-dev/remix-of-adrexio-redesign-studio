@@ -74,7 +74,8 @@ const SEO = ({
 
     // Primary Meta Tags
     updateMetaTag("description", description);
-    updateMetaTag("keywords", keywords);
+    // No meta keywords: Google ignores it and it only lists our targets for competitors.
+    document.querySelector('meta[name="keywords"]')?.remove();
     updateMetaTag("robots", noindex ? "noindex, nofollow" : "index, follow");
     updateMetaTag("author", "Adrexio");
 

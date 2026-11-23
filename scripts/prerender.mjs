@@ -6,6 +6,7 @@
 // The React app still hydrates and takes over in the browser.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { marked } from "marked";
 import sharp from "sharp";
@@ -317,7 +318,9 @@ function applyMeta(html, { title, description, url, image, type = "website", key
   let out = html;
   out = replaceTitle(out, title);
   out = replaceMetaName(out, "description", description);
-  if (keywords) out = replaceMetaName(out, "keywords", keywords);
+  // meta keywords is ignored by Google and only shows competitors the targets,
+  // so the template carries none; the `keywords` argument is kept for callers.
+  void keywords;
   out = replaceCanonical(out, url);
   out = replaceHreflang(out, url);
   out = replaceMetaProperty(out, "og:type", type);
@@ -1148,6 +1151,7 @@ function prerenderCaseStudyPages(template, studies) {
 
 function prerenderBlog(template, posts) {
   for (const post of posts) {
+    routeLastmod[`/blog/${post.slug}`] = post.updated || post.date;
     const url = `${BASE_URL}/blog/${post.slug}`;
     const image = `${BASE_URL}${post.cover}`;
     const bodyHtml = marked.parse(post.content);
@@ -1425,11 +1429,41 @@ ${link("/contact", "Контакти")}
   writeFileSync(join(DIST, "llms.txt"), text, "utf8");
 }
 
+// lastmod is the date the page's own source last changed, not the build date:
+// Google ignores lastmod once it sees every URL "change" on every deploy.
+const routeLastmod = {};
+
+function gitDate(files) {
+  try {
+    const out = execFileSync("git", ["log", "-1", "--format=%cs", "--", ...files], {
+      cwd: ROOT,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(out) ? out : null;
+  } catch {
+    return null;
+  }
+}
+
+function sourcesForRoute(route) {
+  const shared = ["src/components", "src/data/pricing.ts"];
+  if (route === "/") return ["src/pages/Index.tsx", ...shared];
+  if (route.startsWith("/case-studies")) return ["src/data/caseStudies.ts", "src/pages/CaseStudyDetail.tsx", "src/pages/CaseStudies.tsx"];
+  const svc = SERVICE_FILES.find((f) => f.path === route);
+  if (svc) return [`src/pages/${svc.dir || "services"}/${svc.file}`, "src/components/ServiceLandingTemplate.tsx"];
+  const page = { "/services": "Services", "/pricing": "Pricing", "/about": "About", "/contact": "Contact", "/affiliate": "Affiliate", "/privacy": "Privacy", "/terms": "Terms", "/blog": "Blog" }[route];
+  return page ? [`src/pages/${page}.tsx`, ...shared] : [];
+}
+
 function writeSitemap() {
   const today = new Date().toISOString().slice(0, 10);
   const urls = ["/", ...writtenRoutes.filter((r) => r !== "/").sort()]
-    .map((r) => withTrailingSlash(`${BASE_URL}${r}`))
-    .map((loc) => `  <url>\n    <loc>${escapeHtml(loc)}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`)
+    .map((r) => {
+      const files = sourcesForRoute(r);
+      const lastmod = routeLastmod[r] || (files.length && gitDate(files)) || today;
+      return `  <url>\n    <loc>${escapeHtml(withTrailingSlash(`${BASE_URL}${r}`))}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
+    })
     .join("\n");
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
   writeFileSync(join(DIST, "sitemap.xml"), xml, "utf8");
