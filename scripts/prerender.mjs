@@ -19,7 +19,7 @@ const SITE_NAME = "Adrexio";
 const DEFAULT_IMAGE = `${BASE_URL}/og-hero.jpg`;
 const ORG_ID = `${BASE_URL}/#organization`;
 const WEBSITE_ID = `${BASE_URL}/#website`;
-const LOGO = { "@type": "ImageObject", url: `${BASE_URL}/og-image.png`, width: 1200, height: 630 };
+const LOGO = { "@type": "ImageObject", url: `${BASE_URL}/logo-square.png`, width: 512, height: 512 };
 const GOOGLE_PROFILE_URL = "https://www.google.com/search?kgmid=/g/11nvh68dnt&q=Adrexio";
 const FOUNDER_ID = `${BASE_URL}/about/#founder`;
 
@@ -373,6 +373,20 @@ function list(items) {
   return `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
 }
 
+// Same list as the React footer, so the crawled HTML links every service page
+// from every page instead of leaving some with two inbound links.
+const SERVICE_NAV = [
+  ["/services/web-development", "Изработка на сайт"],
+  ["/services/onlajn-magazin", "Онлайн магазин"],
+  ["/services/ui-ux-design", "UI/UX дизайн"],
+  ["/services/seo", "SEO оптимизация"],
+  ["/services/geo-optimizaciya", "GEO оптимизация"],
+  ["/services/technical-support", "Поддръжка на сайт"],
+  ["/services/ai-implementation", "AI интеграции"],
+  ["/services/mobile-apps", "Мобилни приложения"],
+  ["/services/digital-marketing", "Дигитален маркетинг"],
+];
+
 function chrome(inner) {
   return `<header>
     <p><a href="/">Adrexio</a> — уеб студио в София</p>
@@ -389,6 +403,7 @@ function chrome(inner) {
   <main>${inner}</main>
   <footer>
     <p>Adrexio · София, България · <a href="mailto:hello@adrexio.com">hello@adrexio.com</a> · <a href="tel:+359896173743">+359 896 173 743</a></p>
+    <nav aria-label="Услуги">${SERVICE_NAV.map(([href, label]) => `<a href="${href}">${label}</a>`).join(" · ")}</nav>
     <p><a href="/privacy">Политика за поверителност</a> · <a href="/terms">Общи условия</a> · <a href="/affiliate">Партньорска програма</a></p>
   </footer>`;
 }
@@ -401,7 +416,7 @@ function orgSchema() {
     name: SITE_NAME,
     url: BASE_URL,
     logo: LOGO,
-    image: LOGO.url,
+    image: `${BASE_URL}/og-image.png`,
     description:
       "Уеб студио в София: сайтове и онлайн магазини от нулата, техническа поддръжка, SEO и AI автоматизации.",
     foundingDate: team.foundingYear,
@@ -482,15 +497,15 @@ function localBusinessSchema() {
     "@id": ORG_ID,
     name: SITE_NAME,
     url: BASE_URL,
-    image: LOGO.url,
+    image: `${BASE_URL}/og-image.png`,
     logo: LOGO,
-    description: "Уеб дизайн и разработка, мобилни приложения, SEO и GEO оптимизация",
+    description: "Уеб студио в София: изработка на сайтове и онлайн магазини, SEO и GEO оптимизация, AI интеграции и поддръжка",
     foundingDate: team.foundingYear,
     founder: founderSchema(),
     address: { "@type": "PostalAddress", addressLocality: "София", addressCountry: "BG" },
     telephone: "+359-896-173-743",
     email: "hello@adrexio.com",
-    priceRange: "$$",
+    priceRange: "от €599",
     areaServed: { "@type": "Country", name: "България" },
     sameAs: [
       "https://www.linkedin.com/company/adrexio/",
@@ -622,9 +637,9 @@ function parseServicesIndex(src) {
 // ── Page writers ────────────────────────────────────────────────────────────
 
 function prerenderHome(template, services, posts, studies) {
-  const title = "Изработка на сайт и онлайн магазин в София | Adrexio";
+  const title = "Adrexio — уеб студио в София за сайтове и онлайн магазини";
   const description =
-    "Уеб студио в София. Правим сайтове и онлайн магазини от нулата, без шаблони. Ясни цени, срокове и плащане на два етапа.";
+    "Уеб студио в София от 2019 г. Сайтове от €599, онлайн магазини от €1.299, SEO и AI интеграции. Плащане на два етапа, 5,0 в Google.";
   const inner = `
     <h1>Правим сложното да изглежда просто.</h1>
     <p>Ние сме Adrexio, уеб студио в София. Проектираме и пишем сайтове и онлайн магазини, в които клиентът намира нужното, без да се замисля.</p>
@@ -658,7 +673,7 @@ function prerenderHome(template, services, posts, studies) {
 }
 
 function prerenderServicesIndex(template, services) {
-  const title = "Услуги - Adrexio | Изработка на уебсайтове, мобилни приложения, SEO и GEO, дигитален маркетинг";
+  const title = "Услуги: сайтове, онлайн магазини, SEO и AI интеграции | Adrexio";
   const description =
     "Изработка на уебсайтове, мобилни приложения, UI/UX дизайн, SEO и GEO оптимизация, дигитален маркетинг и техническа поддръжка в София.";
   const inner = `
@@ -744,7 +759,16 @@ const RELATED_SERVICES = {
   ],
 };
 
-function prerenderServicePages(template) {
+// Case studies that prove a service. A study's servicePath names its service;
+// studies without one are websites, so they back /services/web-development.
+export function studiesForService(routePath, studies, limit = 4) {
+  return studies
+    .filter((s) => s.isPublic)
+    .filter((s) => (s.servicePath || "/services/web-development") === routePath)
+    .slice(0, limit);
+}
+
+function prerenderServicePages(template, studies = []) {
   for (const { path: routePath, file } of SERVICE_FILES) {
     const src = readFileSync(join(SRC, "pages", "services", file), "utf8");
     const page = parseServicePage(src);
@@ -789,6 +813,15 @@ function prerenderServicePages(template) {
           : ""
       }
       ${
+        studiesForService(routePath, studies).length
+          ? `<h2>Проекти от този тип</h2>${list(
+              studiesForService(routePath, studies).map(
+                (st) => `<a href="/case-studies/${st.id}">${escapeHtml(st.title)}</a> — ${escapeHtml(st.subtitle)}`,
+              ),
+            )}`
+          : ""
+      }
+      ${
         (RELATED_SERVICES[routePath] || []).length
           ? `<h2>Свързани услуги</h2>${list(
               RELATED_SERVICES[routePath].map(([href, label]) => `<a href="${href}">${escapeHtml(label)}</a>`),
@@ -821,7 +854,7 @@ function prerenderServicePages(template) {
 }
 
 function prerenderPricing(template, amounts, services, faqs, factors, timeline, scope) {
-  const title = "Изработка на сайт — цена, срокове и какво влиза | Adrexio";
+  const title = "Цени: изработка на сайт, онлайн магазин и поддръжка | Adrexio";
   const description =
     "Колко струва изработката на сайт и онлайн магазин: начални цени, срокове по тип проект, какво влиза и какво не, и как се формира крайната оферта.";
   const inner = `
@@ -1172,7 +1205,7 @@ function prerenderBlog(template, posts) {
 }
 
 function prerenderContact(template) {
-  const title = "Контакти - Adrexio | Свържете се с нас за безплатна консултация";
+  const title = "Контакти — безплатна консултация | Adrexio, София";
   const description =
     "Свържете се с Adrexio за безплатна консултация по вашия проект. Телефон: +359 896 173 743, Email: hello@adrexio.com. София, България.";
   const inner = `
@@ -1279,6 +1312,8 @@ const UNPRERENDERED_ROUTES = ["/project-inquiry"];
 
 // Netlify applies these in order, and a rule without "!" never beats a real
 // file — so the prerendered <route>/index.html files still win.
+const REMOVED_CASE_STUDIES = ["booom-bg", "inniti", "kapabay", "mehanna-group", "oraqor", "riact"];
+
 function writeRedirects() {
   const lines = [
     "# Generated by scripts/prerender.mjs on build — do not edit by hand.",
@@ -1286,6 +1321,13 @@ function writeRedirects() {
     "# Legacy duplicate of /contact kept working for old links. Safe to force:",
     "# no file is served at /contacts.",
     "/contacts  /contact/  301!",
+    "",
+    "# Case studies taken out of the portfolio. Google still had them indexed, so",
+    "# they go to the portfolio instead of a 404 and keep whatever links they had.",
+    ...REMOVED_CASE_STUDIES.flatMap((id) => [
+      `/case-studies/${id}  /case-studies/  301!`,
+      `/case-studies/${id}/  /case-studies/  301!`,
+    ]),
     "",
     "# Router-only pages with no prerendered HTML.",
     ...UNPRERENDERED_ROUTES.map((r) => `${r}  /index.html  200`),
@@ -1419,7 +1461,7 @@ export function prerenderAll() {
   if (!pricingServices.length) throw new Error("[prerender] failed to parse pricing services");
 
   prerenderServicesIndex(template, services);
-  prerenderServicePages(template);
+  prerenderServicePages(template, studies);
   prerenderPricing(template, amounts, pricingServices, pricingFaqs, pricingFactors, pricingTimeline, pricingScope);
   prerenderAbout(template, about);
   prerenderCaseStudiesIndex(template, studies);

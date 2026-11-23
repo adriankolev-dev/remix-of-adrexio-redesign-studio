@@ -12,7 +12,7 @@ import ServiceLandingTemplate from "@/components/ServiceLandingTemplate";
 const TechnicalSupport = () => {
   return (
     <ServiceLandingTemplate
-      seoTitle="Техническа поддръжка на сайтове - Adrexio | София"
+      seoTitle="Поддръжка на сайт и WordPress — от €99 на месец | Adrexio"
       seoDescription="Техническа поддръжка на уебсайтове в София: актуализации, резервни копия, сигурност и промени по съдържанието. От €99 / месец, без дългосрочен договор."
       seoKeywords="техническа поддръжка, поддръжка уебсайт, мониторинг сайт, актуализации сайт, бекъпи, сигурност уебсайт, техническа поддръжка София"
       serviceName="Техническа поддръжка"

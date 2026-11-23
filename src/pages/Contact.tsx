@@ -195,7 +195,7 @@ const Contact = () => {
   return (
     <main className="min-h-screen bg-background">
       <SEO
-        title="Контакти - Adrexio | Свържете се с нас за безплатна консултация"
+        title="Контакти — безплатна консултация | Adrexio, София"
         description="Свържете се с Adrexio за безплатна консултация по вашия проект. Телефон: +359 896 173 743, Email: hello@adrexio.com. София, България."
         keywords="контакт Adrexio, уеб студио София, консултация уебсайт, разработка сайт България, свържете се с нас"
         structuredData={getLocalBusinessSchema()}

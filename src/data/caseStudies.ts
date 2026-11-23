@@ -1106,3 +1106,15 @@ export const getCaseStudiesForFilter = (filter: CaseStudyFilterId): CaseStudy[] 
   if (filter === "all") return getPortfolioOrder();
   return sortByPortfolioOrder(caseStudies.filter((s) => getCaseStudyKind(s.id) === filter));
 };
+
+/**
+ * Public case studies that back a service page. Studies without a servicePath
+ * are websites, so they belong to /services/web-development. Mirrors
+ * studiesForService in scripts/prerender.mjs so the crawled HTML and the app
+ * list the same projects.
+ */
+export const studiesForService = (servicePath: string, limit = 4): CaseStudy[] =>
+  caseStudies
+    .filter((s) => s.isPublic)
+    .filter((s) => (s.servicePath || "/services/web-development") === servicePath)
+    .slice(0, limit);

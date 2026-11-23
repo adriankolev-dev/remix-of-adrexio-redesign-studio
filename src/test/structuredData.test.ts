@@ -20,8 +20,8 @@ describe("structured data", () => {
     const local = getLocalBusinessSchema();
     expect(org["@id"]).toBe(ORG_ID);
     expect(local["@id"]).toBe(ORG_ID);
-    expect(org.logo.url).toBe("https://www.adrexio.com/og-image.png");
-    expect(local.logo.url).toBe("https://www.adrexio.com/og-image.png");
+    expect(org.logo.url).toBe("https://www.adrexio.com/logo-square.png");
+    expect(local.logo.url).toBe("https://www.adrexio.com/logo-square.png");
   });
 
   it("includes Google aggregate rating on local business schema", () => {

@@ -15,7 +15,8 @@ import PricingTeaser from "@/components/pricing/PricingTeaser";
 const WebDevelopment = () => {
   return (
     <ServiceLandingTemplate
-      seoTitle="Изработка на сайт в София — фирмени сайтове от нулата | Adrexio"
+      showRelatedProjects={false}
+      seoTitle="Изработка на сайт в София — от €599, за 2–3 седмици | Adrexio"
       seoDescription="Изработка на сайт в София: фирмени и корпоративни сайтове от нулата, на WordPress или Next.js. Какво включва, колко струва (от €599) и за колко време се прави."
       seoKeywords="изработка на сайт, изработка на сайт софия, изработка на уебсайт, разработка на сайт, фирмен сайт, корпоративен сайт, уеб студио София"
       serviceName="Изработка на сайт"

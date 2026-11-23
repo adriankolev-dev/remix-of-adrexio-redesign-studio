@@ -164,7 +164,7 @@ const SEO = () => {
 
   return (
     <ServiceLandingTemplate
-      seoTitle="SEO оптимизация в София — технически одит, съдържание и Search Console | Adrexio"
+      seoTitle="SEO оптимизация в София — одит, съдържание и отчети | Adrexio"
       seoDescription="SEO оптимизация в София: технически одит, on-page, съдържание по намерението на търсенето, вътрешни връзки и местно SEO. Без гаранции за позиции, с отчет какво се променя."
       seoKeywords="SEO оптимизация, SEO София, SEO услуги, SEO агенция София, технически SEO, on-page SEO, местно SEO, органичен трафик, позиции в Google"
       serviceName="SEO оптимизация"

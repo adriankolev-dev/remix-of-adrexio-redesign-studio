@@ -17,6 +17,7 @@ import Reveal from "@/components/editorial/Reveal";
 import SectionHeader from "@/components/editorial/SectionHeader";
 import { useLocation } from "react-router-dom";
 import { getServiceSchema, getFAQSchema, getBreadcrumbSchema } from "@/lib/structuredData";
+import { studiesForService } from "@/data/caseStudies";
 
 interface ServiceFeature {
   title: string;
@@ -127,6 +128,10 @@ export interface ServiceLandingProps {
 
   // Optional custom section before Footer
   customSection?: React.ReactNode;
+
+  // "Проекти от този тип": case studies whose servicePath is this page. Off on
+  // pages that already show their projects another way.
+  showRelatedProjects?: boolean;
 }
 
 const ServiceLandingTemplate = ({
@@ -166,8 +171,11 @@ const ServiceLandingTemplate = ({
   customSectionBeforeCTA,
   customSectionAfterTechnologies,
   customSection,
+  showRelatedProjects = true,
 }: ServiceLandingProps) => {
   const location = useLocation();
+  const servicePath = location.pathname.replace(/\/$/, "");
+  const relatedStudies = showRelatedProjects ? studiesForService(servicePath) : [];
   const serviceUrl = `https://www.adrexio.com${location.pathname.replace(/\/$/, "")}`;
 
   const structuredData = [
@@ -346,6 +354,33 @@ const ServiceLandingTemplate = ({
                       )}
                     </div>
                   </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {relatedStudies.length > 0 && (
+        <section className="bg-background py-16 md:py-24">
+          <div className="container mx-auto px-6">
+            <SectionHeader title="Проекти от този тип." />
+            <div className="border-t border-border">
+              {relatedStudies.map((study, i) => (
+                <Reveal key={study.id} delay={(i % 3) * 0.05}>
+                  <Link
+                    to={`/case-studies/${study.id}`}
+                    className="group grid gap-2 border-b border-border py-7 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] md:gap-8"
+                  >
+                    <h3 className="text-xl font-semibold text-foreground md:text-2xl">{study.title}</h3>
+                    <div className="flex items-start justify-between gap-6 md:pt-1">
+                      <p className="text-[0.95rem] leading-relaxed text-muted-foreground">{study.subtitle}</p>
+                      <ArrowUpRight
+                        className="mt-1 h-4 w-4 shrink-0 text-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
+                    </div>
+                  </Link>
                 </Reveal>
               ))}
             </div>

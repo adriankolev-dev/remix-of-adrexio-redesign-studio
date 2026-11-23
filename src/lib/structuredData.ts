@@ -13,9 +13,9 @@ export const WEBSITE_ID = `${SITE_URL}/#website`;
 
 const LOGO = {
   "@type": "ImageObject" as const,
-  url: `${SITE_URL}/og-image.png`,
-  width: 1200,
-  height: 630,
+  url: `${SITE_URL}/logo-square.png`,
+  width: 512,
+  height: 512,
 };
 
 const SOCIAL = [
@@ -49,7 +49,7 @@ export const getOrganizationSchema = () => ({
   name: "Adrexio",
   url: SITE_URL,
   logo: LOGO,
-  image: LOGO.url,
+  image: `${SITE_URL}/og-image.png`,
   description:
     "Уеб студио в София: сайтове и онлайн магазини от нулата, техническа поддръжка, SEO и AI автоматизации.",
   foundingDate: String(FOUNDING_YEAR),
@@ -138,15 +138,15 @@ export const getLocalBusinessSchema = () => ({
   "@id": ORG_ID,
   name: "Adrexio",
   url: SITE_URL,
-  image: LOGO.url,
+  image: `${SITE_URL}/og-image.png`,
   logo: LOGO,
-  description: "Уеб дизайн и разработка, мобилни приложения, SEO и GEO оптимизация",
+  description: "Уеб студио в София: изработка на сайтове и онлайн магазини, SEO и GEO оптимизация, AI интеграции и поддръжка",
   foundingDate: String(FOUNDING_YEAR),
   founder: getFounderSchema(),
   address: ADDRESS,
   telephone: "+359-896-173-743",
   email: "hello@adrexio.com",
-  priceRange: "$$",
+  priceRange: "от €599",
   areaServed: {
     "@type": "Country",
     name: "България",

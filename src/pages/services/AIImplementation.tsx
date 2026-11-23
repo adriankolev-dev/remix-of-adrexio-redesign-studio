@@ -14,6 +14,7 @@ import { SERVICE_TRUST_STATS } from "@/data/trustStats";
 const AIImplementation = () => {
   return (
     <ServiceLandingTemplate
+      showRelatedProjects={false}
       seoTitle="AI интеграции и автоматизации за бизнеса | Adrexio София"
       seoDescription="AI интеграции и автоматизации: запитвания към CRM, чатбот за честите въпроси, данни от документи, синхронизация между системи. Кога AI има смисъл и кога обикновената автоматизация е по-добра."
       seoKeywords="AI интеграции, AI автоматизация, изкуствен интелект за бизнеса, чатбот, автоматизация на процеси, обработка на документи с AI, AI решения София, бизнес автоматизация"
