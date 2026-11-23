@@ -141,7 +141,7 @@ const CaseStudyDetail = () => {
             ? `${study.title}, къща за гости Твърдица, настаняване Сливен, Next.js уебсайт, Stefan Kolev, ${study.category}, уеб разработка, case study, ${study.technologies.join(", ")}`
             : `${study.title}, ${study.category}, уеб разработка, case study, ${study.technologies.join(", ")}`
         }
-        image={study.image}
+        image={`/og/case-studies/${study.id}.jpg`}
         type="article"
         noindex={!study.isPublic}
         structuredData={structuredData}

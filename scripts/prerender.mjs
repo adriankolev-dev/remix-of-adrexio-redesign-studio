@@ -8,6 +8,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { marked } from "marked";
+import sharp from "sharp";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -222,6 +223,7 @@ export function parseCaseStudies(raw) {
       detailTitle: extractStringField(body, "detailTitle") || "Най-сложната част",
       cta: extractStringField(body, "cta"),
       servicePath: extractStringField(body, "servicePath"),
+      imageVar: body.match(/\n    image:\s*(\w+)/)?.[1] ?? null,
       technologies: extractQuotedArray(body, "technologies"),
       results: [
         ...body.matchAll(
@@ -972,7 +974,7 @@ function prerenderCaseStudiesIndex(template, studies) {
     ${list(
       publicStudies.map(
         (s) =>
-          `<a href="/case-studies/${s.id}">${escapeHtml(s.title)}</a> — ${escapeHtml(s.subtitle)}. ${escapeHtml(s.overview)}`,
+          `${caseStudyImg(s, true)}<a href="/case-studies/${s.id}">${escapeHtml(s.title)}</a> — ${escapeHtml(s.subtitle)}. ${escapeHtml(s.overview)}`,
       ),
     )}
   `;
@@ -1057,14 +1059,14 @@ function resultList(study, kind, heading, tag) {
   return `<${tag}>${heading}</${tag}>${list(items.map((r) => `${escapeHtml(r.metric)} — ${escapeHtml(r.label)}`))}`;
 }
 
-// The generic paragraph below already links to /services/web-development, so
-// only a different service page earns a second link here.
 // Same as CASE_STUDY_INDUSTRY_PAGE in src/data/caseStudies.ts.
 const CASE_STUDY_INDUSTRY_PAGE = {
   "Медицина & Дентална": "/izrabotka-na-sait-za/medicinski-centar",
   "Туризъм & Хотели": "/izrabotka-na-sait-za/hotel",
 };
 
+// The generic paragraph below already links to /services/web-development, so
+// only a different service page earns a second link here.
 function serviceLink(study) {
   const path = study.servicePath || CASE_STUDY_INDUSTRY_PAGE[study.category];
   if (!path || path === "/services/web-development") return "";
@@ -1081,6 +1083,7 @@ function prerenderCaseStudyPages(template, studies) {
       <p>${escapeHtml(study.category)}</p>
       <h1>${escapeHtml(study.title)}</h1>
       <p>${escapeHtml(study.subtitle)}</p>
+      ${caseStudyImg(study)}
       <h2>За клиента</h2>
       <p>${escapeHtml(study.overview)}</p>
       ${resultList(study, "client", "Данни на клиента", "h3")}
@@ -1103,6 +1106,7 @@ function prerenderCaseStudyPages(template, studies) {
         title: caseStudyTitle(study),
         description,
         url: `${BASE_URL}/case-studies/${study.id}`,
+        image: caseStudyImages[study.id]?.og,
         type: "article",
         keywords:
           study.id === "koleff-house"
@@ -1115,6 +1119,7 @@ function prerenderCaseStudyPages(template, studies) {
               "@type": "Article",
               "@id": `${BASE_URL}/case-studies/${study.id}`,
               headline: `${study.title} - ${study.subtitle}`,
+              ...(caseStudyImages[study.id] ? { image: caseStudyImages[study.id].og } : {}),
               description,
               inLanguage: "bg-BG",
               author: { "@type": "Organization", name: SITE_NAME, url: BASE_URL },
@@ -1462,7 +1467,45 @@ function prerender404(template) {
 
 // ── Main ────────────────────────────────────────────────────────────────────
 
-export function prerenderAll() {
+// Each case study's screenshot, copied out of the hashed Vite assets to stable
+// paths: a WebP for the crawled <img> and a 1200×630 JPEG for og:image, so a
+// shared link shows the project instead of the same site-wide picture.
+export function parseImageImports(raw) {
+  const map = {};
+  for (const m of raw.matchAll(/^import\s+(\w+)\s+from\s+"@\/([^"]+\.(?:webp|png|jpe?g))";/gm)) {
+    map[m[1]] = join(SRC, m[2]);
+  }
+  return map;
+}
+
+const caseStudyImages = {};
+
+async function writeCaseStudyImages(studies, imports) {
+  const webDir = join(DIST, "case-study-images");
+  const ogDir = join(DIST, "og", "case-studies");
+  mkdirSync(webDir, { recursive: true });
+  mkdirSync(ogDir, { recursive: true });
+  for (const study of studies.filter((s) => s.isPublic)) {
+    const src = imports[study.imageVar];
+    if (!src || !existsSync(src)) continue;
+    const web = await sharp(src).resize({ width: 1200, withoutEnlargement: true }).webp({ quality: 80 }).toFile(join(webDir, `${study.id}.webp`));
+    await sharp(src).resize(1200, 630, { fit: "cover", position: "top" }).jpeg({ quality: 80, mozjpeg: true }).toFile(join(ogDir, `${study.id}.jpg`));
+    caseStudyImages[study.id] = {
+      src: `/case-study-images/${study.id}.webp`,
+      width: web.width,
+      height: web.height,
+      og: `${BASE_URL}/og/case-studies/${study.id}.jpg`,
+    };
+  }
+}
+
+function caseStudyImg(study, lazy = false) {
+  const img = caseStudyImages[study.id];
+  if (!img) return "";
+  return `<img src="${img.src}" alt="${escapeAttr(`${study.title}: ${study.subtitle}`)}" width="${img.width}" height="${img.height}"${lazy ? ' loading="lazy"' : ""} />`;
+}
+
+export async function prerenderAll() {
   if (!existsSync(DIST)) {
     throw new Error("[prerender] dist/ not found — run `vite build` first.");
   }
@@ -1494,6 +1537,7 @@ export function prerenderAll() {
 
   if (!services.length) throw new Error("[prerender] failed to parse services list");
   if (!studies.some((s) => s.isPublic)) throw new Error("[prerender] failed to parse case studies");
+  await writeCaseStudyImages(studies, parseImageImports(caseStudiesSrc));
   if (!pricingServices.length) throw new Error("[prerender] failed to parse pricing services");
 
   prerenderServicesIndex(template, services);
@@ -1520,10 +1564,8 @@ export function prerenderAll() {
 
 const isDirectRun = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isDirectRun) {
-  try {
-    prerenderAll();
-  } catch (err) {
+  prerenderAll().catch((err) => {
     console.error(err.message || err);
     process.exit(1);
-  }
+  });
 }
