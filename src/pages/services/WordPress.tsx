@@ -118,18 +118,6 @@ const WordPress = () => {
         },
       ]}
 
-      technologiesTitle="С какво работим"
-      technologies={[
-        { name: "WordPress" },
-        { name: "Собствена тема" },
-        { name: "Gutenberg блокове" },
-        { name: "ACF" },
-        { name: "Breakdance" },
-        { name: "Rank Math SEO" },
-        { name: "TranslatePress" },
-        { name: "Complianz" },
-        { name: "WP Rocket" },
-      ]}
 
       useCasesTitle="За кого е"
       useCasesSubtitle="Кога WordPress е добрият избор"

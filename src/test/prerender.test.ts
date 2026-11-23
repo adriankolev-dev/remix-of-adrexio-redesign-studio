@@ -57,8 +57,8 @@ describe("prerender parsers", () => {
   });
 
   it("extracts the service blocks that used to be dropped from crawler HTML", () => {
-    // ServiceLandingTemplate renders process, use cases, benefits, reasons and
-    // technologies to users, but the prerender once emitted only hero, intro,
+    // ServiceLandingTemplate renders process, use cases, benefits and reasons
+    // to users, but the prerender once emitted only hero, intro,
     // features and FAQs — roughly 40% of each page was invisible to crawlers.
     const src = readFileSync(join(ROOT, "src/pages/services/OnlineStore.tsx"), "utf8");
     const page = parseServicePage(src);
@@ -66,7 +66,6 @@ describe("prerender parsers", () => {
     expect(page.steps.length).toBeGreaterThan(2);
     expect(page.useCases.length).toBeGreaterThan(2);
     expect(page.whyChooseUs.length).toBeGreaterThan(2);
-    expect(page.technologies).toContain("WooCommerce");
     expect(page.processTitle).toBeTruthy();
   });
 

@@ -178,19 +178,6 @@ const GEOOptimization = () => {
         },
       ]}
 
-      technologiesTitle="С какво работим"
-      technologies={[
-        { name: "Schema.org" },
-        { name: "JSON-LD" },
-        { name: "Google Search Console" },
-        { name: "Bing Webmaster Tools" },
-        { name: "robots.txt" },
-        { name: "llms.txt" },
-        { name: "Server-side rendering" },
-        { name: "Prerendering" },
-        { name: "Core Web Vitals" },
-        { name: "Open Graph" },
-      ]}
 
       faqTitle="Често задавани въпроси"
       faqs={[

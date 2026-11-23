@@ -267,19 +267,6 @@ const SEO = () => {
           description: "Сравняваме данните от Search Console преди и след и решаваме кое е следващото.",
         },
       ]}
-      technologiesTitle="Инструменти"
-      technologies={[
-        { name: "Ahrefs" },
-        { name: "SEMrush" },
-        { name: "Screaming Frog" },
-        { name: "Google Search Console" },
-        { name: "Google Analytics 4" },
-        { name: "Surfer SEO" },
-        { name: "Moz" },
-        { name: "Majestic" },
-        { name: "Schema Markup" },
-        { name: "PageSpeed Insights" },
-      ]}
       useCasesTitle="За кого е подходящо"
       useCasesSubtitle="SEO има смисъл, когато хората вече търсят това, което продавате."
       useCases={[

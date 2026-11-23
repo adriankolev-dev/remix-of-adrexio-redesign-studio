@@ -103,18 +103,6 @@ const TechnicalSupport = () => {
           description: "Обновления по график и заявки за промени, когато ви трябват.",
         },
       ]}
-      technologiesTitle="Инструменти"
-      technologies={[
-        { name: "Cloudflare" },
-        { name: "Sucuri" },
-        { name: "Wordfence" },
-        { name: "ManageWP" },
-        { name: "WP Rocket" },
-        { name: "UpdraftPlus" },
-        { name: "Google PageSpeed" },
-        { name: "GTmetrix" },
-        { name: "SSL/TLS" },
-      ]}
       useCasesTitle="Какво не влиза в месечната такса"
       useCasesSubtitle="Оценяваме го отделно и получавате оферта, преди да започнем."
       useCases={[

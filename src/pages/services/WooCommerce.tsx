@@ -117,19 +117,6 @@ const WooCommerce = () => {
         },
       ]}
 
-      technologiesTitle="С какво работим"
-      technologies={[
-        { name: "WooCommerce" },
-        { name: "WordPress" },
-        { name: "Собствена тема" },
-        { name: "Breakdance" },
-        { name: "Еконт" },
-        { name: "Спиди" },
-        { name: "myPOS" },
-        { name: "Stripe" },
-        { name: "Microinvest" },
-        { name: "WP Rocket" },
-      ]}
 
       useCasesTitle="За кого е"
       useCasesSubtitle="Кога WooCommerce е добрият избор"

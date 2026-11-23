@@ -116,19 +116,6 @@ const AIImplementation = () => {
           description: "Следим грешките и разходите и коригираме, когато процесът или моделите се променят.",
         },
       ]}
-      technologiesTitle="С какво работим"
-      technologies={[
-        { name: "OpenAI GPT" },
-        { name: "TensorFlow" },
-        { name: "PyTorch" },
-        { name: "LangChain" },
-        { name: "Hugging Face" },
-        { name: "Azure AI" },
-        { name: "AWS AI Services" },
-        { name: "Google Cloud AI" },
-        { name: "Rasa" },
-        { name: "Dialogflow" },
-      ]}
       useCasesTitle="Три примера от портфолиото"
       useCasesSubtitle="Два са с AI, третият не е. И трите спестяват ръчна работа."
       useCases={[

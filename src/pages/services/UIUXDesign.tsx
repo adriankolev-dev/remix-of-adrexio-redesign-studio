@@ -115,19 +115,6 @@ const UIUXDesign = () => {
             "Компоненти, състояния и спецификации за разработка, за нашия екип или за вашия.",
         },
       ]}
-      technologiesTitle="Инструменти"
-      technologies={[
-        { name: "Figma" },
-        { name: "Adobe XD" },
-        { name: "Sketch" },
-        { name: "Principle" },
-        { name: "Hotjar" },
-        { name: "Maze" },
-        { name: "Miro" },
-        { name: "Zeplin" },
-        { name: "Lottie" },
-        { name: "axe" },
-      ]}
       useCasesTitle="Кога има смисъл"
       useCasesSubtitle="Типични поводи да ни потърсят."
       useCases={[

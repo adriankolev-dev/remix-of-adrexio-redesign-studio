@@ -123,21 +123,6 @@ const WebDevelopment = () => {
             "Тестваме на телефони и браузъри, проверяваме скоростта и формите, пускаме сайта и пренасочваме старите адреси.",
         },
       ]}
-      technologiesTitle="С какво работим"
-      technologies={[
-        { name: "WordPress" },
-        { name: "Next.js" },
-        { name: "React" },
-        { name: "TypeScript" },
-        { name: "Node.js" },
-        { name: "PHP" },
-        { name: "Symfony" },
-        { name: "Laravel" },
-        { name: "MySQL" },
-        { name: "Tailwind CSS" },
-        { name: "AWS" },
-        { name: "Docker" },
-      ]}
       useCasesTitle=""
       useCasesSubtitle=""
       useCases={[]}

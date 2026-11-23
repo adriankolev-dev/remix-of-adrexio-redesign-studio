@@ -36,11 +36,6 @@ interface Benefit {
   description: string;
 }
 
-interface Technology {
-  name: string;
-  icon?: string;
-}
-
 interface UseCase {
   title: string;
   description: string;
@@ -96,8 +91,6 @@ export interface ServiceLandingProps {
   steps: ProcessStep[];
 
   // Technologies section (optional)
-  technologiesTitle?: string;
-  technologies?: Technology[];
 
   // Use cases section
   useCasesTitle: string;
@@ -157,8 +150,6 @@ const ServiceLandingTemplate = ({
   processTitle,
   processSubtitle,
   steps,
-  technologiesTitle,
-  technologies,
   useCasesTitle,
   useCasesSubtitle,
   useCases,
@@ -311,26 +302,6 @@ const ServiceLandingTemplate = ({
         </div>
       </section>
 
-      {/* Technologies: outlined pills */}
-      {technologies && technologies.length > 0 && (
-        <section className="bg-background py-16 md:py-24">
-          <div className="container mx-auto px-6">
-            <SectionHeader title={technologiesTitle || "Технологии."} />
-            <Reveal>
-              <ul className="flex flex-wrap gap-2.5">
-                {technologies.map((tech) => (
-                  <li
-                    key={tech.name}
-                    className="rounded-full border border-border px-5 py-2.5 text-sm font-medium text-foreground"
-                  >
-                    {tech.name}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-        </section>
-      )}
 
       {customSectionAfterTechnologies}
 

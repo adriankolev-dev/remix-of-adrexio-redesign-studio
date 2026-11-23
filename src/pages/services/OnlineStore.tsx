@@ -136,19 +136,6 @@ const OnlineStore = () => {
         },
       ]}
 
-      technologiesTitle="С какво го строим"
-      technologies={[
-        { name: "WooCommerce" },
-        { name: "React" },
-        { name: "Next.js" },
-        { name: "TypeScript" },
-        { name: "Еконт API" },
-        { name: "Спиди API" },
-        { name: "myPOS" },
-        { name: "Borica" },
-        { name: "Stripe" },
-        { name: "Schema.org Product" },
-      ]}
 
       useCasesTitle="За кого е"
       useCasesSubtitle="Магазинът не е еднакъв за всички"

@@ -118,19 +118,6 @@ const DigitalMarketing = () => {
           description: "Месечен отчет с разхода, резултатите и следващите стъпки.",
         },
       ]}
-      technologiesTitle="Платформи, с които работим"
-      technologies={[
-        { name: "Google Ads" },
-        { name: "Meta Ads" },
-        { name: "LinkedIn Ads" },
-        { name: "TikTok Ads" },
-        { name: "Google Analytics 4" },
-        { name: "Mailchimp" },
-        { name: "Klaviyo" },
-        { name: "HubSpot" },
-        { name: "Hootsuite" },
-        { name: "Canva Pro" }
-      ]}
       
       useCasesTitle="За кого е подходящо"
       useCasesSubtitle="Работим най-добре там, където контролираме и сайта."

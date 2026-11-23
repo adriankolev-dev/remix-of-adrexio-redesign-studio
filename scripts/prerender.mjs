@@ -229,11 +229,6 @@ export function parseCaseStudies(raw) {
   return studies;
 }
 
-// `{ name: "React" }` entries, which carry no description to pair up.
-function extractNames(block) {
-  return [...block.matchAll(/name:\s*"((?:\\.|[^"\\])*)"/g)].map((m) => unescapeJs(m[1]));
-}
-
 export function parseServicePage(src) {
   const pairs = (name) => extractTitleDescriptionPairs(extractJsxArrayBlock(src, name));
   const faqs = pairs("faqs").map((p) => ({ question: p.title, answer: p.description }));
@@ -261,8 +256,6 @@ export function parseServicePage(src) {
     useCases: pairs("useCases"),
     whyChooseUsTitle: extractJsxStringProp(src, "whyChooseUsTitle"),
     whyChooseUs: pairs("whyChooseUs"),
-    technologiesTitle: extractJsxStringProp(src, "technologiesTitle"),
-    technologies: extractNames(extractJsxArrayBlock(src, "technologies")),
   };
 }
 
@@ -814,13 +807,6 @@ function prerenderServicePages(template, studies = []) {
       ${section(page.processTitle || "Как работим", page.steps)}
       ${section(page.useCasesTitle || "Приложения", page.useCases)}
       ${section(page.whyChooseUsTitle || "Защо да изберете нас", page.whyChooseUs)}
-      ${
-        page.technologies.length
-          ? `<h2>${escapeHtml(page.technologiesTitle || "Технологии")}</h2><p>${escapeHtml(
-              page.technologies.join(", "),
-            )}</p>`
-          : ""
-      }
       ${
         page.faqs.length
           ? `<h2>Често задавани въпроси</h2>${page.faqs
