@@ -61,10 +61,11 @@
 
     <!-- Heading face (Tektur) is self-hosted; preload the Cyrillic subset every page title uses. -->
     <link rel="preload" href="/fonts/tektur-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Google Fonts: body/display first; mono + hand load after so they do not block first paint. -->
+    <!-- Body text (Inter Tight) is self-hosted too: the Google Fonts stylesheet it used to come from blocked first paint. -->
+    <link rel="preload" href="/fonts/inter-tight-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Mono + hand still come from Google Fonts, loaded after first paint. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;700&display=swap" media="print" onload="this.media='all'" />
     <!-- Hide crawler HTML in #root until React mounts. Paint a matching canvas so FCP is not a blank wait. -->
