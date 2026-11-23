@@ -6,7 +6,7 @@
 
 | # | Slug | Заглавие (H1 = title) | Основна фраза / второстепенни | Категория | Вътрешни връзки | Статус |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | kolko-struva-onlajn-magazin | Колко струва онлайн магазин в България през 2026 | цена онлайн магазин / изработка на онлайн магазин цена, месечни разходи за магазин, цена WooCommerce | Цени и бюджет | /services/onlajn-magazin/, /pricing/, /blog/kolko-struva-izrabotka-na-sait/, казус koni-jewellery | чака |
+| 1 | kolko-struva-onlajn-magazin | Колко струва онлайн магазин в България през 2026 | цена онлайн магазин / изработка на онлайн магазин цена, месечни разходи за магазин, цена WooCommerce | Цени и бюджет | /services/onlajn-magazin/, /pricing/, /blog/kolko-struva-izrabotka-na-sait/, казус koni-jewellery | публикувана 2026-11-23 |
 | 2 | mesechna-poddrazhka-na-sait | Месечна поддръжка на сайт: какво влиза и колко струва | поддръжка на сайт цена / WordPress поддръжка, поддържане на уебсайтове | Цени и бюджет | /services/technical-support/, /pricing/ | чака |
 | 3 | redizajn-bez-zaguba-na-pozicii | Редизайн на сайт без загуба на позиции в Google | редизайн на сайт / миграция на сайт, 301 пренасочвания | SEO | /services/ui-ux-design/, /services/seo/, казус koleff-house | чака |
 | 4 | seo-optimizaciya-ceni | SEO оптимизация: колко струва и какво трябва да получите | SEO цени / колко струва SEO, SEO отчет, SEO агенция | Цени и бюджет | /services/seo/, /pricing/, /services/geo-optimizaciya/ | чака |

@@ -10,5 +10,10 @@ marked.setOptions({
  * Content is authored in-repo (not user input), so the output is safe to inject.
  */
 export function renderMarkdown(markdown: string): string {
-  return marked.parse(markdown, { async: false }) as string;
+  const html = marked.parse(markdown, { async: false }) as string;
+  // A wide table must scroll on its own on a phone instead of widening the
+  // whole article past the screen.
+  return html
+    .replace(/<table>/g, '<div class="blog-table overflow-x-auto"><table>')
+    .replace(/<\/table>/g, "</table></div>");
 }
