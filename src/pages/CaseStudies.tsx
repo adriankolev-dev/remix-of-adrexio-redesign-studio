@@ -22,7 +22,7 @@ import DeviceMockup, { getMobileShot } from "@/components/case-studies/DeviceMoc
 import { prefetchCaseStudy } from "@/lib/prefetchRoute";
 
 /** The project shown full width at the top of the unfiltered list. */
-const FEATURED_ID = "amelia-diva";
+const FEATURED_ID = "viajes-a-bulgaria";
 
 const FeaturedCaseStudy = ({ study }: { study: CaseStudy }) => (
   <Reveal immediate delay={0.2}>

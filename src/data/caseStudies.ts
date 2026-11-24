@@ -27,6 +27,7 @@ import zdravecImg from "@/assets/case-studies/zdravec.webp";
 import wexelImg from "@/assets/case-studies/wexel.webp";
 import nutritionExpertImg from "@/assets/case-studies/nutrition-expert.webp";
 import firescapeImg from "@/assets/case-studies/firescape.webp";
+import saraktaImg from "@/assets/case-studies/sarakta.webp";
 import curlyImg from "@/assets/case-studies/curly.webp";
 import curlyPagespeedMobileImg from "@/assets/case-studies/curly-pagespeed-mobile.webp";
 import curlyPagespeedDesktopImg from "@/assets/case-studies/curly-pagespeed-desktop.webp";
@@ -938,6 +939,38 @@ export const caseStudies: CaseStudy[] = [
     gradient: "from-forest-500/20 to-green-600/20",
     accentColor: "text-green-600"
   },
+  // SARAKTA
+  {
+    id: "sarakta",
+    title: "Мебелна къща Саракта",
+    subtitle: "Каталог от 351 мебели и матрака със запитване за няколко модела наведнъж за мебелна къща в Габрово",
+    category: "Електронна търговия",
+    url: "https://staging.sarakta.com/",
+    isPublic: true,
+    image: saraktaImg,
+    overview: "Саракта е мебелна къща с шоурум в Габрово, кв. Войново. Продава мебели за всяка стая, матраци Magniflex, Mollyflex и iSleep и кухни по проект, с безплатна доставка за областите Габрово, Ловеч и Велико Търново. Направихме сайта на WordPress и WooCommerce, със собствена тема.",
+    challenge: "Мебелите се купуват след разговор и оглед в шоурума, а кухните и гардеробите често се правят по мярка. Сайтът трябваше да покаже целия асортимент с цени и размери и да доведе клиента до обаждане или запитване, без онлайн плащане.",
+    solution: [
+      "Каталогът има 351 продукта в осем раздела по стаи: дневна, спалня, матраци, кухня и трапезария, мека мебел, антре, детска стая и офис.",
+      "Вместо количка всеки продукт има бутон „Запитване“. Клиентът добавя няколко модела, оставя име и телефон и изпраща едно запитване за всички.",
+      "Матраците се филтрират по размер, твърдост, вид и производител. Размерите са 17, от бебешки 60/120 до 200/200.",
+      "Продуктовата страница показва цветовете, материала, функциите и размерите в сантиметри, отзивите за модела и мебели, които вървят с него.",
+      "На страница „Брошури“ са 24 PDF каталога на Ирим, Юнис Булини, Геномакс и FAT, за моделите, които не са на сайта.",
+      "На телефона долу стоят два бутона, „Обади ни се“ и „Изпрати запитване“. В горната лента се вижда оценката 4,4 от 201 отзива в Google."
+    ],
+    detailTitle: "Защо запитване, а не поръчка",
+    detail: "Срокът и цената на голяма мебел зависят от наличността, от дамаската и от това дали диванът минава през вратата. Затова сайтът събира модела и телефона, а екипът се обажда и уточнява. Страницата „Доставка и монтаж“ описва сроковете: 3–7 работни дни за наличен артикул, а за мебел по мярка според производителя.",
+    results: [
+      { metric: "351", label: "Продукта в каталога", kind: "delivered" },
+      { metric: "24", label: "PDF каталога на производители", kind: "delivered" },
+      { metric: "4,4", label: "Оценка от 201 отзива в Google", kind: "client" }
+    ],
+    technologies: ["WordPress", "WooCommerce", "Собствена тема", "Запитвания", "Филтри"],
+    cta: "Продавате мебели или техника, която клиентът иска да види на живо? Каталог със запитвания праща при вас хора, които вече са избрали модела.",
+    servicePath: "/services/onlajn-magazin",
+    gradient: "from-red-700/20 to-stone-500/20",
+    accentColor: "text-red-600"
+  },
   // BREEZY POINT VILLAS
   {
     id: "breezy-point-villas",
@@ -1051,14 +1084,15 @@ export const FEATURED_IDS = [
  */
 export const PORTFOLIO_ORDER = [
   "body-aesthetics",
-  "body-aesthetics-ai",
   "amelia-diva",
+  "body-aesthetics-ai",
   "scaleher",
   "koni-jewellery-hu",
   "my-story-travel",
   "viajes-a-bulgaria",
   "rimskata-stena",
   "zdravec",
+  "curly",
   "nutrition-expert",
   "firescape-partners",
   "drmariaraykova",
@@ -1069,8 +1103,8 @@ export const PORTFOLIO_ORDER = [
   "amadent",
   "boas",
   "legends-villas",
+  "sarakta",
   "breezy-point-villas",
-  "curly",
   "bitcoin-empires",
   "webxotic",
   "nfc-logo",
@@ -1084,6 +1118,7 @@ export const PORTFOLIO_ORDER = [
 
 const SHOP_IDS = new Set([
   "curly",
+  "sarakta",
   "nutrition-expert",
   "koni-jewellery",
   "koni-jewellery-hu",
